@@ -1,0 +1,27 @@
+{
+  "name": "broken-mold",
+  "productName": "Broken Mold",
+  "version": "0.1.0",
+  "description": "Dungeons & Dragons companion application",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/.bin/electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/D5-SDD/broken-mold.git"
+  },
+  "author": "D5",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/D5-SDD/broken-mold/issues"
+  },
+  "homepage": "https://github.com/D5-SDD/broken-mold#readme",
+  "dependencies": {
+    "react": "^15.3.2"
+  },
+  "devDependencies": {
+    "electron": "^1.4.1"
+  }
+}
