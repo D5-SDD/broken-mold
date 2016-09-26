@@ -17,9 +17,9 @@ let mainWindow = null;
 function createWindow () {
   //Browser window options
   const browserOptions = {
-    width: 500,
-    height: 500,
-    maximizeable: false
+    width: 1000,
+    height: 700,
+    maximizeable: true
   }
   // Create the browser window.
   mainWindow = new BrowserWindow(browserOptions);
