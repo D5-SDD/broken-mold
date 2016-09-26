@@ -16,7 +16,7 @@ class AppContainer extends React.Component {
   
   render() {
     return (
-      <div className='broken_mold'>
+      <div>
         <h1>Welcome to Broken Mold</h1>
       </div>
     );

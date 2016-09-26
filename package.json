@@ -7,7 +7,7 @@
   "scripts": {
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "watchify src/app.js -t babelify -o bundle.js --debug --verbose"
+    "watch": "watchify src/app.js -t babelify -o bin/bundle.js --debug --verbose"
   },
   "repository": {
     "type": "git",
