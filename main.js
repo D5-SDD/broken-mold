@@ -20,7 +20,8 @@ function createWindow () {
     width: 1000,
     height: 700,
     maximizeable: true
-  }
+  };
+
   // Create the browser window.
   mainWindow = new BrowserWindow(browserOptions);
 

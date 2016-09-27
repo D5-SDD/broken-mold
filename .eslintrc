@@ -1,7 +1,27 @@
 {
   "env": {
+    "browser": true,
+    "es6": true,
     "node": true
   },
+  
+  "globals": {
+    "React": true
+  },
+  
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "impliedStrict": true,
+    "sourceType": "module"
+  },
+  
+  "plugins": [
+    "react"
+  ],
+
   "rules": {
     "array-bracket-spacing": [2, "never"],
     "block-scoped-var": 2,
@@ -24,6 +44,31 @@
     "quotes": [2, "single", "avoid-escape"],
     "semi": [2, "always"],
     "keyword-spacing": [2, {"before": true, "after": true}],
-    "space-unary-ops": 2
+    "space-unary-ops": 2,
+
+    "react/display-name": 0,
+    "react/no-did-mount-set-state": 2,
+    "react/no-did-update-set-state": 2,
+    "react/no-direct-mutation-state": 2,
+    "react/no-multi-comp": 0,
+    "react/no-unknown-property": 2,
+    "react/prefer-es6-class": 2,
+    "react/prop-types": 2,
+    "react/react-in-jsx-scope": 2,
+    "react/self-closing-comp": 2,
+
+    "react/jsx-no-undef": 2,
+    "react/jsx-sort-props": 0,
+    "react/jsx-uses-react": 2,
+    "react/jsx-uses-vars": 2,
+    "react/jsx-wrap-multilines": 2
+  },
+
+  "settings": {
+    "react": {
+      "createClass": "createClass",
+      "pragma": "React",
+      "version": "15.0"
+    }
   }
 }
