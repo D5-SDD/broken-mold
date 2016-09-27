@@ -20,7 +20,10 @@
   },
   "homepage": "https://github.com/D5-SDD/broken-mold#readme",
   "babel": {
-    "presets": ["latest", "react"]
+    "presets": [
+      "latest",
+      "react"
+    ]
   },
   "dependencies": {
     "babel-preset-latest": "^6.14.0",
