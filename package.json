@@ -7,7 +7,7 @@
   "scripts": {
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "watchify src/app.js -t babelify -o bin/bundle.js --debug --verbose"
+    "watch": "./node_modules/.bin/watchify src/app.js -t babelify -o bin/bundle.js --debug --verbose"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,7 @@
     "jquery": "^3.1.1",
     "lodash": "^4.16.1",
     "react": "^15.3.2",
-    "react-dom": "^15.3.2"
+    "react-dom": "^15.3.2",
+    "watchify": "^3.7.0"
   }
 }
