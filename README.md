@@ -6,18 +6,18 @@
 https://nodejs.org/.
 
 2. Use the following commands to setup your development environment:
-```
-git clone https://github.com/D5-SDD/broken-mold.git
-cd broken-mold
-npm install
-```
+  ```
+  git clone https://github.com/D5-SDD/broken-mold.git
+  cd broken-mold
+  npm install
+  ```
 
 3. Bundle the project and watch for changes like this:
-```
-npm run watch
-```
+  ```
+  npm run watch
+  ```
 
 4. Run the application using this command:
-```
-npm start
-```
+  ```
+  npm start
+  ```
