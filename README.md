@@ -11,7 +11,7 @@ git clone https://github.com/D5-SDD/broken-mold.git
 cd broken-mold
 npm install
 ```
-These will globally install the required libraries and then install the 
+  These will globally install the required libraries and then install the 
 application's dependencies.
 
 3. Bundle the project and watch for changes like this:
