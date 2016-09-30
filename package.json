@@ -20,13 +20,19 @@
   },
   "homepage": "https://github.com/D5-SDD/broken-mold#readme",
   "babel": {
-    "presets": ["latest", "react"]
+    "presets": [
+      "latest",
+      "react"
+    ]
   },
   "dependencies": {
     "babel-preset-latest": "^6.14.0",
     "babel-preset-react": "^6.11.1",
     "electron-prebuilt": "^1.4.1",
     "electron-reload": "^1.0.2",
+    "eslint": "^3.6.1",
+    "eslint-plugin-react": "^6.3.0",
+    "ip": "^1.1.3",
     "jquery": "^3.1.1",
     "lodash": "^4.16.1",
     "react": "^15.3.2",
