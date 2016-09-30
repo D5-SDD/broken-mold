@@ -25,15 +25,17 @@
   "dependencies": {
     "babel-preset-latest": "^6.14.0",
     "babel-preset-react": "^6.11.1",
-    "babelify": "^7.3.0",
     "electron-prebuilt": "^1.4.1",
     "electron-reload": "^1.0.2",
-    "eslint": "^3.6.1",
-    "eslint-plugin-react": "^6.3.0",
     "jquery": "^3.1.1",
     "lodash": "^4.16.1",
     "react": "^15.3.2",
-    "react-dom": "^15.3.2",
+    "react-dom": "^15.3.2"
+  },
+  "devDependencies": {
+    "babelify": "^7.3.0",
+    "eslint": "^3.6.1",
+    "eslint-plugin-react": "^6.3.0",
     "watchify": "^3.7.0"
   }
 }
