@@ -7,9 +7,10 @@
   "version": "0.1.0",
   "main": "main.js",
   "scripts": {
+    "gulp": "node_modules/.bin/gulp",
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "./node_modules/.bin/watchify src/app.js -t babelify -o bin/bundle.js --debug --verbose"
+    "watch": "./node_modules/.bin/watchify src/app.js -o bin/bundle.js --debug --verbose -t sassify -t babelify"
   },
   "repository": {
     "type": "git",
@@ -42,6 +43,11 @@
     "babelify": "^7.3.0",
     "eslint": "^3.6.1",
     "eslint-plugin-react": "^6.3.0",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.2",
+    "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
   }
 }
