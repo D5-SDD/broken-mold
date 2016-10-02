@@ -24,9 +24,10 @@ gulp.task('sass:watch', function () {
 
 gulp.task('browserify', function() {
     return browserify('./src/app.js')
-        .bundle()
-        //Pass desired output filename to vinyl-source-stream
-        .pipe(source('bundle.js'))
-        // Start piping stream to tasks!
-        .pipe(gulp.dest(path.DEST));
+      .transform('babelify', {presets: ['latest', 'react']})
+      .bundle()
+      //Pass desired output filename to vinyl-source-stream
+      .pipe(source('bundle.js'))
+      // Start piping stream to tasks!
+      .pipe(gulp.dest(path.DEST));
 });
