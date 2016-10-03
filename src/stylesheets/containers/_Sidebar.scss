@@ -1,14 +1,14 @@
 .sidebar {
     display: block;
 
-    div {
+    > div {
         position: absolute;
         z-index: 2;
         top: 0;
-        width: $sidebar-width; 
-        height: 100%; 
-        @include border-box; 
-        @include transition(-webkit-transform ease 250ms); 
+        width: $sidebar-width;
+        height: 100%;
+        @include border-box;
+        @include transition(-webkit-transform ease 250ms);
         @include transition(transform ease 250ms);
 
         &.left {
