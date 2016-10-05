@@ -22,11 +22,13 @@
   },
   "homepage": "https://github.com/D5-SDD/broken-mold#readme",
   "dependencies": {
+    "dgram": "^1.0.1",
     "electron-prebuilt": "^1.4.1",
     "electron-reload": "^1.0.2",
     "ip": "^1.1.3",
     "jquery": "^3.1.1",
     "lodash": "^4.16.1",
+    "net": "^1.0.2",
     "react": "^15.3.2",
     "react-dom": "^15.3.2"
   },

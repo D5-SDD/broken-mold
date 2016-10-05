@@ -11,6 +11,7 @@ import Sidebar from './Sidebar';
 import SidebarItem from '../components/SidebarItem';
 
 import Character from '../../lib/Character';
+//import Networking from '../../lib/Networking';
 
 class AppContainer extends React.Component {
   constructor(props) {
