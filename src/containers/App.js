@@ -1,22 +1,25 @@
 //
-// App.react.js
-//
 // This component is the skeleton around the actual pages, and should only
 // contain code that should be seen on all pages. (e.g. navigation bar)
 //
 
 'use strict';
 
+import Character from '../../lib/Character';
+
 import React from 'react';
 
-import Sidebar from '../Sidebar';
-import SidebarItem from '../../components/SidebarItem';
+import Sidebar from './Sidebar';
+import SidebarItem from '../components/SidebarItem';
 
 class AppContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.openSidebar = this.openSidebar.bind(this);
+    this.testChar = new Character('../../test/example_character.json');
+
+    console.log(this.testChar.path);
+    console.log(this.testChar.doStuff('testName'));
   }
 
   openSidebar() {
