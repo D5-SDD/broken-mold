@@ -12,12 +12,17 @@ https://nodejs.org/.
   npm install
   ```
 
-3. Bundle the project and watch for changes like this:
+3. Build the project with:
   ```
-  npm run watch
+  npm run build
   ```
 
 4. Run the application using this command:
   ```
   npm start
+  ```
+
+5. You can watch for changes to files in the project with:
+  ```
+  npm run watch
   ```
