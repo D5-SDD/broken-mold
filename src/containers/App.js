@@ -5,12 +5,13 @@
 
 'use strict';
 
-import Character from '../../lib/Character';
-
 import React from 'react';
 
 import Sidebar from './Sidebar';
 import SidebarItem from '../components/SidebarItem';
+
+import Character from '../../lib/Character';
+import Networking from '../../lib/Networking';
 
 class AppContainer extends React.Component {
   constructor(props) {
@@ -19,6 +20,8 @@ class AppContainer extends React.Component {
     this.testChar = new Character('../../test/example_character.json');
 
     console.log(this.testChar.path);
+    console.log('strength: ' + this.testChar.strength.value);
+    console.log('modifier: ' + this.testChar.strength.mod);
     console.log(this.testChar.doStuff('testName'));
   }
 
