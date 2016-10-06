@@ -9,7 +9,7 @@ class CharacterView extends Component {
 
   render() {
     return (
-      <div id="character-view">
+      <div className="character-view">
         <h2>This is the Characters Tab</h2>
       </div>
     );

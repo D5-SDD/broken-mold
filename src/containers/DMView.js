@@ -10,7 +10,7 @@ class DMView extends Component {
   render() {
     return (
       <div id="dm-view">
-        <h1>This is the DM Tab</h1>
+        <h2>This is the DM Tab</h2>
       </div>
     );
   }

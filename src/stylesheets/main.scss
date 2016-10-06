@@ -1,6 +1,17 @@
-#app {
-  @import 'utils/all';
-  @import 'base/all';
-  @import 'components/all';
-  @import 'containers/all';
+@import 'utils/all';
+
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  background-color: $gunmetal;
+  color: #FFFFFF;
 }
+
+#app {
+  margin: 8px;
+}
+
+@import 'base/all';
+@import 'components/all';
+@import 'containers/all';

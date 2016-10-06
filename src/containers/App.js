@@ -29,7 +29,7 @@ class AppContainer extends Component {
     return (
       <Tabs
         onSelect={this.handleSelect}
-        selectedIndex={2}
+        selectedIndex={0}
       >
         <TabList>
           <Tab>Characters</Tab>
@@ -44,7 +44,7 @@ class AppContainer extends Component {
           <DMView />
         </TabPanel>
         <TabPanel>
-          <h2>Hello from Baz</h2>
+          <h2>Why are you here? This tab isn't working yet.</h2>
         </TabPanel>
       </Tabs>
     );
