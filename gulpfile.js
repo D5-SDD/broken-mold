@@ -60,5 +60,5 @@ gulp.task('sass:watch', function () {
 });
 
 gulp.task('build', ['sass', 'browserify']);
-gulp.task('watch', ['sass:watch', 'browserify:watch']);
+gulp.task('watch', ['build', 'sass:watch', 'browserify:watch']);
 gulp.task('default', ['build']);
