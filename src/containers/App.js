@@ -1,12 +1,9 @@
-//
-// This component is the skeleton around the actual pages, and should only
-// contain code that should be seen on all pages. (e.g. navigation bar)
-//
-
 'use strict';
 
 import React, {Component} from 'react';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
+import CharacterView from './CharacterView';
+import DMView from './DMView';
 
 import Character from '../../lib/Character';
 
@@ -35,16 +32,16 @@ class AppContainer extends Component {
         selectedIndex={2}
       >
         <TabList>
-          <Tab>Foo</Tab>
-          <Tab>Bar</Tab>
-          <Tab>Baz</Tab>
+          <Tab>Characters</Tab>
+          <Tab>Dungeon Master</Tab>
+          <Tab>Networking</Tab>
         </TabList>
 
         <TabPanel>
-          <h2>Hello from Foo</h2>
+          <CharacterView />
         </TabPanel>
         <TabPanel>
-          <h2>Hello from Bar</h2>
+          <DMView />
         </TabPanel>
         <TabPanel>
           <h2>Hello from Baz</h2>
