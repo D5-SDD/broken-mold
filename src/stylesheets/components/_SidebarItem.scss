@@ -1,0 +1,14 @@
+.sidebar-item {
+    float: left;
+    width: 100%;
+    margin: 0;
+    padding: 10px 15px;
+    border-bottom: solid 1px #555;
+    cursor: pointer;
+    @include border-box;
+    color: #B0B0B0;
+
+    &:hover {
+        color: #F0F0F0;
+    }
+}
