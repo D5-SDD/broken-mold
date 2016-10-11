@@ -1,14 +1,14 @@
 //
-// Tab.react.js
+// Test.react.js
 //
-// This component would be part of the navigation bar in a tab-based design
+// This is a test component
 //
 
 'use strict';
 
 import React from 'react';
 
-class Tab extends React.Component {
+class Test extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -22,4 +22,4 @@ class Tab extends React.Component {
   }
 }
 
-export default Tab;
+export default Test;

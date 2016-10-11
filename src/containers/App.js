@@ -1,19 +1,13 @@
-//
-// This component is the skeleton around the actual pages, and should only
-// contain code that should be seen on all pages. (e.g. navigation bar)
-//
-
 'use strict';
 
-import React from 'react';
-
-import Sidebar from './Sidebar';
-import SidebarItem from '../components/SidebarItem';
+import React, {Component} from 'react';
+import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
+import CharacterView from './CharacterView';
+import DMView from './DMView';
 
 import Character from '../../lib/Character';
-//import Networking from '../../lib/Networking';
 
-class AppContainer extends React.Component {
+class AppContainer extends Component {
   constructor(props) {
     super(props);
 
@@ -25,20 +19,34 @@ class AppContainer extends React.Component {
     console.log(this.testChar.doStuff('testName'));
   }
 
-  openSidebar() {
-    this.refs.left.show();
+  // Called when a new tab is selected
+  handleSelect(index, last) {
+    //console.log('Selected tab: ' + index + ', Last tab: ' + last);
+    return index, last;
   }
 
   render() {
     return (
-      <div>
-        <button onClick={this.openSidebar}>Open Sidebar!</button>
-        <Sidebar ref="left" alignment="left">
-          <SidebarItem has="first-page">First Page</SidebarItem>
-          <SidebarItem has="second-page">Second Page</SidebarItem>
-          <SidebarItem has="third-page">Third Page</SidebarItem>
-        </Sidebar>
-      </div>
+      <Tabs
+        onSelect={this.handleSelect}
+        selectedIndex={0}
+      >
+        <TabList>
+          <Tab>Characters</Tab>
+          <Tab>Dungeon Master</Tab>
+          <Tab>Networking</Tab>
+        </TabList>
+
+        <TabPanel>
+          <CharacterView />
+        </TabPanel>
+        <TabPanel>
+          <DMView />
+        </TabPanel>
+        <TabPanel>
+          <h2>Why are you here? This tab isn't working yet.</h2>
+        </TabPanel>
+      </Tabs>
     );
   }
 }
