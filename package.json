@@ -36,15 +36,16 @@
     "react-tree-menu": "^1.5.0"
   },
   "devDependencies": {
-    "babelify": "^7.3.0",
     "babel-preset-latest": "^6.14.0",
     "babel-preset-react": "^6.11.1",
+    "babelify": "^7.3.0",
     "eslint": "^3.6.1",
     "eslint-plugin-react": "^6.3.0",
     "gulp": "^3.9.1",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.3.2",
     "gulp-util": "^3.0.7",
+    "reactify": "^1.1.1",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
   }

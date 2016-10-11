@@ -5,18 +5,20 @@ import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import CharacterView from './CharacterView';
 import DMView from './DMView';
 
-import Character from '../../lib/Character';
+//import Character from '../../lib/Character';
 
 class AppContainer extends Component {
   constructor(props) {
     super(props);
 
+    /*
     this.testChar = new Character('../../test/example_character.json');
 
     console.log(this.testChar.path);
     console.log('strength: ' + this.testChar.strength.value);
     console.log('modifier: ' + this.testChar.strength.mod);
     console.log(this.testChar.doStuff('testName'));
+    */
   }
 
   // Called when a new tab is selected
