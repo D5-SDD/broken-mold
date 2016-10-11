@@ -30,7 +30,7 @@ b.transform('babelify', {presets: ['latest', 'react']});
 
 gulp.task('browserify:watch', bundle);
 b.on('update', bundle);
-b.on('log', gutil.log);
+//b.on('log', gutil.log);
 
 function bundle() {
   return b.bundle()
