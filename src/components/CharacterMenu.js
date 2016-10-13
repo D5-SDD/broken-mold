@@ -9,8 +9,6 @@ class CharacterMenu extends React.Component {
   constructor(props) {
     super(props);
 
-    console.log(this.props.characterMap);
-
     var data = [];
     for (let i = 0; i < this.props.characterMap.length; i++) {
       data.push({
