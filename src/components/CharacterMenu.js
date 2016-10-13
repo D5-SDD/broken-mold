@@ -66,19 +66,30 @@ class CharacterMenu extends React.Component {
 
   render() {
     var shareButtonText = ' Share ';
-    var shareButtonStyle = 'success';
+    var shareButtonStyle = 'primary';
+    var continueButton = null;
     if (this.state.sharing === true) {
       shareButtonText = 'Cancel';
       shareButtonStyle = 'danger';
+      continueButton = (
+        <Button
+          className="continue"
+          bsStyle="success"
+          bsSize="small"
+          onClick={this._toggleSharing}
+        >
+          OK
+        </Button>
+      );
     }
 
     return (
       <div className="character-menu">
-        <nav className="navigation">
-          <Button bsStyle="success" bsSize="small">
+        <nav className="navigation" id="header">
+          <Button bsStyle="primary" bsSize="small">
             New
           </Button>
-          <Button bsStyle="success" bsSize="small">
+          <Button bsStyle="primary" bsSize="small">
             Load
           </Button>
           <Button
@@ -98,6 +109,9 @@ class CharacterMenu extends React.Component {
           }
           data={this.state.treeData}
         />
+      <nav className="navigation" id="footer">
+        {continueButton}
+      </nav>
       </div>
     );
   }

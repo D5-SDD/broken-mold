@@ -15,12 +15,12 @@
 .character-tree-node-label.selected {
   border: 1px solid #003f81;
   border-radius: 3px;
-  background-color: red;
+  background-color: #808080;
 }
 
 .character-tree-node-checkbox {}
 
-.navigation {
+nav {
   margin-top: 10px;
   margin-bottom: 10px;
   display: flex;
@@ -31,5 +31,9 @@
     &:not(:first-child) {
       margin-left: 5px;
     }
+  }
+  
+  &#footer {
+    justify-content: flex-end;
   }
 }
