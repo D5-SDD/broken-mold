@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import Button from 'react-bootstrap/lib/Button';
 import TreeMenu, {Utils} from 'react-tree-menu';
 
 import '../stylesheets/components/CharacterMenu';
@@ -13,20 +14,34 @@ class CharacterMenu extends React.Component {
     for (let i = 0; i < this.props.characterMap.length; i++) {
       data.push({
         label: this.props.characterMap[i].label,
-        checkbox: true
+        checkbox: false
       });
     }
 
     this.state = {
       lastAction: null,
-      treeData: data
+      treeData: data,
+      sharing: false
     };
 
-    this._setLastActionState = this._setLastActionState.bind(this);
+    this._toggleSharing = this._toggleSharing.bind(this);
+  }
+
+  // Fires when the "Share" button is clicked, toggles the sharing state
+  _toggleSharing() {
+    var sharing = !this.state.sharing;
+    var data = this.state.treeData;
+    for (let i = 0; i < data.length; i++) {
+      data[i].checkbox = sharing;
+    }
+    this.setState({
+      treeData: data,
+      sharing: sharing
+    });
   }
 
   _setLastActionState(action, node) {
-    var toggleEvents = ['collapsed', 'checked', 'selected'];
+    var toggleEvents = ['checked', 'selected'];
 
     if (toggleEvents.indexOf(action) >= 0) {
       action += 'Changed';
@@ -50,27 +65,46 @@ class CharacterMenu extends React.Component {
   }
 
   render() {
+    var shareButtonText = ' Share ';
+    var shareButtonStyle = 'success';
+    if (this.state.sharing === true) {
+      shareButtonText = 'Cancel';
+      shareButtonStyle = 'danger';
+    }
+
     return (
-      <TreeMenu
-        id={'character-menu'}
-        classNamePrefix={'character-menu'}
-        expandIconClass="fa fa-chevron-right"
-        collapseIconClass="fa fa-chevron-down"
-        onTreeNodeClick={this._setLastActionState.bind(this, 'clicked')}
-        onTreeNodeCollapseChange={
-          this._handleDynamicTreeNodePropChange.bind(this, 'collapsed')
-        }
-        onTreeNodeCheckChange={
-          this._handleDynamicTreeNodePropChange.bind(this, 'checked')
-        }
-        data={this.state.treeData}
-      />
+      <div className="character-menu">
+        <nav className="navigation">
+          <Button bsStyle="success" bsSize="small">
+            New
+          </Button>
+          <Button bsStyle="success" bsSize="small">
+            Load
+          </Button>
+          <Button
+            bsStyle={shareButtonStyle}
+            bsSize="small"
+            onClick={this._toggleSharing}
+          >
+            {shareButtonText}
+          </Button>
+        </nav>
+        <TreeMenu
+          classNamePrefix={'character-tree'}
+          collapsible={false}
+          onTreeNodeClick={this._setLastActionState.bind(this, 'clicked')}
+          onTreeNodeCheckChange={
+            this._handleDynamicTreeNodePropChange.bind(this, 'checked')
+          }
+          data={this.state.treeData}
+        />
+      </div>
     );
   }
 }
 
 CharacterMenu.propTypes = {
-  characterMap: React.PropTypes.array
+  characterMap: React.PropTypes.array.isRequired
 };
 
 export default CharacterMenu;

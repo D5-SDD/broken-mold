@@ -1,10 +1,10 @@
-.character-menu {}
+.character-tree {}
 
-.character-menu-node {
+.character-tree-node {
   margin-left: 5px;
 }
 
-.character-menu-node-label {
+.character-tree-node-label {
   margin-left: 3px;
   padding: 1px;
   border: 1px solid #fff;
@@ -12,10 +12,24 @@
 }
 
 // This doesn't work yet, I think it needs JQuery?
-.character-menu-node-label.selected {
+.character-tree-node-label.selected {
   border: 1px solid #003f81;
   border-radius: 3px;
   background-color: red;
 }
 
-.character-menu-node-checkbox {}
+.character-tree-node-checkbox {}
+
+.navigation {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  
+  button {
+    flex-basis: calc(100% / 3);
+    
+    &:not(:first-child) {
+      margin-left: 5px;
+    }
+  }
+}
