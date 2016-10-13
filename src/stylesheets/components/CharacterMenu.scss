@@ -1,0 +1,31 @@
+.character-menu {}
+
+.character-menu-node {
+    margin-left: 10px;
+}
+
+.character-menu-node-collapse-toggle.collapse-spacer {
+    width: 14px;
+    display: inline-block;
+}
+
+.character-menu-node-collapse-toggle {
+    margin-right: 3px;
+    width: 14px;
+}
+
+.character-menu-node-label {
+    margin-left: 3px;
+    padding: 1px;
+    border: 1px solid #fff;
+}
+
+.character-menu-node-label.selected {
+    border: 1px solid #003f81;
+    border-radius: 3px;
+    background-color: #808080;
+}
+
+.character-menu-node-checkbox {}
+
+.character-menu-node-children {}

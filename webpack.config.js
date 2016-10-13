@@ -17,6 +17,10 @@ module.exports =  validate({
         loader: ExtractTextPlugin.extract('css!sass')
       },
       {
+        test: /\.(eot|svg|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
+        loader: 'url'
+      },
+      {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         query: {
@@ -31,7 +35,7 @@ module.exports =  validate({
   },
 
   plugins: [
-    new ExtractTextPlugin('style.css', {
+    new ExtractTextPlugin('bundle.css', {
       allChunks: true
     })
   ],
