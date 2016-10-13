@@ -5,7 +5,7 @@ import CharacterMenu from '../components/CharacterMenu';
 
 import '../stylesheets/containers/CharacterView';
 
-class CharacterView extends Component {
+class CharacterView extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -13,8 +13,8 @@ class CharacterView extends Component {
   render() {
     return (
       <div className="character-view">
-        <CharacterMenu/>
         <h2>This is the Character Tab</h2>
+        <CharacterMenu />
       </div>
     );
   }

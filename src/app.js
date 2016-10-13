@@ -1,5 +1,7 @@
 'use strict';
 
+import 'babel-polyfill';
+
 // Import React libraries
 import React from 'react';
 import ReactDOM from 'react-dom';

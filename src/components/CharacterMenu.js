@@ -51,7 +51,7 @@ class CharacterMenu extends React.Component {
       action += 'Changed';
     }
 
-    console.log('Controller View received tree menu ' + action + ' action: ' + node.join(' > '));
+    //console.log('Controller View received tree menu ' + action + ' action: ' + node.join(' > '));
 
     var key = 'lastAction';
 

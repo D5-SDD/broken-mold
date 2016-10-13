@@ -1,6 +1,6 @@
 'use strict';
 
-import React, {Component} from 'react';
+import React from 'react';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 
 import '../stylesheets/containers/App.scss';
@@ -8,9 +8,9 @@ import '../stylesheets/containers/App.scss';
 import CharacterView from './CharacterView';
 import DMView from './DMView';
 
-//import Character from '../../lib/Character';
+import Character from '../../lib/Character';
 
-class AppContainer extends Component {
+class AppContainer extends React.Component {
   constructor(props) {
     super(props);
 
