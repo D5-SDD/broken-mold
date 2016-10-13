@@ -4,9 +4,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports =  validate({
   cache: true,
-  entry: {
-    app: './src/app.js'
-  },
+  entry: ['babel-polyfill', './src/app.js'],
   output: {
     path: path.join(__dirname, 'bin'),
     filename: 'bundle.js'
@@ -21,9 +19,8 @@ module.exports =  validate({
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
-        exclude: /node_modules/,
         query: {
-          presets: ['latest', 'react']
+          presets: ['es2015', 'react']
         }
       },
       {
