@@ -1,40 +1,23 @@
 'use strict';
 
 import React from 'react';
-import TreeMenu, {TreeNode, Utils} from 'react-tree-menu';
+import TreeMenu, {Utils} from 'react-tree-menu';
+
+import '../stylesheets/components/CharacterMenu';
 
 class CharacterMenu extends React.Component {
   constructor(props) {
     super(props);
 
-    var data = [
-      {
-        label: 'Option 1'
-      },
-      {
-        label: 'Option 2',
-        children : [
-          {
-            checkbox: true,
-            label: 'Sub Option A',
-            children: [
-              {
-                label: 'Third Level Nest Option 1',
-                checkbox : true
-              },
-              {
-                label: 'Third Level Nest Option 2',
-                checkbox : true
-              }
-            ]
-          },
-          {
-            checkbox: true,
-            label: 'Sub Option B'
-          }
-        ]
-      }
-    ];
+    console.log(this.props.characterMap);
+
+    var data = [];
+    for (let i = 0; i < this.props.characterMap.length; i++) {
+      data.push({
+        label: this.props.characterMap[i].label,
+        checkbox: true
+      });
+    }
 
     this.state = {
       lastAction: null,
@@ -51,8 +34,6 @@ class CharacterMenu extends React.Component {
       action += 'Changed';
     }
 
-    //console.log('Controller View received tree menu ' + action + ' action: ' + node.join(' > '));
-
     var key = 'lastAction';
 
     var mutation = {};
@@ -67,17 +48,25 @@ class CharacterMenu extends React.Component {
 
   _handleDynamicTreeNodePropChange(propName, lineage) {
     this._setLastActionState(propName, lineage);
-    this.setState(Utils.getNewTreeState(lineage, this.state.treeData, propName));
+    this.setState(
+      Utils.getNewTreeState(lineage, this.state.treeData, propName)
+    );
   }
 
   render() {
     return (
       <TreeMenu
+        id={'character-menu'}
+        classNamePrefix={'character-menu'}
         expandIconClass="fa fa-chevron-right"
         collapseIconClass="fa fa-chevron-down"
         onTreeNodeClick={this._setLastActionState.bind(this, 'clicked')}
-        onTreeNodeCollapseChange={this._handleDynamicTreeNodePropChange.bind(this, 'collapsed')}
-        onTreeNodeCheckChange={this._handleDynamicTreeNodePropChange.bind(this, 'checked')}
+        onTreeNodeCollapseChange={
+          this._handleDynamicTreeNodePropChange.bind(this, 'collapsed')
+        }
+        onTreeNodeCheckChange={
+          this._handleDynamicTreeNodePropChange.bind(this, 'checked')
+        }
         data={this.state.treeData}
       />
     );
@@ -85,7 +74,7 @@ class CharacterMenu extends React.Component {
 }
 
 CharacterMenu.propTypes = {
-  //treeData: React.PropTypes.array
+  characterMap: React.PropTypes.array
 };
 
 export default CharacterMenu;
