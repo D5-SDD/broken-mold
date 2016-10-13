@@ -8,6 +8,7 @@ import ReactDOM from 'react-dom';
 
 // Import the main stylesheet
 import './stylesheets/main.scss';
+import 'font-awesome/scss/font-awesome.scss';
 
 // Import the AppContainer
 import AppContainer from './containers/App';

@@ -51,8 +51,6 @@ class CharacterMenu extends React.Component {
       action += 'Changed';
     }
 
-    //console.log('Controller View received tree menu ' + action + ' action: ' + node.join(' > '));
-
     var key = 'lastAction';
 
     var mutation = {};
@@ -67,7 +65,9 @@ class CharacterMenu extends React.Component {
 
   _handleDynamicTreeNodePropChange(propName, lineage) {
     this._setLastActionState(propName, lineage);
-    this.setState(Utils.getNewTreeState(lineage, this.state.treeData, propName));
+    this.setState(
+      Utils.getNewTreeState(lineage, this.state.treeData, propName)
+    );
   }
 
   render() {
@@ -76,8 +76,12 @@ class CharacterMenu extends React.Component {
         expandIconClass="fa fa-chevron-right"
         collapseIconClass="fa fa-chevron-down"
         onTreeNodeClick={this._setLastActionState.bind(this, 'clicked')}
-        onTreeNodeCollapseChange={this._handleDynamicTreeNodePropChange.bind(this, 'collapsed')}
-        onTreeNodeCheckChange={this._handleDynamicTreeNodePropChange.bind(this, 'checked')}
+        onTreeNodeCollapseChange={
+          this._handleDynamicTreeNodePropChange.bind(this, 'collapsed')
+        }
+        onTreeNodeCheckChange={
+          this._handleDynamicTreeNodePropChange.bind(this, 'checked')
+        }
         data={this.state.treeData}
       />
     );
