@@ -1,0 +1,9 @@
+
+.navigation {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  
+  button:not(:first-child) {
+    margin-left: 5px;
+  }
+}

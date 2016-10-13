@@ -33,12 +33,10 @@ class CharacterMenu extends React.Component {
     }
 
     var key = 'lastAction';
-
     var mutation = {};
     mutation[key] = {
       event: action,
       node: node.join(' > '),
-      time: new Date().getTime()
     };
 
     this.setState(mutation);

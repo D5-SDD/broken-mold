@@ -14,10 +14,17 @@ class CharacterView extends React.Component {
   render() {
     return (
       <div className="character-view">
-        <h2>This is the Character Tab</h2>
-        <Button bsStyle="success" bsSize="small">
-          Something
-        </Button>
+        <nav className="navigation">
+          <Button bsStyle="success" bsSize="small">
+            New
+          </Button>
+          <Button bsStyle="success" bsSize="small">
+            Load
+          </Button>
+          <Button bsStyle="success" bsSize="small">
+            Share
+          </Button>
+        </nav>
         <CharacterMenu characterMap={this.props.characterMap} />
       </div>
     );
