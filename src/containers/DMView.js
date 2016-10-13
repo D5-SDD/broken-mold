@@ -1,8 +1,10 @@
 'use strict';
 
-import React, {Component} from 'react';
+import React from 'react';
 
-class DMView extends Component {
+//import '../stylesheets/containers/DMView.scss';
+
+class DMView extends React.Component {
   constructor(props) {
     super(props);
   }

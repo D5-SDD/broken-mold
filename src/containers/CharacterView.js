@@ -1,8 +1,11 @@
 'use strict';
 
-import React, {Component} from 'react';
+import React from 'react';
+import CharacterMenu from '../components/CharacterMenu';
 
-class CharacterView extends Component {
+import '../stylesheets/containers/CharacterView';
+
+class CharacterView extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -10,7 +13,8 @@ class CharacterView extends Component {
   render() {
     return (
       <div className="character-view">
-        <h2>This is the Characters Tab</h2>
+        <h2>This is the Character Tab</h2>
+        <CharacterMenu />
       </div>
     );
   }
