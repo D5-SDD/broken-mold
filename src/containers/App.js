@@ -1,22 +1,32 @@
 'use strict';
 
+// Import React and components
 import React from 'react';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
-
-import '../stylesheets/containers/App.scss';
-
 import CharacterView from './CharacterView';
 import DMView from './DMView';
 
+// Import libraries
+import fs from 'fs';
 import Character from '../../lib/Character';
+
+// Import stylesheet
+import '../stylesheets/containers/App.scss';
 
 class AppContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.testChar = new Character('./test/example_character.json');
+    var characterMapPath = './test/character_map.json';
+    this.characterMap = JSON.parse(fs.readFileSync(characterMapPath));
 
-    console.log(this.testChar.data);
+    this.characters = [];
+    for (let i = 0; i < this.characterMap.length; i++) {
+      let path = './test/Characters/' + this.characterMap[i].filename;
+      this.characters.push(new Character(path));
+    }
+
+    console.log(this.characters[0].data);
   }
 
   // Called when a new tab is selected
