@@ -14,10 +14,14 @@ class CharacterView extends React.Component {
     return (
       <div className="character-view">
         <h2>This is the Character Tab</h2>
-        <CharacterMenu />
+        <CharacterMenu characterMap={this.props.characterMap} />
       </div>
     );
   }
 }
+
+CharacterView.propTypes = {
+  characterMap: React.PropTypes.array
+};
 
 export default CharacterView;

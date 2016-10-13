@@ -22,6 +22,7 @@
   "homepage": "https://github.com/D5-SDD/broken-mold#readme",
   "dependencies": {
     "electron": "^1.4.3",
+    "electron-context-menu": "^0.6.0",
     "electron-prebuilt": "^1.4.1",
     "electron-reload": "^1.0.2",
     "font-awesome": "^4.6.3",

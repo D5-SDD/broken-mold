@@ -18,7 +18,7 @@ class AppContainer extends React.Component {
     super(props);
 
     var characterMapPath = './test/character_map.json';
-    this.characterMap = JSON.parse(fs.readFileSync(characterMapPath));
+    this.characterMap = JSON.parse(fs.readFileSync(characterMapPath)).map;
 
     this.characters = [];
     for (let i = 0; i < this.characterMap.length; i++) {
@@ -48,7 +48,7 @@ class AppContainer extends React.Component {
         </TabList>
 
         <TabPanel>
-          <CharacterView />
+          <CharacterView characterMap={this.characterMap} />
         </TabPanel>
         <TabPanel>
           <DMView />
