@@ -2,6 +2,9 @@
 
 import React, {Component} from 'react';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
+
+import '../stylesheets/containers/App.scss';
+
 import CharacterView from './CharacterView';
 import DMView from './DMView';
 
@@ -11,14 +14,9 @@ class AppContainer extends Component {
   constructor(props) {
     super(props);
 
-    /*
-    this.testChar = new Character('../../test/example_character.json');
+    this.testChar = new Character('./test/example_character.json');
 
-    console.log(this.testChar.path);
-    console.log('strength: ' + this.testChar.strength.value);
-    console.log('modifier: ' + this.testChar.strength.mod);
-    console.log(this.testChar.doStuff('testName'));
-    */
+    console.log(this.testChar.data);
   }
 
   // Called when a new tab is selected

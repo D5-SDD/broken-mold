@@ -14,7 +14,6 @@
     "bonds": "Did you mean bondage?",
     "flaws": "2 inch dick",
     "playerName": "Sam",
-    // abilityScore mod = floor((val-10)/2)
     "abilityScores": {
         "strength": 14,
         "dexterity": 18,

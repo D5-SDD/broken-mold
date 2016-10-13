@@ -8,6 +8,8 @@
 
 import React from 'react';
 
+//import '../stylesheets/components/Test.scss';
+
 class Test extends React.Component {
   constructor(props) {
     super(props);
