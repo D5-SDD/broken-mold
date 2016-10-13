@@ -2,6 +2,8 @@
 
 import React, {Component} from 'react';
 
+import '../stylesheets/containers/CharacterView';
+
 class CharacterView extends Component {
   constructor(props) {
     super(props);
@@ -10,7 +12,7 @@ class CharacterView extends Component {
   render() {
     return (
       <div className="character-view">
-        <h2>This is the Characters Tab</h2>
+        <h2>This is the Character Tab</h2>
       </div>
     );
   }

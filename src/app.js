@@ -4,7 +4,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// Import the Container component
+// Import the main stylesheet
+import './stylesheets/main.scss';
+
+// Import the AppContainer
 import AppContainer from './containers/App';
 
 class App extends React.Component {
