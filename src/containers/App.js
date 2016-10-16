@@ -8,25 +8,27 @@ import DMView from './DMView';
 
 // Import libraries
 import fs from 'fs';
-import Character from '../../lib/Character';
+import Character, {readMap, exportMap} from '../../lib/Character';
 
 // Import stylesheet
 import '../stylesheets/containers/App.scss';
+
+const CHARACTER_MAP_PATH = './test/character_map.json';
 
 class AppContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    var characterMapPath = './test/character_map.json';
-    this.characterMap = JSON.parse(fs.readFileSync(characterMapPath)).map;
+    
+    this.characterMap = readMap(CHARACTER_MAP_PATH);
 
     this.characters = [];
     for (let i = 0; i < this.characterMap.length; i++) {
       let path = './test/Characters/' + this.characterMap[i].filename;
       this.characters.push(new Character(path));
     }
-
-    console.log(this.characters[0].data);
+    this.characters[0].race = 'Dragon-Born';
+    //exportMap(this.characters, './test/character_map.json');
   }
 
   // Called when a new tab is selected

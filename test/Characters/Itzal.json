@@ -1,8 +1,11 @@
 {
   "name": "Itzal",
-  "class": {
-    "Rogue": 3
-  },
+  "classes": [
+    {
+      "name": "Rogue",
+      "level": 3
+    }
+  ],
   "race": "Human",
   "alignment": [
     "Lawful",
@@ -23,104 +26,80 @@
     "charisma": 14
   },
   "inspiration": 0,
-  "proficienyBonus": 2,
+  "proficiencyBonus": 2,
   "savingThrows": {
     "strength": {
-      "value": 2,
       "proficient": false
     },
     "dexterity": {
-      "value": 6,
       "proficient": true
     },
     "constitution": {
-      "value": 0,
       "proficient": false
     },
     "intelligence": {
-      "value": 4,
       "proficient": true
     },
     "wisdom": {
-      "value": 1,
       "proficient": false
     },
     "charisma": {
-      "value": 2,
       "proficient": false
     }
   },
   "skills": {
     "acrobatics": {
-      "value": 4,
       "proficient": false
     },
     "animalHandling": {
-      "value": 1,
       "proficient": false
     },
     "arcana": {
-      "value": 2,
       "proficient": false
     },
     "athletics": {
-      "value": 2,
       "proficient": false
     },
     "deception": {
-      "value": 4,
       "proficient": true
     },
     "history": {
-      "value": 2,
       "proficient": false
     },
     "insight": {
-      "value": 3,
       "proficient": true
     },
     "intimidation": {
-      "value": 2,
       "proficient": false
     },
     "investigation": {
-      "value": 4,
       "proficient": true
     },
     "medicine": {
-      "value": 1,
       "proficient": false
     },
     "nature": {
-      "value": 2,
       "proficient": true
     },
     "perception": {
-      "value": 5,
       "proficient": true
     },
     "performance": {
-      "value": 2,
       "proficient": false
     },
     "persuasion": {
-      "value": 2,
       "proficient": false
     },
     "religion": {
-      "value": 2,
       "proficient": false
     },
     "sleightOfHand": {
-      "value": 6,
       "proficient": true
     },
     "stealth": {
-      "value": 6,
       "proficient": true
     },
     "survival": {
-      "value": 3,
       "proficient": true
     }
   },
@@ -130,7 +109,6 @@
     "temporary": 0
   },
   "armorClass": 16,
-  "initiative": 4,
   "speed": 30,
   "hitDice": "3d8",
   "deathSaves": {
