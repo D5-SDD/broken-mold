@@ -16,6 +16,7 @@ class CharacterView extends React.Component {
     };
 
     this.selectCharacterCB = this.selectCharacterCB.bind(this);
+    //this.exitCharacterSheetCB = this.exitCharacterSheetCB.bind(this);
   }
 
   selectCharacterCB(node) {
@@ -28,6 +29,10 @@ class CharacterView extends React.Component {
     }
 
     this.setState({viewState: 1, currentCharacter: char});
+  }
+
+  exitCharacterSheetCB() {
+    this.setState({viewState: 0, currentCharacter: null});
   }
 
   render() {
@@ -43,6 +48,7 @@ class CharacterView extends React.Component {
       CV = (
         <CharacterSheet
           currentCharacter={this.state.currentCharacter}
+          exitCharacterSheetCB={this.exitCharacterSheetCB.bind(this)}
         />
       );
     }
