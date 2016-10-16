@@ -16,9 +16,17 @@ class CharacterView extends React.Component {
     this.selectCharacterCB = this.selectCharacterCB.bind(this);
   }
 
-  selectCharacterCB() {
+  selectCharacterCB(node) {
     console.log('selectCharacterCB');
-    console.log(this.state.viewState);
+
+    var char;
+    for (let i = 0; i < this.props.characterMap.length; i++) {
+      if (this.props.characterMap[i].label === node.label) {
+        char = this.props.characterMap[i];
+        break;
+      }
+    }
+    console.log(char);
   }
 
   render() {

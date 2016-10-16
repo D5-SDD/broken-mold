@@ -67,8 +67,8 @@ class CharacterMenu extends React.Component {
   }
 
   _handleNodeClicked(action, node) {
-    console.log(action, node);
-    this.props.selectCharacterCB();
+    node = this.state.treeData[node];
+    this.props.selectCharacterCB(node);
   }
 
   _handleNodeCheckChange(propName, lineage) {
@@ -122,9 +122,9 @@ class CharacterMenu extends React.Component {
           }
           data={this.state.treeData}
         />
-      <nav className="navigation" id="footer">
-        {continueButton}
-      </nav>
+        <nav className="navigation" id="footer">
+          {continueButton}
+        </nav>
       </div>
     );
   }
