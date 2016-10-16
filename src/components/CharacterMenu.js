@@ -19,12 +19,12 @@ class CharacterMenu extends React.Component {
     }
 
     this.state = {
-      lastAction: null,
       treeData: data,
       sharing: false
     };
 
     this._toggleSharing = this._toggleSharing.bind(this);
+    this._confirmSharing = this._confirmSharing.bind(this);
   }
 
   // Fires when the "Share" button is clicked, toggles the sharing state
@@ -33,6 +33,7 @@ class CharacterMenu extends React.Component {
     var data = this.state.treeData;
     for (let i = 0; i < data.length; i++) {
       data[i].checkbox = sharing;
+      data[i].checked = false;
     }
     this.setState({
       treeData: data,
@@ -40,25 +41,37 @@ class CharacterMenu extends React.Component {
     });
   }
 
-  _setLastActionState(action, node) {
-    var toggleEvents = ['checked', 'selected'];
-
-    if (toggleEvents.indexOf(action) >= 0) {
-      action += 'Changed';
+  _confirmSharing() {
+    if (!this.state.sharing) {
+      return;
     }
 
-    var key = 'lastAction';
-    var mutation = {};
-    mutation[key] = {
-      event: action,
-      node: node.join(' > '),
-    };
+    // Parse the character tree and find selected characters
+    var charactersToShare = [];
+    for (let i = 0; i < this.state.treeData.length; i++) {
+      if (this.state.treeData[i].checked === true) {
+        charactersToShare.push(this.state.treeData[i]);
+      }
+    }
 
-    this.setState(mutation);
+    this._toggleSharing();
+
+    // Only want to share if there were selected characters
+    if (charactersToShare.length === 0) {
+      return;
+    }
+
+    console.log(charactersToShare);
+
+    // TODO: Make the appropriate calls to the networking library and shit here
   }
 
-  _handleDynamicTreeNodePropChange(propName, lineage) {
-    this._setLastActionState(propName, lineage);
+  _handleNodeClicked(action, node) {
+    console.log(action, node);
+    this.props.selectCharacterCB();
+  }
+
+  _handleNodeCheckChange(propName, lineage) {
     this.setState(
       Utils.getNewTreeState(lineage, this.state.treeData, propName)
     );
@@ -76,7 +89,7 @@ class CharacterMenu extends React.Component {
           className="continue"
           bsStyle="success"
           bsSize="small"
-          onClick={this._toggleSharing}
+          onClick={this._confirmSharing}
         >
           OK
         </Button>
@@ -103,9 +116,9 @@ class CharacterMenu extends React.Component {
         <TreeMenu
           classNamePrefix={'character-tree'}
           collapsible={false}
-          onTreeNodeClick={this._setLastActionState.bind(this, 'clicked')}
+          onTreeNodeClick={this._handleNodeClicked.bind(this, 'clicked')}
           onTreeNodeCheckChange={
-            this._handleDynamicTreeNodePropChange.bind(this, 'checked')
+            this._handleNodeCheckChange.bind(this, 'checked')
           }
           data={this.state.treeData}
         />
@@ -118,7 +131,8 @@ class CharacterMenu extends React.Component {
 }
 
 CharacterMenu.propTypes = {
-  characterMap: React.PropTypes.array.isRequired
+  characterMap: React.PropTypes.array.isRequired,
+  selectCharacterCB: React.PropTypes.func.isRequired
 };
 
 export default CharacterMenu;

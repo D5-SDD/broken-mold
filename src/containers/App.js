@@ -25,8 +25,6 @@ class AppContainer extends React.Component {
       let path = './test/Characters/' + this.characterMap[i].filename;
       this.characters.push(new Character(path));
     }
-
-    console.log(this.characters[0].data);
   }
 
   // Called when a new tab is selected
