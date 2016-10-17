@@ -40,14 +40,14 @@ class AppContainer extends React.Component {
 
   render() {
     return (
-      <Tabs defaultActiveKey={1} animation={true} id="uncontrolled-tab-example">
+      <Tabs defaultActiveKey={1} animation={true} id="app-tabs">
         <Tab eventKey={1} title="Characters">
           <CharacterView characterMap={this.characterMap} />
         </Tab>
-        <Tab eventKey={2} title="Dungeon Master">
+        <Tab eventKey={2} title="Dungeon Master" disabled>
           <DMView />
         </Tab>
-        <Tab eventKey={3} title="Networking">
+        <Tab eventKey={3} title="Networking" disabled>
           <h2>Why are you here? This tab isn't working yet</h2>
         </Tab>
       </Tabs>

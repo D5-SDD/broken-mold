@@ -1,24 +1,33 @@
-.character-tree {}
-
 .character-tree-node {
   margin-left: 5px;
+  
+  span:first-child {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
 }
 
 .character-tree-node-label {
-  margin-left: 3px;
-  padding: 1px;
-  border: 1px solid #fff;
+  flex-grow: 1;
+  height: 30px;
+  line-height: 30px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-bottom: 0;
+  color: #000000;
+  background-color: #ffffff;
   border-radius: 5px;
 }
-
-// This doesn't work yet, I think it needs JQuery?
-.character-tree-node-label.selected {
-  border: 1px solid #003f81;
-  border-radius: 3px;
-  background-color: #808080;
+input[type="checkbox"].character-tree-node-checkbox {
+  flex-grow: 0;
+  margin: 0;
+  margin-right: 5px;
 }
 
-.character-tree-node-checkbox {}
+
+// TODO: .character-tree-node-checkbox {}
 
 nav {
   margin-top: 10px;
