@@ -17,5 +17,8 @@ $app-tabs-height: 47px;
 .tab-content {
     width: 100%;
     height: calc(100% - #{$app-tabs-height});
-    padding: 5px;
+
+    div {
+        height: 100%;
+    }
 }
