@@ -12,7 +12,9 @@ class CharacterSheet extends React.Component {
 
   render() {
     return (
-      <CharacterSheetSidebar exitCharacterSheetCB={this.props.exitCharacterSheetCB} />
+      <div class="character-sheet">
+        <CharacterSheetSidebar exitCharacterSheetCB={this.props.exitCharacterSheetCB} />
+      </div>
     );
   }
 }

@@ -53,9 +53,7 @@ class CharacterView extends React.Component {
       );
     }
     return (
-      <div className="character-view">
-        {CV}
-      </div>
+      <div className="character-view">{CV}</div>
     );
   }
 }

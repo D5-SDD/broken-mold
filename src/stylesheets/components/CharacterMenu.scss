@@ -1,3 +1,7 @@
+.character-tree {
+  padding: 5px 0px;
+}
+
 .character-tree-node {
   margin-left: 5px;
   
@@ -20,6 +24,7 @@
   background-color: #ffffff;
   border-radius: 5px;
 }
+
 input[type="checkbox"].character-tree-node-checkbox {
   flex-grow: 0;
   margin: 0;
@@ -30,8 +35,6 @@ input[type="checkbox"].character-tree-node-checkbox {
 // TODO: .character-tree-node-checkbox {}
 
 nav {
-  margin-top: 10px;
-  margin-bottom: 10px;
   display: flex;
   
   button {

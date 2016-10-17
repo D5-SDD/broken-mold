@@ -44,7 +44,7 @@ class AppContainer extends React.Component {
         <Tab eventKey={1} title="Characters">
           <CharacterView characterMap={this.characterMap} />
         </Tab>
-        <Tab eventKey={2} title="Dungeon Master" disabled>
+        <Tab eventKey={2} title="Dungeon Master">
           <DMView />
         </Tab>
         <Tab eventKey={3} title="Networking" disabled>
