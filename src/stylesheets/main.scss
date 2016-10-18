@@ -1,13 +1,18 @@
 @import 'utils/all';
 
-body {
+html, body {
   height: 100%;
   width: 100%;
+}
+
+body {
   margin: 0;
   background-color: $gunmetal;
   color: #FFFFFF;
+  -webkit-user-select: none;
 }
 
 #app {
-  margin: 8px;
+  height: 100%;
+  width: 100%;
 }
