@@ -8,7 +8,7 @@ class CharacterSheetSidebar extends React.Component {
   constructor(props) {
     super(props);
   }
-  
+
   render() {
     return (
       <div className="character-sheet sidebar">
