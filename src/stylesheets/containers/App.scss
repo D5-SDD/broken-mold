@@ -18,7 +18,7 @@ $app-tabs-height: 47px;
   width: 100%;
   height: calc(100% - #{$app-tabs-height});
 
-  div {
+  .tab-pane {
     height: 100%;
   }
 }
