@@ -1,5 +1,7 @@
 'use strict';
 
+import $ from 'jQuery';
+
 import React from 'react';
 import CharacterMenu from '../components/CharacterMenu';
 import CharacterSheet from './CharacterSheet';
@@ -40,13 +42,16 @@ class CharacterView extends React.Component {
   }
 
   loadCharacterCB() {
-    var name = '#fileDialog';
-    var chooser = document.querySelector(name);
-    chooser.addEventListener('change', function log() {
-      console.log(this.value);
-    }, false);
-
-    chooser.click();
+    var chooser = $('#fileDialog');
+    chooser.unbind('change');
+    chooser.on('change', function() {
+      var files = $(this)[0].files;
+      var characters = [];
+      for (let i = 0; i < files.length; i++) {
+        characters.push(new Character(files[i].path));
+      }
+    });
+    chooser.trigger('click');
   }
 
   render() {

@@ -13,16 +13,20 @@ import Character, {readMap} from '../../lib/Character';
 import '../stylesheets/containers/App.scss';
 
 const CHARACTER_MAP_PATH = './test/character_map.json';
+const CHARACTER_DIR = './test/Characters/';
 
 class AppContainer extends React.Component {
   constructor(props) {
     super(props);
 
+    // TODO: Move all this to the character library
     this.characterMap = readMap(CHARACTER_MAP_PATH);
 
     this.characters = [];
     for (let i = 0; i < this.characterMap.length; i++) {
-      this.characters.push(new Character(this.characterMap[i].filename));
+      this.characters.push(
+        new Character(CHARACTER_DIR + this.characterMap[i].filename)
+      );
     }
   }
 

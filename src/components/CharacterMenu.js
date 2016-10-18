@@ -103,6 +103,7 @@ class CharacterMenu extends React.Component {
           id="fileDialog"
           type="file"
           accept=".json"
+          multiple
         />
         <nav className="navigation" id="header">
           <Button bsStyle="primary" bsSize="small">
