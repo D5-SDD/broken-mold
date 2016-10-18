@@ -1,10 +1,8 @@
 .character-tree {
-  padding: 5px 0px;
+  padding: 0px 5px;
 }
 
 .character-tree-node {
-  margin-left: 5px;
-  
   span:first-child {
     width: 100%;
     display: flex;
@@ -35,6 +33,7 @@ input[type="checkbox"].character-tree-node-checkbox {
 // TODO: .character-tree-node-checkbox {}
 
 nav {
+  padding: 5px;
   display: flex;
   
   button {
