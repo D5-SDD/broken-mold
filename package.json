@@ -29,9 +29,9 @@
     "jquery": "^3.1.1",
     "lodash": "^4.16.1",
     "react": "^15.3.2",
+    "react-bootstrap": "^0.30.5",
     "react-dom": "^15.3.2",
     "react-notification-system": "^0.2.10",
-    "react-tabs": "^0.8.0",
     "react-tree-menu": "^1.5.0"
   },
   "devDependencies": {

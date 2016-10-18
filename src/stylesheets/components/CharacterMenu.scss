@@ -1,31 +1,49 @@
-.character-menu {}
-
-.character-menu-node {
-    margin-left: 10px;
+.character-tree {
+  padding: 0px 10px;
 }
 
-.character-menu-node-collapse-toggle.collapse-spacer {
-    width: 14px;
-    display: inline-block;
+.character-tree-node {
+  span:first-child {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
 }
 
-.character-menu-node-collapse-toggle {
-    margin-right: 3px;
-    width: 14px;
+.character-tree-node-label {
+  flex-grow: 1;
+  height: 30px;
+  line-height: 30px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-bottom: 0;
+  color: #000000;
+  background-color: #f5f7f9;
+  border-radius: 5px;
 }
 
-.character-menu-node-label {
-    margin-left: 3px;
-    padding: 1px;
-    border: 1px solid #fff;
+input[type="checkbox"].character-tree-node-checkbox {
+  flex-grow: 0;
+  margin: 0px 5px;
 }
 
-.character-menu-node-label.selected {
-    border: 1px solid #003f81;
-    border-radius: 3px;
-    background-color: #808080;
+
+// TODO: .character-tree-node-checkbox {}
+
+nav {
+  padding: 5px;
+  display: flex;
+  
+  button {
+    flex-basis: calc(100% / 3);
+    
+    &:not(:first-child) {
+      margin-left: 5px;
+    }
+  }
+  
+  &#footer {
+    justify-content: flex-end;
+  }
 }
-
-.character-menu-node-checkbox {}
-
-.character-menu-node-children {}

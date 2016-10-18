@@ -2,7 +2,7 @@
 
 // Import React and components
 import React from 'react';
-import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
+import {Tabs, Tab} from 'react-bootstrap';
 import CharacterView from './CharacterView';
 import DMView from './DMView';
 
@@ -17,6 +17,10 @@ class AppContainer extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      activeTab: 1
+    };
+
     var characterMapPath = './test/character_map.json';
     this.characterMap = JSON.parse(fs.readFileSync(characterMapPath)).map;
 
@@ -26,36 +30,26 @@ class AppContainer extends React.Component {
       this.characters.push(new Character(path));
     }
 
-    console.log(this.characters[0].data);
+    this._handleSelect = this._handleSelect.bind(this);
   }
 
   // Called when a new tab is selected
-  handleSelect(index, last) {
-    //console.log('Selected tab: ' + index + ', Last tab: ' + last);
-    return index, last;
+  _handleSelect(selectedKey) {
+    this.setState({activeTab: selectedKey});
   }
 
   render() {
     return (
-      <Tabs
-        onSelect={this.handleSelect}
-        selectedIndex={0}
-      >
-        <TabList>
-          <Tab>Characters</Tab>
-          <Tab>Dungeon Master</Tab>
-          <Tab>Networking</Tab>
-        </TabList>
-
-        <TabPanel>
+      <Tabs defaultActiveKey={1} animation={true} id="app-tabs">
+        <Tab eventKey={1} title="Characters">
           <CharacterView characterMap={this.characterMap} />
-        </TabPanel>
-        <TabPanel>
+        </Tab>
+        <Tab eventKey={2} title="Dungeon Master">
           <DMView />
-        </TabPanel>
-        <TabPanel>
-          <h2>Why are you here? This tab isn't working yet.</h2>
-        </TabPanel>
+        </Tab>
+        <Tab eventKey={3} title="Networking" disabled>
+          <h2>Why are you here? This tab isn't working yet</h2>
+        </Tab>
       </Tabs>
     );
   }
