@@ -1,13 +1,12 @@
 {
   "name": "Itzal",
-  "playerName": "Sam",
   "classes": [
     {
       "name": "Rogue",
       "level": 3
     }
   ],
-  "race": "Dragon-Born",
+  "race": "Human",
   "alignment": [
     "Lawful",
     "Neutral"
@@ -17,6 +16,7 @@
   "ideals": "Fuck bitches get money",
   "bonds": "Did you mean bondage?",
   "flaws": "2 inch dick",
+  "playerName": "Sam",
   "abilityScores": {
     "strength": 14,
     "dexterity": 18,
@@ -26,105 +26,105 @@
     "charisma": 14
   },
   "inspiration": 0,
-  "proficiencyBonus": 2,
+  "proficienyBonus": 2,
   "savingThrows": {
     "strength": {
-      "proficient": false,
-      "value": 2
+      "value": 2,
+      "proficient": false
     },
     "dexterity": {
-      "proficient": true,
-      "value": 6
+      "value": 6,
+      "proficient": true
     },
     "constitution": {
-      "proficient": false,
-      "value": 0
+      "value": 0,
+      "proficient": false
     },
     "intelligence": {
-      "proficient": true,
-      "value": 4
+      "value": 4,
+      "proficient": true
     },
     "wisdom": {
-      "proficient": false,
-      "value": 1
+      "value": 1,
+      "proficient": false
     },
     "charisma": {
-      "proficient": false,
-      "value": 2
+      "value": 2,
+      "proficient": false
     }
   },
   "skills": {
     "acrobatics": {
-      "proficient": false,
-      "value": 4
+      "value": 4,
+      "proficient": false
     },
     "animalHandling": {
-      "proficient": false,
-      "value": 1
+      "value": 1,
+      "proficient": false
     },
     "arcana": {
-      "proficient": false,
-      "value": 2
+      "value": 2,
+      "proficient": false
     },
     "athletics": {
-      "proficient": false,
-      "value": 2
+      "value": 2,
+      "proficient": false
     },
     "deception": {
-      "proficient": true,
-      "value": 4
+      "value": 4,
+      "proficient": true
     },
     "history": {
-      "proficient": false,
-      "value": 2
+      "value": 2,
+      "proficient": false
     },
     "insight": {
-      "proficient": true,
-      "value": 3
+      "value": 3,
+      "proficient": true
     },
     "intimidation": {
-      "proficient": false,
-      "value": 2
+      "value": 2,
+      "proficient": false
     },
     "investigation": {
-      "proficient": true,
-      "value": 4
+      "value": 4,
+      "proficient": true
     },
     "medicine": {
-      "proficient": false,
-      "value": 1
+      "value": 1,
+      "proficient": false
     },
     "nature": {
-      "proficient": true,
-      "value": 4
+      "value": 2,
+      "proficient": true
     },
     "perception": {
-      "proficient": true,
-      "value": 3
+      "value": 5,
+      "proficient": true
     },
     "performance": {
-      "proficient": false,
-      "value": 2
+      "value": 2,
+      "proficient": false
     },
     "persuasion": {
-      "proficient": false,
-      "value": 2
+      "value": 2,
+      "proficient": false
     },
     "religion": {
-      "proficient": false,
-      "value": 2
+      "value": 2,
+      "proficient": false
     },
     "sleightOfHand": {
-      "proficient": true,
-      "value": 6
+      "value": 6,
+      "proficient": true
     },
     "stealth": {
-      "proficient": true,
-      "value": 6
+      "value": 6,
+      "proficient": true
     },
     "survival": {
-      "proficient": true,
-      "value": 3
+      "value": 3,
+      "proficient": true
     }
   },
   "hitpoints": {
@@ -139,7 +139,7 @@
     "failures": 0
   },
   "weapons": [
-    {
+    { 
       "name": "longsword",
       "attackBonus": 4,
       "damage": "1d8+2",
@@ -208,13 +208,10 @@
     }
   ],
   "proficiencies": [
-    "Light Armor",
-    "Simple Weapons",
-    "Disguise Kit"
+    "Light Armor", "Simple Weapons", "Disguise Kit"
   ],
   "languages": [
-    "Common",
-    "Draconic"
+    "Common", "Draconic"
   ],
   "spells": {
     "class": "Wizard",
