@@ -7,8 +7,7 @@ import CharacterView from './CharacterView';
 import DMView from './DMView';
 
 // Import libraries
-import fs from 'fs';
-import Character, {readMap, exportMap} from '../../lib/Character';
+import Character, {readMap} from '../../lib/Character';
 
 // Import stylesheet
 import '../stylesheets/containers/App.scss';
