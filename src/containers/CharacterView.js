@@ -36,7 +36,7 @@ class CharacterView extends React.Component {
   }
 
   render() {
-    var CV;
+    var CV = null;
     if (this.state.viewState === 0) {
       CV = (
         <CharacterMenu

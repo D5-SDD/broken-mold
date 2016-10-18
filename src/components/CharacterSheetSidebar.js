@@ -2,8 +2,6 @@
 
 import React from 'react';
 
-import '../stylesheets/components/CharacterSheetSidebar';
-
 class CharacterSheetSidebar extends React.Component {
   constructor(props) {
     super(props);
@@ -11,7 +9,7 @@ class CharacterSheetSidebar extends React.Component {
 
   render() {
     return (
-      <div className="character-sheet sidebar">
+      <div className="sidebar">
         <div onClick={this.props.exitCharacterSheetCB}>
           <i className="fa fa-arrow-left fa-3x" id="back" aria-hidden="true"/>
         </div>
