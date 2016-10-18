@@ -98,11 +98,21 @@ class CharacterMenu extends React.Component {
 
     return (
       <div className="character-menu">
+        <input
+          style={{display: 'none'}}
+          id="fileDialog"
+          type="file"
+          accept=".json"
+        />
         <nav className="navigation" id="header">
           <Button bsStyle="primary" bsSize="small">
             New
           </Button>
-          <Button bsStyle="primary" bsSize="small">
+          <Button
+            bsStyle="primary"
+            bsSize="small"
+            onClick={this.props.loadCharacterCB}
+          >
             Load
           </Button>
           <Button
@@ -132,7 +142,8 @@ class CharacterMenu extends React.Component {
 
 CharacterMenu.propTypes = {
   characterMap: React.PropTypes.array.isRequired,
-  selectCharacterCB: React.PropTypes.func.isRequired
+  selectCharacterCB: React.PropTypes.func.isRequired,
+  loadCharacterCB: React.PropTypes.func.isRequired
 };
 
 export default CharacterMenu;

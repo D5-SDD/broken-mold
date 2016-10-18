@@ -17,8 +17,6 @@ class CharacterView extends React.Component {
     };
 
     this.currentCharacter = null;
-
-    this.selectCharacterCB = this.selectCharacterCB.bind(this);
   }
 
   selectCharacterCB(node) {
@@ -41,13 +39,24 @@ class CharacterView extends React.Component {
     this.setState({viewState: 0});
   }
 
+  loadCharacterCB() {
+    var name = '#fileDialog';
+    var chooser = document.querySelector(name);
+    chooser.addEventListener('change', function log() {
+      console.log(this.value);
+    }, false);
+
+    chooser.click();
+  }
+
   render() {
     var CV = null;
     if (this.state.viewState === 0) {
       CV = (
         <CharacterMenu
           characterMap={this.props.characterMap}
-          selectCharacterCB={this.selectCharacterCB}
+          selectCharacterCB={this.selectCharacterCB.bind(this)}
+          loadCharacterCB={this.loadCharacterCB.bind(this)}
         />
       );
     } else if (this.state.viewState === 1) {
