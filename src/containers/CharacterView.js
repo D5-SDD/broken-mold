@@ -4,6 +4,8 @@ import React from 'react';
 import CharacterMenu from '../components/CharacterMenu';
 import CharacterSheet from './CharacterSheet';
 
+import Character from '../../lib/Character';
+
 import '../stylesheets/containers/CharacterView';
 
 class CharacterView extends React.Component {

@@ -23,8 +23,7 @@ class AppContainer extends React.Component {
 
     this.characters = [];
     for (let i = 0; i < this.characterMap.length; i++) {
-      let path = './test/Characters/' + this.characterMap[i].filename;
-      this.characters.push(new Character(path));
+      this.characters.push(new Character(this.characterMap[i].filename));
     }
   }
 

@@ -9,6 +9,7 @@ import '../stylesheets/containers/CharacterSheet';
 class CharacterSheet extends React.Component {
   constructor(props) {
     super(props);
+    console.log(this.props.character);
   }
 
   render() {
