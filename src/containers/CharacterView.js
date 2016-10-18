@@ -16,7 +16,6 @@ class CharacterView extends React.Component {
     };
 
     this.selectCharacterCB = this.selectCharacterCB.bind(this);
-    //this.exitCharacterSheetCB = this.exitCharacterSheetCB.bind(this);
   }
 
   selectCharacterCB(node) {
@@ -28,7 +27,10 @@ class CharacterView extends React.Component {
       }
     }
 
-    this.setState({viewState: 1, currentCharacter: char});
+    this.setState({
+      viewState: 1,
+      currentCharacter: new Character(char.filename)
+    });
   }
 
   exitCharacterSheetCB() {
@@ -47,7 +49,7 @@ class CharacterView extends React.Component {
     } else if (this.state.viewState === 1) {
       CV = (
         <CharacterSheet
-          currentCharacter={this.state.currentCharacter}
+          character={this.state.currentCharacter}
           exitCharacterSheetCB={this.exitCharacterSheetCB.bind(this)}
         />
       );

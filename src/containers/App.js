@@ -18,7 +18,7 @@ const CHARACTER_MAP_PATH = './test/character_map.json';
 class AppContainer extends React.Component {
   constructor(props) {
     super(props);
-    
+
     this.characterMap = readMap(CHARACTER_MAP_PATH);
 
     this.characters = [];
@@ -26,9 +26,6 @@ class AppContainer extends React.Component {
       let path = './test/Characters/' + this.characterMap[i].filename;
       this.characters.push(new Character(path));
     }
-    this.characters[0].race = 'Dragon-Born';
-    //this.characters[0].saveCharacter();
-    //exportMap(this.characters, './test/character_map.json');
   }
 
   // Called when a new tab is selected
