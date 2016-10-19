@@ -4,7 +4,7 @@ import React from 'react';
 import CharacterMenu from '../components/CharacterMenu';
 import CharacterSheet from './CharacterSheet';
 
-import Character, {loadCharacters} from '../../lib/Character';
+import Character, {loadCharacters, readMap, readCharactersFromMap} from '../../lib/Character';
 
 import '../stylesheets/containers/CharacterView';
 
@@ -17,10 +17,18 @@ class CharacterView extends React.Component {
     };
 
     this.currentCharacter = null;
+    this.characterMap = readMap();
+    this.characters = readCharactersFromMap();
   }
 
   selectCharacterCB(node) {
-    this.currentCharacter = new Character(node.filename);
+    var name = node.filename.slice(0, -5);
+    for (let char in this.characters) {
+      if (this.characters[char].name === name) {
+        this.currentCharacter = this.characters[char];
+        break;
+      }
+    }
     this.setState({
       viewState: 1
     });
@@ -50,7 +58,7 @@ class CharacterView extends React.Component {
     if (this.state.viewState === 0) {
       CV = (
         <CharacterMenu
-          characterMap={this.props.characterMap}
+          characterMap={this.characterMap}
           selectCharacterCB={this.selectCharacterCB.bind(this)}
           loadCharacterCB={this.loadCharacterCB.bind(this)}
         />
@@ -70,7 +78,6 @@ class CharacterView extends React.Component {
 }
 
 CharacterView.propTypes = {
-  characterMap: React.PropTypes.array
 };
 
 export default CharacterView;
