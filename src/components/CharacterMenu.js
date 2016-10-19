@@ -103,7 +103,11 @@ class CharacterMenu extends React.Component {
           multiple
         />
         <nav className="navigation" id="header">
-          <Button bsStyle="primary" bsSize="small">
+          <Button
+            bsStyle="primary"
+            bsSize="small"
+            onClick={this.props.newCharacterCB}
+          >
             New
           </Button>
           <Button
@@ -140,8 +144,9 @@ class CharacterMenu extends React.Component {
 
 CharacterMenu.propTypes = {
   characterMap: React.PropTypes.array.isRequired,
-  selectCharacterCB: React.PropTypes.func.isRequired,
-  loadCharacterCB: React.PropTypes.func.isRequired
+  loadCharacterCB: React.PropTypes.func.isRequired,
+  newCharacterCB: React.PropTypes.func.isRequired,
+  selectCharacterCB: React.PropTypes.func.isRequired
 };
 
 export default CharacterMenu;
