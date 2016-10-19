@@ -13,19 +13,12 @@ import Character, {readMap, exportMap} from '../../lib/Character';
 // Import stylesheet
 import '../stylesheets/containers/App.scss';
 
-const CHARACTER_MAP_PATH = './test/character_map.json';
-
 class AppContainer extends React.Component {
   constructor(props) {
     super(props);
     
-    this.characterMap = readMap(CHARACTER_MAP_PATH);
+    this.characters = readMap();
 
-    this.characters = [];
-    for (let i = 0; i < this.characterMap.length; i++) {
-      let path = './test/Characters/' + this.characterMap[i].filename;
-      this.characters.push(new Character(path));
-    }
     this.characters[0].race = 'Dragon-Born';
     //console.log(this.characters[0].getListOfSpells(['Wizard'],'level1'));
     //this.characters[0].saveCharacter();
@@ -41,7 +34,7 @@ class AppContainer extends React.Component {
     return (
       <Tabs defaultActiveKey={1} animation={true} id="app-tabs">
         <Tab eventKey={1} title="Characters">
-          <CharacterView characterMap={this.characterMap} />
+          <CharacterView characterMap={this.characters} />
         </Tab>
         <Tab eventKey={2} title="Dungeon Master">
           <DMView />
