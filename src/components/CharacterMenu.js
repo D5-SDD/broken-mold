@@ -12,10 +12,8 @@ class CharacterMenu extends React.Component {
 
     var data = [];
     for (let i = 0; i < this.props.characterMap.length; i++) {
-      data.push({
-        label: this.props.characterMap[i].label,
-        checkbox: false
-      });
+      data.push(this.props.characterMap[i]);
+      data[i].checkbox = false;
     }
 
     this.state = {

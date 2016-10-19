@@ -20,15 +20,7 @@ class CharacterView extends React.Component {
   }
 
   selectCharacterCB(node) {
-    var char;
-    for (let i = 0; i < this.props.characterMap.length; i++) {
-      if (this.props.characterMap[i].label === node.label) {
-        char = this.props.characterMap[i];
-        break;
-      }
-    }
-
-    this.currentCharacter = new Character(char.filename);
+    this.currentCharacter = new Character(node.filename);
     this.setState({
       viewState: 1
     });
