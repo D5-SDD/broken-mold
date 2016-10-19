@@ -13,7 +13,7 @@ class CharacterView extends React.Component {
     super(props);
 
     this.state = {
-      viewState: 0, // 0: menu, 1: view sheet, 2: create sheet
+      viewState: 0, // 0: menu, 1: view/create sheet
     };
 
     this.currentCharacter = null;
@@ -36,8 +36,9 @@ class CharacterView extends React.Component {
   }
 
   newCharacterCB() {
+    this.currentCharacter = null;
     this.setState({
-      viewState: 2
+      viewState: 1
     });
   }
 
@@ -74,12 +75,6 @@ class CharacterView extends React.Component {
       CV = (
         <CharacterSheet
           character={this.currentCharacter}
-          exitCharacterSheetCB={this.exitCharacterSheetCB.bind(this)}
-        />
-      );
-    } else if (this.state.viewState === 2) {
-      CV = (
-        <CharacterSheet
           exitCharacterSheetCB={this.exitCharacterSheetCB.bind(this)}
         />
       );

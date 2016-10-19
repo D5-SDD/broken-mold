@@ -13,6 +13,8 @@ class CharacterSheet extends React.Component {
 
   render() {
     var CS_GRID = null;
+    // NOTE: If this gets called with this.props.character === null, we are
+    // creating a new character
     return (
       <div className="character-sheet">
         <CharacterSheetSidebar
@@ -27,7 +29,7 @@ class CharacterSheet extends React.Component {
 
 CharacterSheet.propTypes = {
   exitCharacterSheetCB: React.PropTypes.func.isRequired,
-  character: React.PropTypes.object.isRequired
+  character: React.PropTypes.object
 };
 
 export default CharacterSheet;
