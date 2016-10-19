@@ -1,13 +1,1 @@
-{
-  "map": [
-    {
-      "filename": "example_character.json",
-      "label": "Itzal - Human - Rogue 3",
-      "name": "Itzal",
-      "class": {
-        "Rogue": 3
-      },
-      "race": "Human"
-    }
-  ]
-}
+{"map":[{"filename":"Itzal.json","label":"Itzal - Human - Rogue 3","classes":[{"name":"Rogue","level":3}],"race":"Human"}]}

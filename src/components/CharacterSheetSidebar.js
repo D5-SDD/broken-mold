@@ -19,7 +19,8 @@ class CharacterSheetSidebar extends React.Component {
 }
 
 CharacterSheetSidebar.propTypes = {
-  exitCharacterSheetCB: React.PropTypes.func.isRequired
+  exitCharacterSheetCB: React.PropTypes.func.isRequired,
+  character: React.PropTypes.object.isRequired
 };
 
 export default CharacterSheetSidebar;
