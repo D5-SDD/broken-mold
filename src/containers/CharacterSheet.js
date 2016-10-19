@@ -27,11 +27,14 @@ class CharacterSheet extends React.Component {
       CS_GRID = (
         <Grid className="character-sheet-grid">
           <Row>
-            <Col className="col" md={8}>
-              <code>&lt;{'Col xs={12} md={8}'} /&gt;</code>
+            <Col className="col" md={4}>
+              <p>Proficiencies</p>
             </Col>
             <Col className="col" md={4}>
-              <code>&lt;{'Col xs={6} md={4}'} /&gt;</code>
+              <p>Health and Attacks</p>
+            </Col>
+            <Col className="col" md={4}>
+              <p>Feats and Features</p>
             </Col>
           </Row>
         </Grid>

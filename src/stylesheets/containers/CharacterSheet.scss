@@ -20,12 +20,6 @@
 }
 
 .character-sheet-grid {
-  //width: 70%;
-  //display: inline-block;
-  padding: 0;
-  margin: 0;
-  //float: right;
-  
   .row {
     margin: 0;
     padding: 0;
@@ -34,5 +28,6 @@
   .col {
     background: #ffffff;
     border: 1px solid black;
+    color: black;
   }
 }
