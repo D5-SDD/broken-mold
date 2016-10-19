@@ -6,7 +6,7 @@ import React from 'react';
 import CharacterMenu from '../components/CharacterMenu';
 import CharacterSheet from './CharacterSheet';
 
-import Character from '../../lib/Character';
+import Character, {loadCharacters} from '../../lib/Character';
 
 import '../stylesheets/containers/CharacterView';
 
@@ -22,6 +22,7 @@ class CharacterView extends React.Component {
   }
 
   selectCharacterCB(node) {
+    console.log(node);
     var char;
     for (let i = 0; i < this.props.characterMap.length; i++) {
       if (this.props.characterMap[i].label === node.label) {
@@ -46,10 +47,11 @@ class CharacterView extends React.Component {
     chooser.unbind('change');
     chooser.on('change', function() {
       var files = $(this)[0].files;
-      var characters = [];
+      var paths = [];
       for (let i = 0; i < files.length; i++) {
-        characters.push(new Character(files[i].path));
+        paths.push(files[i].path);
       }
+      loadCharacters(paths);
     });
     chooser.trigger('click');
   }
