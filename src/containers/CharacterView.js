@@ -1,7 +1,5 @@
 'use strict';
 
-import $ from 'jQuery';
-
 import React from 'react';
 import CharacterMenu from '../components/CharacterMenu';
 import CharacterSheet from './CharacterSheet';

@@ -1,4 +1,5 @@
 var path = require('path');
+var webpack = require('webpack');
 var validate = require('webpack-validator');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -22,9 +23,14 @@ module.exports =  validate({
       },
       {
         test: /\.jsx?$/,
-        loader: 'babel-loader',
+        include: [
+          path.resolve(__dirname, 'src'),
+          path.resolve(__dirname, 'lib'),
+          path.resolve(__dirname, 'node_modules/react-tree-menu/src')
+        ],
+        loader: 'babel',
         query: {
-          presets: ['es2015', 'react']
+          presets: ['react', 'es2015']
         }
       },
       {
@@ -35,6 +41,10 @@ module.exports =  validate({
   },
 
   plugins: [
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery'
+    }),
     new ExtractTextPlugin('bundle.css', {
       allChunks: true
     })
