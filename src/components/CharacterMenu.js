@@ -67,7 +67,6 @@ class CharacterMenu extends React.Component {
   }
 
   _handleNodeClicked(action, node) {
-    console.log(this.state.treeData[node]);
     this.props.selectCharacterCB(this.state.treeData[node]);
   }
 

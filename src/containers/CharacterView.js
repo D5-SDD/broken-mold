@@ -22,7 +22,6 @@ class CharacterView extends React.Component {
   }
 
   selectCharacterCB(node) {
-    console.log(node);
     var char;
     for (let i = 0; i < this.props.characterMap.length; i++) {
       if (this.props.characterMap[i].label === node.label) {
