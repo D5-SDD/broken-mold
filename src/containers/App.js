@@ -20,6 +20,8 @@ class AppContainer extends React.Component {
     this.characters = readMap();
 
     this.characters[0].race = 'Dragon-Born';
+    var testChar = new Character('NEW_CHARACTER');
+    console.log(testChar);
     //console.log(this.characters[0].getListOfSpells(['Wizard'],'level1'));
     //this.characters[0].saveCharacter();
     //exportMap(this.characters, './test/character_map.json');
