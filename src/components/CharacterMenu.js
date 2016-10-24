@@ -6,7 +6,7 @@ import TreeMenu, {Utils} from 'react-tree-menu';
 
 import '../stylesheets/components/CharacterMenu';
 
-class CharacterMenu extends React.Component {
+export default class CharacterMenu extends React.Component {
   constructor(props) {
     super(props);
 
@@ -148,5 +148,3 @@ CharacterMenu.propTypes = {
   newCharacterCB: React.PropTypes.func.isRequired,
   selectCharacterCB: React.PropTypes.func.isRequired
 };
-
-export default CharacterMenu;
