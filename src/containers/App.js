@@ -7,28 +7,16 @@ import CharacterView from './CharacterView';
 import DMView from './DMView';
 
 // Import libraries
-import fs from 'fs';
-import Character, {readMap, exportMap} from '../../lib/Character';
+import {readMap} from '../../lib/Character';
 
 // Import stylesheet
 import '../stylesheets/containers/App.scss';
 
-const CHARACTER_MAP_PATH = './test/character_map.json';
-
 class AppContainer extends React.Component {
   constructor(props) {
     super(props);
-    
-    this.characterMap = readMap(CHARACTER_MAP_PATH);
 
-    this.characters = [];
-    for (let i = 0; i < this.characterMap.length; i++) {
-      let path = './test/Characters/' + this.characterMap[i].filename;
-      this.characters.push(new Character(path));
-    }
-    this.characters[0].race = 'Dragon-Born';
-    //this.characters[0].saveCharacter();
-    //exportMap(this.characters, './test/character_map.json');
+    this.characterMap = readMap();
   }
 
   // Called when a new tab is selected
@@ -38,7 +26,7 @@ class AppContainer extends React.Component {
 
   render() {
     return (
-      <Tabs defaultActiveKey={1} animation={true} id="app-tabs">
+      <Tabs defaultActiveKey={1} animation={false} id="app-tabs">
         <Tab eventKey={1} title="Characters">
           <CharacterView characterMap={this.characterMap} />
         </Tab>

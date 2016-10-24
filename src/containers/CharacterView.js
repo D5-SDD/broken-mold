@@ -4,6 +4,8 @@ import React from 'react';
 import CharacterMenu from '../components/CharacterMenu';
 import CharacterSheet from './CharacterSheet';
 
+import Character, {loadCharacters} from '../../lib/Character';
+
 import '../stylesheets/containers/CharacterView';
 
 class CharacterView extends React.Component {
@@ -12,11 +14,9 @@ class CharacterView extends React.Component {
 
     this.state = {
       viewState: 0, // 0: character menu, 1: character sheet
-      currentCharacter: null
     };
 
-    this.selectCharacterCB = this.selectCharacterCB.bind(this);
-    //this.exitCharacterSheetCB = this.exitCharacterSheetCB.bind(this);
+    this.currentCharacter = null;
   }
 
   selectCharacterCB(node) {
@@ -28,11 +28,29 @@ class CharacterView extends React.Component {
       }
     }
 
-    this.setState({viewState: 1, currentCharacter: char});
+    this.currentCharacter = new Character(char.filename);
+    this.setState({
+      viewState: 1
+    });
   }
 
   exitCharacterSheetCB() {
-    this.setState({viewState: 0, currentCharacter: null});
+    this.currentCharacter = null;
+    this.setState({viewState: 0});
+  }
+
+  loadCharacterCB() {
+    var chooser = $('#fileDialog');
+    chooser.unbind('change');
+    chooser.on('change', function() {
+      var files = $(this)[0].files;
+      var paths = [];
+      for (let i = 0; i < files.length; i++) {
+        paths.push(files[i].path);
+      }
+      loadCharacters(paths);
+    });
+    chooser.trigger('click');
   }
 
   render() {
@@ -41,13 +59,14 @@ class CharacterView extends React.Component {
       CV = (
         <CharacterMenu
           characterMap={this.props.characterMap}
-          selectCharacterCB={this.selectCharacterCB}
+          selectCharacterCB={this.selectCharacterCB.bind(this)}
+          loadCharacterCB={this.loadCharacterCB.bind(this)}
         />
       );
     } else if (this.state.viewState === 1) {
       CV = (
         <CharacterSheet
-          currentCharacter={this.state.currentCharacter}
+          character={this.currentCharacter}
           exitCharacterSheetCB={this.exitCharacterSheetCB.bind(this)}
         />
       );

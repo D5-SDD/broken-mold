@@ -9,6 +9,7 @@ import '../stylesheets/containers/CharacterSheet';
 class CharacterSheet extends React.Component {
   constructor(props) {
     super(props);
+    console.log(this.props.character);
   }
 
   render() {
@@ -56,6 +57,7 @@ class CharacterSheet extends React.Component {
     return (
       <div className="character-sheet">
         <CharacterSheetSidebar
+          character={this.props.character}
           exitCharacterSheetCB={this.props.exitCharacterSheetCB}
         />
         {CS_GRID}
@@ -65,7 +67,8 @@ class CharacterSheet extends React.Component {
 }
 
 CharacterSheet.propTypes = {
-  exitCharacterSheetCB: React.PropTypes.func.isRequired
+  exitCharacterSheetCB: React.PropTypes.func.isRequired,
+  character: React.PropTypes.object.isRequired
 };
 
 export default CharacterSheet;
