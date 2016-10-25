@@ -3,19 +3,16 @@
   width: 100%;
 }
 
-.sidebar {
-  background-color: #FFFFFF;
-  height: 100%;
-  width: 30%;
-  display: inline-block;
-  float: left;
-  
-  #back {
-    color: #000000;
-    
-    &:hover {
-      color: skyblue;
-    }
+.panel {
+  .fa {
+    margin-right: 5px;
+  }
+}
+
+.panel.centered {
+  .panel-heading, .panel-body {
+    text-align: center;
+    padding: 10px 0;
   }
 }
 
