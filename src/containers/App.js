@@ -5,10 +5,7 @@ import React from 'react';
 import {Tabs, Tab} from 'react-bootstrap';
 import CharacterView from './CharacterView';
 import DMView from './DMView';
-
-// Import libraries
-import fs from 'fs';
-import Character, {readMap, exportMap} from '../../lib/Character';
+import Character, {readMap,exportMap} from '../../lib/Character';
 
 // Import stylesheet
 import '../stylesheets/containers/App.scss';
@@ -34,9 +31,9 @@ class AppContainer extends React.Component {
 
   render() {
     return (
-      <Tabs defaultActiveKey={1} animation={true} id="app-tabs">
+      <Tabs defaultActiveKey={1} animation={false} id="app-tabs">
         <Tab eventKey={1} title="Characters">
-          <CharacterView characterMap={this.characters} />
+          <CharacterView />
         </Tab>
         <Tab eventKey={2} title="Dungeon Master">
           <DMView />
