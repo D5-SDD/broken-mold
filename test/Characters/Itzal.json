@@ -29,102 +29,78 @@
   "proficiencyBonus": 2,
   "savingThrows": {
     "strength": {
-      "proficient": false,
-      "value": 2
+      "proficient": false
     },
     "dexterity": {
-      "proficient": true,
-      "value": 6
+      "proficient": true
     },
     "constitution": {
-      "proficient": false,
-      "value": 0
+      "proficient": false
     },
     "intelligence": {
-      "proficient": true,
-      "value": 4
+      "proficient": true
     },
     "wisdom": {
-      "proficient": false,
-      "value": 1
+      "proficient": false
     },
     "charisma": {
-      "proficient": false,
-      "value": 2
+      "proficient": false
     }
   },
   "skills": {
     "acrobatics": {
-      "proficient": false,
-      "value": 4
+      "proficient": false
     },
     "animalHandling": {
-      "proficient": false,
-      "value": 1
+      "proficient": false
     },
     "arcana": {
-      "proficient": false,
-      "value": 2
+      "proficient": false
     },
     "athletics": {
-      "proficient": false,
-      "value": 2
+      "proficient": false
     },
     "deception": {
-      "proficient": true,
-      "value": 4
+      "proficient": true
     },
     "history": {
-      "proficient": false,
-      "value": 2
+      "proficient": false
     },
     "insight": {
-      "proficient": true,
-      "value": 3
+      "proficient": true
     },
     "intimidation": {
-      "proficient": false,
-      "value": 2
+      "proficient": false
     },
     "investigation": {
-      "proficient": true,
-      "value": 4
+      "proficient": true
     },
     "medicine": {
-      "proficient": false,
-      "value": 1
+      "proficient": false
     },
     "nature": {
-      "proficient": true,
-      "value": 4
+      "proficient": true
     },
     "perception": {
-      "proficient": true,
-      "value": 3
+      "proficient": true
     },
     "performance": {
-      "proficient": false,
-      "value": 2
+      "proficient": false
     },
     "persuasion": {
-      "proficient": false,
-      "value": 2
+      "proficient": false
     },
     "religion": {
-      "proficient": false,
-      "value": 2
+      "proficient": false
     },
     "sleightOfHand": {
-      "proficient": true,
-      "value": 6
+      "proficient": true
     },
     "stealth": {
-      "proficient": true,
-      "value": 6
+      "proficient": true
     },
     "survival": {
-      "proficient": true,
-      "value": 3
+      "proficient": true
     }
   },
   "hitpoints": {
@@ -216,19 +192,19 @@
     "Common",
     "Draconic"
   ],
-  "spellCastingClass" : "Wizard",
+  "spellCastingClass": "Wizard",
   "spells": [
     {
       "casting_time": "1 action",
       "classes": [
-          "sorcerer",
-          "wizard"
+        "sorcerer",
+        "wizard"
       ],
       "components": {
-          "material": false,
-          "raw": "V, S",
-          "somatic": true,
-          "verbal": true
+        "material": false,
+        "raw": "V, S",
+        "somatic": true,
+        "verbal": true
       },
       "description": "You hurl a bubble of acid. Choose one creature within range, or choose two creatures within range that are within 5 feet of each other. A target must succeed on a Dexterity saving throw or take 1d6 acid damage.\n\nThis spell's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).",
       "duration": "Instantaneous",
@@ -238,9 +214,9 @@
       "ritual": false,
       "school": "Conjuration",
       "tags": [
-          "sorcerer",
-          "wizard",
-          "cantrip"
+        "sorcerer",
+        "wizard",
+        "cantrip"
       ],
       "type": "Conjuration cantrip"
     }
