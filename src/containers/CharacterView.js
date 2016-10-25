@@ -4,7 +4,7 @@ import React from 'react';
 import CharacterMenu from '../components/CharacterMenu';
 import CharacterSheet from './CharacterSheet';
 
-import Character, {loadCharacters} from '../../lib/Character';
+import * as Character from '../../lib/Character';
 
 import '../stylesheets/containers/CharacterView';
 
@@ -13,30 +13,12 @@ class CharacterView extends React.Component {
     super(props);
 
     this.state = {
-      viewState: 0, // 0: character menu, 1: character sheet
+      viewState: 0, // 0: menu, 1: view/create sheet
     };
 
     this.currentCharacter = null;
-  }
-
-  selectCharacterCB(node) {
-    var char;
-    for (let i = 0; i < this.props.characterMap.length; i++) {
-      if (this.props.characterMap[i].label === node.label) {
-        char = this.props.characterMap[i];
-        break;
-      }
-    }
-
-    this.currentCharacter = new Character(char.filename);
-    this.setState({
-      viewState: 1
-    });
-  }
-
-  exitCharacterSheetCB() {
-    this.currentCharacter = null;
-    this.setState({viewState: 0});
+    this.characterMap = Character.readMap();
+    this.characters = Character.readCharactersFromMap();
   }
 
   loadCharacterCB() {
@@ -53,14 +35,40 @@ class CharacterView extends React.Component {
     chooser.trigger('click');
   }
 
+  newCharacterCB() {
+    this.currentCharacter = null;
+    this.setState({
+      viewState: 1
+    });
+  }
+
+  selectCharacterCB(node) {
+    var name = node.filename.slice(0, -5);
+    for (let char in this.characters) {
+      if (this.characters[char].name === name) {
+        this.currentCharacter = this.characters[char];
+        break;
+      }
+    }
+    this.setState({
+      viewState: 1
+    });
+  }
+
+  exitCharacterSheetCB() {
+    this.currentCharacter = null;
+    this.setState({viewState: 0});
+  }
+
   render() {
     var CV = null;
     if (this.state.viewState === 0) {
       CV = (
         <CharacterMenu
-          characterMap={this.props.characterMap}
-          selectCharacterCB={this.selectCharacterCB.bind(this)}
+          characterMap={this.characterMap}
           loadCharacterCB={this.loadCharacterCB.bind(this)}
+          newCharacterCB={this.newCharacterCB.bind(this)}
+          selectCharacterCB={this.selectCharacterCB.bind(this)}
         />
       );
     } else if (this.state.viewState === 1) {
@@ -78,7 +86,6 @@ class CharacterView extends React.Component {
 }
 
 CharacterView.propTypes = {
-  characterMap: React.PropTypes.array
 };
 
 export default CharacterView;

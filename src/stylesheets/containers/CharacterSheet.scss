@@ -3,31 +3,22 @@
   width: 100%;
 }
 
-.sidebar {
-  background-color: #FFFFFF;
-  height: 100%;
-  width: 30%;
-  display: inline-block;
-  float: left;
-  
-  #back {
-    color: #000000;
-    
-    &:hover {
-      color: skyblue;
-    }
+.panel {
+  .fa {
+    margin-right: 5px;
   }
 }
 
-.grid {
-  width: 70%;
-  display: inline-block;
-  padding: 0;
-  margin: 0;
-  float: right;
-  
-  .row {
-    margin: 0;
-    padding: 0;
+.panel.centered {
+  .panel-heading, .panel-body {
+    text-align: center;
+    padding: 10px 0;
+  }
+}
+
+.character-sheet-grid {
+  .col {
+    background: #ffffff;
+    color: black;
   }
 }

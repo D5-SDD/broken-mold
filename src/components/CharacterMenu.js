@@ -6,16 +6,14 @@ import TreeMenu, {Utils} from 'react-tree-menu';
 
 import '../stylesheets/components/CharacterMenu';
 
-class CharacterMenu extends React.Component {
+export default class CharacterMenu extends React.Component {
   constructor(props) {
     super(props);
 
     var data = [];
     for (let i = 0; i < this.props.characterMap.length; i++) {
-      data.push({
-        label: this.props.characterMap[i].label,
-        checkbox: false
-      });
+      data.push(this.props.characterMap[i]);
+      data[i].checkbox = false;
     }
 
     this.state = {
@@ -105,7 +103,11 @@ class CharacterMenu extends React.Component {
           multiple
         />
         <nav className="navigation" id="header">
-          <Button bsStyle="primary" bsSize="small">
+          <Button
+            bsStyle="primary"
+            bsSize="small"
+            onClick={this.props.newCharacterCB}
+          >
             New
           </Button>
           <Button
@@ -142,8 +144,7 @@ class CharacterMenu extends React.Component {
 
 CharacterMenu.propTypes = {
   characterMap: React.PropTypes.array.isRequired,
-  selectCharacterCB: React.PropTypes.func.isRequired,
-  loadCharacterCB: React.PropTypes.func.isRequired
+  loadCharacterCB: React.PropTypes.func.isRequired,
+  newCharacterCB: React.PropTypes.func.isRequired,
+  selectCharacterCB: React.PropTypes.func.isRequired
 };
-
-export default CharacterMenu;

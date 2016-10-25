@@ -6,17 +6,12 @@ import {Tabs, Tab} from 'react-bootstrap';
 import CharacterView from './CharacterView';
 import DMView from './DMView';
 
-// Import libraries
-import {readMap} from '../../lib/Character';
-
 // Import stylesheet
 import '../stylesheets/containers/App.scss';
 
 class AppContainer extends React.Component {
   constructor(props) {
     super(props);
-
-    this.characterMap = readMap();
   }
 
   // Called when a new tab is selected
@@ -28,7 +23,7 @@ class AppContainer extends React.Component {
     return (
       <Tabs defaultActiveKey={1} animation={false} id="app-tabs">
         <Tab eventKey={1} title="Characters">
-          <CharacterView characterMap={this.characterMap} />
+          <CharacterView />
         </Tab>
         <Tab eventKey={2} title="Dungeon Master">
           <DMView />

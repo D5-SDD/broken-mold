@@ -19,8 +19,8 @@ let mainWindow = null;
 function createWindow () {
   //Browser window options
   const browserOptions = {
-    width: 1200,
-    height: 800,
+    width: 1100,
+    height: 700,
     maximizeable: true
   };
 

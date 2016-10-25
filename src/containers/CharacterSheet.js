@@ -2,64 +2,55 @@
 
 import React from 'react';
 import {Grid, Row, Col} from 'react-bootstrap';
-import CharacterSheetSidebar from '../components/CharacterSheetSidebar';
+import {AbilityScores} from '../components/CharacterSheet';
 
 import '../stylesheets/containers/CharacterSheet';
 
 class CharacterSheet extends React.Component {
   constructor(props) {
     super(props);
+
+    var viewState = 0;
+    if (this.props.character === null) {
+      viewState = 1;
+    }
+
+    this.state = {
+      viewState: viewState
+    };
+
     console.log(this.props.character);
   }
-
   render() {
+    var character = this.props.character;
     var CS_GRID = null;
-    CS_GRID = (
-      <Grid className="grid">
-        <Row className="show-grid">
-          <Col xs={12} md={8}>
-            <code>&lt;{'Col xs={12} md={8}'} /&gt;</code>
-          </Col>
-          <Col xs={6} md={4}>
-            <code>&lt;{'Col xs={6} md={4}'} /&gt;</code>
-          </Col>
-        </Row>
-
-        <Row className="show-grid">
-          <Col xs={6} md={4}>
-            <code>&lt;{'Col xs={6} md={4}'} /&gt;</code>
-          </Col>
-          <Col xs={6} md={4}>
-            <code>&lt;{'Col xs={6} md={4}'} /&gt;</code>
-          </Col>
-          <Col xsHidden md={4}>
-            <code>&lt;{'Col xsHidden md={4}'} /&gt;</code>
-          </Col>
-        </Row>
-
-        <Row className="show-grid">
-          <Col xs={6} xsOffset={6}>
-            <code>&lt;{'Col xs={6} xsOffset={6}'} /&gt;</code>
-          </Col>
-        </Row>
-
-        <Row className="show-grid">
-          <Col md={6} mdPush={6}>
-            <code>&lt;{'Col md={6} mdPush={6}'} /&gt;</code>
-          </Col>
-          <Col md={6} mdPull={6}>
-            <code>&lt;{'Col md={6} mdPull={6}'} /&gt;</code>
-          </Col>
-        </Row>
-      </Grid>
-    );
+    if (this.state.viewState === 0) {
+      // TODO: Character View
+      CS_GRID = (
+        <Grid className="character-sheet-grid">
+          <Row>
+            <Col className="col" md={4}>
+              <AbilityScores
+                abilityScores={character.abilityScores}
+                savingThrows={character.savingThrows}
+                skills={character.skills}
+              />
+            </Col>
+            <Col className="col" md={4}>
+              <p>Health and Attacks</p>
+            </Col>
+            <Col className="col" md={4}>
+              <p>Feats and Features</p>
+            </Col>
+          </Row>
+        </Grid>
+      );
+    } else {
+      // TODO: Character creation
+    }
 
     return (
       <div className="character-sheet">
-        <CharacterSheetSidebar
-          character={this.props.character}
-          exitCharacterSheetCB={this.props.exitCharacterSheetCB}
-        />
         {CS_GRID}
       </div>
     );
@@ -68,7 +59,7 @@ class CharacterSheet extends React.Component {
 
 CharacterSheet.propTypes = {
   exitCharacterSheetCB: React.PropTypes.func.isRequired,
-  character: React.PropTypes.object.isRequired
+  character: React.PropTypes.object
 };
 
 export default CharacterSheet;
