@@ -1,0 +1,249 @@
+## Tools
+### Artisan's tools
+Item,Cost,Weight
+Alchemist's supplies,50 gp,8 lb.
+Brewer's supplies,20 gp,9 lb.
+Calligrapher's supplies,8 gp,5 lb.
+Carpenter's tools,15 gp,6 lb.
+Cartographer's tools,5 gp,6 lb.
+Cobbler's tools,1 gp,5 lb.
+Cook's utensils,30 gp,8 lb.
+Glassblower's tools,25 gp,5 lb.
+Jeweler's tools,6 gp,2 lb.
+Leatherworker's tools,10 gp,5 lb.
+Mason's tools,10 gp,8 lb.
+Painter's supplies,10 gp,5 lb.
+Potter's tools,10 gp,3 lb.
+Smith's tools,20 gp,8 lb.
+Tinker's tools,50 gp,10 lb.
+Weaver's tools,1 gp,5 lb.
+Woodcarver's tools,1 gp,5 lb.
+Disguise kit,25 gp,3 lb.
+Forgery kit,15 gp,5 lb.
+;
+### Gaming set
+Item,Cost,Weight
+Dice set,1 sp,-
+Playing card set,5 sp,-
+;
+### Musical instrument
+Item,Cost,Weight
+Bagpipes,30 gp,6 lb.
+Drum,6 gp,3 lb.
+Dulcimer,25 gp,10 lb.
+Flute,2 gp,1 lb.
+Lute,35 gp,2 lb.
+Lyre,30 gp,2 lb.
+Horn,3 gp,2 lb.
+Pan flute,12 gp,2 lb.
+Shawm,2 gp,1 lb.
+Viol,30 gp,1 lb.
+;
+### Other tools
+Item,Cost,Weight
+Herbalism kit,5 gp,3 lb.
+Navigator's tools,25 gp,2 lb.
+Poisoner's kit,50 gp,2 lb.
+Thieves' tools,25 gp,1 lb.
+;
+## Weapons
+### Simple Melee Weapons
+Simple Melee Weapons,Cost,Damage,Weight,Properties
+Club,1 sp,1d4 bludgeoning,2 lb.,Light
+Dagger,2 gp,1d4 piercing,1 lb.,Finesse/Light/Thrown (range 20/60)
+Greatclub,2 sp,1d8 bludgeoning,10 lb.,Two-handed
+Handaxe,5 gp,1d6 slashing,2 lb.,Light/Thrown (range 20/60)
+Javelin,5 sp,1d6 piercing,2 lb.,Thrown (range 30/120)
+Light hammer,2 gp,1d4 bludgeoning,2 lb.,Light/Thrown (range 20/60)
+Mace,5 gp,1d6 bludgeoning,4 lb.,-
+Quarterstaff,2 sp,1d6 bludgeoning,4 lb.,Versatile (1d8)
+Sickle,1 gp,1d4 slashing,2 lb.,Light
+Spear,1 gp,1d6 piercing,3 lb.,Thrown (range 20/60)/Versatile (1d8)
+;
+### Simple Ranged Weapons
+Simple Ranged Weapons,Cost,Damage,Weight,Properties
+Crossbowlight,25 gp,1d8 piercing,5 lb.,Ammunition (range 80/320)/Loading/Two-handed
+Dart,5 cp,1d4 piercing,1/4 lb.,Finesse/Thrown (range 20/60)
+Shortbow,25 gp,1d6 piercing,2 lb.,Ammunition (range 80/320)/Two-handed
+Sling,1 sp,1d4 bludgeoning,-,Ammunition (range 30/120)
+;
+### Martial Melee Weapons
+Martial Melee Weapons,Cost,Damage,Weight,Properties
+Battleaxe,10 gp,1d8 slashing,4 lb.,Versatile (1d10)
+Flail,10 gp,1d8 bludgeoning,2 lb.,-
+Glaive,20 gp,1d10 slashing,6 lb.,Heavy/Reach/Two-handed
+Greataxe,30 gp,1d12 slashing,7 lb.,Heavy/Two-handed
+Greatsword,50 gp,2d6 slashing,6 lb.,Heavy/Two-handed
+Halberd,20 gp,1d10 slashing,6 lb.,Heavy/Reach/Two-handed
+Lance,10 gp,1d12 piercing,6 lb.,Reach/Special
+Longsword,15 gp,1d8 slashing,3 lb.,Versatile (1d10)
+Maul,10 gp,2d6 bludgeoning,10 lb.,Heavy/Two-handed
+Morningstar,15 gp,1d8 piercing,4 lb.,-
+Pike,5 gp,1d10 piercing,18 lb.,Heavy/ReachTwo-handed
+Rapier,25 gp,1d8 piercing,2 lb.,Finesse
+Scimitar,25 gp,1d6 slashing,3 lb.,Finesse/Light
+Shortsword,10 gp,1d6 piercing,2 lb.,Finesse/Light
+Trident,5 gp,1d6 piercing,4 lb.,Thrown (range 20/60)/Versatile (1d8)
+War pick,5 gp,1d8 piercing,2 lb.,-
+Warhammer,15 gp,1d8 bludgeoning,2 lb.,Versatile (1d10)
+Whip,2 gp,1d4 slashing,3 lb.,Finesse/Reach
+;
+### Martial Ranged Weapons
+Martial Ranged Weapons,Cost,Damage,Weight,Properties
+Blowgun,10 gp,1 piercing,1 lb.,Ammunition (range 25/100)/Loading
+Crossbowhand,75 gp,1d6 piercing,3 lb.,Ammunition (range 30/120)/Light/Loading
+Crossbowheavy,50 gp,1d10 piercing,18 lb.,Ammunition (range 100/400)/Heavy/Loading/Two-handed
+Longbow,50 gp,1d8 piercing,2 lb.,Ammunition (range 150/600)/Heavy/Two-handed
+Net,1 gp,-,3 lb.,Special/Thrown (range 5/15)
+;
+## Mounts
+Item,Cost,Speed,Carrying Capacity
+Camel,50 gp,50 ft.,480 lb.
+Donkey or mule,8 gp,40 ft.,420 lb.
+Elephant,200 gp,40 ft.,1320 lb.
+Horsedraft,50 gp,40 ft.,540 lb.
+Horseriding,75 gp,60 ft.,480 lb.
+Mastiff,25 gp,40 ft.,195 lb.
+Pony,30 gp,40 ft.,225 lb.
+Warhorse,400 gp,60 ft.,540 lb.
+;
+## Tack, Harness, and Drawn Vehicles
+Item,Cost,Weight
+Barding,x4,x2
+Bit and bridle,2 gp,1 lb.
+Carriage,100 gp,600 lb.
+Cart,15 gp,200 lb.
+Chariot,250 gp,100 lb.
+Feed (per day),5 cp,10 lb.
+Saddlebags,4 gp,8 lb.
+Sled,20 gp,300 lb.
+Stabling (per day),5 sp,-
+Wagon,35 gp,400 lb.
+;
+## Saddles
+Item,Cost,Weight
+Exotic,60 gp,40 lb.
+Military,20 gp,30 lb.
+Pack,5 gp,15 lb.
+Riding,10 gp,25 lb.
+;
+## Waterborne Vehicles
+Item,Cost,Speed
+Galley,30000 gp,4 mph
+Keelboat,3000 gp,1 mph
+Longship,10000 gp,3 mph
+Rowboat,50 gp,1 1/2 mph
+Sailing ship,10000 gp,2 mph
+Warship,25000 gp,2 1/2 mph
+;
+## Adventuring Gear
+Item,Cost,Weight
+Abacus,2 gp,2 lb.
+Acid (vial),25 gp,1 lb.
+Alchemist's fire (flask),50 gp,1 lb.
+Antitoxin (vial),50 gp,-
+Backpack,2 gp,5 lb.
+Ball bearings (bag of 1000),1 gp,2 lb.
+Barrel,2 gp,70 lb.
+Basket,4 sp,2 lb.
+Bedroll,1 gp,7 lb.
+Bell,1 gp,-
+Blanket,5 sp,3 lb.
+Block and tackle,1 gp,5 lb.
+Book,25 gp,5 lb.
+Bottleglass,2 gp,2 lb.
+Bucket,5 cp,2 lb.
+Caltrops (bag of 20),1 gp,2 lb.
+Candle,1 cp,-
+Casecrossbow bolt,1 gp,1 lb.
+Casemap or scroll,1 gp,1 lb.
+Chain (10 feet),5 gp,10 lb.
+Chalk (1 piece),1 cp,-
+Chest,5 gp,25 lb.
+Climber's kit,25 gp,12 lb.
+Clothescommon,5 sp,3 lb.
+Clothescostume,5 gp,4 lb.
+Clothesfine,15 gp,6 lb.
+Clothestraveler's,2 gp,4 lb.
+Component pouch,25 gp,2 lb.
+Crowbar,2 gp,5 lb.
+Fishing tackle,1 gp,4 lb.
+Flask or tankard,2 cp,1 lb.
+Grappling hook,2 gp,4 lb.
+Hammer,1 gp,3 lb.
+Hammersledge,2 gp,10 lb.
+Healer's kit,5 gp,3 lb.
+Holy water (flask),25 gp,1 lb.
+Hourglass,25 gp,1 lb.
+Hunting trap,5 gp,25 lb.
+Ink (1 ounce bottle),10 gp,-
+Ink pen,2 cp,-
+Jug or pitcher,2 cp,4 lb.
+Ladder (10 foot),1 sp,25 lb.
+Lamp,5 sp,1 lb.
+Lanternbullseye,10 gp,2 lb.
+Lanternhooded,5 gp,2 lb.
+Lock,10 gp,1 lb.
+Magnifying glass,100 gp,-
+Manacles,2 gp,6 lb.
+Mess kit,2 sp,1 lb.
+Mirrorsteel,5 gp,1/2 lb.
+Oil (flask),1 sp,1 lb.
+Paper (one sheet),2 sp,-
+Parchment (one sheet),1 sp,-
+Perfume (vial),5 gp,-
+Pickminer's,2 gp,10 lb.
+Piton,5 cp,1/4 lb.
+Poisonbasic (vial),100 gp,-
+Pole (10-foot),5 cp,7 lb.
+Potiron,2 gp,10 lb.
+Potion of healing,50 gp,1/2 lb.
+Pouch,5 sp,1 lb.
+Quiver,1 gp,1 lb.
+Ramportable,4 gp,35 lb.
+Rations (1 day),5 sp,2 lb.
+Robes,1 gp,4 lb.
+Ropehempen (50 feet),1 gp,10 lb.
+Ropesilk (50 feet),10 gp,5 lb.
+Sack,1 cp,1/2 lb.
+Scalemerchant's,5 gp,3 lb.
+Sealing wax,5 sp,-
+Shovel,2 gp,5 lb.
+Signal whistle,5 cp,-
+Signet ring,5 gp,-
+Soap,2 cp,-
+Spellbook,50 gp,3 lb.
+Spikesiron (10),1 gp,5 lb.
+Spyglass,1000 gp,1 lb.
+Tenttwo-person,2 gp,20 lb.
+Tinderbox,5 sp,1 lb.
+Torch,1 cp,1 lb.
+Vial,1 gp,-
+Waterskin,2 sp,5 lb. (full)
+Whetstone,1 cp,1 lb.
+;
+## Armor
+### Light Armor
+Light Armor,Cost,Armor Class (AC),Strength,Stealth,Weight
+Padded,5 gp,11 + Dex modifier,-,Disadvantage,8 lb.
+Leather,10 gp,11 + Dex modifier,-,-,10 lb.
+Studded leather,45 gp,12 + Dex modifier,-,-,13 lb.
+;
+### Medium Armor
+Medium Armor,Cost,Armor Class (AC),Strength,Stealth,Weight
+Hide,10 gp,12 + Dex modifier (max 2),-,-,12 lb.
+Chain shirt,50 gp,13 + Dex modifier (max 2),-,-,20 lb.
+Scale mail,50 gp,14 + Dex modifier (max 2),-,Disadvantage,45 lb.
+Breastplate,400 gp,14 + Dex modifier (max 2),-,-,20 lb.
+Half plate,750 gp,15 + Dex modifier (max 2),-,Disadvantage,40 lb.
+;
+### Heavy Armor
+Heavy Armor,Cost,Armor Class (AC),Strength,Stealth,Weight
+Ring mail,30 gp,14,-,Disadvantage,40 lb.
+Chain mail,75 gp,16,Str 13,Disadvantage,55 lb.
+Splint,200 gp,17,Str 15,Disadvantage,60 lb.
+Plate,1500 gp,18,Str 15,Disadvantage,65 lb.
+;
+### Shield
+Shield,Cost,Armor Class (AC),Strength,Stealth,Weight
+Shield,10 gp,+2,-,-,6 lb.
