@@ -27,39 +27,6 @@ function getIcon(name, data) {
   }
 }
 
-export class AbilityScores extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    var abilityScores = [];
-    for (let abilityScore in this.props.abilityScores) {
-      abilityScores.push(
-        <AbilityScore
-          key={abilityScore}
-          name={abilityScore}
-          savingThrows={this.props.savingThrows[abilityScore]}
-          skills={this.props.skills}
-          value={this.props.abilityScores[abilityScore]}
-        />
-      );
-    }
-
-    return (
-      <div className="ability-scores">
-        {abilityScores}
-      </div>
-    );
-  }
-}
-
-AbilityScores.propTypes = {
-  abilityScores: React.PropTypes.object.isRequired,
-  savingThrows: React.PropTypes.object.isRequired,
-  skills: React.PropTypes.object.isRequired
-};
-
 export class AbilityScore extends React.Component {
 	constructor(props) {
 		super(props);
