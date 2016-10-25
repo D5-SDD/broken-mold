@@ -9,10 +9,15 @@ const ICONS = {
   savingThrows: {
     true: 'star',
     false: 'star-o'
+  },
+  skill: {
+    true: 'circle',
+    false: 'circle-o'
   }
 };
 
 function getIcon(name, data) {
+  //console.log(name, data);
   if (data !== undefined) {
     return (<i className={'fa fa-' + ICONS[name][data]} aria-hidden="true"/>);
   } else if (name !== undefined) {
@@ -28,15 +33,22 @@ export class AbilityScores extends React.Component {
   }
 
   render() {
+    var abilityScores = [];
+    for (let abilityScore in this.props.abilityScores) {
+      abilityScores.push(
+        <AbilityScore
+          key={abilityScore}
+          name={abilityScore}
+          savingThrows={this.props.savingThrows[abilityScore]}
+          skills={this.props.skills}
+          value={this.props.abilityScores[abilityScore]}
+        />
+      );
+    }
 
     return (
       <div className="ability-scores">
-        <AbilityScore
-          name="strength"
-          savingThrows={this.props.savingThrows.strength}
-          skills={this.props.skills}
-          value={this.props.abilityScores.strength}
-        />
+        {abilityScores}
       </div>
     );
   }
@@ -59,7 +71,9 @@ export class AbilityScore extends React.Component {
     var skills = [];
     for (let i = 0; i < SKILLS[name].length; i++) {
       let skill = SKILLS[name][i];
-      skills[skill] = this.props.skills[skill];
+      let icon = getIcon('skill', this.props.skills[skill].proficient);
+      let skillName = skill.charAt(0).toUpperCase() + skill.slice(1);
+      skills.push(<div key={skill}>{icon} {this.props.skills[skill].value} {skillName}</div>);
     }
 
 		return (
