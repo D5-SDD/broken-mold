@@ -1,0 +1,24 @@
+.panel {
+  .fa {
+    margin-right: 5px;
+  }
+
+  &.centered {
+  	.panel-heading, .panel-body {
+      text-align: center;
+	    padding: 10px 0;
+	  }
+  }
+}
+
+.ability-score {
+  &.value {
+    width: 50%;
+    float: left;
+    border-right: 1px solid gray;
+  }
+  &.mod {
+    width: 50%;
+    float: right;
+  }
+}

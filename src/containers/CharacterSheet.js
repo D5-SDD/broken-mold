@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {Grid, Row, Col} from 'react-bootstrap';
-import {AbilityScores} from '../components/CharacterSheet';
+import {AbilityScore} from '../components/CharacterSheet';
 
 import '../stylesheets/containers/CharacterSheet';
 
@@ -31,6 +31,7 @@ class CharacterSheet extends React.Component {
           <Row>
             <Col className="col" md={4}>
               <AbilityScores
+                abilityScoreMods={character.abilityScoreMods}
                 abilityScores={character.abilityScores}
                 savingThrows={character.savingThrows}
                 skills={character.skills}
@@ -63,3 +64,38 @@ CharacterSheet.propTypes = {
 };
 
 export default CharacterSheet;
+
+class AbilityScores extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    var abilityScores = [];
+    for (let abilityScore in this.props.abilityScores) {
+      abilityScores.push(
+        <AbilityScore
+          key={abilityScore}
+          mod={this.props.abilityScoreMods[abilityScore]}
+          name={abilityScore}
+          savingThrows={this.props.savingThrows[abilityScore]}
+          skills={this.props.skills}
+          value={this.props.abilityScores[abilityScore]}
+        />
+      );
+    }
+
+    return (
+      <div className="ability-scores">
+        {abilityScores}
+      </div>
+    );
+  }
+}
+
+AbilityScores.propTypes = {
+  abilityScoreMods: React.PropTypes.object.isRequired,
+  abilityScores: React.PropTypes.object.isRequired,
+  savingThrows: React.PropTypes.object.isRequired,
+  skills: React.PropTypes.object.isRequired
+};
