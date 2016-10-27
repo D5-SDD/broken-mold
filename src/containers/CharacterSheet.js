@@ -2,7 +2,8 @@
 
 import React from 'react';
 import {Grid, Row, Col} from 'react-bootstrap';
-import {AbilityScore} from '../components/CharacterSheet';
+import {AbilityScore, HealthBox, SpellArea, DiceAndSaves}
+  from '../components/CharacterSheet';
 
 import '../stylesheets/containers/CharacterSheet';
 
@@ -38,7 +39,18 @@ export default class CharacterSheet extends React.Component {
               />
             </Col>
             <Col className="col" md={4}>
-              <p>Health and Attacks</p>
+              <HealthBox
+                health={character.hitpoints}
+              />
+              <DiceAndSaves
+                hitDice={character.hitDice}
+                deathSaves={character.deathSaves}
+              />
+              <SpellArea
+                cast={character.hitDice}
+                save={character.hitDice}
+                attack={character.hitDice}
+              />
             </Col>
             <Col className="col" md={4}>
               <p>Feats and Features</p>
