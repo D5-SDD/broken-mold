@@ -49,7 +49,11 @@ export class AbilityScore extends React.Component {
     for (let i = 0; i < SKILLS[name].length; i++) {
       let skill = SKILLS[name][i];
       let icon = getIcon('skill', this.props.skills[skill].proficient);
-      let skillName = skill.charAt(0).toUpperCase() + skill.slice(1);
+
+      // convert from camelCase to Camel Case
+      let skillName = skill.text.replace(/([A-Z])/g, ' $1');
+      skillName = skillName.charAt(0).toUpperCase() + skillName.slice(1);
+
       skills.push(<div key={skill}>{icon} {this.props.skills[skill].value} {skillName}</div>);
     }
 
