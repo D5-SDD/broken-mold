@@ -75,11 +75,6 @@ CharacterSheet.propTypes = {
   character: React.PropTypes.object
 };
 
-<<<<<<< HEAD
-export default CharacterSheet;
-
-=======
->>>>>>> f642ab9493f53e5ebb7b93887725d94fd2f6c9dd
 class AbilityScores extends React.Component {
   constructor(props) {
     super(props);
@@ -91,10 +86,7 @@ class AbilityScores extends React.Component {
       abilityScores.push(
         <AbilityScore
           key={abilityScore}
-<<<<<<< HEAD
           mod={this.props.abilityScoreMods[abilityScore]}
-=======
->>>>>>> f642ab9493f53e5ebb7b93887725d94fd2f6c9dd
           name={abilityScore}
           savingThrows={this.props.savingThrows[abilityScore]}
           skills={this.props.skills}
