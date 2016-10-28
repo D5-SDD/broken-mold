@@ -5,6 +5,8 @@ import {Row, Col, Panel} from 'react-bootstrap';
 
 import {SKILLS} from '../../lib/Character';
 
+import '../stylesheets/components/CharacterSheet';
+
 const ICONS = {
   savingThrows: {
     true: 'star',
@@ -47,7 +49,11 @@ export class AbilityScore extends React.Component {
     for (let i = 0; i < SKILLS[name].length; i++) {
       let skill = SKILLS[name][i];
       let icon = getIcon('skill', this.props.skills[skill].proficient);
-      let skillName = skill.charAt(0).toUpperCase() + skill.slice(1);
+
+      // convert from camelCase to Camel Case
+      let skillName = skill.replace(/([A-Z])/g, ' $1');
+      skillName = skillName.charAt(0).toUpperCase() + skillName.slice(1);
+
       skills.push(<div key={skill}>{icon} {this.props.skills[skill].value} {skillName}</div>);
     }
 
@@ -55,7 +61,12 @@ export class AbilityScore extends React.Component {
       <Row className="ability-score" id={name} >
         <Col className="col" md={4}>
           <Panel header={name} className="centered">
-            {this.props.value}
+            <div className='ability-score value'>
+              {this.props.value}
+            </div>
+            <div className='ability-score mod'>
+              {this.props.mod}
+            </div>
           </Panel>
         </Col>
         <Col className="col" md={8}>
@@ -200,6 +211,7 @@ export class SpellArea extends React.Component {
 }
 
 AbilityScore.propTypes = {
+  mod: React.PropTypes.number.isRequired,
 	name: React.PropTypes.string.isRequired,
   savingThrows: React.PropTypes.object.isRequired,
   skills: React.PropTypes.object.isRequired,
