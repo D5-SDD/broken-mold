@@ -5,6 +5,7 @@ import React from 'react';
 import {Tabs, Tab} from 'react-bootstrap';
 import CharacterView from './CharacterView';
 import DMView from './DMView';
+import Character, {readMap,exportMap} from '../../lib/Character';
 
 // Import stylesheet
 import '../stylesheets/containers/App.scss';
@@ -12,6 +13,15 @@ import '../stylesheets/containers/App.scss';
 class AppContainer extends React.Component {
   constructor(props) {
     super(props);
+    
+    this.characters = readMap();
+
+    this.characters[0].race = 'Dragon-Born';
+    var testChar = new Character('NEW_CHARACTER');
+    console.log(testChar);
+    //console.log(this.characters[0].getListOfSpells(['Wizard'],'level1'));
+    //this.characters[0].saveCharacter();
+    //exportMap(this.characters, './test/character_map.json');
   }
 
   // Called when a new tab is selected

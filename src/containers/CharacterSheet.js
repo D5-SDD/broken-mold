@@ -2,11 +2,11 @@
 
 import React from 'react';
 import {Grid, Row, Col} from 'react-bootstrap';
-import {AbilityScore} from '../components/CharacterSheet';
+import {AbilityScore, HealthBox, SpellArea, DiceAndSaves} from '../components/CharacterSheet';
 
 import '../stylesheets/containers/CharacterSheet';
 
-class CharacterSheet extends React.Component {
+export default class CharacterSheet extends React.Component {
   constructor(props) {
     super(props);
 
@@ -21,6 +21,7 @@ class CharacterSheet extends React.Component {
 
     console.log(this.props.character);
   }
+
   render() {
     var character = this.props.character;
     var CS_GRID = null;
@@ -38,7 +39,18 @@ class CharacterSheet extends React.Component {
               />
             </Col>
             <Col className="col" md={4}>
-              <p>Health and Attacks</p>
+              <HealthBox
+                health={character.hitpoints}
+              />
+              <DiceAndSaves
+                hitDice={character.hitDice}
+                deathSaves={character.deathSaves}
+              />
+              <SpellArea
+                cast={character.hitDice}
+                save={character.hitDice}
+                attack={character.hitDice}
+              />
             </Col>
             <Col className="col" md={4}>
               <p>Feats and Features</p>
@@ -63,8 +75,11 @@ CharacterSheet.propTypes = {
   character: React.PropTypes.object
 };
 
+<<<<<<< HEAD
 export default CharacterSheet;
 
+=======
+>>>>>>> f642ab9493f53e5ebb7b93887725d94fd2f6c9dd
 class AbilityScores extends React.Component {
   constructor(props) {
     super(props);
@@ -76,7 +91,10 @@ class AbilityScores extends React.Component {
       abilityScores.push(
         <AbilityScore
           key={abilityScore}
+<<<<<<< HEAD
           mod={this.props.abilityScoreMods[abilityScore]}
+=======
+>>>>>>> f642ab9493f53e5ebb7b93887725d94fd2f6c9dd
           name={abilityScore}
           savingThrows={this.props.savingThrows[abilityScore]}
           skills={this.props.skills}

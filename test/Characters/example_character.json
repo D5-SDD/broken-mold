@@ -184,7 +184,7 @@
     {
       "name": "studded leather armor",
       "armorClass": 12,
-      "armorTyle": "light",
+      "armorType": "light",
       "strength": 0,
       "stealthDisadvantage": false
     },
