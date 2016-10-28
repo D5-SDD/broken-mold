@@ -29,8 +29,8 @@ export default class CharacterSheet extends React.Component {
       // TODO: Character View
       CS_GRID = (
         <Grid className="character-sheet-grid">
-          <Row>
-            <Col className="col" md={4}>
+          <Row className="outer">
+            <Col className="outer col" md={4}>
               <AbilityScores
                 abilityScoreMods={character.abilityScoreMods}
                 abilityScores={character.abilityScores}
@@ -38,7 +38,7 @@ export default class CharacterSheet extends React.Component {
                 skills={character.skills}
               />
             </Col>
-            <Col className="col" md={4}>
+            <Col className="outer col" md={4}>
               <HealthBox
                 health={character.hitpoints}
               />
@@ -52,7 +52,7 @@ export default class CharacterSheet extends React.Component {
                 attack={character.hitDice}
               />
             </Col>
-            <Col className="col" md={4}>
+            <Col className="outer col" md={4}>
               <p>Feats and Features</p>
             </Col>
           </Row>
