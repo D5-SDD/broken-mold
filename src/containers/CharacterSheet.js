@@ -2,8 +2,7 @@
 
 import React from 'react';
 import {Grid, Row, Col} from 'react-bootstrap';
-import {AbilityScore, HealthBox, SpellArea, DiceAndSaves}
-  from '../components/CharacterSheet';
+import {AbilityScore, HealthBox, SpellArea, DiceAndSaves} from '../components/CharacterSheet';
 
 import '../stylesheets/containers/CharacterSheet';
 
@@ -30,15 +29,16 @@ export default class CharacterSheet extends React.Component {
       // TODO: Character View
       CS_GRID = (
         <Grid className="character-sheet-grid">
-          <Row>
-            <Col className="col" md={4}>
+          <Row className="outer">
+            <Col className="outer col" md={4}>
               <AbilityScores
+                abilityScoreMods={character.abilityScoreMods}
                 abilityScores={character.abilityScores}
                 savingThrows={character.savingThrows}
                 skills={character.skills}
               />
             </Col>
-            <Col className="col" md={4}>
+            <Col className="outer col" md={4}>
               <HealthBox
                 health={character.hitpoints}
               />
@@ -52,7 +52,7 @@ export default class CharacterSheet extends React.Component {
                 attack={character.hitDice}
               />
             </Col>
-            <Col className="col" md={4}>
+            <Col className="outer col" md={4}>
               <p>Feats and Features</p>
             </Col>
           </Row>
@@ -86,6 +86,7 @@ class AbilityScores extends React.Component {
       abilityScores.push(
         <AbilityScore
           key={abilityScore}
+          mod={this.props.abilityScoreMods[abilityScore]}
           name={abilityScore}
           savingThrows={this.props.savingThrows[abilityScore]}
           skills={this.props.skills}
@@ -103,6 +104,7 @@ class AbilityScores extends React.Component {
 }
 
 AbilityScores.propTypes = {
+  abilityScoreMods: React.PropTypes.object.isRequired,
   abilityScores: React.PropTypes.object.isRequired,
   savingThrows: React.PropTypes.object.isRequired,
   skills: React.PropTypes.object.isRequired
