@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {Grid, Row, Col} from 'react-bootstrap';
-import {AbilityScore, HealthBox, SpellArea, DiceAndSaves} from '../components/CharacterSheet';
+import {AbilityScore, HealthBox, SpellArea, DiceAndSaves, Header} from '../components/CharacterSheet';
 
 import '../stylesheets/containers/CharacterSheet';
 
@@ -29,6 +29,9 @@ export default class CharacterSheet extends React.Component {
       // TODO: Character View
       CS_GRID = (
         <Grid className="character-sheet-grid">
+          <Header
+            name={character.name}
+          />
           <Row className="outer">
             <Col className="outer col" md={4}>
               <AbilityScores

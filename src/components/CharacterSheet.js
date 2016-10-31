@@ -223,9 +223,23 @@ export class Header extends React.Component {
   }
 
   render() {
-    return;
+    return(
+      <Row className="Header" >
+        <Col className="col" md={4}>
+          <Panel className="centered">
+            Character Name: {this.props.name}
+          </Panel>
+        </Col>
+        <Col className="col" md={4}>
+          <div>
+          
+          </div>
+        </Col>
+      </Row>
+    );
   }
 }
 
 Header.propTypes = {
+  name: React.PropTypes.string.isRequired
 };
