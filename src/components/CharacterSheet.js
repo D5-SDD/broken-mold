@@ -193,7 +193,7 @@ export class SpellArea extends React.Component {
       <Row className="SpellArea" >
         <Col className="col" md={4}>
           <Panel className="centered">
-            SpellCasting Ability: {this.props.cast}
+            Spell-Casting Ability: {this.props.cast}
           </Panel>
         </Col>
         <Col className="col" md={4}>
@@ -212,9 +212,9 @@ export class SpellArea extends React.Component {
 }
 
 SpellArea.propTypes = {
-  attack: React.PropTypes.string.isRequired,
   cast: React.PropTypes.string.isRequired,
-  save: React.PropTypes.string.isRequired
+  attack: React.PropTypes.number.isRequired,
+  save: React.PropTypes.number.isRequired
 };
 
 export class Header extends React.Component {
