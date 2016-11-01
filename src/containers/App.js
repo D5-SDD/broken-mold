@@ -24,7 +24,7 @@ class AppContainer extends React.Component {
     //exportMap(this.characters, './test/character_map.json');
     console.log(this.characters[0].effectiveClassLevel);
     console.log(this.characters[0].proficiencyBonus);
-    this.characters[0].updateAutoValues();
+    //this.characters[0].updateAutoValues();
     console.log(this.characters[0].effectiveClassLevel);
     console.log(this.characters[0].proficiencyBonus);    
   }
