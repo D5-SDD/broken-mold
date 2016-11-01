@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import {Row, Col, Panel, Accordion, Table} from 'react-bootstrap';
+import {Row, Col, Panel, Accordion, Table, ListGroup, ListGroupItem} from 'react-bootstrap';
 import {
   FaStar, FaStarO, FaCircle, FaCircleO,
   FaHeart, FaHeartO, FaGittip, FaHeartbeat,
@@ -15,7 +15,11 @@ import '../stylesheets/components/CharacterSheet';
 
 function capitalize(s) {
   s = s.replace(/([A-Z])/g, ' $1');
-  return s.charAt(0).toUpperCase() + s.slice(1);
+  s = s.charAt(0).toUpperCase() + s.slice(1);
+  s = s.replace(/\b\w+/g, function(s) {
+    return s.charAt(0).toUpperCase() + s.substr(1).toLowerCase();
+  });
+  return s;
 }
 
 export class AbilityScore extends React.Component {
@@ -302,14 +306,8 @@ export class Currency extends React.Component {
       );
     });
 
-    var title = (
-      <span className="panel header">
-        Currency
-      </span>
-    );
-
     return (
-      <Panel collapsible defaultExpanded header={title}>
+      <Panel header="Currency">
         <Table fill bordered>
           <tbody>
             {currencies}
@@ -329,3 +327,34 @@ Currency.propTypes = {
     copper: React.PropTypes.number
   }).isRequired
 };
+
+export class Equipment extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    var items = [];
+    this.props.data.map(function(value) {
+      value.map(function(value) {
+        items.push(
+          <ListGroupItem key={items.length}>
+            {capitalize(value.name)}
+          </ListGroupItem>
+        );
+      })
+    })
+
+    return (
+      <Panel header="Equipment">
+        <ListGroup fill>
+          {items}
+        </ListGroup>
+      </Panel>
+    );
+  }
+}
+
+Equipment.propTypes = {
+  data: React.PropTypes.array.isRequired
+}

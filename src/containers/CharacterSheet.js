@@ -4,7 +4,7 @@ import React from 'react';
 import {Grid, Row, Col} from 'react-bootstrap';
 import {
   AbilityScore, Currency, DiceAndSaves,
-  HealthBox, SpellArea, TextBox
+  Equipment, HealthBox, SpellArea, TextBox
 } from '../components/CharacterSheet';
 
 import '../stylesheets/containers/CharacterSheet';
@@ -55,8 +55,13 @@ export default class CharacterSheet extends React.Component {
                 attack={character.spellAttackMod}
               />
               <Row>
-                <Col className="inner col" md={11}>
+                <Col className="inner col" md={5}>
                   <Currency currency={character.currency}/>
+                </Col>
+                <Col className="inner col" md={7}>
+                  <Equipment
+                    data={[character.inventory, character.armor]}
+                  />
                 </Col>
               </Row>
             </Col>
