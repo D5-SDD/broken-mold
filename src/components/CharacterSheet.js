@@ -296,21 +296,6 @@ export class Currency extends React.Component {
   }
 
   render() {
-<<<<<<< HEAD
-    return(
-      <Row className="Header" >
-        <Col className="col" md={4}>
-          <Panel className="centered">
-            Character Name: {this.props.name}
-          </Panel>
-        </Col>
-        <Col className="col" md={4}>
-          <div>
-          
-          </div>
-        </Col>
-      </Row>
-=======
     var currencies = [];
     _.forIn(this.props.currency, function(value, key){
       currencies.push(
@@ -329,15 +314,10 @@ export class Currency extends React.Component {
           </tbody>
         </Table>
       </Panel>
->>>>>>> 67db7af1de5bf1e3c993b5df48a7dfaec38fc7ba
     );
   }
 }
 
-<<<<<<< HEAD
-Header.propTypes = {
-  name: React.PropTypes.string.isRequired
-=======
 Currency.propTypes = {
   currency: React.PropTypes.shape({
     platinum: React.PropTypes.number,
@@ -346,7 +326,6 @@ Currency.propTypes = {
     silver: React.PropTypes.number,
     copper: React.PropTypes.number
   }).isRequired
->>>>>>> 67db7af1de5bf1e3c993b5df48a7dfaec38fc7ba
 };
 
 export class Equipment extends React.Component {
@@ -379,3 +358,30 @@ export class Equipment extends React.Component {
 Equipment.propTypes = {
   data: React.PropTypes.array.isRequired
 }
+
+export class Header extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  
+  render() {
+    return (
+      <Row className="Header" >
+        <Col className="col" md={4}>
+          <Panel className="centered">
+            Character Name: {this.props.name}
+          </Panel>
+        </Col>
+        <Col className="col" md={4}>
+          <div>
+          
+          </div>
+        </Col>
+      </Row>
+    );
+  }
+}
+
+Header.propTypes = {
+  name: React.PropTypes.string.isRequired
+};
