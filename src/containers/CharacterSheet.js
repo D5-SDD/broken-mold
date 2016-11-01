@@ -90,6 +90,7 @@ export default class CharacterSheet extends React.Component {
                     <TextBox
                       data={character.featuresAndTraits}
                       title="featuresAndTraits"
+                      accordion
                     />
                   </Row>
                   <Row>

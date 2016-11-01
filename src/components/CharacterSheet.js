@@ -228,10 +228,10 @@ export class TextBox extends React.Component {
 
     this.id = this.props.title;
     this.header = capitalize(this.id);
-    this.data = this.props.data;
+    this.data = [this.props.data];
 
-    if (typeof this.data === 'object') {
-      this.data = _.map(this.data, function(obj) {
+    if (typeof this.props.data === 'object') {
+      this.data = _.map(this.props.data, function(obj) {
         if (typeof obj === 'string') {
           return obj;
         }
@@ -243,20 +243,40 @@ export class TextBox extends React.Component {
 
   render() {
     var data = [];
-    if (typeof this.data === 'object') {
-      for (let i = 0; i < this.data.length; i++) {
+    for (let i = 0; i < this.data.length; i++) {
+      if (this.props.accordion === true) {
+        data.push(
+          <Panel header={this.data[i]} eventKey={i/2} key={i/2}>
+            {this.data[i+1]}
+          </Panel>
+        );
+        i++;
+      } else {
         data.push(<div key={i}>{this.data[i]}</div>);
       }
+    }
+
+    var panel = null;
+    if (this.props.accordion === true) {
+      panel = (
+        <Panel id={this.id} header={this.header}>
+          <Accordion>
+            {data}
+          </Accordion>
+        </Panel>
+      );
     } else {
-      data.push(<div key={0}>{this.data}</div>);
+      panel = (
+        <Panel id={this.id} header={this.header}>
+          {data}
+        </Panel>
+      );
     }
 
     return (
       <Row id={this.id}>
         <Col className="col" md={12}>
-          <Panel id={this.id} header={this.header}>
-            {data}
-          </Panel>
+          {panel}
         </Col>
       </Row>
     );
@@ -264,6 +284,7 @@ export class TextBox extends React.Component {
 }
 
 TextBox.propTypes = {
+  accordion: React.PropTypes.bool,
   data: React.PropTypes.oneOfType([
     React.PropTypes.array,
     React.PropTypes.string
