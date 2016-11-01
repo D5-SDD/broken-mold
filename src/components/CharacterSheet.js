@@ -216,16 +216,3 @@ SpellArea.propTypes = {
   attack: React.PropTypes.number.isRequired,
   save: React.PropTypes.number.isRequired
 };
-
-export class Header extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return;
-  }
-}
-
-Header.propTypes = {
-};
