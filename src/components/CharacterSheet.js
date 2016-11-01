@@ -94,23 +94,21 @@ export class HealthBox extends React.Component {
     return (
       <Row className="healthBox" >
         <Col className="col" md={12}>
-          <Panel>
-            <Col className="col" md={4}>
-              <Panel className="centered">
-                {healthIcon} Max Health: {this.props.health.maximum}
-              </Panel>
-            </Col>
-            <Col className="col" md={4}>
-              <Panel className="centered">
-                {heartIcon} Current Health: {this.props.health.current}
-              </Panel>
-            </Col>
-            <Col className="col" md={4}>
-              <Panel className="centered">
-                {tempIcon} Temp Health: {this.props.health.temporary}
-              </Panel>
-            </Col>
-          </Panel>
+          <Col className="col" md={4}>
+            <Panel header="Max Health" className="centered">
+              {healthIcon} {this.props.health.maximum}
+            </Panel>
+          </Col>
+          <Col className="col" md={4}>
+            <Panel header="Curr Health" className="centered">
+              {heartIcon} {this.props.health.current}
+            </Panel>
+          </Col>
+          <Col className="col" md={4}>
+            <Panel header="Temp Health" className="centered">
+              {tempIcon} {this.props.health.temporary}
+            </Panel>
+          </Col>
         </Col>
       </Row>
     );
@@ -133,12 +131,12 @@ export class DiceAndSaves extends React.Component {
     return (
       <Row className="DiceAndSaves" >
         <Col className="col" md={4}>
-          <Panel className="centered">
-            {hitDiceIcon} Hit Dice: {this.props.hitDice}
+          <Panel header="Hit Dice" className="centered">
+            {hitDiceIcon} {this.props.hitDice}
           </Panel>
         </Col>
         <Col className="col" md={8}>
-          <Panel className="centered">
+          <Panel header="Death Saves" className="centered">
             {deathIcon} Successes: <DeathSavesHelper
               saves={this.props.deathSaves.successes}
               deathKey="deathsucc"
@@ -148,8 +146,6 @@ export class DiceAndSaves extends React.Component {
               saves={this.props.deathSaves.failures}
               deathKey="deathfail"
             />
-            <br/>
-            Death Saves
           </Panel>
         </Col>
       </Row>
@@ -201,18 +197,18 @@ export class SpellArea extends React.Component {
     return (
       <Row className="SpellArea">
         <Col className="col" md={4}>
-          <Panel className="centered">
-            Spell-Casting Ability: {this.props.cast}
+          <Panel header="Spell-Casting Ability" className="centered">
+            {this.props.cast}
           </Panel>
         </Col>
         <Col className="col" md={4}>
-          <Panel className="centered">
-            Spell Save DC: {this.props.save}
+          <Panel header="Spell Save DC" className="centered">
+            {this.props.save}
           </Panel>
         </Col>
         <Col className="col" md={4}>
-          <Panel className="centered">
-            Spell Attack Bonus: {this.props.attack}
+          <Panel header="Spell Attack Bonus" className="centered">
+            {this.props.attack}
           </Panel>
         </Col>
       </Row>
