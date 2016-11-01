@@ -41,9 +41,9 @@ export class AbilityScore extends React.Component {
       skills.push(<div key={skill}>{icon} {this.props.skills[skill].value} {skillName}</div>);
     }
 
-    var value = this.props.value;
-    if (value >= 0) {
-      value = '+' + this.props.value;
+    var mod = this.props.mod;
+    if (mod >= 0) {
+      mod = '+' + this.props.mod;
     }
 
 		return (
@@ -54,7 +54,7 @@ export class AbilityScore extends React.Component {
               {this.props.value}
             </div>
             <div className='ability-score mod'>
-              {this.props.mod}
+              {mod}
             </div>
           </Panel>
         </Col>
