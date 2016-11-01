@@ -5,6 +5,10 @@
     {
       "name": "Rougue",
       "level": 3
+    },
+    {
+      "name": "Wizard",
+      "level": 3
     }
   ],
   "race": "Human",
@@ -12,6 +16,7 @@
     "Lawful",
     "Neutral"
   ],
+  "experience": 900,
   "background": "Urchin",
   "personalityTraits": "I sleep with my back to a wall or tree, with everything I own wrapped in a bundle in my arms.",
   "ideals": "I help the people who help me—that’s what keeps us alive.",
