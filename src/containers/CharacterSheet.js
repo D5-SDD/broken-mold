@@ -2,7 +2,10 @@
 
 import React from 'react';
 import {Grid, Row, Col} from 'react-bootstrap';
-import {AbilityScore, HealthBox, SpellArea, DiceAndSaves} from '../components/CharacterSheet';
+import {
+  AbilityScore, Currency, DiceAndSaves,
+  Equipment, HealthBox, SpellArea, TextBox
+} from '../components/CharacterSheet';
 
 import '../stylesheets/containers/CharacterSheet';
 
@@ -47,13 +50,67 @@ export default class CharacterSheet extends React.Component {
                 deathSaves={character.deathSaves}
               />
               <SpellArea
-                cast={character.hitDice}
-                save={character.hitDice}
-                attack={character.hitDice}
+                cast={character.spellCastingClass}
+                save={character.spellSaveDC}
+                attack={character.spellAttackMod}
               />
+              <Row>
+                <Col className="inner col" md={5}>
+                  <Currency currency={character.currency}/>
+                </Col>
+                <Col className="inner col" md={7}>
+                  <Equipment
+                    data={[character.inventory, character.armor]}
+                  />
+                </Col>
+              </Row>
             </Col>
             <Col className="outer col" md={4}>
-              <p>Feats and Features</p>
+              <Row>
+                <Col className="col" md={11}>
+                  <Row>
+                    <TextBox
+                      data={character.personalityTraits}
+                      title="personalityTraits"
+                    />
+                  </Row>
+                  <Row>
+                    <TextBox
+                      data={character.ideals}
+                      title="ideals"
+                    />
+                  </Row>
+                  <Row>
+                    <TextBox
+                      data={character.bonds}
+                      title="bonds"
+                    />
+                  </Row>
+                  <Row>
+                    <TextBox
+                      data={character.flaws}
+                      title="flaws"
+                    />
+                  </Row>
+                </Col>
+              </Row>
+              <Row>
+                <Col className="col" md={11}>
+                  <Row>
+                    <TextBox
+                      data={character.featuresAndTraits}
+                      title="featuresAndTraits"
+                      accordion
+                    />
+                  </Row>
+                  <Row>
+                    <TextBox
+                      data={[character.proficiencies, character.languages]}
+                      title="otherProficienciesAndLanguages"
+                    />
+                  </Row>
+                </Col>
+              </Row>
             </Col>
           </Row>
         </Grid>

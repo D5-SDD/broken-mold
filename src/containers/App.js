@@ -5,7 +5,7 @@ import React from 'react';
 import {Tabs, Tab} from 'react-bootstrap';
 import CharacterView from './CharacterView';
 import DMView from './DMView';
-import Character, {readMap,exportMap} from '../../lib/Character';
+import Character, {readMap} from '../../lib/Character';
 
 // Import stylesheet
 import '../stylesheets/containers/App.scss';
@@ -13,7 +13,7 @@ import '../stylesheets/containers/App.scss';
 class AppContainer extends React.Component {
   constructor(props) {
     super(props);
-    
+
     this.characters = readMap();
 
     this.characters[0].race = 'Dragon-Born';
@@ -24,6 +24,10 @@ class AppContainer extends React.Component {
     //exportMap(this.characters, './test/character_map.json');
     console.log(this.characters[0].effectiveClassLevel);
     console.log(this.characters[0].proficiencyBonus);
+<<<<<<< HEAD
+=======
+    //this.characters[0].updateAutoValues();
+>>>>>>> 484dcfbc2425bb9b97fa66ef6317decbbdec7aaf
     console.log(this.characters[0].effectiveClassLevel);
     console.log(this.characters[0].proficiencyBonus);    
   }
@@ -39,7 +43,7 @@ class AppContainer extends React.Component {
         <Tab eventKey={1} title="Characters">
           <CharacterView />
         </Tab>
-        <Tab eventKey={2} title="Dungeon Master">
+        <Tab eventKey={2} title="Dungeon Master" disabled>
           <DMView />
         </Tab>
         <Tab eventKey={3} title="Networking" disabled>

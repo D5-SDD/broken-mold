@@ -16,6 +16,7 @@
     "Lawful",
     "Neutral"
   ],
+  "experience": 900,
   "background": "Urchin",
   "personalityTraits": "Stufity stuff",
   "ideals": "Fuck bitches get money",
@@ -176,7 +177,13 @@
       "stealthDisadvantage": false
     }
   ],
-  "money": 1000,
+  "currency": {
+    "platinum": 0,
+    "gold": 10,
+    "electrum": 0,
+    "silver": 0,
+    "copper": 0    
+  },
   "featuresAndTraits": [
     {
       "name": "City Secrets",
