@@ -6,6 +6,10 @@
       "name": "Rougue",
       "level": 3
     }
+    {
+      "name": "Wizard"
+      "level": 3
+    }
   ],
   "race": "Human",
   "alignment": [

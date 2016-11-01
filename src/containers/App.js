@@ -22,6 +22,11 @@ class AppContainer extends React.Component {
     //console.log(this.characters[0].getListOfSpells(['Wizard'],'level1'));
     //this.characters[0].saveCharacter();
     //exportMap(this.characters, './test/character_map.json');
+    console.log(this.characters[0].effectiveClassLevel);
+    console.log(this.characters[0].proficiencyBonus);
+    this.characters[0].updateAutoValues();
+    console.log(this.characters[0].effectiveClassLevel);
+    console.log(this.characters[0].proficiencyBonus);    
   }
 
   // Called when a new tab is selected
