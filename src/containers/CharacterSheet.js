@@ -56,10 +56,44 @@ export default class CharacterSheet extends React.Component {
               />
             </Col>
             <Col className="outer col" md={4}>
-              <TextBox
-                data={character.featuresAndTraits}
-                title="featuresAndTraits"
-              />
+              <Row>
+                <Col className="col" md={11}>
+                  <Row>
+                    <TextBox
+                      data={character.personalityTraits}
+                      title="personalityTraits"
+                    />
+                  </Row>
+                  <Row>
+                    <TextBox
+                      data={character.ideals}
+                      title="ideals"
+                    />
+                  </Row>
+                  <Row>
+                    <TextBox
+                      data={character.bonds}
+                      title="bonds"
+                    />
+                  </Row>
+                  <Row>
+                    <TextBox
+                      data={character.flaws}
+                      title="flaws"
+                    />
+                  </Row>
+                </Col>
+              </Row>
+              <Row>
+                <Col className="col" md={11}>
+                  <Row>
+                    <TextBox
+                      data={character.featuresAndTraits}
+                      title="featuresAndTraits"
+                    />
+                  </Row>
+                </Col>
+              </Row>
             </Col>
           </Row>
         </Grid>

@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import {Row, Col, Panel} from 'react-bootstrap';
+import {Row, Col, Panel, Accordion} from 'react-bootstrap';
 import {
   FaStar, FaStarO, FaCircle, FaCircleO,
   FaHeart, FaHeartO, FaGittip, FaHeartbeat,
@@ -226,17 +226,38 @@ export class TextBox extends React.Component {
     this.id = this.props.title;
     this.header = this.id.replace(/([A-Z])/g, ' $1');
     this.header = this.header.charAt(0).toUpperCase() + this.header.slice(1);
-
-    console.log(this.id, this.header, this.props.data);
   }
 
   render() {
+    var panel = (
+      <Panel id={this.id} header={this.header}>
+        {this.props.data}
+      </Panel>
+    );
+
+    var data = [];
+    if (typeof this.props.data === 'object') {
+      for (let i = 0; i < this.props.data.length; i++) {
+        data.push(
+          <Panel header={this.props.data[i].name} eventKey={i} key={i}>
+            {this.props.data[i].description}
+          </Panel>
+        );
+      }
+
+      panel = (
+        <Panel id={this.id} header={this.header}>
+          <Accordion>
+            {data}
+          </Accordion>
+        </Panel>
+      );
+    }
+
     return (
       <Row id={this.id}>
         <Col className="col" md={12}>
-          <Panel id={this.id} header={this.header}>
-            Test data
-          </Panel>
+          {panel}
         </Col>
       </Row>
     );
@@ -244,6 +265,9 @@ export class TextBox extends React.Component {
 }
 
 TextBox.propTypes = {
-  data: React.PropTypes.array.isRequired,
+  data: React.PropTypes.oneOfType([
+    React.PropTypes.array,
+    React.PropTypes.string
+  ]).isRequired,
   title: React.PropTypes.string.isRequired
 };
