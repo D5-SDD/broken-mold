@@ -4,8 +4,8 @@ import React from 'react';
 import {Row, Col, Panel} from 'react-bootstrap';
 import {
   FaStar, FaStarO, FaCircle, FaCircleO,
-  FaShield, FaHeart, FaHeartO, FaGittip,
-  FaHeartbeat, FaMedkit
+  FaHeart, FaHeartO, FaGittip, FaHeartbeat,
+  FaMedkit
 } from 'react-icons/lib/fa';
 
 import {SKILLS} from '../../lib/Character';
@@ -86,23 +86,25 @@ export class HealthBox extends React.Component {
 
     return (
       <Row className="healthBox" >
-        <Panel>
-          <Col className="col" md={4}>
-            <Panel className="centered">
-              {healthIcon} Max Health: {this.props.health.maximum}
-            </Panel>
-          </Col>
-          <Col className="col" md={4}>
-            <Panel className="centered">
-              {heartIcon} Current Health: {this.props.health.current}
-            </Panel>
-          </Col>
-          <Col className="col" md={4}>
-            <Panel className="centered">
-              {tempIcon} Temp Health: {this.props.health.temporary}
-            </Panel>
-          </Col>
-        </Panel>
+        <Col className="col" md={12}>
+          <Panel>
+            <Col className="col" md={4}>
+              <Panel className="centered">
+                {healthIcon} Max Health: {this.props.health.maximum}
+              </Panel>
+            </Col>
+            <Col className="col" md={4}>
+              <Panel className="centered">
+                {heartIcon} Current Health: {this.props.health.current}
+              </Panel>
+            </Col>
+            <Col className="col" md={4}>
+              <Panel className="centered">
+                {tempIcon} Temp Health: {this.props.health.temporary}
+              </Panel>
+            </Col>
+          </Panel>
+        </Col>
       </Row>
     );
 	}
@@ -190,7 +192,7 @@ export class SpellArea extends React.Component {
 
 	render() {
     return (
-      <Row className="SpellArea" >
+      <Row className="SpellArea">
         <Col className="col" md={4}>
           <Panel className="centered">
             Spell-Casting Ability: {this.props.cast}
@@ -215,4 +217,33 @@ SpellArea.propTypes = {
   cast: React.PropTypes.string.isRequired,
   attack: React.PropTypes.number.isRequired,
   save: React.PropTypes.number.isRequired
+};
+
+export class TextBox extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.id = this.props.title;
+    this.header = this.id.replace(/([A-Z])/g, ' $1');
+    this.header = this.header.charAt(0).toUpperCase() + this.header.slice(1);
+
+    console.log(this.id, this.header, this.props.data);
+  }
+
+  render() {
+    return (
+      <Row id={this.id}>
+        <Col className="col" md={12}>
+          <Panel id={this.id} header={this.header}>
+            Test data
+          </Panel>
+        </Col>
+      </Row>
+    );
+  }
+}
+
+TextBox.propTypes = {
+  data: React.PropTypes.array.isRequired,
+  title: React.PropTypes.string.isRequired
 };
