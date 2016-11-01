@@ -3,8 +3,8 @@
 import React from 'react';
 import {Grid, Row, Col} from 'react-bootstrap';
 import {
-  AbilityScore, HealthBox, DiceAndSaves,
-  SpellArea, TextBox
+  AbilityScore, Currency, DiceAndSaves,
+  HealthBox, SpellArea, TextBox
 } from '../components/CharacterSheet';
 
 import '../stylesheets/containers/CharacterSheet';
@@ -54,10 +54,15 @@ export default class CharacterSheet extends React.Component {
                 save={character.spellSaveDC}
                 attack={character.spellAttackMod}
               />
+              <Row>
+                <Col className="inner col" md={11}>
+                  <Currency currency={character.currency}/>
+                </Col>
+              </Row>
             </Col>
             <Col className="outer col" md={4}>
               <Row>
-                <Col className="col" md={12}>
+                <Col className="col" md={11}>
                   <Row>
                     <TextBox
                       data={character.personalityTraits}
@@ -85,7 +90,7 @@ export default class CharacterSheet extends React.Component {
                 </Col>
               </Row>
               <Row>
-                <Col className="col" md={12}>
+                <Col className="col" md={11}>
                   <Row>
                     <TextBox
                       data={character.featuresAndTraits}

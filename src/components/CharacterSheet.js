@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import {Row, Col, Panel, Accordion} from 'react-bootstrap';
+import {Row, Col, Panel, Accordion, Table} from 'react-bootstrap';
 import {
   FaStar, FaStarO, FaCircle, FaCircleO,
   FaHeart, FaHeartO, FaGittip, FaHeartbeat,
@@ -33,7 +33,7 @@ export class AbilityScore extends React.Component {
     var skills = [];
     for (let i = 0; i < SKILLS[name].length; i++) {
       let skill = SKILLS[name][i];
-      let icon = <FaCircle />;
+      let icon = <FaCircleO />;
       if (this.props.skills[skill].proficient === true) {
         icon = <FaCircle />;
       }
@@ -258,11 +258,15 @@ export class TextBox extends React.Component {
 
     if (this.props.accordion === true) {
       return (
-        <Panel id={this.id} header={this.header}>
-          <Accordion>
-            {data}
-          </Accordion>
-        </Panel>
+        <Row>
+          <Col md={11}>
+            <Panel id={this.id} header={this.header}>
+              <Accordion>
+                {data}
+              </Accordion>
+            </Panel>
+          </Col>
+        </Row>
       );
     }
     return (
@@ -282,21 +286,36 @@ TextBox.propTypes = {
   title: React.PropTypes.string.isRequired
 };
 
-/*
 export class Currency extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    var rows = [];
-    _.forIn(this.props.currency, function(key, value) {
-      console.log(key, value);
+    var currencies = [];
+    _.forIn(this.props.currency, function(value, key){
+      currencies.push(
+        <tr key={key}>
+          <td>{capitalize(key)}</td>
+          <td>{value}</td>
+        </tr>
+      );
     });
 
+    var title = (
+      <span className="panel header">
+        Currency
+      </span>
+    );
 
     return (
-      null
+      <Panel collapsible defaultExpanded header={title}>
+        <Table fill bordered>
+          <tbody>
+            {currencies}
+          </tbody>
+        </Table>
+      </Panel>
     );
   }
 }
@@ -310,4 +329,3 @@ Currency.propTypes = {
     copper: React.PropTypes.number
   }).isRequired
 };
-*/
