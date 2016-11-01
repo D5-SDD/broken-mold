@@ -8,20 +8,15 @@ import {
   FaMedkit
 } from 'react-icons/lib/fa';
 import _ from 'lodash';
+import capital from 'to-capital-case';
 
+// Import the SKILLS reference database from the Character library
 import {SKILLS} from '../../lib/Character';
 
+// Import the stylesheet
 import '../stylesheets/components/CharacterSheet';
 
-function capitalize(s) {
-  s = s.replace(/([A-Z])/g, ' $1');
-  s = s.charAt(0).toUpperCase() + s.slice(1);
-  s = s.replace(/\b\w+/g, function(s) {
-    return s.charAt(0).toUpperCase() + s.substr(1).toLowerCase();
-  });
-  return s;
-}
-
+// Displays Abil
 export class AbilityScore extends React.Component {
 	constructor(props) {
 		super(props);
@@ -42,14 +37,14 @@ export class AbilityScore extends React.Component {
         icon = <FaCircle />;
       }
 
-      let skillName = capitalize(skill);
+      let skillName = capital(skill);
       skills.push(<div key={skill}>{icon} {this.props.skills[skill].value} {skillName}</div>);
     }
 
 		return (
       <Row className="ability-score" id={name} >
         <Col className="col" md={4}>
-          <Panel header={capitalize(name)} className="centered">
+          <Panel header={capital(name)} className="centered">
             <div className='ability-score value'>
               {this.props.value}
             </div>
@@ -231,7 +226,7 @@ export class TextBox extends React.Component {
     super(props);
 
     this.id = this.props.title;
-    this.header = capitalize(this.id);
+    this.header = capital(this.id);
     this.data = [this.props.data];
 
     if (typeof this.props.data === 'object') {
@@ -300,7 +295,7 @@ export class Currency extends React.Component {
     _.forIn(this.props.currency, function(value, key){
       currencies.push(
         <tr key={key}>
-          <td>{capitalize(key)}</td>
+          <td>{capital(key)}</td>
           <td>{value}</td>
         </tr>
       );
@@ -339,7 +334,7 @@ export class Equipment extends React.Component {
       value.map(function(value) {
         items.push(
           <ListGroupItem key={items.length}>
-            {capitalize(value.name)}
+            {capital(value.name)}
           </ListGroupItem>
         );
       })
