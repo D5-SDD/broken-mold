@@ -1,3 +1,5 @@
+@import '../utils/all';
+
 .character-sheet {
   height: 100%;
   width: 100%;
@@ -5,7 +7,7 @@
 
 .character-sheet-grid {
   .col {
-    background: #ffffff;
-    color: black;
+    background: $baseGreen;
+    color: $darkBrown;
   }
 }

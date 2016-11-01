@@ -1,3 +1,5 @@
+@import '../utils/all';
+
 .character-sheet-grid {
   .outer.col {
     padding-top: 20px
@@ -5,6 +7,8 @@
 }
 
 .panel {
+  background-color: $lightBrown;
+  color: $darkRed;
   .fa {
     margin-right: 5px;
   }
@@ -19,7 +23,6 @@
 
 span.panel.header {
   vertical-align: middle;
-  background: none;
 
   &:hover {
     cursor: pointer;
@@ -34,7 +37,7 @@ span.panel.header {
   &.value {
     width: 50%;
     float: left;
-    border-right: 1px solid gray;
+    border-right: 1px solid $darkGreen;
   }
   &.mod {
     width: 50%;
