@@ -47,9 +47,9 @@ export default class CharacterSheet extends React.Component {
                 deathSaves={character.deathSaves}
               />
               <SpellArea
-                cast={character.hitDice}
-                save={character.hitDice}
-                attack={character.hitDice}
+                cast={character.spellCastingClass}
+                save={character.spellSaveDC}
+                attack={character.spellAttackMod}
               />
             </Col>
             <Col className="outer col" md={4}>

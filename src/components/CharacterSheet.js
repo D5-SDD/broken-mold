@@ -212,9 +212,9 @@ export class SpellArea extends React.Component {
 }
 
 SpellArea.propTypes = {
-  attack: React.PropTypes.string.isRequired,
+  attack: React.PropTypes.number.isRequired,
   cast: React.PropTypes.string.isRequired,
-  save: React.PropTypes.string.isRequired
+  save: React.PropTypes.number.isRequired
 };
 
 export class Header extends React.Component {
