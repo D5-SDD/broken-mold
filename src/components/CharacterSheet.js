@@ -256,24 +256,20 @@ export class TextBox extends React.Component {
       }
     }
 
-    var panel = null;
     if (this.props.accordion === true) {
-      panel = (
+      return (
         <Panel id={this.id} header={this.header}>
           <Accordion>
             {data}
           </Accordion>
         </Panel>
       );
-    } else {
-      panel = (
-        <Panel id={this.id} header={this.header}>
-          {data}
-        </Panel>
-      );
     }
-
-    return panel;
+    return (
+      <Panel id={this.id} header={this.header}>
+        {data}
+      </Panel>
+    );
   }
 }
 
@@ -286,20 +282,32 @@ TextBox.propTypes = {
   title: React.PropTypes.string.isRequired
 };
 
+/*
 export class Currency extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
+    var rows = [];
+    _.forIn(this.props.currency, function(key, value) {
+      console.log(key, value);
+    });
+
+
     return (
-      <Col>
-        {this.props.currency}
-      </Col>
+      null
     );
   }
 }
 
 Currency.propTypes = {
-  currency: React.PropTypes.object.isRequired
+  currency: React.PropTypes.shape({
+    platinum: React.PropTypes.number,
+    gold: React.PropTypes.number,
+    electrum: React.PropTypes.number,
+    silver: React.PropTypes.number,
+    copper: React.PropTypes.number
+  }).isRequired
 };
+*/

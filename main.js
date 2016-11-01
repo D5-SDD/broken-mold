@@ -20,8 +20,7 @@ function createWindow () {
   //Browser window options
   const browserOptions = {
     width: 1100,
-    height: 700,
-    center: true
+    height: 700
   };
 
   // Create the browser window.
