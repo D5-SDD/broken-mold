@@ -1,16 +1,26 @@
 'use strict';
 
 import React from 'react';
-import {Row, Col, Panel} from 'react-bootstrap';
+import {Row, Col, Panel, Accordion, Table, ListGroup, ListGroupItem} from 'react-bootstrap';
 import {
   FaStar, FaStarO, FaCircle, FaCircleO,
-  FaShield, FaHeart, FaHeartO, FaGittip,
-  FaHeartbeat, FaMedkit
+  FaHeart, FaHeartO, FaGittip, FaHeartbeat,
+  FaMedkit
 } from 'react-icons/lib/fa';
+import _ from 'lodash';
 
 import {SKILLS} from '../../lib/Character';
 
 import '../stylesheets/components/CharacterSheet';
+
+function capitalize(s) {
+  s = s.replace(/([A-Z])/g, ' $1');
+  s = s.charAt(0).toUpperCase() + s.slice(1);
+  s = s.replace(/\b\w+/g, function(s) {
+    return s.charAt(0).toUpperCase() + s.substr(1).toLowerCase();
+  });
+  return s;
+}
 
 export class AbilityScore extends React.Component {
 	constructor(props) {
@@ -27,22 +37,19 @@ export class AbilityScore extends React.Component {
     var skills = [];
     for (let i = 0; i < SKILLS[name].length; i++) {
       let skill = SKILLS[name][i];
-      let icon = <FaCircle />;
+      let icon = <FaCircleO />;
       if (this.props.skills[skill].proficient === true) {
         icon = <FaCircle />;
       }
 
-      // convert from camelCase to Camel Case
-      let skillName = skill.replace(/([A-Z])/g, ' $1');
-      skillName = skillName.charAt(0).toUpperCase() + skillName.slice(1);
-
+      let skillName = capitalize(skill);
       skills.push(<div key={skill}>{icon} {this.props.skills[skill].value} {skillName}</div>);
     }
 
 		return (
       <Row className="ability-score" id={name} >
         <Col className="col" md={4}>
-          <Panel header={name} className="centered">
+          <Panel header={capitalize(name)} className="centered">
             <div className='ability-score value'>
               {this.props.value}
             </div>
@@ -86,23 +93,25 @@ export class HealthBox extends React.Component {
 
     return (
       <Row className="healthBox" >
-        <Panel>
-          <Col className="col" md={4}>
-            <Panel className="centered">
-              {healthIcon} Max Health: {this.props.health.maximum}
-            </Panel>
-          </Col>
-          <Col className="col" md={4}>
-            <Panel className="centered">
-              {heartIcon} Current Health: {this.props.health.current}
-            </Panel>
-          </Col>
-          <Col className="col" md={4}>
-            <Panel className="centered">
-              {tempIcon} Temp Health: {this.props.health.temporary}
-            </Panel>
-          </Col>
-        </Panel>
+        <Col className="col" md={12}>
+          <Panel>
+            <Col className="col" md={4}>
+              <Panel className="centered">
+                {healthIcon} Max Health: {this.props.health.maximum}
+              </Panel>
+            </Col>
+            <Col className="col" md={4}>
+              <Panel className="centered">
+                {heartIcon} Current Health: {this.props.health.current}
+              </Panel>
+            </Col>
+            <Col className="col" md={4}>
+              <Panel className="centered">
+                {tempIcon} Temp Health: {this.props.health.temporary}
+              </Panel>
+            </Col>
+          </Panel>
+        </Col>
       </Row>
     );
 	}
@@ -190,7 +199,7 @@ export class SpellArea extends React.Component {
 
 	render() {
     return (
-      <Row className="SpellArea" >
+      <Row className="SpellArea">
         <Col className="col" md={4}>
           <Panel className="centered">
             Spell-Casting Ability: {this.props.cast}
@@ -217,15 +226,135 @@ SpellArea.propTypes = {
   save: React.PropTypes.number.isRequired
 };
 
-export class Header extends React.Component {
+export class TextBox extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.id = this.props.title;
+    this.header = capitalize(this.id);
+    this.data = [this.props.data];
+
+    if (typeof this.props.data === 'object') {
+      this.data = _.map(this.props.data, function(obj) {
+        if (typeof obj === 'string') {
+          return obj;
+        }
+        return _.values(obj);
+      });
+      this.data = _.flatten(this.data);
+    }
+  }
+
+  render() {
+    var data = [];
+    for (let i = 0; i < this.data.length; i++) {
+      if (this.props.accordion === true) {
+        data.push(
+          <Panel header={this.data[i]} eventKey={i/2} key={i/2}>
+            {this.data[i+1]}
+          </Panel>
+        );
+        i++;
+      } else {
+        data.push(<div key={i}>{this.data[i]}</div>);
+      }
+    }
+
+    if (this.props.accordion === true) {
+      return (
+        <Row>
+          <Col md={11}>
+            <Panel id={this.id} header={this.header}>
+              <Accordion>
+                {data}
+              </Accordion>
+            </Panel>
+          </Col>
+        </Row>
+      );
+    }
+    return (
+      <Panel id={this.id} header={this.header}>
+        {data}
+      </Panel>
+    );
+  }
+}
+
+TextBox.propTypes = {
+  accordion: React.PropTypes.bool,
+  data: React.PropTypes.oneOfType([
+    React.PropTypes.array,
+    React.PropTypes.string
+  ]).isRequired,
+  title: React.PropTypes.string.isRequired
+};
+
+export class Currency extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    return;
+    var currencies = [];
+    _.forIn(this.props.currency, function(value, key){
+      currencies.push(
+        <tr key={key}>
+          <td>{capitalize(key)}</td>
+          <td>{value}</td>
+        </tr>
+      );
+    });
+
+    return (
+      <Panel header="Currency">
+        <Table fill bordered>
+          <tbody>
+            {currencies}
+          </tbody>
+        </Table>
+      </Panel>
+    );
   }
 }
 
-Header.propTypes = {
+Currency.propTypes = {
+  currency: React.PropTypes.shape({
+    platinum: React.PropTypes.number,
+    gold: React.PropTypes.number,
+    electrum: React.PropTypes.number,
+    silver: React.PropTypes.number,
+    copper: React.PropTypes.number
+  }).isRequired
 };
+
+export class Equipment extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    var items = [];
+    this.props.data.map(function(value) {
+      value.map(function(value) {
+        items.push(
+          <ListGroupItem key={items.length}>
+            {capitalize(value.name)}
+          </ListGroupItem>
+        );
+      })
+    })
+
+    return (
+      <Panel header="Equipment">
+        <ListGroup fill>
+          {items}
+        </ListGroup>
+      </Panel>
+    );
+  }
+}
+
+Equipment.propTypes = {
+  data: React.PropTypes.array.isRequired
+}
