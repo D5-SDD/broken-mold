@@ -273,13 +273,7 @@ export class TextBox extends React.Component {
       );
     }
 
-    return (
-      <Row id={this.id}>
-        <Col className="col" md={12}>
-          {panel}
-        </Col>
-      </Row>
-    );
+    return panel;
   }
 }
 
@@ -290,4 +284,22 @@ TextBox.propTypes = {
     React.PropTypes.string
   ]).isRequired,
   title: React.PropTypes.string.isRequired
+};
+
+export class Currency extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <Col>
+        {this.props.currency}
+      </Col>
+    );
+  }
+}
+
+Currency.propTypes = {
+  currency: React.PropTypes.object.isRequired
 };

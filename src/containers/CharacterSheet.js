@@ -57,7 +57,7 @@ export default class CharacterSheet extends React.Component {
             </Col>
             <Col className="outer col" md={4}>
               <Row>
-                <Col className="col" md={11}>
+                <Col className="col" md={12}>
                   <Row>
                     <TextBox
                       data={character.personalityTraits}
@@ -85,7 +85,7 @@ export default class CharacterSheet extends React.Component {
                 </Col>
               </Row>
               <Row>
-                <Col className="col" md={11}>
+                <Col className="col" md={12}>
                   <Row>
                     <TextBox
                       data={character.featuresAndTraits}
