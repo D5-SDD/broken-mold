@@ -17,6 +17,19 @@
   }
 }
 
+span.panel.header {
+  vertical-align: middle;
+  background: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  svg {
+    margin-right: 5px;
+  }
+}
+
 .ability-score {
   &.value {
     width: 50%;

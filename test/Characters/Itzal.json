@@ -13,10 +13,10 @@
     "Neutral"
   ],
   "background": "Urchin",
-  "personalityTraits": "Stufity stuff",
-  "ideals": "Fuck bitches get money",
-  "bonds": "Did you mean bondage?",
-  "flaws": "2 inch dick",
+  "personalityTraits": "I sleep with my back to a wall or tree, with everything I own wrapped in a bundle in my arms.",
+  "ideals": "I help the people who help me—that’s what keeps us alive.",
+  "bonds": "	I owe a debt I can never repay to the person who took pity on me.",
+  "flaws": "I’d rather kill someone in their sleep then fight fair.",
   "abilityScores": {
     "strength": 14,
     "dexterity": 18,
@@ -172,7 +172,13 @@
       "stealthDisadvantage": false
     }
   ],
-  "money": 1000,
+  "currency": {
+    "platinum": 0,
+    "gold": 10,
+    "electrum": 0,
+    "silver": 0,
+    "copper": 0    
+  },
   "featuresAndTraits": [
     {
       "name": "City Secrets",

@@ -20,8 +20,7 @@ function createWindow () {
   //Browser window options
   const browserOptions = {
     width: 1100,
-    height: 700,
-    maximizeable: true
+    height: 700
   };
 
   // Create the browser window.
@@ -31,7 +30,7 @@ function createWindow () {
   mainWindow.loadURL('file://' + __dirname + '/index.html');
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
