@@ -16,7 +16,7 @@ import {SKILLS} from '../../lib/Character';
 // Import the stylesheet
 import '../stylesheets/components/CharacterSheet';
 
-// Displays Abil
+// Defines the section for Ability Scores in the Character Sheet view
 export class AbilityScore extends React.Component {
 	constructor(props) {
 		super(props);
@@ -39,6 +39,11 @@ export class AbilityScore extends React.Component {
 
       let skillName = capital(skill);
       skills.push(<div key={skill}>{icon} {this.props.skills[skill].value} {skillName}</div>);
+    }
+
+    var value = this.props.value;
+    if (value >= 0) {
+      value = '+' + this.props.value;
     }
 
 		return (
