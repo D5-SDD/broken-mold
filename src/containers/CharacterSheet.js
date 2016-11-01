@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import {Grid, Row, Col} from 'react-bootstrap';
+import {Grid, Row, Col, Panel} from 'react-bootstrap';
 import {
   AbilityScore, Currency, DiceAndSaves,
   Equipment, HealthBox, SpellArea, TextBox
@@ -34,6 +34,18 @@ export default class CharacterSheet extends React.Component {
         <Grid className="character-sheet-grid">
           <Row className="outer">
             <Col className="outer col" md={4}>
+              <Row>
+                <Col md={6}>
+                  <Panel header="Proficiency Bonus" className="centered">
+                    {character.proficiencyBonus}
+                  </Panel>
+                </Col>
+                <Col md={6}>
+                  <Panel header="Inspiration" className="centered">
+                    {character.inspiration}
+                  </Panel>
+                </Col>
+              </Row>
               <AbilityScores
                 abilityScoreMods={character.abilityScoreMods}
                 abilityScores={character.abilityScores}
