@@ -7,10 +7,16 @@ import {
   FaHeart, FaHeartO, FaGittip, FaHeartbeat,
   FaMedkit
 } from 'react-icons/lib/fa';
+import _ from 'lodash';
 
 import {SKILLS} from '../../lib/Character';
 
 import '../stylesheets/components/CharacterSheet';
+
+function capitalize(s) {
+  s = s.replace(/([A-Z])/g, ' $1');
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
 
 export class AbilityScore extends React.Component {
 	constructor(props) {
@@ -32,17 +38,14 @@ export class AbilityScore extends React.Component {
         icon = <FaCircle />;
       }
 
-      // convert from camelCase to Camel Case
-      let skillName = skill.replace(/([A-Z])/g, ' $1');
-      skillName = skillName.charAt(0).toUpperCase() + skillName.slice(1);
-
+      let skillName = capitalize(skill);
       skills.push(<div key={skill}>{icon} {this.props.skills[skill].value} {skillName}</div>);
     }
 
 		return (
       <Row className="ability-score" id={name} >
         <Col className="col" md={4}>
-          <Panel header={name} className="centered">
+          <Panel header={capitalize(name)} className="centered">
             <div className='ability-score value'>
               {this.props.value}
             </div>
@@ -224,40 +227,36 @@ export class TextBox extends React.Component {
     super(props);
 
     this.id = this.props.title;
-    this.header = this.id.replace(/([A-Z])/g, ' $1');
-    this.header = this.header.charAt(0).toUpperCase() + this.header.slice(1);
+    this.header = capitalize(this.id);
+    this.data = this.props.data;
+
+    if (typeof this.data === 'object') {
+      this.data = _.map(this.data, function(obj) {
+        if (typeof obj === 'string') {
+          return obj;
+        }
+        return _.values(obj);
+      });
+      this.data = _.flatten(this.data);
+    }
   }
 
   render() {
-    var panel = (
-      <Panel id={this.id} header={this.header}>
-        {this.props.data}
-      </Panel>
-    );
-
     var data = [];
-    if (typeof this.props.data === 'object') {
-      for (let i = 0; i < this.props.data.length; i++) {
-        data.push(
-          <Panel header={this.props.data[i].name} eventKey={i} key={i}>
-            {this.props.data[i].description}
-          </Panel>
-        );
+    if (typeof this.data === 'object') {
+      for (let i = 0; i < this.data.length; i++) {
+        data.push(<div key={i}>{this.data[i]}</div>);
       }
-
-      panel = (
-        <Panel id={this.id} header={this.header}>
-          <Accordion>
-            {data}
-          </Accordion>
-        </Panel>
-      );
+    } else {
+      data.push(<div key={0}>{this.data}</div>);
     }
 
     return (
       <Row id={this.id}>
         <Col className="col" md={12}>
-          {panel}
+          <Panel id={this.id} header={this.header}>
+            {data}
+          </Panel>
         </Col>
       </Row>
     );

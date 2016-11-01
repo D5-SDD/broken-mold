@@ -92,6 +92,12 @@ export default class CharacterSheet extends React.Component {
                       title="featuresAndTraits"
                     />
                   </Row>
+                  <Row>
+                    <TextBox
+                      data={[character.proficiencies, character.languages]}
+                      title="otherProficienciesAndLanguages"
+                    />
+                  </Row>
                 </Col>
               </Row>
             </Col>
