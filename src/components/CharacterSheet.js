@@ -293,7 +293,7 @@ export class Currency extends React.Component {
 
   render() {
     var currencies = [];
-    _.forIn(this.props.currency, function(value, key){
+    _.forIn(this.props.currency, function(value, key) {
       currencies.push(
         <tr key={key}>
           <td>{capital(key)}</td>
@@ -338,8 +338,8 @@ export class Equipment extends React.Component {
             {capital(value.name)}
           </ListGroupItem>
         );
-      })
-    })
+      });
+    });
 
     return (
       <Panel header="Equipment">
@@ -353,4 +353,22 @@ export class Equipment extends React.Component {
 
 Equipment.propTypes = {
   data: React.PropTypes.array.isRequired
+};
+
+export class TestImage extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <div className="test-image">
+        Strength: {this.props.data}
+      </div>
+    );
+  }
 }
+
+TestImage.propTypes = {
+  data: React.PropTypes.number.isRequired
+};
