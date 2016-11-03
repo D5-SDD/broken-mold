@@ -19,9 +19,7 @@ class Header extends React.Component {
           </Panel>
         </Col>
         <Col className="col" md={4}>
-          <div>
-            TODO
-          </div>
+          <div/>
         </Col>
       </Row>
     );

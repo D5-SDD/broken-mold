@@ -1,5 +1,11 @@
-.header .panel {
-  margin-top: 10px;
+.header {
+  &.row {
+    background: #FFFFFF;
+  }
+  
+  .panel {
+    margin-top: 10px;
+  }
 }
 
 .panel {
