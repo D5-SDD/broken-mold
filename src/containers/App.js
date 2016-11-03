@@ -14,10 +14,12 @@ import {readMap} from '../../lib/Character';
 // Import stylesheet
 import '../stylesheets/containers/App.scss';
 
+// Main container for the React application, handles the various tabs and views
 class AppContainer extends React.Component {
   constructor(props) {
     super(props);
 
+    // import the characters from the character map file
     this.characters = readMap();
   }
 

@@ -107,6 +107,7 @@ export default class CharacterMenu extends React.Component {
             bsStyle="primary"
             bsSize="small"
             onClick={this.props.newCharacterCB}
+            disabled
           >
             New
           </Button>
@@ -121,6 +122,7 @@ export default class CharacterMenu extends React.Component {
             bsStyle={shareButtonStyle}
             bsSize="small"
             onClick={this._toggleSharing}
+            disabled
           >
             {shareButtonText}
           </Button>

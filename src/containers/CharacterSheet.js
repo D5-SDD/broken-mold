@@ -1,7 +1,10 @@
 'use strict';
 
+// Import external libraries
 import React from 'react';
 import {Grid, Row, Col, Panel} from 'react-bootstrap';
+
+// Import internal libraries
 import {
   AbilityScores, Currency, DiceAndSaves, Equipment,
   Header, HealthBox, SpellArea, TextBox
@@ -13,6 +16,9 @@ import {FaArrowLeft} from 'react-icons/lib/fa';
 // Import the stylesheet
 import '../stylesheets/containers/CharacterSheet';
 
+// The Character Sheet View for the client,
+// displays data to the player during a game
+// TODO: allow a player to edit their character sheet while viewing it
 class CharacterSheet extends React.Component {
   constructor(props) {
     super(props);
@@ -26,12 +32,14 @@ class CharacterSheet extends React.Component {
       viewState: viewState
     };
 
-    console.log(this.props.character);
+    // console.log(this.props.character);
   }
 
   render() {
     var character = this.props.character;
     var CS_GRID = null;
+
+    // populate the grid that displays all the relevant information to the user
     if (this.state.viewState === 0) {
       CS_GRID = (
         <Grid className="character-sheet-grid">
