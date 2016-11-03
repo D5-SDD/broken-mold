@@ -3,8 +3,8 @@
 import React from 'react';
 import {Grid, Row, Col, Panel} from 'react-bootstrap';
 import {
-  AbilityScore, Currency, DiceAndSaves,
-  Equipment, HealthBox, SpellArea, TextBox
+  AbilityScore, Currency, DiceAndSaves, Equipment, 
+  Header, HealthBox, SpellArea, TextBox
 } from '../components/CharacterSheet';
 import {FaArrowLeft} from 'react-icons/lib/fa';
 
@@ -33,6 +33,9 @@ export default class CharacterSheet extends React.Component {
       // TODO: Character View
       CS_GRID = (
         <Grid className="character-sheet-grid">
+          <Header
+            name={character.name}
+          />
           <Row className="outer">
             <Col className="outer col" md={4}>
               <Row>
