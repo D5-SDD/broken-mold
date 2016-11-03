@@ -1,3 +1,6 @@
+/*
+  Entry point for the application, renders the React application
+*/
 'use strict';
 
 import 'babel-polyfill';
@@ -9,7 +12,7 @@ import ReactDOM from 'react-dom';
 // Import the main stylesheet
 import './stylesheets/main.scss';
 
-// Import the AppContainer
+// Import the React AppContainer
 import AppContainer from './containers/App';
 
 class App extends React.Component {
