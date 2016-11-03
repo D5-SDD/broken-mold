@@ -1,7 +1,3 @@
-/*
-  What does this class do?
-*/
-
 'use strict';
 
 // Import libraries
@@ -10,6 +6,7 @@ import {Accordion, Col, Row, Panel} from 'react-bootstrap';
 import capital from 'to-capital-case';
 import _ from 'lodash';
 
+// Generix display for text and lists of properties in the Character Sheet View
 class TextBox extends React.Component {
   constructor(props) {
     super(props);
@@ -18,6 +15,7 @@ class TextBox extends React.Component {
     this.header = capital(this.id);
     this.data = [this.props.data];
 
+    // if the data needs to be parsed, flatten it to the information we want to display
     if (typeof this.props.data === 'object') {
       this.data = _.map(this.props.data, function(obj) {
         if (typeof obj === 'string') {
@@ -31,6 +29,8 @@ class TextBox extends React.Component {
 
   render() {
     var data = [];
+
+    // populate the data to display based on the type of information being displayed
     for (let i = 0; i < this.data.length; i++) {
       if (this.props.accordion === true) {
         data.push(
@@ -44,6 +44,7 @@ class TextBox extends React.Component {
       }
     }
 
+    // render an accordion if necessary
     if (this.props.accordion === true) {
       return (
         <Row>
@@ -57,6 +58,8 @@ class TextBox extends React.Component {
         </Row>
       );
     }
+
+    // otherwise just render a panel
     return (
       <Panel id={this.id} header={this.header}>
         {data}

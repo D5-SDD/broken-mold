@@ -12,6 +12,7 @@ import TextBox from './TextBox';
 // Import the stylesheet for all the components
 import '../stylesheets/components/CharacterSheet';
 
+// package together all the components that are included in the Character Sheet View
 export {
   AbilityScores,
   Currency,

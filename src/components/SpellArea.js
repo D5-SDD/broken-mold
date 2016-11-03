@@ -1,13 +1,10 @@
-/*
-  What does this class do?
-*/
-
 'use strict';
 
 // Inport libraries
 import React from 'react';
 import {Col, Row, Panel} from 'react-bootstrap';
 
+// Displays a character's spell information in the Character Sheet View
 class SpellArea extends React.Component {
   constructor(props) {
 		super(props);

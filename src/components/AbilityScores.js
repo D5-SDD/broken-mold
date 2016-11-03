@@ -1,7 +1,3 @@
-/*
-  What does this class do?
-*/
-
 'use strict';
 
 // Inport libraries
@@ -15,6 +11,7 @@ import {FaCircle, FaCircleO, FaStar, FaStarO} from 'react-icons/lib/fa';
 // Import the SKILLS reference database from the Character library
 import {SKILLS} from '../../lib/Character';
 
+// Displays a character's ability scores in the Character Sheet View
 class AbilityScores extends React.Component {
   constructor(props) {
     super(props);
@@ -52,6 +49,7 @@ AbilityScores.propTypes = {
 
 export default AbilityScores;
 
+// Displays an individual ability score
 class AbilityScore extends React.Component {
 	constructor(props) {
 		super(props);

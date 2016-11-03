@@ -1,7 +1,3 @@
-/*
-  What does this class do?
-*/
-
 'use strict';
 
 // Inport libraries
@@ -10,6 +6,7 @@ import {Panel, Table} from 'react-bootstrap';
 import capital from 'to-capital-case';
 import _ from 'lodash';
 
+// Displays a character's currency in the Character Sheet View
 class Currency extends React.Component {
   constructor(props) {
     super(props);

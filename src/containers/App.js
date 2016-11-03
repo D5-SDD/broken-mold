@@ -45,4 +45,6 @@ class AppContainer extends React.Component {
   }
 }
 
+AppContainer.propTypes = {};
+
 export default AppContainer;

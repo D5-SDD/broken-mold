@@ -6,7 +6,7 @@ import CharacterMenu from '../components/CharacterMenu';
 import CharacterSheet from './CharacterSheet';
 
 // Import internal libraries
-import {readCharactersFromMap, readMap} from '../../lib/Character';
+import {exportMap, readCharactersFromMap, readMap} from '../../lib/Character';
 
 // Import stylesheet
 import '../stylesheets/containers/CharacterView';
@@ -71,7 +71,7 @@ class CharacterView extends React.Component {
   // Called when any exit button is clicked,
   // exports any changes to the characters and return to the character menu
   exitCharacterSheetCB() {
-    exportMap(this.characters);
+    // exportMap(this.characters);
     this.currentCharacter = null;
     this.setState({viewState: 0});
   }
@@ -103,7 +103,6 @@ class CharacterView extends React.Component {
   }
 }
 
-CharacterView.propTypes = {
-};
+CharacterView.propTypes = {};
 
 export default CharacterView;

@@ -18,4 +18,6 @@ class DMView extends React.Component {
   }
 }
 
+DMView.propTypes = {};
+
 export default DMView;

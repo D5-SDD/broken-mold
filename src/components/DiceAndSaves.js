@@ -1,7 +1,3 @@
-/*
-  What does this class do?
-*/
-
 'use strict';
 
 // Inport libraries
@@ -11,30 +7,29 @@ import {Col, Row, Panel} from 'react-bootstrap';
 // Import icons
 import {FaCircle, FaCircleO, FaGittip, FaMedkit} from 'react-icons/lib/fa';
 
+// Displays a character's hit dice and death saves in the Character Sheet View
 export class DiceAndSaves extends React.Component {
   constructor(props) {
 		super(props);
 	}
 
 	render() {
-    var hitDiceIcon = <FaGittip />;
-    var deathIcon = <FaMedkit />;
-
     return (
       <Row className="DiceAndSaves" >
         <Col className="col" md={4}>
           <Panel header="Hit Dice" className="centered">
-            {hitDiceIcon} {this.props.hitDice}
+            <FaGittip />
+            {this.props.hitDice}
           </Panel>
         </Col>
         <Col className="col" md={8}>
           <Panel header="Death Saves" className="centered">
-            {deathIcon} Successes: <DeathSavesHelper
+            <FaMedkit /> Successes: <DeathSavesHelper
               saves={this.props.deathSaves.successes}
               deathKey="deathsucc"
             />
             <br/>
-            {deathIcon} Failures: <DeathSavesHelper
+            <FaMedkit /> Failures: <DeathSavesHelper
               saves={this.props.deathSaves.failures}
               deathKey="deathfail"
             />
@@ -52,6 +47,7 @@ DiceAndSaves.propTypes = {
 
 export default DiceAndSaves;
 
+// Displays an individual row of death saves
 class DeathSavesHelper extends React.Component {
   constructor(props) {
 		super(props);

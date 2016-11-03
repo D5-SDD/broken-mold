@@ -157,7 +157,7 @@ class CharacterSheet extends React.Component {
 
 CharacterSheet.propTypes = {
   exitCharacterSheetCB: React.PropTypes.func.isRequired,
-  character: React.PropTypes.object
+  character: React.PropTypes.object.isRequired
 };
 
 export default CharacterSheet;
