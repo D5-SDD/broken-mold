@@ -1,16 +1,33 @@
 'use strict';
 
+// Import external libraries
 import React from 'react';
+<<<<<<< HEAD
 import {Grid, Row, Col} from 'react-bootstrap';
 import {
   AbilityScore, Currency, DiceAndSaves,
   Equipment, HealthBox, SpellArea, TextBox, Header,
   Armor_Initiative_Speed
+=======
+import {Grid, Row, Col, Panel} from 'react-bootstrap';
+
+// Import internal libraries
+import {
+  AbilityScores, CombatStatistics, Currency, DiceAndSaves,
+  Equipment, Header, HealthBox, SpellArea, TextBox
+>>>>>>> 354551362c3aee585b28f91706fadf26a5ad391f
 } from '../components/CharacterSheet';
 
+// Import icons
+import {FaArrowLeft} from 'react-icons/lib/fa';
+
+// Import the stylesheet
 import '../stylesheets/containers/CharacterSheet';
 
-export default class CharacterSheet extends React.Component {
+// The Character Sheet View for the client,
+// displays data to the player during a game
+// TODO: allow a player to edit their character sheet while viewing it
+class CharacterSheet extends React.Component {
   constructor(props) {
     super(props);
 
@@ -23,16 +40,18 @@ export default class CharacterSheet extends React.Component {
       viewState: viewState
     };
 
-    console.log(this.props.character);
+    // console.log(this.props.character);
   }
 
   render() {
     var character = this.props.character;
     var CS_GRID = null;
+
+    // populate the grid that displays all the relevant information to the user
     if (this.state.viewState === 0) {
-      // TODO: Character View
       CS_GRID = (
         <Grid className="character-sheet-grid">
+<<<<<<< HEAD
           <Row className="outer">
             <Col className="outer col" md={12}>
               <Header
@@ -46,8 +65,31 @@ export default class CharacterSheet extends React.Component {
               />
             </Col>
           </Row>
+=======
+          <Header
+            alignment={character.alignment}
+            background={character.background}
+            classes={character.classes}
+            experience={character.experience}
+            name={character.name}
+            playerName={character.playerName}
+            race={character.race}
+          />
+>>>>>>> 354551362c3aee585b28f91706fadf26a5ad391f
           <Row className="outer">
             <Col className="outer col" md={4}>
+              <Row>
+                <Col md={6}>
+                  <Panel header="Proficiency Bonus" className="centered">
+                    {character.proficiencyBonus}
+                  </Panel>
+                </Col>
+                <Col md={6}>
+                  <Panel header="Inspiration" className="centered">
+                    {character.inspiration}
+                  </Panel>
+                </Col>
+              </Row>
               <AbilityScores
                 abilityScoreMods={character.abilityScoreMods}
                 abilityScores={character.abilityScores}
@@ -56,7 +98,11 @@ export default class CharacterSheet extends React.Component {
               />
             </Col>
             <Col className="outer col" md={4}>
+<<<<<<< HEAD
               <Armor_Initiative_Speed
+=======
+              <CombatStatistics
+>>>>>>> 354551362c3aee585b28f91706fadf26a5ad391f
                 armorClass={character.armorClass}
                 initiative={character.initiative}
                 speed={character.speed}
@@ -69,9 +115,9 @@ export default class CharacterSheet extends React.Component {
                 deathSaves={character.deathSaves}
               />
               <SpellArea
+                attack={character.spellAttackMod}
                 cast={character.spellCastingClass}
                 save={character.spellSaveDC}
-                attack={character.spellAttackMod}
               />
               <Row>
                 <Col className="inner col" md={5}>
@@ -117,9 +163,9 @@ export default class CharacterSheet extends React.Component {
                 <Col className="col" md={11}>
                   <Row>
                     <TextBox
+                      accordion
                       data={character.featuresAndTraits}
                       title="featuresAndTraits"
-                      accordion
                     />
                   </Row>
                   <Row>
@@ -140,6 +186,10 @@ export default class CharacterSheet extends React.Component {
 
     return (
       <div className="character-sheet">
+        <FaArrowLeft
+          className="exit"
+          onClick={this.props.exitCharacterSheetCB}
+        />
         {CS_GRID}
       </div>
     );
@@ -148,40 +198,7 @@ export default class CharacterSheet extends React.Component {
 
 CharacterSheet.propTypes = {
   exitCharacterSheetCB: React.PropTypes.func.isRequired,
-  character: React.PropTypes.object
+  character: React.PropTypes.object.isRequired
 };
 
-class AbilityScores extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    var abilityScores = [];
-    for (let abilityScore in this.props.abilityScores) {
-      abilityScores.push(
-        <AbilityScore
-          key={abilityScore}
-          mod={this.props.abilityScoreMods[abilityScore]}
-          name={abilityScore}
-          savingThrows={this.props.savingThrows[abilityScore]}
-          skills={this.props.skills}
-          value={this.props.abilityScores[abilityScore]}
-        />
-      );
-    }
-
-    return (
-      <div className="ability-scores">
-        {abilityScores}
-      </div>
-    );
-  }
-}
-
-AbilityScores.propTypes = {
-  abilityScoreMods: React.PropTypes.object.isRequired,
-  abilityScores: React.PropTypes.object.isRequired,
-  savingThrows: React.PropTypes.object.isRequired,
-  skills: React.PropTypes.object.isRequired
-};
+export default CharacterSheet;

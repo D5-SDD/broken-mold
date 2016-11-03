@@ -1,1 +1,60 @@
-{"map":[{"filename":"Itzal.json","label":"Itzal - Human - Rogue 3","classes":[{"name":"Rogue","level":3}],"race":"Human"}]}
+{
+  "map": [
+    {
+      "filename": "Itzal.json",
+      "label": "Itzal - Human - Rogue 3",
+      "classes": [
+        {
+          "name": "Rogue",
+          "level": 3
+        }
+      ],
+      "race": "Human"
+    },
+    {
+      "filename": "T.json",
+      "label": "T - Half-Orc - Monk 10",
+      "classes": [
+        {
+          "name": "Monk",
+          "level": 10
+        }
+      ],
+      "race": "Half-Orc"
+    },
+    {
+      "filename": "Dvlrpewee.json",
+      "label": "Dvlrpewee - Dwarf - Paladin 18 - Barbarian 5",
+      "classes": [
+        {
+          "name": "Paladin",
+          "level": 18
+        },
+        {
+          "name": "Barbarian",
+          "level": 5
+        }
+      ],
+      "race": "Dwarf"
+    },
+    {
+      "filename": "Epqvpvp.json",
+      "label": "Epqvpvp - Elf - Druid 1 - Ranger 13 - Monk 7",
+      "classes": [
+        {
+          "name": "Druid",
+          "level": 1
+        },
+        {
+          "name": "Ranger",
+          "level": 13
+        },
+        {
+          "name": "Monk",
+          "level": 7
+        }
+      ],
+      "race": "Elf"
+    }
+  ]
+}

@@ -1,18 +1,19 @@
 'use strict';
 
-import React from 'react';
-import {Row, Col, Panel, Accordion, Table, ListGroup, ListGroupItem} from 'react-bootstrap';
-import {
-  FaStar, FaStarO, FaCircle, FaCircleO,
-  FaHeart, FaHeartO, FaGittip, FaHeartbeat,
-  FaMedkit
-} from 'react-icons/lib/fa';
-import _ from 'lodash';
+import AbilityScores from './AbilityScores';
+import CombatStatistics from './CombatStatistics';
+import Currency from './Currency';
+import DiceAndSaves from './DiceAndSaves';
+import Equipment from './Equipment';
+import Header from './Header';
+import HealthBox from './HealthBox';
+import SpellArea from './SpellArea';
+import TextBox from './TextBox';
 
-import {SKILLS} from '../../lib/Character';
-
+// Import the stylesheet for all the components
 import '../stylesheets/components/CharacterSheet';
 
+<<<<<<< HEAD
 function capitalize(s) {
   s = s.replace(/([A-Z])/g, ' $1');
   s = s.charAt(0).toUpperCase() + s.slice(1);
@@ -459,4 +460,17 @@ Armor_Initiative_Speed.propTypes = {
   armorClass: React.PropTypes.string.isRequired,
   initiative: React.PropTypes.number.isRequired,
   speed: React.PropTypes.number.isRequired
+=======
+// package together all the components that are included in the Character Sheet View
+export {
+  AbilityScores,
+  CombatStatistics,
+  Currency,
+  DiceAndSaves,
+  Equipment,
+  Header,
+  HealthBox,
+  SpellArea,
+  TextBox
+>>>>>>> 354551362c3aee585b28f91706fadf26a5ad391f
 };

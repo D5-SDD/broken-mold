@@ -14,12 +14,21 @@ module.exports =  validate({
   module: {
     loaders: [
       {
+        test: /\.(eot|svg|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
+        loader: 'url'
+      },
+      {
+        test: /\.(jpg|png)$/,
+        loader: 'url?limit=25000',
+        include: path.resolve(__dirname, 'src/assets/images')
+      },
+      {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract('css!sass')
       },
       {
-        test: /\.(eot|svg|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
-        loader: 'url'
+        test: /\.json$/,
+        loader: 'json-loader'
       },
       {
         test: /\.jsx?$/,
@@ -32,10 +41,6 @@ module.exports =  validate({
         query: {
           presets: ['react', 'es2015']
         }
-      },
-      {
-        test: /\.json$/,
-        loader: 'json-loader'
       }
     ]
   },

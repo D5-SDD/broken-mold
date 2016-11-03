@@ -1,32 +1,26 @@
 'use strict';
 
-// Import React and components
+// Import external libraries
 import React from 'react';
 import {Tabs, Tab} from 'react-bootstrap';
+
+// Import containers
 import CharacterView from './CharacterView';
 import DMView from './DMView';
-import Character, {readMap} from '../../lib/Character';
+
+// Import internal libraries
+import {readMap} from '../../lib/Character';
 
 // Import stylesheet
 import '../stylesheets/containers/App.scss';
 
+// Main container for the React application, handles the various tabs and views
 class AppContainer extends React.Component {
   constructor(props) {
     super(props);
 
+    // import the characters from the character map file
     this.characters = readMap();
-
-    this.characters[0].race = 'Dragon-Born';
-    var testChar = new Character('NEW_CHARACTER');
-    console.log(testChar);
-    //console.log(this.characters[0].getListOfSpells(['Wizard'],'level1'));
-    //this.characters[0].saveCharacter();
-    //exportMap(this.characters, './test/character_map.json');
-    console.log(this.characters[0].effectiveClassLevel);
-    console.log(this.characters[0].proficiencyBonus);
-    //this.characters[0].updateAutoValues();
-    console.log(this.characters[0].effectiveClassLevel);
-    console.log(this.characters[0].proficiencyBonus);    
   }
 
   // Called when a new tab is selected
@@ -50,5 +44,7 @@ class AppContainer extends React.Component {
     );
   }
 }
+
+AppContainer.propTypes = {};
 
 export default AppContainer;
