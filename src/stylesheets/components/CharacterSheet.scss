@@ -1,8 +1,12 @@
 @import '../utils/all';
 
-.character-sheet-grid {
-  .outer.col {
-    padding-top: 20px
+.header {
+  &.row {
+    background: #FFFFFF;
+  }
+  
+  .panel {
+    margin-top: 10px;
   }
 }
 

@@ -31,7 +31,6 @@
     "charisma": 14
   },
   "inspiration": 0,
-  "proficiencyBonus": 2,
   "savingThrows": {
     "strength": {
       "proficient": false
