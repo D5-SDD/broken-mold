@@ -3,14 +3,17 @@
 import React from 'react';
 import {Grid, Row, Col, Panel} from 'react-bootstrap';
 import {
-  AbilityScore, Currency, DiceAndSaves, Equipment,
+  AbilityScores, Currency, DiceAndSaves, Equipment,
   Header, HealthBox, SpellArea, TextBox
 } from '../components/CharacterSheet';
+
+// Import icons
 import {FaArrowLeft} from 'react-icons/lib/fa';
 
+// Import the stylesheet
 import '../stylesheets/containers/CharacterSheet';
 
-export default class CharacterSheet extends React.Component {
+class CharacterSheet extends React.Component {
   constructor(props) {
     super(props);
 
@@ -30,12 +33,9 @@ export default class CharacterSheet extends React.Component {
     var character = this.props.character;
     var CS_GRID = null;
     if (this.state.viewState === 0) {
-      // TODO: Character View
       CS_GRID = (
         <Grid className="character-sheet-grid">
-          <Header
-            name={character.name}
-          />
+          <Header name={character.name}/>
           <Row className="outer">
             <Col className="outer col" md={4}>
               <Row>
@@ -152,37 +152,4 @@ CharacterSheet.propTypes = {
   character: React.PropTypes.object
 };
 
-class AbilityScores extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    var abilityScores = [];
-    for (let abilityScore in this.props.abilityScores) {
-      abilityScores.push(
-        <AbilityScore
-          key={abilityScore}
-          mod={this.props.abilityScoreMods[abilityScore]}
-          name={abilityScore}
-          savingThrows={this.props.savingThrows[abilityScore]}
-          skills={this.props.skills}
-          value={this.props.abilityScores[abilityScore]}
-        />
-      );
-    }
-
-    return (
-      <div className="ability-scores">
-        {abilityScores}
-      </div>
-    );
-  }
-}
-
-AbilityScores.propTypes = {
-  abilityScoreMods: React.PropTypes.object.isRequired,
-  abilityScores: React.PropTypes.object.isRequired,
-  savingThrows: React.PropTypes.object.isRequired,
-  skills: React.PropTypes.object.isRequired
-};
+export default CharacterSheet;
