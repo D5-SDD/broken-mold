@@ -3,7 +3,7 @@
 import React from 'react';
 import {Grid, Row, Col, Panel} from 'react-bootstrap';
 import {
-  AbilityScore, Currency, DiceAndSaves, Equipment, 
+  AbilityScore, Currency, DiceAndSaves, Equipment,
   Header, HealthBox, SpellArea, TextBox
 } from '../components/CharacterSheet';
 import {FaArrowLeft} from 'react-icons/lib/fa';

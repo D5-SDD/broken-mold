@@ -353,13 +353,13 @@ export class Equipment extends React.Component {
 
 Equipment.propTypes = {
   data: React.PropTypes.array.isRequired
-}
+};
 
 export class Header extends React.Component {
   constructor(props) {
     super(props);
   }
-  
+
   render() {
     return (
       <Row className="Header" >
@@ -370,7 +370,7 @@ export class Header extends React.Component {
         </Col>
         <Col className="col" md={4}>
           <div>
-          
+            TODO
           </div>
         </Col>
       </Row>
