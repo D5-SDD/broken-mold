@@ -19,8 +19,8 @@ class CharacterView extends React.Component {
 
     this.state = {
       viewState: 0, // 0: menu, 1: view/create sheet
-    };
-
+    }
+;
     this.currentCharacter = null;
 
     // import the character map and read all saved characters
