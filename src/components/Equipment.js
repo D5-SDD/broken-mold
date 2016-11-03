@@ -3,27 +3,32 @@
 // Inport libraries
 import React from 'react';
 import {Panel, ListGroup, ListGroupItem} from 'react-bootstrap';
+import _ from 'lodash';
 import capital from 'to-capital-case';
 
 // Displays a character's equipment in the Character Sheet View
 class Equipment extends React.Component {
   constructor(props) {
     super(props);
+
+    this.data = _.flattenDeep(this.props.data);
   }
 
   render() {
-    return null; // TODO: this is broken for the randomly generated characters
     var items = [];
+    this.data.map(function(value) {
+      let title = '';
+      if (value.name) {
+        title = capital(value.name);
+      } else if (value.item) {
+        title = capital(value.item);
+      }
 
-    // flatten the array of types of equipment to a list
-    this.props.data.map(function(value) {
-      value.map(function(value) {
-        items.push(
-          <ListGroupItem key={items.length}>
-            {capital(value.name)}
-          </ListGroupItem>
-        );
-      });
+      items.push(
+        <ListGroupItem key={items.length}>
+          {title}
+        </ListGroupItem>
+      );
     });
 
     return (
