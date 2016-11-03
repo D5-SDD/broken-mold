@@ -366,6 +366,8 @@ export class Header extends React.Component {
   
   render() {
     var printAlignment = this.props.alignment[0]+" "+this.props.alignment[1];
+    var classesLevels = this.props.classes[0].name +" | "+this.props.classes[0].level+"\n";
+    
     return (
       <Row className="Header" >
         <Col className="col" md={3}>
@@ -377,7 +379,7 @@ export class Header extends React.Component {
           <Row>
             <Col className="col" md={3}>
               <Panel className="centered">
-                Class & Level:<br/>
+                Class & Level:<br/> {this.classLevels}
               </Panel>
             </Col>
             <Col className="col" md={3}>
