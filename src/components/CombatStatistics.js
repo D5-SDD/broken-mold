@@ -35,7 +35,7 @@ class CombatStatistics extends React.Component {
 }
 
 CombatStatistics.propTypes = {
-  armorClass: React.PropTypes.string.isRequired,
+  armorClass: React.PropTypes.number.isRequired,
   initiative: React.PropTypes.number.isRequired,
   speed: React.PropTypes.number.isRequired
 };
