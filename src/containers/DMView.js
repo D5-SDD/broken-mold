@@ -1,9 +1,9 @@
 'use strict';
 
+// Import libraries
 import React from 'react';
 
-//import '../stylesheets/containers/DMView.scss';
-
+// The Dungeon Master View for the client
 class DMView extends React.Component {
   constructor(props) {
     super(props);
@@ -17,5 +17,7 @@ class DMView extends React.Component {
     );
   }
 }
+
+DMView.propTypes = {};
 
 export default DMView;

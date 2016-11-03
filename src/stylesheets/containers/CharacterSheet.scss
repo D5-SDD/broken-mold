@@ -1,3 +1,5 @@
+@import '../utils/all';
+
 .character-sheet {
   height: 100%;
   width: 100%;
@@ -7,5 +9,16 @@
   .col {
     background: #ffffff;
     color: black;
+  }
+}
+
+.exit {
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  
+  &:hover {
+    cursor: pointer;
+    color: #FFFFFF;
   }
 }
