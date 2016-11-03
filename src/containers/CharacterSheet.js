@@ -6,8 +6,8 @@ import {Grid, Row, Col, Panel} from 'react-bootstrap';
 
 // Import internal libraries
 import {
-  AbilityScores, Currency, DiceAndSaves, Equipment,
-  Header, HealthBox, SpellArea, TextBox
+  AbilityScores, CombatStatistics, Currency, DiceAndSaves,
+  Equipment, Header, HealthBox, SpellArea, TextBox
 } from '../components/CharacterSheet';
 
 // Import icons
@@ -43,7 +43,15 @@ class CharacterSheet extends React.Component {
     if (this.state.viewState === 0) {
       CS_GRID = (
         <Grid className="character-sheet-grid">
-          <Header name={character.name}/>
+          <Header
+            alignment={character.alignment}
+            background={character.background}
+            classes={character.classes}
+            experience={character.experience}
+            name={character.name}
+            playerName={character.playerName}
+            race={character.race}
+          />
           <Row className="outer">
             <Col className="outer col" md={4}>
               <Row>
@@ -66,6 +74,11 @@ class CharacterSheet extends React.Component {
               />
             </Col>
             <Col className="outer col" md={4}>
+              <CombatStatistics
+                armorClass={character.armorClass}
+                initiative={character.initiative}
+                speed={character.speed}
+              />
               <HealthBox
                 health={character.hitpoints}
               />
@@ -74,9 +87,9 @@ class CharacterSheet extends React.Component {
                 deathSaves={character.deathSaves}
               />
               <SpellArea
+                attack={character.spellAttackMod}
                 cast={character.spellCastingClass}
                 save={character.spellSaveDC}
-                attack={character.spellAttackMod}
               />
               <Row>
                 <Col className="inner col" md={5}>
@@ -122,9 +135,9 @@ class CharacterSheet extends React.Component {
                 <Col className="col" md={11}>
                   <Row>
                     <TextBox
+                      accordion
                       data={character.featuresAndTraits}
                       title="featuresAndTraits"
-                      accordion
                     />
                   </Row>
                   <Row>

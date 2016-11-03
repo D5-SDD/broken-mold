@@ -1,6 +1,7 @@
 'use strict';
 
 import AbilityScores from './AbilityScores';
+import CombatStatistics from './CombatStatistics';
 import Currency from './Currency';
 import DiceAndSaves from './DiceAndSaves';
 import Equipment from './Equipment';
@@ -15,6 +16,7 @@ import '../stylesheets/components/CharacterSheet';
 // package together all the components that are included in the Character Sheet View
 export {
   AbilityScores,
+  CombatStatistics,
   Currency,
   DiceAndSaves,
   Equipment,

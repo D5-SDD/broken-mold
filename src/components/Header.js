@@ -11,6 +11,7 @@ class Header extends React.Component {
   }
 
   render() {
+    var printAlignment = this.props.alignment[0] + ' ' + this.props.alignment[1];
     return (
       <Row className="header" >
         <Col className="col" md={3}>
@@ -60,8 +61,9 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
+  alignment: React.PropTypes.array.isRequired,
   background: React.PropTypes.string.isRequired,
-  experience: React.PropTypes.string.isRequired,
+  experience: React.PropTypes.number.isRequired,
   name: React.PropTypes.string.isRequired,
   playerName: React.PropTypes.string.isRequired,
   race: React.PropTypes.string.isRequired
