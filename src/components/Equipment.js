@@ -12,6 +12,7 @@ class Equipment extends React.Component {
   }
 
   render() {
+    return null; // TODO: this is broken for the randomly generated characters
     var items = [];
 
     // flatten the array of types of equipment to a list

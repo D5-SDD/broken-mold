@@ -1,0 +1,335 @@
+{
+  "name": "T",
+  "playerName": "Broken Mold",
+  "classes": [
+    {
+      "name": "Monk",
+      "level": 10
+    }
+  ],
+  "race": "Half-Orc",
+  "alignment": [
+    "Lawful",
+    "Evil"
+  ],
+  "experience": 1610,
+  "background": "Acolyte",
+  "personalityTraits": "Personality Traits",
+  "ideals": "Ideals",
+  "bonds": "Bonds",
+  "flaws": "Flaws",
+  "abilityScores": {
+    "strength": 8,
+    "dexterity": 8,
+    "constitution": 8,
+    "intelligence": 3,
+    "wisdom": 13,
+    "charisma": 12
+  },
+  "inspiration": 0,
+  "proficiencyBonus": 4,
+  "savingThrows": {
+    "strength": {
+      "proficient": true
+    },
+    "dexterity": {
+      "proficient": false
+    },
+    "constitution": {
+      "proficient": false
+    },
+    "intelligence": {
+      "proficient": false
+    },
+    "wisdom": {
+      "proficient": true
+    },
+    "charisma": {
+      "proficient": false
+    }
+  },
+  "skills": {
+    "acrobatics": {
+      "proficient": true
+    },
+    "animalHandling": {
+      "proficient": false
+    },
+    "arcana": {
+      "proficient": false
+    },
+    "athletics": {
+      "proficient": false
+    },
+    "deception": {
+      "proficient": false
+    },
+    "history": {
+      "proficient": false
+    },
+    "insight": {
+      "proficient": false
+    },
+    "intimidation": {
+      "proficient": false
+    },
+    "investigation": {
+      "proficient": false
+    },
+    "medicine": {
+      "proficient": false
+    },
+    "nature": {
+      "proficient": false
+    },
+    "perception": {
+      "proficient": false
+    },
+    "performance": {
+      "proficient": true
+    },
+    "persuasion": {
+      "proficient": false
+    },
+    "religion": {
+      "proficient": false
+    },
+    "sleightOfHand": {
+      "proficient": false
+    },
+    "stealth": {
+      "proficient": false
+    },
+    "survival": {
+      "proficient": false
+    }
+  },
+  "hitpoints": {
+    "maximum": 11,
+    "current": 10,
+    "temporary": 0
+  },
+  "speed": 35,
+  "hitDice": "1d8",
+  "deathSaves": {
+    "successes": 0,
+    "failures": 0
+  },
+  "weapons": {
+    "name": "longsword",
+    "attackBonus": 4,
+    "damage": "1d8+2",
+    "type": "slashing",
+    "properties": [
+      "versatile(1d10)"
+    ]
+  },
+  "inventory": [
+    {
+      "item": "Sling",
+      "cost": "1 sp",
+      "weight": "-"
+    },
+    {
+      "item": "Navigator's tools",
+      "cost": "25 gp",
+      "weight": "2 lb."
+    },
+    {
+      "item": "Herbalism kit",
+      "cost": "5 gp",
+      "weight": "3 lb."
+    },
+    {
+      "item": "Cart",
+      "cost": "15 gp",
+      "weight": "200 lb."
+    },
+    {
+      "item": "Bucket",
+      "cost": "5 cp",
+      "weight": "2 lb."
+    },
+    {
+      "item": "Mason's tools",
+      "cost": "10 gp",
+      "weight": "8 lb."
+    },
+    {
+      "item": "Ink (1 ounce bottle)",
+      "cost": "10 gp",
+      "weight": "-"
+    },
+    {
+      "item": "Whetstone",
+      "cost": "1 cp",
+      "weight": "1 lb."
+    },
+    {
+      "item": "Pony",
+      "cost": "30 gp",
+      "weight": "-"
+    },
+    {
+      "item": "Bedroll",
+      "cost": "1 gp",
+      "weight": "7 lb."
+    },
+    {
+      "item": "Saddlebags",
+      "cost": "4 gp",
+      "weight": "8 lb."
+    },
+    {
+      "item": "Mirror (steel)",
+      "cost": "5 gp",
+      "weight": "1/2 lb."
+    },
+    {
+      "item": "Manacles",
+      "cost": "2 gp",
+      "weight": "6 lb."
+    },
+    {
+      "item": "Longship",
+      "cost": "10000 gp",
+      "weight": "-"
+    },
+    {
+      "item": "Ball bearing",
+      "cost": ".001 gp",
+      "weight": ".002 lb."
+    },
+    {
+      "item": "Quiver",
+      "cost": "1 gp",
+      "weight": "1 lb."
+    },
+    {
+      "item": "Splint",
+      "cost": "200 gp",
+      "weight": "60 lb."
+    },
+    {
+      "item": "Greataxe",
+      "cost": "30 gp",
+      "weight": "7 lb."
+    },
+    {
+      "item": "Crowbar",
+      "cost": "2 gp",
+      "weight": "5 lb."
+    }
+  ],
+  "armor": {
+    "name": "studded leather armor",
+    "armorClass": 12,
+    "armorType": "light",
+    "strength": 0,
+    "stealthDisadvantage": false
+  },
+  "currency": {
+    "platinum": 27,
+    "gold": 5,
+    "electrum": 1,
+    "silver": 1,
+    "copper": 6
+  },
+  "featuresAndTraits": [
+    {
+      "name": "Test Character",
+      "description": "You have no purpose in life but to test this program"
+    }
+  ],
+  "proficiencies": [
+    "Light Armor",
+    "Simple Weapons"
+  ],
+  "languages": [
+    "Common"
+  ],
+  "spellCastingClass": "Wizard",
+  "spells": [
+    {
+      "casting_time": "1 action",
+      "classes": [
+        "druid",
+        "ranger"
+      ],
+      "components": {
+        "material": true,
+        "materials_needed": [
+          "seven sharp thorns or seven small twigs, each sharpened to a point"
+        ],
+        "raw": "V, S, M (seven sharp thorns or seven small twigs, each sharpened to a point)",
+        "somatic": true,
+        "verbal": true
+      },
+      "description": "The ground in a 20-foot radius centered on a point within range twists and sprouts hard spikes and thorns. The area becomes difficult terrain for the duration. When a creature moves into or within the area, it takes 2d4 piercing damage for every 5 feet it travels.\n\nThe transformation of the ground is camouflaged to look natural. Any creature that can't see the area at the time the spell is cast must make a Wisdom (Perception) check against your spell save DC to recognize the terrain as hazardous before entering it.",
+      "duration": "Concentration, up to 10 minutes",
+      "level": "2",
+      "name": "Spike Growth",
+      "range": "150 feet",
+      "ritual": false,
+      "school": "transmutation",
+      "tags": [
+        "druid",
+        "ranger",
+        "level2"
+      ],
+      "type": "2nd-level transmutation"
+    },
+    {
+      "casting_time": "1 action or 8 hours",
+      "classes": [
+        "bard",
+        "druid",
+        "ranger"
+      ],
+      "components": {
+        "material": false,
+        "raw": "V, S",
+        "somatic": true,
+        "verbal": true
+      },
+      "description": "This spell channels vitality into plants within a specific area. There are two possible uses for the spell, granting either immediate or long-term benefits.\n\nIf you cast this spell using 1 action, choose a point within range. All normal plants in a 100-foot radius centered on that point become thick and overgrown. A creature moving through the area must spend 4 feet of movement for every 1 foot it moves.\n\nYou can exclude one or more areas of any size within the spell’s area from being affected.\n\nIf you cast this spell over 8 hours, you enrich the land. All plants in a half-mile radius centered on a point within range become enriched for 1 year. The plants yield twice the normal amount of food when harvested.",
+      "duration": "Instantaneous",
+      "level": "3",
+      "name": "Plant Growth",
+      "range": "150 feet",
+      "ritual": false,
+      "school": "transmutation",
+      "tags": [
+        "bard",
+        "druid",
+        "ranger",
+        "level3"
+      ],
+      "type": "3rd-level transmutation"
+    },
+    {
+      "casting_time": "1 action",
+      "classes": [
+        "paladin"
+      ],
+      "components": {
+        "material": false,
+        "raw": "V, S",
+        "somatic": true,
+        "verbal": true
+      },
+      "duration": "Concentration, up to 1 hour",
+      "higher_levels": "When you cast this spell using a spell slot of 5th or 6th level, the bonus to attack rolls increases to +2 and the extra damage increases to 2d4. When you use a spell slot of 7th level or higher, the bonus increases to +3 and the extra damage increases to 3d4.",
+      "level": "3",
+      "name": "Elemental Weapon",
+      "range": "Touch",
+      "ritual": false,
+      "school": "transmutation",
+      "tags": [
+        "paladin",
+        "level3"
+      ],
+      "type": "3rd-level transmutation"
+    }
+  ]
+}

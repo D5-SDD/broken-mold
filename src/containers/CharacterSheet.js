@@ -97,7 +97,7 @@ class CharacterSheet extends React.Component {
                 </Col>
                 <Col className="inner col" md={7}>
                   <Equipment
-                    data={[character.inventory, character.armor]}
+                    data={[character.armor]}
                   />
                 </Col>
               </Row>
