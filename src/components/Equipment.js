@@ -15,7 +15,6 @@ class Equipment extends React.Component {
   }
 
   render() {
-    //return null; // TODO: this is broken for the randomly generated characters
     var items = [];
     this.data.map(function(value) {
       let title = '';
