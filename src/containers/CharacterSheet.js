@@ -2,14 +2,11 @@
 
 import React from 'react';
 import {Grid, Row, Col} from 'react-bootstrap';
-<<<<<<< HEAD
-import {AbilityScore, HealthBox, SpellArea, DiceAndSaves, Header} from '../components/CharacterSheet';
-=======
 import {
   AbilityScore, Currency, DiceAndSaves,
-  Equipment, HealthBox, SpellArea, TextBox
+  Equipment, HealthBox, SpellArea, TextBox, Header,
+  Armor_Initiative_Speed
 } from '../components/CharacterSheet';
->>>>>>> 67db7af1de5bf1e3c993b5df48a7dfaec38fc7ba
 
 import '../stylesheets/containers/CharacterSheet';
 
@@ -36,9 +33,19 @@ export default class CharacterSheet extends React.Component {
       // TODO: Character View
       CS_GRID = (
         <Grid className="character-sheet-grid">
-          <Header
-            name={character.name}
-          />
+          <Row className="outer">
+            <Col className="outer col" md={12}>
+              <Header
+                name={character.name}
+                playerName={character.playerName}
+                classes={character.classes}
+                race={character.race}
+                alignment={character.alignment}
+                experience={character.experience}
+                background={character.background}
+              />
+            </Col>
+          </Row>
           <Row className="outer">
             <Col className="outer col" md={4}>
               <AbilityScores
@@ -49,6 +56,11 @@ export default class CharacterSheet extends React.Component {
               />
             </Col>
             <Col className="outer col" md={4}>
+              <Armor_Initiative_Speed
+                armorClass={character.armorClass}
+                initiative={character.initiative}
+                speed={character.speed}
+              />
               <HealthBox
                 health={character.hitpoints}
               />
