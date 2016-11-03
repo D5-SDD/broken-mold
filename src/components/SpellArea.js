@@ -34,8 +34,8 @@ class SpellArea extends React.Component {
 }
 
 SpellArea.propTypes = {
-  cast: React.PropTypes.string.isRequired,
   attack: React.PropTypes.number.isRequired,
+  cast: React.PropTypes.string.isRequired,
   save: React.PropTypes.number.isRequired
 };
 
