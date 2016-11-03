@@ -4,8 +4,9 @@ import React from 'react';
 import {Grid, Row, Col, Panel} from 'react-bootstrap';
 import {
   AbilityScore, Currency, DiceAndSaves,
-  Equipment, HealthBox, SpellArea, TextBox, TestImage
+  Equipment, HealthBox, SpellArea, TextBox
 } from '../components/CharacterSheet';
+import {FaArrowLeft} from 'react-icons/lib/fa';
 
 import '../stylesheets/containers/CharacterSheet';
 
@@ -133,7 +134,10 @@ export default class CharacterSheet extends React.Component {
 
     return (
       <div className="character-sheet">
-        <TestImage data={14} />
+        <FaArrowLeft
+          className="exit"
+          onClick={this.props.exitCharacterSheetCB}
+        />
         {CS_GRID}
       </div>
     );

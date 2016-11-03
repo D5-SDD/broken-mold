@@ -9,3 +9,14 @@
     color: black;
   }
 }
+
+.exit {
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  
+  &:hover {
+    cursor: pointer;
+    color: #FFFFFF;
+  }
+}

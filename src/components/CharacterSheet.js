@@ -354,21 +354,3 @@ export class Equipment extends React.Component {
 Equipment.propTypes = {
   data: React.PropTypes.array.isRequired
 };
-
-export class TestImage extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <div className="test-image">
-        Strength: {this.props.data}
-      </div>
-    );
-  }
-}
-
-TestImage.propTypes = {
-  data: React.PropTypes.number.isRequired
-};
