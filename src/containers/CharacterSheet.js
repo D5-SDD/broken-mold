@@ -4,7 +4,7 @@ import React from 'react';
 import {Grid, Row, Col, Panel} from 'react-bootstrap';
 import {
   AbilityScore, Currency, DiceAndSaves,
-  Equipment, HealthBox, SpellArea, TextBox
+  Equipment, HealthBox, SpellArea, TextBox, TestImage
 } from '../components/CharacterSheet';
 
 import '../stylesheets/containers/CharacterSheet';
@@ -133,6 +133,7 @@ export default class CharacterSheet extends React.Component {
 
     return (
       <div className="character-sheet">
+        <TestImage data={14} />
         {CS_GRID}
       </div>
     );
