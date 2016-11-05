@@ -7,8 +7,7 @@
 
 .character-sheet-grid {
   .col {
-    background: $baseGreen;
-    color: $darkBrown;
+    color: $whiteRed;
   }
 }
 
@@ -19,6 +18,6 @@
   
   &:hover {
     cursor: pointer;
-    color: #FFFFFF;
+    color: $whiteGreen;
   }
 }
