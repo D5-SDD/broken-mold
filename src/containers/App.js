@@ -7,6 +7,7 @@ import {Tabs, Tab} from 'react-bootstrap';
 // Import containers
 import CharacterView from './CharacterView';
 import DMView from './DMView';
+import NetworkingView from './NetworkingView';
 
 // Import internal libraries
 import {readMap} from '../../lib/Character';
@@ -37,8 +38,8 @@ class AppContainer extends React.Component {
         <Tab eventKey={2} title="Dungeon Master" disabled>
           <DMView />
         </Tab>
-        <Tab eventKey={3} title="Networking" disabled>
-          <h2>Why are you here? This tab isn't working yet</h2>
+        <Tab eventKey={3} title="Networking">
+          <NetworkingView />
         </Tab>
       </Tabs>
     );
