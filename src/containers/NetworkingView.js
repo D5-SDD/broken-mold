@@ -27,21 +27,21 @@ class NetworkingView extends React.Component {
             bsSize="small"
             onClick={startUDPBroadcast}
           >
-            Button 1
+            Start UDP
           </Button>
           <Button
             bsStyle="primary"
             bsSize="small"
             onClick={startUDPBroadcast}
           >
-            Button 2
+            End UDP
           </Button>
           <Button
             bsStyle="primary"
             bsSize="small"
             onClick={startUDPBroadcast}
           >
-            Button 3
+            Future Stuff
           </Button>
         </nav>
       </div>
