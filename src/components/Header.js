@@ -12,6 +12,15 @@ class Header extends React.Component {
 
   render() {
     var printAlignment = this.props.alignment[0] + ' ' + this.props.alignment[1];
+    var classAndLevel = [];
+    for (let i=0; i<this.props.classes.length; i++) {
+      classAndLevel.push(
+        <div>
+          {this.props.classes[i].name+ ' ' +this.props.classes[i].level}
+        </div>
+       );
+    }
+    
     return (
       <Row className="header" >
         <Col className="col" md={3}>
@@ -23,7 +32,7 @@ class Header extends React.Component {
           <Row>
             <Col className="col" md={3}>
               <Panel className="centered">
-                Class & Level:<br/>
+                Class & Level:<br/> {classAndLevel}
               </Panel>
             </Col>
             <Col className="col" md={3}>
