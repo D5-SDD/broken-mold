@@ -6,11 +6,11 @@ const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
 
-/*
+
 require('electron-reload')(__dirname, {
   electron: require('electron-prebuilt')
 });
-*/
+
 require('electron-context-menu')();
 
 // Keep a global reference of the window object, if you don't, the window will

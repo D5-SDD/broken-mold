@@ -2,7 +2,7 @@
 
 // Inport libraries
 import React from 'react';
-import {Row, Col, Panel} from 'react-bootstrap';
+import {FormGroup, FormControl, Row, Col, Panel} from 'react-bootstrap';
 
 // Displays various character information in the Header for the Character Sheet View
 class Header extends React.Component {
@@ -11,12 +11,23 @@ class Header extends React.Component {
   }
 
   render() {
+    console.log(this.props.viewState);
     var printAlignment = this.props.alignment[0] + ' ' + this.props.alignment[1];
+
+    var charName = this.props.name;
+    if (this.props.viewState === 1) {
+      charName = (
+        <FormGroup>
+          <FormControl id="csform-name" type="text" defaultValue={this.props.name}/>
+        </FormGroup>
+      )
+    }
+
     return (
       <Row className="header" >
         <Col className="col" md={3}>
           <Panel className="centered">
-            Character Name: {this.props.name}
+            Character Name: {charName}
           </Panel>
         </Col>
         <Col className="col" md={9}>
@@ -66,7 +77,8 @@ Header.propTypes = {
   experience: React.PropTypes.number.isRequired,
   name: React.PropTypes.string.isRequired,
   playerName: React.PropTypes.string.isRequired,
-  race: React.PropTypes.string.isRequired
+  race: React.PropTypes.string.isRequired,
+  viewState: React.PropTypes.number.isRequired
 };
 
 export default Header;

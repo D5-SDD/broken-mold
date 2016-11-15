@@ -22,3 +22,15 @@
     color: #FFFFFF;
   }
 }
+
+.edit {
+  position: absolute;
+  right: 0;
+  height: 50px;
+  width: 50px;
+
+  &:hover {
+    cursor: pointer;
+    color: #FFFFFF;
+  }
+}
