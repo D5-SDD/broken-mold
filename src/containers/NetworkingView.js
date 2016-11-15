@@ -5,7 +5,7 @@ import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
 
 // Import internal libraries
-import {UDP, startUDPBroadcast} from '../../lib/Networking';
+import {UDP, startUDPBroadcast, stopUDPBroadcast} from '../../lib/Networking';
 
 // MIKE! THIS IS A TUTORIAL FOR YOU!
 // ANY FUNCTIONS THAT YOU NEED TO CALL/TEST YOU IMPORT
@@ -36,14 +36,16 @@ class NetworkingView extends React.Component {
           <Button
             bsStyle="primary"
             bsSize="small"
-            onClick={startUDPBroadcast}
+            onClick={stopUDPBroadcast}
           >
             End UDP
           </Button>
           <Button
             bsStyle="primary"
             bsSize="small"
-            onClick={startUDPBroadcast}
+            onClick={() => {
+              console.log('Future stuff');
+            }}
           >
             Future Stuff
           </Button>
