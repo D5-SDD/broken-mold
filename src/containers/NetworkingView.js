@@ -5,11 +5,15 @@ import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
 
 // Import internal libraries
-import {UDP, TCP, startUDPBroadcast, stopUDPBroadcast, startUDPListen} from '../../lib/Networking';
+import {UDP, TCP, startUDPBroadcast, stopUDPBroadcast, 
+  startUDPListen, startTCPServer} from '../../lib/Networking';
+
+import Character from '../../lib/Character';
 
 class NetworkingView extends React.Component {
 	constructor(props) {
 		super(props);
+    this.characters = [];
 	}
 
 	render() {
@@ -21,9 +25,13 @@ class NetworkingView extends React.Component {
             bsSize="small"
             onClick={ () => {
               startUDPBroadcast(true);
+              startTCPServer((charLocation) => {
+                var test = new Character(charLocation);
+                this.characters.push(test);
+              }, []);
             }}
           >
-            Start UDP
+            Open DM Connections
           </Button>
           <Button
             bsStyle="primary"
@@ -32,7 +40,7 @@ class NetworkingView extends React.Component {
               stopUDPBroadcast();
             }}
           >
-            End UDP
+            Close DM Connections
           </Button>
           <Button
             bsStyle="primary"

@@ -71,8 +71,6 @@ class CharacterMenu extends React.Component {
     if (charactersToShare.length === 0) {
       return;
     }
-
-    console.log(charactersToShare);
     // TODO: Make the appropriate calls to the networking library
     
     startTCPServer((charactersToShare, client) => {
@@ -80,15 +78,13 @@ class CharacterMenu extends React.Component {
       stopUDPBroadcast();      
       for(let i = 0; i < charactersToShare.length; i++)
       {
-        console.log(charactersToShare[i].filename);
-        var test = fs.readFileSync(CHAR_LOCATION + charactersToShare[i].filename);
-        client.write(test + '\n');        
+        var temp = fs.readFileSync(CHAR_LOCATION + charactersToShare[i].filename);
+        client.write(temp);        
       }
       //close TCP client
       closeTCPServer();
     }, charactersToShare);
     startUDPBroadcast(false);
-    console.log(TCP); 
   }
 
   // Called when a character is selected from the menu
