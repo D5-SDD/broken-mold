@@ -72,7 +72,11 @@ class CharacterView extends React.Component {
   // exports any changes to the characters and return to the character menu
   exitCharacterSheetCB() {
     // check if character is saveable
+    if (!this.currentCharacter.isCharacterValid()) {
+      //stop the character saving process
+    }
     // save character
+    this.currentCharacter.saveCharacter();
     this.currentCharacter = null;
     this.setState({viewState: 0});
   }

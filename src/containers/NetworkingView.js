@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/lib/Button';
 
 // Import internal libraries
 import {UDP, TCP, startUDPBroadcast, stopUDPBroadcast, 
-  startUDPListen, startTCPServer} from '../../lib/Networking';
+  startUDPListen, startTCPServer, closeTCPServer} from '../../lib/Networking';
 
 import Character from '../../lib/Character';
 
@@ -23,11 +23,12 @@ class NetworkingView extends React.Component {
           <Button
             bsStyle="primary"
             bsSize="small"
-            onClick={ () => {
+            onClick={() => {
               startUDPBroadcast(true);
               startTCPServer((charLocation) => {
                 var test = new Character(charLocation);
                 this.characters.push(test);
+                console.log(this);
               }, []);
             }}
           >
@@ -41,6 +42,16 @@ class NetworkingView extends React.Component {
             }}
           >
             Close DM Connections
+          </Button>
+          <Button
+            bsStyle="primary"
+            bsSize="small"
+            onClick={() => {
+              closeTCPServer();
+              stopUDPBroadcast();
+            }}
+          >
+            Stop DM Session
           </Button>
           <Button
             bsStyle="primary"
