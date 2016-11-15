@@ -1,5 +1,4 @@
-{
-  "races": [
+[
   "Dragonborn",
   "Dwarf",
   "Elf",
@@ -8,5 +7,4 @@
   "Halfling",
   "Half-Orc",
   "Tiefling"
-  ]
-}
+]

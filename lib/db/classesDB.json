@@ -1,5 +1,4 @@
-{
-  "classes": [
+[
   "Barbarian",
   "Bard",
   "Cleric",
@@ -12,5 +11,4 @@
   "Sorcerer",
   "Warlock",
   "Wizard"
-  ]
-}
+]
