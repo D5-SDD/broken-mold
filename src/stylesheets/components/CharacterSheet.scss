@@ -1,6 +1,7 @@
+@import '../utils/all';
+
 .header {
   &.row {
-    background: #FFFFFF;
   }
   
   .panel {
@@ -9,6 +10,8 @@
 }
 
 .panel {
+  background-color: $lightGreen;
+  color: $blackRed;
   .fa {
     margin-right: 5px;
   }
