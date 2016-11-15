@@ -1,22 +1,33 @@
 'use strict';
 
+import fs from 'fs';
+
 // Import libraries
 import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
 import TreeMenu, {Utils} from 'react-tree-menu';
+import {readMap} from '../../lib/Character';
+import {UDP, TCP, startUDPBroadcast, 
+  stopUDPBroadcast, startUDPListen, startTCPServer, closeTCPServer} from '../../lib/Networking';
 
 // Import the stylesheet
 import '../stylesheets/components/CharacterMenu';
+
+
+const CHAR_LOCATION = './test/Characters/';
 
 // Displays a menu of all characters that are available for a client to view
 class CharacterMenu extends React.Component {
   constructor(props) {
     super(props);
 
+    // update the map or whatever here
+    this.characterMap = readMap();
+
     // parse the character map and create a tree data structure for the menu
     var data = [];
-    for (let i = 0; i < this.props.characterMap.length; i++) {
-      data.push(this.props.characterMap[i]);
+    for (let i = 0; i < this.characterMap.length; i++) {
+      data.push(this.characterMap[i]);
       data[i].checkbox = false;
     }
 
@@ -64,10 +75,19 @@ class CharacterMenu extends React.Component {
     if (charactersToShare.length === 0) {
       return;
     }
-
-    console.log(charactersToShare);
-
     // TODO: Make the appropriate calls to the networking library
+
+    startTCPServer((charactersToShare, client) => {
+      //once connection is made, save and
+      stopUDPBroadcast();
+      for (let i = 0; i < charactersToShare.length; i++) {
+        var temp = fs.readFileSync(CHAR_LOCATION + charactersToShare[i].filename);
+        client.write(temp);
+      }
+      //close TCP client
+      closeTCPServer();
+    }, charactersToShare);
+    startUDPBroadcast(false);
   }
 
   // Called when a character is selected from the menu
@@ -132,7 +152,6 @@ class CharacterMenu extends React.Component {
             bsStyle={shareButtonStyle}
             bsSize="small"
             onClick={this._toggleSharing}
-            disabled
           >
             {shareButtonText}
           </Button>
@@ -155,7 +174,6 @@ class CharacterMenu extends React.Component {
 }
 
 CharacterMenu.propTypes = {
-  characterMap: React.PropTypes.array.isRequired,
   loadCharacterCB: React.PropTypes.func.isRequired,
   newCharacterCB: React.PropTypes.func.isRequired,
   selectCharacterCB: React.PropTypes.func.isRequired

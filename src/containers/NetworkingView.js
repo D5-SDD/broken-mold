@@ -5,17 +5,15 @@ import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
 
 // Import internal libraries
-import {startUDPBroadcast} from '../../lib/Networking';
+import {UDP, TCP, startUDPBroadcast, stopUDPBroadcast, 
+  startUDPListen, startTCPServer} from '../../lib/Networking';
 
-// MIKE! THIS IS A TUTORIAL FOR YOU!
-// ANY FUNCTIONS THAT YOU NEED TO CALL/TEST YOU IMPORT
-// IN THE CURLY BRACES ABOVE THIS COMMENT.
-// TO ASSIGN THAT FUNCTION TO BE CALLED BY A BUTTON,
-// CHANGE THE ONCLICK PROPERTY OF THAT BUTTON TO CALL THAT FUNCTION
+import Character from '../../lib/Character';
 
 class NetworkingView extends React.Component {
 	constructor(props) {
 		super(props);
+    this.characters = [];
 	}
 
 	render() {
@@ -25,23 +23,33 @@ class NetworkingView extends React.Component {
           <Button
             bsStyle="primary"
             bsSize="small"
-            onClick={startUDPBroadcast}
+            onClick={ () => {
+              startUDPBroadcast(true);
+              startTCPServer((charLocation) => {
+                var test = new Character(charLocation);
+                this.characters.push(test);
+              }, []);
+            }}
           >
-            Button 1
+            Open DM Connections
           </Button>
           <Button
             bsStyle="primary"
             bsSize="small"
-            onClick={startUDPBroadcast}
+            onClick={() => {
+              stopUDPBroadcast();
+            }}
           >
-            Button 2
+            Close DM Connections
           </Button>
           <Button
             bsStyle="primary"
             bsSize="small"
-            onClick={startUDPBroadcast}
+            onClick={() => {
+              startUDPListen();
+            }}
           >
-            Button 3
+            UDP Listen
           </Button>
         </nav>
       </div>
