@@ -1,12 +1,19 @@
 'use strict';
 
+import fs from 'fs';
+
 // Import libraries
 import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
 import TreeMenu, {Utils} from 'react-tree-menu';
+import {UDP, TCP, startUDPBroadcast, 
+  stopUDPBroadcast, startUDPListen, startTCPServer, closeTCPServer} from '../../lib/Networking';
 
 // Import the stylesheet
 import '../stylesheets/components/CharacterMenu';
+
+
+const CHAR_LOCATION = './test/Characters/'
 
 // Displays a menu of all characters that are available for a client to view
 class CharacterMenu extends React.Component {
@@ -66,8 +73,22 @@ class CharacterMenu extends React.Component {
     }
 
     console.log(charactersToShare);
-
     // TODO: Make the appropriate calls to the networking library
+    
+    startTCPServer((charactersToShare, client) => {
+      //once connection is made, save and 
+      stopUDPBroadcast();      
+      for(let i = 0; i < charactersToShare.length; i++)
+      {
+        console.log(charactersToShare[i].filename);
+        var test = fs.readFileSync(CHAR_LOCATION + charactersToShare[i].filename);
+        client.write(test + '\n');        
+      }
+      //close TCP client
+      closeTCPServer();
+    }, charactersToShare);
+    startUDPBroadcast(false);
+    console.log(TCP); 
   }
 
   // Called when a character is selected from the menu
@@ -132,7 +153,6 @@ class CharacterMenu extends React.Component {
             bsStyle={shareButtonStyle}
             bsSize="small"
             onClick={this._toggleSharing}
-            disabled
           >
             {shareButtonText}
           </Button>
