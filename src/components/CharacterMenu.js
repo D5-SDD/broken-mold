@@ -57,7 +57,7 @@ class CharacterMenu extends React.Component {
   }
 
   // Called when the "OK" button is clicked while sharing,
-  // initiates a confirmation fialog followed by the sharing interface
+  // initiates a confirmation dialog followed by the sharing interface
   _confirmSharing() {
     if (!this.state.sharing) {
       return;
@@ -88,6 +88,7 @@ class CharacterMenu extends React.Component {
       }
       //close TCP client
       closeTCPServer();
+      // TODO: Update Map
     }, charactersToShare);
     startUDPBroadcast(false);
   }
@@ -132,7 +133,6 @@ class CharacterMenu extends React.Component {
           id="fileDialog"
           type="file"
           accept=".json"
-          multiple
         />
         <nav className="navigation" id="header">
           <Button

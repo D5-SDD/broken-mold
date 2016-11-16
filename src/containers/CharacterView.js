@@ -6,7 +6,7 @@ import CharacterMenu from '../components/CharacterMenu';
 import CharacterSheet from './CharacterSheet';
 
 // Import internal libraries
-import {exportMap, readCharactersFromMap, readMap} from '../../lib/Character';
+import {exportMap, readCharactersFromMap, readMap, loadCharacters} from '../../lib/Character';
 
 // Import stylesheet
 import '../stylesheets/containers/CharacterView';
@@ -34,14 +34,26 @@ class CharacterView extends React.Component {
     var chooser = $('#fileDialog');
     chooser.unbind('change');
     chooser.on('change', function() {
+      console.log('changing');
       var files = $(this)[0].files;
       var paths = [];
       for (let i = 0; i < files.length; i++) {
         paths.push(files[i].path);
       }
-      loadCharacters(paths);
+      /*
+      this.currentCharacter = loadCharacters(paths);
+      if (this.currentCharacter === null) {
+        // TODO: some notification character couldn't be loaded
+        console.log('character not made');
+        return;
+      }
+      this.setState({
+        viewState: 1
+      });
+      */
     });
     chooser.trigger('click');
+    console.log('finished');
   }
 
   // Called when the new button is clicked,
