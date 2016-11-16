@@ -31,6 +31,9 @@ class CharacterView extends React.Component {
   // Called when the load button is clicked,
   // creates a file dialog and calls the function to import
   loadCharacterCB() {
+    console.log(this);
+    console.log($('#fileDialog')[0].files);
+    /*
     var chooser = $('#fileDialog');
     chooser.unbind('change');
     chooser.on('change', function() {
@@ -40,20 +43,11 @@ class CharacterView extends React.Component {
       for (let i = 0; i < files.length; i++) {
         paths.push(files[i].path);
       }
-      /*
-      this.currentCharacter = loadCharacters(paths);
-      if (this.currentCharacter === null) {
-        // TODO: some notification character couldn't be loaded
-        console.log('character not made');
-        return;
-      }
-      this.setState({
-        viewState: 1
-      });
-      */
+      cb(paths);
     });
     chooser.trigger('click');
     console.log('finished');
+    */
   }
 
   // Called when the new button is clicked,

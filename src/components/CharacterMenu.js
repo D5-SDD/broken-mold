@@ -132,7 +132,9 @@ class CharacterMenu extends React.Component {
           style={{display: 'none'}}
           id="fileDialog"
           type="file"
+          title="Load Character"
           accept=".json"
+          onChange={this.props.loadCharacterCB}
         />
         <nav className="navigation" id="header">
           <Button
@@ -146,7 +148,9 @@ class CharacterMenu extends React.Component {
           <Button
             bsStyle="primary"
             bsSize="small"
-            onClick={this.props.loadCharacterCB}
+            onClick={() => {
+              $('#fileDialog').click();
+            }}
           >
             Load
           </Button>
