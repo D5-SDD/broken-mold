@@ -33,21 +33,15 @@ class CharacterView extends React.Component {
   loadCharacterCB() {
     console.log(this);
     console.log($('#fileDialog')[0].files);
-    /*
-    var chooser = $('#fileDialog');
-    chooser.unbind('change');
-    chooser.on('change', function() {
-      console.log('changing');
-      var files = $(this)[0].files;
-      var paths = [];
-      for (let i = 0; i < files.length; i++) {
-        paths.push(files[i].path);
-      }
-      cb(paths);
+    var files = $('#fileDialog')[0].files;
+    var paths = [];
+    for (let i = 0; i < files.length; i++) {
+      paths.push(files[i].path);
+    }
+    this.currentCharacter = loadCharacters(paths);
+    this.setState({
+      viewState: 1
     });
-    chooser.trigger('click');
-    console.log('finished');
-    */
   }
 
   // Called when the new button is clicked,
