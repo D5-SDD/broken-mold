@@ -14,6 +14,8 @@ class NetworkingView extends React.Component {
 	constructor(props) {
 		super(props);
     this.characters = [];
+    
+    // TODO: remove character from characters upon disconnect
 	}
 
 	render() {
@@ -49,6 +51,7 @@ class NetworkingView extends React.Component {
             onClick={() => {
               closeTCPServer();
               stopUDPBroadcast();
+              this.characters = [];
             }}
           >
             Stop DM Session
