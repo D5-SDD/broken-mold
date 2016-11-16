@@ -33,12 +33,13 @@ class CharacterSheet extends React.Component {
     };
 
     this.applyEdits = this.applyEdits.bind(this);
+    this.validateBeforeExit = this.validateBeforeExit.bind(this);
   }
 
   applyEdits() {
     this.props.character.name = document.getElementById('csform-name').value;
   }
-  
+
   validateBeforeExit() {
     if (!this.props.character.isCharacterValid()) {
       //TODO: Pop up window saying character can't be saved
@@ -171,7 +172,7 @@ class CharacterSheet extends React.Component {
           className="exit"
           onClick={this.validateBeforeExit}
         />
-        <FaPencil 
+        <FaPencil
           className="edit"
           onClick={() => {
             // FOR NOW, THIS TOGGLES, SAVE AND CANCEL BUTTONS SHOULD BE MADE
