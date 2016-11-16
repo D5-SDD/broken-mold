@@ -5,7 +5,7 @@ import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
 
 // Import internal libraries
-import {UDP, TCP, startUDPBroadcast, stopUDPBroadcast, 
+import {UDP, TCP, startUDPBroadcast, stopUDPBroadcast,
   startUDPListen, startTCPServer, closeTCPServer} from '../../lib/Networking';
 
 import Character from '../../lib/Character';
@@ -14,7 +14,7 @@ class NetworkingView extends React.Component {
 	constructor(props) {
 		super(props);
     this.characters = [];
-    
+
     // TODO: remove character from characters upon disconnect
 	}
 
