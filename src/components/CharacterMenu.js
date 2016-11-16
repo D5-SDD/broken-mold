@@ -21,7 +21,9 @@ class CharacterMenu extends React.Component {
   constructor(props) {
     super(props);
 
-    // update the map or whatever here
+    // update the map
+    // TODO: call update function
+    // read Map
     this.characterMap = readMap();
 
     // parse the character map and create a tree data structure for the menu
