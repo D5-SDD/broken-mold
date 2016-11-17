@@ -55,6 +55,7 @@ class CharacterView extends React.Component {
   // transitions the user to the character sheet view
   selectCharacterCB(node) {
     var name = node.filename;
+    this.characterMap = readMap();
     for (let i = 0; i < this.characterMap.length; i++) {
       if (this.characterMap[i].filename === name) {
         this.currentCharacter = new Character(node.filename);
