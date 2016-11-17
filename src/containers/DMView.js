@@ -30,6 +30,7 @@ class DMView extends React.Component {
       var test = new Character(charLocation);
       this.characters.push(test);
       console.log(this.characters);
+      //this.forceUpdate();
     }, []);
   }
 
