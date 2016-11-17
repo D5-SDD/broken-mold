@@ -101,7 +101,7 @@ class CharacterMenu extends React.Component {
       }
       //close TCP client
       closeTCPServer();      
-    }, charactersToShare);
+    }, charactersToShare, (c) => {});
     startUDPBroadcast(false);
   }
 

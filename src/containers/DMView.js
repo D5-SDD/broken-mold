@@ -11,7 +11,7 @@ import DMTabs from './DMTabs';
 import Character from '../../lib/Character';
 import {
   startUDPBroadcast, stopUDPBroadcast, startUDPListen,
-  startTCPServer, closeTCPServer
+  startTCPServer, closeTCPServer, closeTCPClient
 } from '../../lib/Networking';
 
 // The Dungeon Master View for the client
@@ -20,19 +20,32 @@ class DMView extends React.Component {
     super(props);
 
     this.characters = [];
+    this.clients = [];
 
     // TODO: remove character from characters upon disconnect
   }
 
   openConnectionCB() {
     startUDPBroadcast(true);
-    startTCPServer((charLocation) => {
-      var test = new Character(charLocation);
-      this.characters.push(test);
+    startTCPServer((charLocation, client) => {
+      var newChar = new Character(charLocation);
+      this.characters.push(newChar);
+      this.clients.push(client);
       console.log(this.characters);
+      console.log(this.clients);
       //this.forceUpdate();
-    }, []);
+    }, [], (client) => {
+      var index = this.clients.indexOf(client);
+      if (fs.existsSync(CHARACTER_DIR + this.characters[index].originalName + '-DMTemp.json')) {
+        fs.unlink(CHARACTER_DIR + this.characters[index].originalName + '-DMTemp.json')
+      }
+      this.character.splice(index, 1);
+      this.clients.splice(index, 1);
+      console.log(characters);
+      console.log(clients);
+    });
   }
+  
 
   render() {
     return (
@@ -72,7 +85,14 @@ class DMView extends React.Component {
               startUDPListen();
             }}
           >
-            UDP Listen
+            Connect to DM
+          </Button>
+          <Button
+            bsStyle="primary"
+            bsSize="small"
+            onClick={closeTCPClient}
+          >
+            Disconnect from DM
           </Button>
         </nav>
         <DMTabs characters={this.characters} />
