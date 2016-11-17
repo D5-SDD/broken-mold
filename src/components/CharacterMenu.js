@@ -39,12 +39,12 @@ class CharacterMenu extends React.Component {
       treeData: data,
       sharing: false,
       lookingForClient: false,
-      recieving: false
+      receiving: false
     };
 
     this._toggleSharing = this._toggleSharing.bind(this);
     this._confirmSharing = this._confirmSharing.bind(this);
-    this._toggleRecieving = this._toggleRecieving.bind(this);
+    this._toggleReceiving = this._toggleReceiving.bind(this);
     this._toggleLookingForClient = this._toggleLookingForClient.bind(this);
   }
 
@@ -53,7 +53,7 @@ class CharacterMenu extends React.Component {
     var sharing = !this.state.sharing;
     var data = this.state.treeData;
     var lookingForClient = this.state.lookingForClient;
-    var recieving = this.state.recieving;
+    var receiving = this.state.receiving;
     for (let i = 0; i < data.length; i++) {
       data[i].checkbox = sharing;
       data[i].checked = false;
@@ -62,7 +62,7 @@ class CharacterMenu extends React.Component {
       treeData: data,
       sharing: sharing,
       lookingForClient: lookingForClient,
-      recieving: recieving    
+      receiving: receiving    
     }); 
   }
 
@@ -120,13 +120,13 @@ class CharacterMenu extends React.Component {
     );
   }
   
-  _toggleRecieving() {
+  _toggleReceiving() {
     var sharing = this.state.sharing;
     var data = this.state.treeData;
     var lookingForClient = this.state.lookingForClient;
-    var recieving = !this.state.recieving
+    var receiving = !this.state.receiving
     
-    if (recieving) {
+    if (receiving) {
       startUDPListen(() => {
         exportMap();
         this.characterMap = readMap();
@@ -136,7 +136,7 @@ class CharacterMenu extends React.Component {
           data[i].checkbox = false;
         }
         this.state.treeData = data;
-        this._toggleRecieving();
+        this._toggleReceiving();
       });
     } else {
       stopUDPListen();
@@ -146,7 +146,7 @@ class CharacterMenu extends React.Component {
       treeData: data,
       sharing: sharing,
       lookingForClient: lookingForClient,
-      recieving: recieving    
+      receiving: receiving    
     });    
   }
   
@@ -154,7 +154,7 @@ class CharacterMenu extends React.Component {
     var sharing = this.state.sharing;
     var data = this.state.treeData;
     var lookingForClient = !this.state.lookingForClient;
-    var recieving = this.state.recieving
+    var receiving = this.state.receiving
       
     if (this.state.lookingForClient) {
       stopUDPBroadcast();
@@ -168,7 +168,7 @@ class CharacterMenu extends React.Component {
       treeData: data,
       sharing: sharing,
       lookingForClient: lookingForClient,
-      recieving: recieving    
+      receiving: receiving    
     }); 
   }
 
@@ -195,7 +195,7 @@ class CharacterMenu extends React.Component {
       );
     }
     
-    if (this.state.lookingForClient === true || this.state.recieving === true) {
+    if (this.state.lookingForClient === true || this.state.receiving === true) {
       cancelButton = (
       <Button
           bsStyle="danger"
@@ -204,7 +204,7 @@ class CharacterMenu extends React.Component {
             if (this.state.lookingForClient) {
               this._toggleLookingForClient()
             } else {
-              this._toggleRecieving();
+              this._toggleReceiving();
             }
           }}
         >
@@ -255,10 +255,10 @@ class CharacterMenu extends React.Component {
           <Button
             bsStyle="primary"
             bsSize="small"
-            onClick={this._toggleRecieving}
+            onClick={this._toggleReceiving}
             disabled = {disableButtons}
           >
-            Recieve Character
+            Receive Character
           </Button>
         </nav>
         <TreeMenu
