@@ -83,8 +83,9 @@ class CharacterMenu extends React.Component {
       //once connection is made, save and
       stopUDPBroadcast();
       for (let i = 0; i < charactersToShare.length; i++) {
-        var temp = fs.readFileSync(CHAR_LOCATION + charactersToShare[i].filename);
-        client.write(temp);
+        var temp = JSON.parse(fs.readFileSync(CHAR_LOCATION + charactersToShare[i].filename));
+        console.log(temp);
+        client.sendMessage(temp);
       }
       //close TCP client
       closeTCPServer();

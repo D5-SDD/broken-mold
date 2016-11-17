@@ -177,6 +177,13 @@
       "stealthDisadvantage": false
     }
   ],
+  "currency": {
+    "platinum": 0,
+    "gold": 10,
+    "electrum": 0,
+    "silver": 0,
+    "copper": 0
+  },
   "featuresAndTraits": [
     {
       "name": "City Secrets",
@@ -198,31 +205,6 @@
   ],
   "spellCastingClass": "Wizard",
   "spells": [
-    {
-      "casting_time": "1 action",
-      "classes": [
-        "sorcerer",
-        "wizard"
-      ],
-      "components": {
-        "material": false,
-        "raw": "V, S",
-        "somatic": true,
-        "verbal": true
-      },
-      "description": "You hurl a bubble of acid. Choose one creature within range, or choose two creatures within range that are within 5 feet of each other. A target must succeed on a Dexterity saving throw or take 1d6 acid damage.\n\nThis spell's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).",
-      "duration": "Instantaneous",
-      "level": "cantrip",
-      "name": "Acid Splash",
-      "range": "60 feet",
-      "ritual": false,
-      "school": "Conjuration",
-      "tags": [
-        "sorcerer",
-        "wizard",
-        "cantrip"
-      ],
-      "type": "Conjuration cantrip"
-    }
+    "Acid Splash"
   ]
 }

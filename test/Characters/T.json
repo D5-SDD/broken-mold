@@ -243,86 +243,8 @@
   ],
   "spellCastingClass": "Wizard",
   "spells": [
-    {
-      "casting_time": "1 action",
-      "classes": [
-        "druid",
-        "ranger"
-      ],
-      "components": {
-        "material": true,
-        "materials_needed": [
-          "seven sharp thorns or seven small twigs, each sharpened to a point"
-        ],
-        "raw": "V, S, M (seven sharp thorns or seven small twigs, each sharpened to a point)",
-        "somatic": true,
-        "verbal": true
-      },
-      "description": "The ground in a 20-foot radius centered on a point within range twists and sprouts hard spikes and thorns. The area becomes difficult terrain for the duration. When a creature moves into or within the area, it takes 2d4 piercing damage for every 5 feet it travels.\n\nThe transformation of the ground is camouflaged to look natural. Any creature that can't see the area at the time the spell is cast must make a Wisdom (Perception) check against your spell save DC to recognize the terrain as hazardous before entering it.",
-      "duration": "Concentration, up to 10 minutes",
-      "level": "2",
-      "name": "Spike Growth",
-      "range": "150 feet",
-      "ritual": false,
-      "school": "transmutation",
-      "tags": [
-        "druid",
-        "ranger",
-        "level2"
-      ],
-      "type": "2nd-level transmutation"
-    },
-    {
-      "casting_time": "1 action or 8 hours",
-      "classes": [
-        "bard",
-        "druid",
-        "ranger"
-      ],
-      "components": {
-        "material": false,
-        "raw": "V, S",
-        "somatic": true,
-        "verbal": true
-      },
-      "description": "This spell channels vitality into plants within a specific area. There are two possible uses for the spell, granting either immediate or long-term benefits.\n\nIf you cast this spell using 1 action, choose a point within range. All normal plants in a 100-foot radius centered on that point become thick and overgrown. A creature moving through the area must spend 4 feet of movement for every 1 foot it moves.\n\nYou can exclude one or more areas of any size within the spell’s area from being affected.\n\nIf you cast this spell over 8 hours, you enrich the land. All plants in a half-mile radius centered on a point within range become enriched for 1 year. The plants yield twice the normal amount of food when harvested.",
-      "duration": "Instantaneous",
-      "level": "3",
-      "name": "Plant Growth",
-      "range": "150 feet",
-      "ritual": false,
-      "school": "transmutation",
-      "tags": [
-        "bard",
-        "druid",
-        "ranger",
-        "level3"
-      ],
-      "type": "3rd-level transmutation"
-    },
-    {
-      "casting_time": "1 action",
-      "classes": [
-        "paladin"
-      ],
-      "components": {
-        "material": false,
-        "raw": "V, S",
-        "somatic": true,
-        "verbal": true
-      },
-      "duration": "Concentration, up to 1 hour",
-      "higher_levels": "When you cast this spell using a spell slot of 5th or 6th level, the bonus to attack rolls increases to +2 and the extra damage increases to 2d4. When you use a spell slot of 7th level or higher, the bonus increases to +3 and the extra damage increases to 3d4.",
-      "level": "3",
-      "name": "Elemental Weapon",
-      "range": "Touch",
-      "ritual": false,
-      "school": "transmutation",
-      "tags": [
-        "paladin",
-        "level3"
-      ],
-      "type": "3rd-level transmutation"
-    }
+    "Spike Growth",
+    "Plant Growth",
+    "Elemental Weapon"
   ]
 }
