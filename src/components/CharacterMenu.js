@@ -6,7 +6,7 @@ import fs from 'fs';
 import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
 import TreeMenu, {Utils} from 'react-tree-menu';
-import {readMap} from '../../lib/Character';
+import {readMap,exportMap} from '../../lib/Character';
 import {UDP, TCP, startUDPBroadcast, 
   stopUDPBroadcast, startUDPListen, startTCPServer, closeTCPServer} from '../../lib/Networking';
 
@@ -23,6 +23,7 @@ class CharacterMenu extends React.Component {
 
     // update the map
     // TODO: call update function
+    exportMap();
     // read Map
     this.characterMap = readMap();
 
@@ -88,8 +89,7 @@ class CharacterMenu extends React.Component {
         client.sendMessage(temp);
       }
       //close TCP client
-      closeTCPServer();
-      // TODO: Update Map
+      closeTCPServer();      
     }, charactersToShare);
     startUDPBroadcast(false);
   }

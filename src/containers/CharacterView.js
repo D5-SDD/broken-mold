@@ -6,7 +6,7 @@ import CharacterMenu from '../components/CharacterMenu';
 import CharacterSheet from './CharacterSheet';
 
 // Import internal libraries
-import {exportMap, readCharactersFromMap, readMap, loadCharacters} from '../../lib/Character';
+import Character, {exportMap, readCharactersFromMap, readMap, loadCharacters} from '../../lib/Character';
 
 // Import stylesheet
 import '../stylesheets/containers/CharacterView';
@@ -24,15 +24,13 @@ class CharacterView extends React.Component {
     this.currentCharacter = null;
 
     // import the character map and read all saved characters
+    exportMap();
     this.characterMap = readMap();
-    this.characters = readCharactersFromMap(this.characterMap);
   }
 
   // Called when the load button is clicked,
   // creates a file dialog and calls the function to import
   loadCharacterCB() {
-    console.log(this);
-    console.log($('#fileDialog')[0].files);
     var files = $('#fileDialog')[0].files;
     var paths = [];
     for (let i = 0; i < files.length; i++) {
@@ -56,13 +54,15 @@ class CharacterView extends React.Component {
   // Called when a character is selected from the menu,
   // transitions the user to the character sheet view
   selectCharacterCB(node) {
-    var name = node.filename.slice(0, -5);
-    for (let char in this.characters) {
-      if (this.characters[char].name === name) {
-        this.currentCharacter = this.characters[char];
+    console.log(node);
+    var name = node.filename;
+    for (let i = 0; i < this.characterMap.length; i++) {
+      if (this.characterMap[i].filename === name) {
+        this.currentCharacter = new Character(node.filename);
         break;
       }
     }
+    console.log(this.currentCharacter);
     this.setState({
       viewState: 1
     });
@@ -74,6 +74,8 @@ class CharacterView extends React.Component {
     // save character
     this.currentCharacter.saveCharacter();
     this.currentCharacter = null;
+    exportMap();
+    this.characterMap = readMap();
     this.setState({viewState: 0});
   }
 

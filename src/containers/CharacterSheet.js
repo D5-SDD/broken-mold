@@ -43,6 +43,7 @@ class CharacterSheet extends React.Component {
   validateBeforeExit() {
     if (!this.props.character.isCharacterValid()) {
       //TODO: Pop up window saying character can't be saved
+      console.log('Character could not be saved');
       return;
     }
     this.props.exitCharacterSheetCB();
