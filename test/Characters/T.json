@@ -228,6 +228,13 @@
     "strength": 0,
     "stealthDisadvantage": false
   },
+  "currency": {
+    "platinum": 1,
+    "gold": 6,
+    "electrum": 3,
+    "silver": 3,
+    "copper": 5
+  },
   "featuresAndTraits": [
     {
       "name": "Test Character",
