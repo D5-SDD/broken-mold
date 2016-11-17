@@ -45,7 +45,7 @@ class CharacterView extends React.Component {
   // Called when the new button is clicked,
   // TODO: create a modal for the character name, then character creation
   newCharacterCB() {
-    this.currentCharacter = null;
+    this.currentCharacter = new Character('NEW_CHARACTER');
     this.setState({
       viewState: 1
     });

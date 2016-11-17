@@ -108,6 +108,7 @@ class CharacterMenu extends React.Component {
   // Called when a character is selected from the menu
   _handleNodeClicked(action, node) {
     stopUDPBroadcast();
+    stopUDPListen();
     closeTCPServer();
     this.props.selectCharacterCB(this.state.treeData[node]);
   }
@@ -229,7 +230,7 @@ class CharacterMenu extends React.Component {
             bsStyle="primary"
             bsSize="small"
             onClick={this.props.newCharacterCB}
-            disabled
+            disabled = {disableButtons}
           >
             New
           </Button>
