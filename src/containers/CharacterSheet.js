@@ -178,7 +178,7 @@ class CharacterSheet extends React.Component {
 
     return (
       <div className="character-sheet">
-        {back}}
+        {back}
         <FaPencil
           className="edit"
           onClick={() => {
