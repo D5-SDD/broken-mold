@@ -54,7 +54,6 @@ class CharacterView extends React.Component {
   // Called when a character is selected from the menu,
   // transitions the user to the character sheet view
   selectCharacterCB(node) {
-    console.log(node);
     var name = node.filename;
     for (let i = 0; i < this.characterMap.length; i++) {
       if (this.characterMap[i].filename === name) {
@@ -62,7 +61,6 @@ class CharacterView extends React.Component {
         break;
       }
     }
-    console.log(this.currentCharacter);
     this.setState({
       viewState: 1
     });
