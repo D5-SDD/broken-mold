@@ -166,12 +166,19 @@ class CharacterSheet extends React.Component {
       </Grid>
     );
 
-    return (
-      <div className="character-sheet">
+    let back = null;
+    if (this.props.exitCharacterSheetCB) {
+      back = (
         <FaArrowLeft
           className="exit"
           onClick={this.validateBeforeExit}
         />
+      );
+    }
+
+    return (
+      <div className="character-sheet">
+        {back}}
         <FaPencil
           className="edit"
           onClick={() => {
@@ -191,7 +198,7 @@ class CharacterSheet extends React.Component {
 }
 
 CharacterSheet.propTypes = {
-  exitCharacterSheetCB: React.PropTypes.func.isRequired,
+  exitCharacterSheetCB: React.PropTypes.func,
   character: React.PropTypes.object.isRequired
 };
 
