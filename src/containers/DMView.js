@@ -28,11 +28,6 @@ class DMView extends React.Component {
 
     this.characterReceivedCB = this.characterReceivedCB.bind(this);
     this.characterRemovedCB = this.characterRemovedCB.bind(this);
-    
-    this.state = {
-      TCPOpen: false,
-      UDPOpen: false
-    }    
   }
 
   characterReceivedCB(charLocation, client) {
@@ -135,6 +130,9 @@ class DMView extends React.Component {
   }
 }
 
-DMView.propTypes = {};
+DMView.propTypes = {
+  TCPOpen: React.PropTypes.boolean.isRequired,
+  UDPOpen: React.PropTypes.boolean.isRequired
+};
 
 export default DMView;

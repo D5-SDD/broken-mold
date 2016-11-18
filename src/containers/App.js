@@ -11,6 +11,7 @@ import NetworkingView from './NetworkingView';
 
 // Import internal libraries
 import {readMap} from '../../lib/Character';
+import {stopUDPBroadcast, closeTCPServer} from '../../lib/Networking';
 
 // Import stylesheet
 import '../stylesheets/containers/App.scss';
@@ -22,6 +23,11 @@ class AppContainer extends React.Component {
 
     // import the characters from the character map file
     this.characters = readMap();
+    
+    this.state = {
+      TCPOpen: false,
+      UDPOpen: false
+    }
   }
 
   // Called when a new tab is selected
@@ -31,15 +37,25 @@ class AppContainer extends React.Component {
 
   render() {
     return (
-      <Tabs defaultActiveKey={1} animation={false} id="app-tabs">
+      <Tabs
+        defaultActiveKey={1}
+        animation={false}
+        id="app-tabs"
+        onSelect={(eventKey) => {
+          if (eventKey === 1) {
+            stopUDPBroadcast();
+            closeTCPServer();
+          }
+          if (eventKey === 2) {
+            // TODO: find some way to set default state
+          }
+        }}
+      >
         <Tab eventKey={1} title="Characters">
           <CharacterView />
         </Tab>
         <Tab eventKey={2} title="Dungeon Master">
-          <DMView />
-        </Tab>
-        <Tab eventKey={3} title="Networking">
-          <NetworkingView />
+          <DMView TCPOpen={this.state.TCPOpen} UDPOpen={this.state.UDPOpen} />
         </Tab>
       </Tabs>
     );
