@@ -10,6 +10,10 @@ import {
   Equipment, Header, HealthBox, SpellArea, TextBox
 } from '../components/CharacterSheet';
 
+import {
+  startUDPListen, stopUDPListen, startTCPClient, closeTCPClient
+} from '../../lib/Networking.js';
+
 // Import icons
 import {FaArrowLeft, FaPencil} from 'react-icons/lib/fa';
 
@@ -179,6 +183,24 @@ class CharacterSheet extends React.Component {
 
     return (
       <div className="character-sheet">
+        <nav className="navigation" id="header">
+          <Button
+            bsStyle="primary"
+            bsSize="small"
+            onClick={() => {
+              startUDPListen();
+            }}
+          >
+            Connect to DM
+          </Button>
+          <Button
+            bsStyle="primary"
+            bsSize="small"
+            onClick={closeTCPClient}
+          >
+            Disconnect from DM
+          </Button>
+        </nav>
         {back}
         <FaPencil
           className="edit"

@@ -7,9 +7,10 @@ import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
 import TreeMenu, {Utils} from 'react-tree-menu';
 import {readMap,exportMap} from '../../lib/Character';
-import {UDP, TCP, startUDPBroadcast, 
-  stopUDPBroadcast, startUDPListen, stopUDPListen, 
-  startTCPServer, closeTCPServer} from '../../lib/Networking';
+import {
+  startUDPBroadcast, stopUDPBroadcast, startUDPListen, 
+  stopUDPListen, startTCPServer, closeTCPServer
+} from '../../lib/Networking';
 
 // Import the stylesheet
 import '../stylesheets/components/CharacterMenu';
