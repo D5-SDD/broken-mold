@@ -273,7 +273,7 @@ class CharacterSheet extends React.Component {
             bsSize="small"
             onClick={() => {
               if (!this.state.lookingForDM && !this.state.connectedToDM) {
-                this.lookForDM(this.props.character.originalName + '.json');
+                this.lookForDM(this.props.character.name + '.json');
               } else if (!this.state.lookingForDM && this.state.connectedToDM) {
                 this.disconnectFromDM();
               } else if (this.state.lookingForDM && !this.state.connectedToDM) {
