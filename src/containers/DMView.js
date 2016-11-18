@@ -16,33 +16,35 @@ import {
 } from '../../lib/Networking';
 
 const CHARACTER_DIR = './test/Characters/'
+const DM_FOLDER = CHARACTER_DIR + 'DMTemp/';
 
 // The Dungeon Master View for the client
 class DMView extends React.Component {
   constructor(props) {
     super(props);
 
-    console.log('restart');
     this.characters = [];
     this.clients = [];
 
     this.characterReceivedCB = this.characterReceivedCB.bind(this);
     this.characterRemovedCB = this.characterRemovedCB.bind(this);
-    // TODO: remove character from characters upon disconnect
+    
+    this.state = {
+      TCPOpen: false,
+      UDPOpen: false
+    }    
   }
 
   characterReceivedCB(charLocation, client) {
     this.characters.push(new Character(charLocation));
     this.clients.push(client);
-    console.log(this.characters);
-    console.log(this.clients);
     this.forceUpdate();
   }
 
   characterRemovedCB(client) {
     var index = this.clients.indexOf(client);
-    if (fs.existsSync(CHARACTER_DIR + this.characters[index].originalName + '-DMTemp.json')) {
-      fs.unlink(CHARACTER_DIR + this.characters[index].originalName + '-DMTemp.json')
+    if (fs.existsSync(DM_FOLDER + this.characters[index].originalName + '.json')) {
+      fs.unlink(DM_FOLDER + this.characters[index].originalName + '.json')
     }
     this.characters.splice(index, 1);
     this.clients.splice(index, 1);
@@ -56,17 +58,30 @@ class DMView extends React.Component {
     }, [], (client) => {
       this.characterRemovedCB(client);
     }, true);
+    
+    this.setState({
+      TCPOpen: true,
+      UDPOpen: true
+    });
   }
   
   closeAllDMConnections() {
     closeTCPServer();
     stopUDPBroadcast();
-    // TODO: Go through and delete all temp files
-    console.log('removing characters');
-    this.characters = [];
-    this.clients = [];
-    this.forceUpdate();
+    this.setState ({
+      TCPOpen: false,
+      UDPOpen: false
+    });    
   }
+  
+  closeUDPBroadcasting() {  
+    stopUDPBroadcast();
+    this.setState ({
+      TCPOpen: this.state.TCPOpen,
+      UDPOpen: false
+    });    
+  }
+  
   render() {
     var tabContainer = null;
     if (this.characters.length > 0) {
@@ -93,15 +108,15 @@ class DMView extends React.Component {
             bsStyle="primary"
             bsSize="small"
             onClick={this.openConnectionCB.bind(this)}
+            disabled = {this.state.UDPOpen}
           >
             Open Connections
           </Button>
           <Button
             bsStyle="primary"
             bsSize="small"
-            onClick={() => {
-              stopUDPBroadcast();
-            }}
+            onClick={this.closeUDPBroadcasting.bind(this)}
+            disabled = {!this.state.UDPOpen}
           >
             Close Connections
           </Button>
@@ -109,6 +124,7 @@ class DMView extends React.Component {
             bsStyle="primary"
             bsSize="small"
             onClick={this.closeAllDMConnections.bind(this)}
+            disabled = {!this.state.TCPOpen}
           >
             Stop Session
           </Button>
