@@ -10,7 +10,7 @@ import DMView from './DMView';
 
 // Import internal libraries
 import {readMap} from '../../lib/Character';
-import {stopUDPBroadcast, closeTCPServer} from '../../lib/Networking';
+import {TCP, UDP, stopUDPBroadcast, closeTCPServer} from '../../lib/Networking';
 
 // Import stylesheet
 import '../stylesheets/containers/App.scss';
@@ -52,12 +52,13 @@ class AppContainer extends React.Component {
         onSelect={(eventKey) => {
           if (eventKey === 1) {
             // TODO: Make this only happen if UDP broadcast and TCP Server
-            stopUDPBroadcast();
-            closeTCPServer();
+            if (UDP && (UDP.timer && UDP.dm)) {
+              stopUDPBroadcast();
+            }
+            if (TCP && (!TCP.client && TCP.dm)){
+              closeTCPServer();
+            }
             this.networkingStateCB(false, false);
-          }
-          if (eventKey === 2) {
-            // TODO: find some way to set default state
           }
         }}
       >

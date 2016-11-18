@@ -66,7 +66,7 @@ class DMView extends React.Component {
   closeUDPBroadcasting() {
     stopUDPBroadcast();
     let TCPOpen = this.props.TCPOpen;
-    this.props.networkingStateCB(TCPOpen, true);
+    this.props.networkingStateCB(TCPOpen, false);
   }
 
   render() {
@@ -95,7 +95,7 @@ class DMView extends React.Component {
             bsStyle="primary"
             bsSize="small"
             onClick={this.openConnectionCB.bind(this)}
-            disabled={Boolean(this.props.UDPOpen || UDP || TCP)}
+            disabled={Boolean(this.props.UDPOpen || UDP || (TCP && TCP.client))}
           >
             Start Accepting Connections
           </Button>
