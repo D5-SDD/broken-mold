@@ -101,6 +101,12 @@ class CharacterSheet extends React.Component {
   }
   
   lookForDM(charLocation) {
+    if (!this.props.character.isCharacterValid()) {
+      console.log('Can\'t be shared till savable');
+      return;
+    }
+    this.props.character.saveCharacter();
+    this.props.character.originalName = this.props.character.name;
     startUDPListen(true, () => {
       this.networkCB();
     }, charLocation);
@@ -289,7 +295,7 @@ class CharacterSheet extends React.Component {
             bsSize="small"
             onClick={() => {
               if (!this.state.lookingForDM && !this.state.connectedToDM) {
-                this.lookForDM(this.props.character.originalName + '.json');
+                this.lookForDM(this.props.character.name + '.json');
               } else if (!this.state.lookingForDM && this.state.connectedToDM) {
                 this.disconnectFromDM();
               } else if (this.state.lookingForDM && !this.state.connectedToDM) {

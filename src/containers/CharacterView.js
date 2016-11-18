@@ -39,9 +39,14 @@ class CharacterView extends React.Component {
       paths.push(files[i].path);
     }
     this.currentCharacter = loadCharacters(paths);
-    this.setState({
-      viewState: 1
-    });
+    // TODO: Something funky going on here when character fails
+    if (this.currentCharacter === null) {
+      console.log('Character was not loaded succesfully');
+    } else {
+      this.setState({
+        viewState: 1
+      });
+    }
   }
 
   // Called when the new button is clicked,
