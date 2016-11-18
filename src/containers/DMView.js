@@ -11,7 +11,7 @@ import CharacterSheet from './CharacterSheet';
 // Import internal libraries
 import Character from '../../lib/Character';
 import {
-  startUDPBroadcast, stopUDPBroadcast, startUDPListen,
+  UDP, TCP, startUDPBroadcast, stopUDPBroadcast, startUDPListen,
   startTCPServer, closeTCPServer, closeTCPClient
 } from '../../lib/Networking';
 
@@ -108,7 +108,7 @@ class DMView extends React.Component {
             bsStyle="primary"
             bsSize="small"
             onClick={this.openConnectionCB.bind(this)}
-            disabled = {this.state.UDPOpen}
+            disabled = {Boolean(this.state.UDPOpen || UDP || TCP)}
           >
             Start Accepting Connections
           </Button>

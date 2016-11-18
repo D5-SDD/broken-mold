@@ -11,7 +11,7 @@ import {
 } from '../components/CharacterSheet';
 
 import {
-  startUDPListen, stopUDPListen, startTCPClient, closeTCPClient
+  UDP, TCP, startUDPListen, stopUDPListen, startTCPClient, closeTCPClient
 } from '../../lib/Networking.js';
 
 // Import icons
