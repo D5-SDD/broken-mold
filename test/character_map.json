@@ -35,21 +35,6 @@
       "race": "Elf"
     },
     {
-      "filename": "Itzal - shared.json",
-      "label": "Itzal - shared - Human - Rougue 3 - Wizard 3",
-      "classes": [
-        {
-          "name": "Rougue",
-          "level": 3
-        },
-        {
-          "name": "Wizard",
-          "level": 3
-        }
-      ],
-      "race": "Human"
-    },
-    {
       "filename": "Itzal.json",
       "label": "Itzal - Human - Rougue 3 - Wizard 3",
       "classes": [
@@ -66,14 +51,14 @@
     },
     {
       "filename": "T.json",
-      "label": "T - Human - Monk 10",
+      "label": "T - Half-Orc - Monk 10",
       "classes": [
         {
           "name": "Monk",
           "level": 10
         }
       ],
-      "race": "Human"
+      "race": "Half-Orc"
     }
   ]
 }
