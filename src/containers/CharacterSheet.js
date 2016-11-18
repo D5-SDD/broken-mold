@@ -91,6 +91,12 @@ class CharacterSheet extends React.Component {
   }
   
   lookForDM(charLocation) {
+    if (!this.props.character.isCharacterValid()) {
+      console.log('Can\'t be shared till savable');
+      return;
+    }
+    this.props.character.saveCharacter();
+    this.props.character.originalName = this.props.character.name;
     startUDPListen(true, () => {
       this.networkCB();
     }, charLocation);
