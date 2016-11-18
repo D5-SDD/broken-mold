@@ -6,7 +6,9 @@ import CharacterMenu from '../components/CharacterMenu';
 import CharacterSheet from './CharacterSheet';
 
 // Import internal libraries
-import Character, {exportMap, readCharactersFromMap, readMap, loadCharacters} from '../../lib/Character';
+import Character, {
+  exportMap, readCharactersFromMap, readMap, loadCharacters
+} from '../../lib/Character';
 
 // Import stylesheet
 import '../stylesheets/containers/CharacterView';
