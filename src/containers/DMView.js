@@ -110,7 +110,7 @@ class DMView extends React.Component {
             onClick={this.openConnectionCB.bind(this)}
             disabled = {this.state.UDPOpen}
           >
-            Open Connections
+            Start Accepting Connections
           </Button>
           <Button
             bsStyle="primary"
@@ -118,7 +118,7 @@ class DMView extends React.Component {
             onClick={this.closeUDPBroadcasting.bind(this)}
             disabled = {!this.state.UDPOpen}
           >
-            Close Connections
+            Stop Accepting Connections
           </Button>
           <Button
             bsStyle="primary"
@@ -126,7 +126,7 @@ class DMView extends React.Component {
             onClick={this.closeAllDMConnections.bind(this)}
             disabled = {!this.state.TCPOpen}
           >
-            Stop Session
+            Close DM Session
           </Button>
           <Button
             bsStyle="primary"
