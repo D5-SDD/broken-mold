@@ -129,7 +129,7 @@ class CharacterMenu extends React.Component {
     var receiving = !this.state.receiving
     
     if (receiving) {
-      startUDPListen(() => {
+      startUDPListen(false, () => {
         exportMap();
         this.characterMap = readMap();
         var data = [];

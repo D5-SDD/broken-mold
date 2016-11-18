@@ -2,7 +2,7 @@
 
 // Import external libraries
 import React from 'react';
-import {Grid, Row, Col, Panel} from 'react-bootstrap';
+import {Button, Grid, Row, Col, Panel} from 'react-bootstrap';
 
 // Import internal libraries
 import {
@@ -33,11 +33,16 @@ class CharacterSheet extends React.Component {
     }
 
     this.state = {
-      viewState: viewState
+      viewState: viewState,
+      lookingForDM: false,
+      connectedToDM: false
     };
 
     this.applyEdits = this.applyEdits.bind(this);
     this.validateBeforeExit = this.validateBeforeExit.bind(this);
+    this.lookForDM = this.lookForDM.bind(this);
+    this.disconnectFromDM = this.disconnectFromDM.bind(this);
+    this.stopLookForDM = this.stopLookForDM.bind(this);
   }
 
   applyEdits() {
@@ -46,11 +51,58 @@ class CharacterSheet extends React.Component {
 
   validateBeforeExit() {
     if (!this.props.character.isCharacterValid()) {
-      //TODO: Pop up window saying character can't be saved
+      // TODO: Pop up window saying character can't be saved
       console.log('Character could not be saved');
       return;
     }
+    this.disconnectFromDM();
     this.props.exitCharacterSheetCB();
+  }
+  
+  networkCB() {
+    var viewState = this.state.viewState;
+    var lookingForDM = false;
+    var connectedToDM = true;
+    if (this.state.connectedToDM) {
+      lookingForDM = false;
+      connectedToDM = false;
+    }
+    this.setState({
+      viewState: viewState,
+      lookingForDM: lookingForDM,
+      connectedToDM: connectedToDM      
+    });  
+  }
+  
+  lookForDM(charLocation) {
+    startUDPListen(true, () => {
+      this.networkCB();
+    }, charLocation);
+    var viewState = this.state.viewState;
+    var lookingForDM = true;
+    var connectedToDM = false;
+    this.setState({
+      viewState: viewState,
+      lookingForDM: lookingForDM,
+      connectedToDM: connectedToDM      
+    });
+  }
+  
+  stopLookForDM() {
+    stopUDPListen();
+    var viewState = this.state.viewState;
+    var lookingForDM = false;
+    var connectedToDM = false;
+    this.setState({
+      viewState: viewState,
+      lookingForDM: lookingForDM,
+      connectedToDM: connectedToDM      
+    });  
+  }
+  
+  disconnectFromDM() {
+    closeTCPClient();
+    stopUDPListen();
   }
 
   render() {
@@ -181,36 +233,48 @@ class CharacterSheet extends React.Component {
       );
     }
 
+    var DMButtonText = 'Connect To DM';
+    var DMButtonStyle = "primary";
+    
+    if (this.state.lookingForDM) {
+      DMButtonText = 'Cancel';
+      DMButtonStyle = "danger";
+    }
+    if (this.state.connectedToDM) {
+      DMButtonText = 'Disconnect From DM';
+    }
     return (
       <div className="character-sheet">
         <nav className="navigation" id="header">
           <Button
-            bsStyle="primary"
+            bsStyle={DMButtonStyle}
             bsSize="small"
             onClick={() => {
-              startUDPListen();
+              if (!this.state.lookingForDM && !this.state.connectedToDM) {
+                this.lookForDM(this.props.character.originalName + '.json');
+              } else if (!this.state.lookingForDM && this.state.connectedToDM) {
+                this.disconnectFromDM();
+              } else if (this.state.lookingForDM && !this.state.connectedToDM) {
+                this.stopLookForDM();
+              }
             }}
+            disabled = {Boolean(this.state.viewState)}
           >
-            Connect to DM
-          </Button>
-          <Button
-            bsStyle="primary"
-            bsSize="small"
-            onClick={closeTCPClient}
-          >
-            Disconnect from DM
+            {DMButtonText}
           </Button>
         </nav>
         {back}
         <FaPencil
           className="edit"
           onClick={() => {
-            // FOR NOW, THIS TOGGLES, SAVE AND CANCEL BUTTONS SHOULD BE MADE
-            if (this.state.viewState === 0) {
-              this.setState({viewState: 1});
-            } else {
-              this.applyEdits();
-              this.setState({viewState: 0});
+            if (!this.state.lookingForDM) {
+              // FOR NOW, THIS TOGGLES, SAVE AND CANCEL BUTTONS SHOULD BE MADE
+              if (this.state.viewState === 0) {
+                this.setState({viewState: 1});
+              } else {
+                this.applyEdits();
+                this.setState({viewState: 0});
+              }
             }
           }}
         />

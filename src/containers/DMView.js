@@ -128,22 +128,6 @@ class DMView extends React.Component {
           >
             Close DM Session
           </Button>
-          <Button
-            bsStyle="primary"
-            bsSize="small"
-            onClick={() => {
-              startUDPListen();
-            }}
-          >
-            Connect to DM
-          </Button>
-          <Button
-            bsStyle="primary"
-            bsSize="small"
-            onClick={closeTCPClient}
-          >
-            Disconnect from DM
-          </Button>
         </nav>
         {tabContainer}
       </div>
