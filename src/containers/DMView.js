@@ -15,6 +15,8 @@ import {
   startTCPServer, closeTCPServer, closeTCPClient
 } from '../../lib/Networking';
 
+const CHARACTER_DIR = './test/Characters/'
+
 // The Dungeon Master View for the client
 class DMView extends React.Component {
   constructor(props) {
@@ -37,11 +39,12 @@ class DMView extends React.Component {
   }
 
   characterRemovedCB(client) {
+    console.log(this.characters);
     var index = this.clients.indexOf(client);
     if (fs.existsSync(CHARACTER_DIR + this.characters[index].originalName + '-DMTemp.json')) {
       fs.unlink(CHARACTER_DIR + this.characters[index].originalName + '-DMTemp.json')
     }
-    this.character.splice(index, 1);
+    this.characters.splice(index, 1);
     this.clients.splice(index, 1);
     console.log(characters);
     console.log(clients);
@@ -59,6 +62,7 @@ class DMView extends React.Component {
   closeAllDMConnections() {
     closeTCPServer();
     stopUDPBroadcast();
+    // TODO: Go through and delete all temp files
     this.characters = [];
     this.clients = [];
     this.forceUpdate();
@@ -104,7 +108,7 @@ class DMView extends React.Component {
           <Button
             bsStyle="primary"
             bsSize="small"
-            onClick={closeAllDMConnections}
+            onClick={this.closeAllDMConnections.bind(this)}
           >
             Stop Session
           </Button>
