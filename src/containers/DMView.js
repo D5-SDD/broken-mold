@@ -22,6 +22,7 @@ class DMView extends React.Component {
   constructor(props) {
     super(props);
 
+    console.log('restart');
     this.characters = [];
     this.clients = [];
 
@@ -39,15 +40,13 @@ class DMView extends React.Component {
   }
 
   characterRemovedCB(client) {
-    console.log(this.characters);
     var index = this.clients.indexOf(client);
     if (fs.existsSync(CHARACTER_DIR + this.characters[index].originalName + '-DMTemp.json')) {
       fs.unlink(CHARACTER_DIR + this.characters[index].originalName + '-DMTemp.json')
     }
     this.characters.splice(index, 1);
     this.clients.splice(index, 1);
-    console.log(characters);
-    console.log(clients);
+    this.forceUpdate();
   }
   
   openConnectionCB() {
@@ -63,6 +62,7 @@ class DMView extends React.Component {
     closeTCPServer();
     stopUDPBroadcast();
     // TODO: Go through and delete all temp files
+    console.log('removing characters');
     this.characters = [];
     this.clients = [];
     this.forceUpdate();
