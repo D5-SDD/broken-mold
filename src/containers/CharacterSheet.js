@@ -37,7 +37,23 @@ class CharacterSheet extends React.Component {
   }
 
   applyEdits() {
+    //header data
+//need help with this class array
+    //this.props.character.class = document.getElementById('csform-class').value;
     this.props.character.name = document.getElementById('csform-name').value;
+    this.props.character.background = document.getElementById('csform-background').value;
+    this.props.character.playerName = document.getElementById('csform-Player').value;
+    this.props.character.race = document.getElementById('csform-race').value;
+//alignment needs revision too
+    //this.props.character.alignment = document.getElementById('csform-alignment').value;
+    var tempExp = document.getElementById('csform-experience').value;
+    this.props.character.experience = parseInt(tempExp);
+    
+    //equipment data
+    //equipment declare
+    
+    //DiceAndSaves data
+    
   }
 
   validateBeforeExit() {
