@@ -51,6 +51,7 @@ class AppContainer extends React.Component {
         id="app-tabs"
         onSelect={(eventKey) => {
           if (eventKey === 1) {
+            // TODO: Make this only happen if UDP broadcast and TCP Server
             stopUDPBroadcast();
             closeTCPServer();
             this.networkingStateCB(false, false);
