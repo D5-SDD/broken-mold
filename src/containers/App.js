@@ -7,7 +7,6 @@ import {Tabs, Tab} from 'react-bootstrap';
 // Import containers
 import CharacterView from './CharacterView';
 import DMView from './DMView';
-import NetworkingView from './NetworkingView';
 
 // Import internal libraries
 import {readMap} from '../../lib/Character';
@@ -23,16 +22,25 @@ class AppContainer extends React.Component {
 
     // import the characters from the character map file
     this.characters = readMap();
-    
+
     this.state = {
       TCPOpen: false,
       UDPOpen: false
-    }
+    };
+
+    this.networkingStateCB = this.networkingStateCB.bind(this);
   }
 
   // Called when a new tab is selected
   _handleSelect(selectedKey) {
     this.setState({activeTab: selectedKey});
+  }
+
+  networkingStateCB(TCPOpen, UDPOpen) {
+    this.setState({
+      TCPOpen: TCPOpen,
+      UDPOpen: UDPOpen
+    });
   }
 
   render() {
@@ -45,6 +53,7 @@ class AppContainer extends React.Component {
           if (eventKey === 1) {
             stopUDPBroadcast();
             closeTCPServer();
+            this.networkingStateCB(false, false);
           }
           if (eventKey === 2) {
             // TODO: find some way to set default state
@@ -55,7 +64,11 @@ class AppContainer extends React.Component {
           <CharacterView />
         </Tab>
         <Tab eventKey={2} title="Dungeon Master">
-          <DMView TCPOpen={this.state.TCPOpen} UDPOpen={this.state.UDPOpen} />
+          <DMView
+            TCPOpen={this.state.TCPOpen}
+            UDPOpen={this.state.UDPOpen}
+            networkingStateCB={this.networkingStateCB}
+          />
         </Tab>
       </Tabs>
     );

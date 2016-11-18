@@ -3,7 +3,7 @@
 // Import libraries
 import React from 'react';
 import {Button, Tab, Tabs} from 'react-bootstrap';
-import fs from 'fs'
+import fs from 'fs';
 
 // Import containers
 import CharacterSheet from './CharacterSheet';
@@ -11,11 +11,11 @@ import CharacterSheet from './CharacterSheet';
 // Import internal libraries
 import Character from '../../lib/Character';
 import {
-  UDP, TCP, startUDPBroadcast, stopUDPBroadcast, startUDPListen,
-  startTCPServer, closeTCPServer, closeTCPClient
+  UDP, TCP, startUDPBroadcast, stopUDPBroadcast,
+  startTCPServer, closeTCPServer
 } from '../../lib/Networking';
 
-const CHARACTER_DIR = './test/Characters/'
+const CHARACTER_DIR = './test/Characters/';
 const DM_FOLDER = CHARACTER_DIR + 'DMTemp/';
 
 // The Dungeon Master View for the client
@@ -39,13 +39,13 @@ class DMView extends React.Component {
   characterRemovedCB(client) {
     var index = this.clients.indexOf(client);
     if (fs.existsSync(DM_FOLDER + this.characters[index].originalName + '.json')) {
-      fs.unlink(DM_FOLDER + this.characters[index].originalName + '.json')
+      fs.unlink(DM_FOLDER + this.characters[index].originalName + '.json');
     }
     this.characters.splice(index, 1);
     this.clients.splice(index, 1);
     this.forceUpdate();
   }
-  
+
   openConnectionCB() {
     startUDPBroadcast(true);
     startTCPServer((charLocation, client) => {
@@ -53,30 +53,22 @@ class DMView extends React.Component {
     }, [], (client) => {
       this.characterRemovedCB(client);
     }, true);
-    
-    this.setState({
-      TCPOpen: true,
-      UDPOpen: true
-    });
+
+    this.props.networkingStateCB(true, true);
   }
-  
+
   closeAllDMConnections() {
     closeTCPServer();
     stopUDPBroadcast();
-    this.setState ({
-      TCPOpen: false,
-      UDPOpen: false
-    });    
+    this.props.networkingStateCB(false, false);
   }
-  
-  closeUDPBroadcasting() {  
+
+  closeUDPBroadcasting() {
     stopUDPBroadcast();
-    this.setState ({
-      TCPOpen: this.state.TCPOpen,
-      UDPOpen: false
-    });    
+    let TCPOpen = this.props.TCPOpen;
+    this.props.networkingStateCB(TCPOpen, true);
   }
-  
+
   render() {
     var tabContainer = null;
     if (this.characters.length > 0) {
@@ -103,7 +95,7 @@ class DMView extends React.Component {
             bsStyle="primary"
             bsSize="small"
             onClick={this.openConnectionCB.bind(this)}
-            disabled = {Boolean(this.state.UDPOpen || UDP || TCP)}
+            disabled={Boolean(this.props.UDPOpen || UDP || TCP)}
           >
             Start Accepting Connections
           </Button>
@@ -111,7 +103,7 @@ class DMView extends React.Component {
             bsStyle="primary"
             bsSize="small"
             onClick={this.closeUDPBroadcasting.bind(this)}
-            disabled = {!this.state.UDPOpen}
+            disabled = {!this.props.UDPOpen}
           >
             Stop Accepting Connections
           </Button>
@@ -119,7 +111,7 @@ class DMView extends React.Component {
             bsStyle="primary"
             bsSize="small"
             onClick={this.closeAllDMConnections.bind(this)}
-            disabled = {!this.state.TCPOpen}
+            disabled = {!this.props.TCPOpen}
           >
             Close DM Session
           </Button>
@@ -131,8 +123,9 @@ class DMView extends React.Component {
 }
 
 DMView.propTypes = {
-  TCPOpen: React.PropTypes.boolean.isRequired,
-  UDPOpen: React.PropTypes.boolean.isRequired
+  TCPOpen: React.PropTypes.bool.isRequired,
+  UDPOpen: React.PropTypes.bool.isRequired,
+  networkingStateCB: React.PropTypes.func.isRequired
 };
 
 export default DMView;

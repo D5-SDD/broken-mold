@@ -5,7 +5,7 @@ import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
 
 // Import internal libraries
-import {UDP, TCP, startUDPBroadcast, stopUDPBroadcast,
+import {startUDPBroadcast, stopUDPBroadcast,
   startUDPListen, startTCPServer, closeTCPServer} from '../../lib/Networking';
 
 import Character from '../../lib/Character';
