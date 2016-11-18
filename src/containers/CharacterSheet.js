@@ -47,22 +47,32 @@ class CharacterSheet extends React.Component {
 
   applyEdits() {
     //header data
-//need help with this class array
-    //this.props.character.class = document.getElementById('csform-class').value;
+    var tempClass = [];
+    for (let i=0; i<this.props.character.classes.length; i++){
+      var classAndLevel = document.getElementById('csform-class-'+i).value;
+      var tempArray = classAndLevel.split(" ");
+      var tempObject = {
+        "name" : tempArray[0],
+        "level": parseInt(tempArray[1])
+      }
+      tempClass.push(tempObject);
+    }
+    this.props.character.classes = tempClass;
     this.props.character.name = document.getElementById('csform-name').value;
     this.props.character.background = document.getElementById('csform-background').value;
     this.props.character.playerName = document.getElementById('csform-Player').value;
     this.props.character.race = document.getElementById('csform-race').value;
-//alignment needs revision too
-    //this.props.character.alignment = document.getElementById('csform-alignment').value;
+    var tempAlign = document.getElementById('csform-alignment').value;
+    this.props.character.alignment = tempAlign.split(" ");
     var tempExp = document.getElementById('csform-experience').value;
     this.props.character.experience = parseInt(tempExp);
-    
     //equipment data
     //equipment declare
     
     //DiceAndSaves data
-    
+    this.props.character.hitDice = document.getElementById('csform-hitDice').value;
+    this.props.character.deathSaves.successes = document.getElementById('csform-deathSucc').value;
+    this.props.character.deathSaves.failures = document.getElementById('csform-deathFails').value;
   }
 
   validateBeforeExit() {
@@ -157,6 +167,7 @@ class CharacterSheet extends React.Component {
               abilityScores={character.abilityScores}
               savingThrows={character.savingThrows}
               skills={character.skills}
+              viewState={this.state.viewState}
             />
           </Col>
           <Col className="outer col" md={4}>
@@ -164,18 +175,22 @@ class CharacterSheet extends React.Component {
               armorClass={character.armorClass}
               initiative={character.initiative}
               speed={character.speed}
+              viewState={this.state.viewState}
             />
             <HealthBox
               health={character.hitpoints}
+              viewState={this.state.viewState}
             />
             <DiceAndSaves
               hitDice={character.hitDice}
               deathSaves={character.deathSaves}
+              viewState={this.state.viewState}
             />
             <SpellArea
               attack={character.spellAttackMod}
               cast={character.spellCastingClass}
               save={character.spellSaveDC}
+              viewState={this.state.viewState}
             />
             <Row>
               <Col className="inner col" md={5}>
@@ -184,6 +199,7 @@ class CharacterSheet extends React.Component {
               <Col className="inner col" md={7}>
                 <Equipment
                   data={[character.inventory, character.armor]}
+                  viewState={this.state.viewState}
                 />
               </Col>
             </Row>
@@ -195,24 +211,28 @@ class CharacterSheet extends React.Component {
                   <TextBox
                     data={character.personalityTraits}
                     title="personalityTraits"
+                    viewState={this.state.viewState}
                   />
                 </Row>
                 <Row>
                   <TextBox
                     data={character.ideals}
                     title="ideals"
+                    viewState={this.state.viewState}
                   />
                 </Row>
                 <Row>
                   <TextBox
                     data={character.bonds}
                     title="bonds"
+                    viewState={this.state.viewState}
                   />
                 </Row>
                 <Row>
                   <TextBox
                     data={character.flaws}
                     title="flaws"
+                    viewState={this.state.viewState}
                   />
                 </Row>
               </Col>
@@ -224,12 +244,14 @@ class CharacterSheet extends React.Component {
                     accordion
                     data={character.featuresAndTraits}
                     title="featuresAndTraits"
+                    viewState={this.state.viewState}
                   />
                 </Row>
                 <Row>
                   <TextBox
                     data={[character.proficiencies, character.languages]}
                     title="otherProficienciesAndLanguages"
+                    viewState={this.state.viewState}
                   />
                 </Row>
               </Col>

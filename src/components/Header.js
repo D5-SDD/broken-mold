@@ -18,7 +18,7 @@ class Header extends React.Component {
         classAndLevel.push(
           //may need help here, fact that its an array is making update weird
           <FormGroup key={i}>
-            <FormControl id={"csform-class"} type="text" 
+            <FormControl id={"csform-class-"+i} type="text" 
             defaultValue={this.props.classes[i].name+ ' ' +this.props.classes[i].level}/>
           </FormGroup>
         );
@@ -37,7 +37,7 @@ class Header extends React.Component {
     var charBackground = this.props.background;
     var charPlayerName = this.props.playerName;
     var charRace = this.props.race;
-    var charExperience = this.props.experience;
+    var charExp = this.props.experience;
     if (this.props.viewState === 1) {
       charName = (
         <FormGroup>
@@ -65,9 +65,9 @@ class Header extends React.Component {
             defaultValue={this.props.alignment[0] + ' ' + this.props.alignment[1]}/>
         </FormGroup>
       )
-      charExperience = (
+      charExp = (
         <FormGroup>
-          <FormControl id="csform-experience" type="text" defaultValue={charExperience}/>
+          <FormControl id="csform-experience" type="number" defaultValue={charExp}/>
         </FormGroup>
       )
     }
@@ -110,7 +110,7 @@ class Header extends React.Component {
             </Col>
             <Col className="col" md={3}>
               <Panel className="centered">
-                Experience Points:<br/> {charExperience}
+                Experience Points:<br/> {charExp}
               </Panel>
             </Col>
           </Row>

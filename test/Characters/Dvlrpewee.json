@@ -116,8 +116,8 @@
   "speed": 20,
   "hitDice": "1d8",
   "deathSaves": {
-    "successes": 0,
-    "failures": 0
+    "successes": 2,
+    "failures": 2
   },
   "weapons": {
     "name": "longsword",
