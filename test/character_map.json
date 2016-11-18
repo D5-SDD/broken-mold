@@ -35,8 +35,8 @@
       "race": "Elf"
     },
     {
-      "filename": "Poop.json",
-      "label": "Poop - Human - Rougue 3 - Wizard 3",
+      "filename": "Itzal.json",
+      "label": "Itzal - Human - Rougue 3 - Wizard 3",
       "classes": [
         {
           "name": "Rougue",
@@ -51,14 +51,14 @@
     },
     {
       "filename": "T.json",
-      "label": "T - Half-Orc - Monk 10",
+      "label": "T - Human - Monk 10",
       "classes": [
         {
           "name": "Monk",
           "level": 10
         }
       ],
-      "race": "Half-Orc"
+      "race": "Human"
     }
   ]
 }
