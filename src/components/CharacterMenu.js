@@ -88,7 +88,6 @@ class CharacterMenu extends React.Component {
     if (charactersToShare.length === 0) {
       return;
     }
-    // TODO: Make the appropriate calls to the networking library
 
     this._toggleLookingForClient();
 
@@ -120,6 +119,7 @@ class CharacterMenu extends React.Component {
     this.setState(
       Utils.getNewTreeState(lineage, this.state.treeData, propName)
     );
+    this._confirmSharing();
   }
 
   _toggleReceiving() {
@@ -138,9 +138,11 @@ class CharacterMenu extends React.Component {
           data[i].checkbox = false;
         }
         this.setState({
-          treeData: data
+          treeData: data,
+          sharing: false,
+          lookingForClient: false,
+          receiving: false
         });
-        this._toggleReceiving();
       });
     } else {
       stopUDPListen();
@@ -179,7 +181,6 @@ class CharacterMenu extends React.Component {
   render() {
     var shareButtonText = ' Share ';
     var shareButtonStyle = 'primary';
-    var continueButton = null;
     var cancelButton = null;
     var disableButtons = false;
 
@@ -187,16 +188,6 @@ class CharacterMenu extends React.Component {
     if (this.state.sharing === true) {
       shareButtonText = 'Cancel';
       shareButtonStyle = 'danger';
-      continueButton = (
-        <Button
-          className="continue"
-          bsStyle="success"
-          bsSize="small"
-          onClick={this._confirmSharing}
-        >
-          OK
-        </Button>
-      );
     }
 
     if (this.state.lookingForClient === true || this.state.receiving === true) {
@@ -275,7 +266,7 @@ class CharacterMenu extends React.Component {
           data={this.state.treeData}
         />
         <nav className="navigation" id="footer">
-          {continueButton},{cancelButton}
+          {cancelButton}
         </nav>
       </div>
     );
