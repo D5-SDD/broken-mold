@@ -351,7 +351,7 @@ class CharacterSheet extends React.Component {
         <FaPencil
           className="edit"
           onClick={() => {
-            if (!this.state.lookingForDM) {
+            if (!this.state.lookingForDM && !this.state.connectedToDM) {
               // FOR NOW, THIS TOGGLES, SAVE AND CANCEL BUTTONS SHOULD BE MADE
               if (this.state.viewState === 0) {
                 this.setState({viewState: 1});
