@@ -107,11 +107,11 @@ class Equipment extends React.Component {
       }
 
       if (this.props.viewState === 1) {
-        let id = 'equipment-' + this.props.heading + ' ' + i;
+        let id = 'equipment-' + this.props.heading;
         title = (
           <span>
-            <FaMinusSquare className="minus" onClick={this.removeEquipment}/>
-            <span id={id}>{title}</span>
+            <FaMinusSquare className="minus" id={id + '-' + i} onClick={this.removeEquipment}/>
+            <span id={id + ' ' + i}>{title}</span>
           </span>
         );
       }

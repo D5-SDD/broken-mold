@@ -11,6 +11,14 @@ import {FaMinusSquare, FaPlusSquare} from 'react-icons/lib/fa';
 class Header extends React.Component {
   constructor(props) {
     super(props);
+
+    this.addClassAndLevel = this.addClassAndLevel.bind(this);
+  }
+
+  addClassAndLevel(e) {
+    var icon = $('#'+e.currentTarget.id);
+    var equipmentToAdd = icon.parent().siblings()[0].value;
+
   }
 
   render() {
@@ -46,7 +54,7 @@ class Header extends React.Component {
             <InputGroup.Button>
               <Button
                 id={'new-class-and-level'}
-                onClick={this.addEquipment}
+                onClick={this.addClassAndLevel}
               >
                 <FaPlusSquare/>
               </Button>
