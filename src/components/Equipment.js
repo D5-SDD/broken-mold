@@ -38,9 +38,12 @@ class Equipment extends React.Component {
   addEquipment(e) {
     var icon = $('#'+e.currentTarget.id);
     var equipmentToAdd = icon.parent().siblings()[0].value;
-    var index = -1;
     for (let i = 0; i < this.db.length; i++) {
-      if (this.db[i].name === equipmentToAdd) {
+      let val = this.db[i].name;
+      if (this.props.heading !== 'Equipment') {
+        val = capital(val);
+      }
+      if (val === equipmentToAdd) {
         this.state.data.push(this.db[i]);
         this.setState({
           data: this.state.data
@@ -62,7 +65,7 @@ class Equipment extends React.Component {
         val = val.item;
       }
 
-      if (equipmentToRemove == val) {
+      if (equipmentToRemove === val) {
         index = i;
         break;
       }
