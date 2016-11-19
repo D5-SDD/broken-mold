@@ -29,6 +29,8 @@ class TextBox extends React.Component {
       this.data = _.flatten(this.data);
     }
   }
+  
+  
 
   render() {
     var data = [];

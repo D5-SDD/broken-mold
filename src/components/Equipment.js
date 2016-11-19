@@ -110,8 +110,8 @@ class Equipment extends React.Component {
         let id = 'equipment-' + this.props.heading;
         title = (
           <span>
-            <FaMinusSquare className="minus" id={id + '-' + i} onClick={this.removeEquipment}/>
-            <span id={id + ' ' + i}>{title}</span>
+            <FaMinusSquare className="minus" id={'minus-' + id + '-' + i} onClick={this.removeEquipment}/>
+            <span className={id}>{title}</span>
           </span>
         );
       }

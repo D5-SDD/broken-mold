@@ -133,6 +133,31 @@ class CharacterSheet extends React.Component {
       var moneyValue = document.getElementById('csform-money-'+capital(key)).value;
       propsCharacter.currency[key] = Math.abs(parseInt(moneyValue));
     });
+    
+    propsCharacter.inventory = [];
+    var inventory = $('.equipment-Equipment');
+    for(let i = 0; i < inventory.length; i++) {
+      console.log(inventory[i].textContent);
+      let item = propsCharacter.findItem(inventory[i].textContent);
+      propsCharacter.inventory.push(item);
+    }
+    
+    
+    propsCharacter.armor = [];
+    var armor = $('.equipment-Armor');
+    for(let i = 0; i < inventory.length; i++) {
+      console.log(armor);
+      let armor = propsCharacter.findArmor(armor[i].textContent);
+      propsCharacter.armor.push(armor);
+    }
+    
+    propsCharacter.weapons = [];
+    var weapons = $('.equipment-Weapons');
+    for(let i = 0; i < weapons.length; i++) {
+      let weapon = propsCharacter.findWeapon(weapons[i].textContent);
+      propsCharacter.inventory.push(weapon);
+    }
+    
   }
 
   validateBeforeExit() {

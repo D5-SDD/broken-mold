@@ -121,49 +121,58 @@
   },
   "weapons": [
     {
-      "name": "longsword",
-      "attackBonus": 4,
-      "damage": "1d8+2",
-      "type": "slashing",
-      "properties": [
-        "versatile(1d10)"
+      "name" : "longsword",
+      "damage" : "1d8",
+      "type" : "slashing",
+      "properties" : [
+        "versatile (1d10)"
       ]
     },
     {
-      "name": "shortbow",
-      "attackBonus": 6,
-      "damage": "1d6+4",
-      "type": "piercing",
-      "properties": [
-        "ammunition",
-        "range(80/320)",
+      "name" : "shortbow",
+      "damage" : "1d6",
+      "type" : "piercing",
+      "properties" : [
+        "ammunition (range 80/320)",
         "two-handed"
       ]
     }
   ],
   "inventory": [
     {
-      "name": "small knife",
-      "weight": 0,
-      "cost": 0,
-      "quantity": 1
+      "name": "Abacus",
+      "cost": "2 gp",
+      "weight": "2 lb."
     },
     {
-      "name": "studded leather armor",
-      "weight": 13,
-      "cost": 4500,
-      "quantity": 1
+      "name": "Backpack",
+      "cost": "2 gp",
+      "weight": "5 lb."
     },
     {
-      "name": "ball bearings",
-      "weight": 0.002,
-      "cost": 0.1,
-      "quantity": 1000
+      "name": "Blowgun",
+      "cost": "10 gp",
+      "weight": "1 1 lb."
+    },
+    {
+      "name": "Bottleglass",
+      "cost": "2 gp",
+      "weight": "2 lb."
+    },
+    {
+      "name": "Bedroll",
+      "cost": "1 gp",
+      "weight": "7 lb."
+    },
+    {
+      "name": "Warship",
+      "cost": "25000 gp",
+      "weight": "-"
     }
   ],
   "armor": [
     {
-      "name": "studded leather armor",
+      "name": "studded leather",
       "armorClass": 12,
       "armorType": "light",
       "strength": 0,
