@@ -12,9 +12,11 @@ import {
   Equipment, Header, HealthBox, SpellArea, TextBox
 } from '../components/CharacterSheet';
 
+import {CHARACTER_DIR} from '../../lib/Character'
+
 import {
   startUDPListen, stopUDPListen, closeTCPClient
-} from '../../lib/Networking.js';
+} from '../../lib/Networking';
 
 // Import icons
 import {FaArrowLeft, FaPencil} from 'react-icons/lib/fa';
@@ -48,9 +50,8 @@ class CharacterSheet extends React.Component {
   }
 
   applyEdits() {
-    //for iterating in loops...
     var propsCharacter = this.props.character;
-    //header data
+    //Header data
     var tempClass = [];
     for (let i=0; i<this.props.character.classes.length; i++){
       var classAndLevel = document.getElementById('csform-class-'+i).value;
@@ -70,8 +71,6 @@ class CharacterSheet extends React.Component {
     propsCharacter.alignment = tempAlign.split(' ');
     var tempExp = document.getElementById('csform-experience').value;
     propsCharacter.experience = Math.abs(parseInt(tempExp));
-    //equipment data
-    //equipment declare
 
     //DiceAndSaves data
     propsCharacter.hitDice = document.getElementById('csform-hitDice').value;
@@ -80,7 +79,7 @@ class CharacterSheet extends React.Component {
     propsCharacter.inspiration = Math.abs(document.getElementById('csform-inspiration').value);
     propsCharacter.speed = Math.abs(document.getElementById('csform-speed').value);
     
-    //ability scores data
+    //Ability Scores data
     propsCharacter.abilityScores.strength = Math.abs(document.getElementById('csform-abilityscore-strength').value);
     propsCharacter.abilityScores.dexterity = Math.abs(document.getElementById('csform-abilityscore-dexterity').value);
     propsCharacter.abilityScores.constitution = Math.abs(document.getElementById('csform-abilityscore-constitution').value);
@@ -88,7 +87,7 @@ class CharacterSheet extends React.Component {
     propsCharacter.abilityScores.wisdom = Math.abs(document.getElementById('csform-abilityscore-wisdom').value);
     propsCharacter.abilityScores.charisma = Math.abs(document.getElementById('csform-abilityscore-charisma').value);
     
-    //saving throws data
+    //Saving Throws data
     propsCharacter.savingThrows.strength.proficient = document.getElementById('csform-savingthrow-strength').checked;
     propsCharacter.savingThrows.dexterity.proficient = document.getElementById('csform-savingthrow-dexterity').checked;
     propsCharacter.savingThrows.constitution.proficient = document.getElementById('csform-savingthrow-constitution').checked;
@@ -96,12 +95,12 @@ class CharacterSheet extends React.Component {
     propsCharacter.savingThrows.wisdom.proficient = document.getElementById('csform-savingthrow-wisdom').checked;
     propsCharacter.savingThrows.charisma.proficient = document.getElementById('csform-savingthrow-charisma').checked;
     
-    //hitpoints data
+    //Hitpoints data
     propsCharacter.hitpoints.maximum = Math.abs(document.getElementById('csform-maxhealth').value);
     propsCharacter.hitpoints.current = Math.abs(document.getElementById('csform-currhealth').value);
     propsCharacter.hitpoints.temporary = Math.abs(document.getElementById('csform-temphealth').value);
     
-    //textbox data
+    //Textbox data
     console.log(document.getElementById('csform-personalityTraits').value);
     propsCharacter.personalityTraits = document.getElementById('csform-personalityTraits').value;
     console.log(propsCharacter.personalityTraits);
@@ -109,7 +108,7 @@ class CharacterSheet extends React.Component {
     propsCharacter.bonds = document.getElementById('csform-bonds').value;
     propsCharacter.flaws = document.getElementById('csform-flaws').value;
     
-    //skills data
+    //Skills data
     propsCharacter.skills.acrobatics.proficient = document.getElementById('csform-skill-acrobatics').checked;
     propsCharacter.skills.animalHandling.proficient = document.getElementById('csform-skill-animalHandling').checked;
     propsCharacter.skills.arcana.proficient = document.getElementById('csform-skill-arcana').checked;
@@ -129,7 +128,7 @@ class CharacterSheet extends React.Component {
     propsCharacter.skills.stealth.proficient = document.getElementById('csform-skill-stealth').checked;
     propsCharacter.skills.survival.proficient = document.getElementById('csform-skill-survival').checked;
     
-    //currency data
+    //Currency data
     _.forIn(this.props.character.currency, function(value, key) {
       var moneyValue = document.getElementById('csform-money-'+capital(key)).value;
       propsCharacter.currency[key] = Math.abs(parseInt(moneyValue));
@@ -166,7 +165,7 @@ class CharacterSheet extends React.Component {
       console.log('Can\'t be shared till savable');
       return;
     }
-    this.props.character.saveCharacter();
+    this.props.character.saveCharacter(CHARACTER_DIR + this.props.character.name + '.json');
     this.props.character.originalName = this.props.character.name;
     startUDPListen(true, () => {
       this.networkCB();
@@ -401,16 +400,6 @@ class CharacterSheet extends React.Component {
       </Grid>
     );
 
-    var back = null;
-    if (this.props.exitCharacterSheetCB) {
-      back = (
-        <FaArrowLeft
-          className="exit"
-          onClick={this.validateBeforeExit}
-        />
-      );
-    }
-
     var DMButtonText = 'Connect To DM';
     var DMButtonStyle = 'primary';
 
@@ -444,39 +433,46 @@ class CharacterSheet extends React.Component {
         </Button>
       );
     }
+
+    let back = null;
+    let DMButton = null;
+    if (this.props.exitCharacterSheetCB) {
+      back = (
+        <FaArrowLeft
+          className="exit"
+          onClick={this.validateBeforeExit}
+        />
+      );
+      DMButton = (
+        <Button
+          bsStyle={DMButtonStyle}
+          bsSize="small"
+          onClick={() => {
+            if (!this.state.lookingForDM && !this.state.connectedToDM) {
+              this.lookForDM(this.props.character.name + '.json');
+            } else if (!this.state.lookingForDM && this.state.connectedToDM) {
+              this.disconnectFromDM();
+            } else if (this.state.lookingForDM && !this.state.connectedToDM) {
+              this.stopLookForDM();
+            }
+          }}
+          disabled = {Boolean(this.state.viewState)}
+        >
+          {DMButtonText}
+        </Button>        
+      );
+    }
     return (
       <div className="character-sheet">
         <nav className="navigation" id="header">
-          <Button
-            bsStyle={DMButtonStyle}
-            bsSize="small"
-            onClick={() => {
-              if (!this.state.lookingForDM && !this.state.connectedToDM) {
-                this.lookForDM(this.props.character.name + '.json');
-              } else if (!this.state.lookingForDM && this.state.connectedToDM) {
-                this.disconnectFromDM();
-              } else if (this.state.lookingForDM && !this.state.connectedToDM) {
-                this.stopLookForDM();
-              }
-            }}
-            disabled = {Boolean(this.state.viewState)}
-          >
-            {DMButtonText}
-          </Button>
-          {okButton}, {cancelButton}
+          {DMButton}, {okButton}, {cancelButton}
         </nav>
         {back}
         <FaPencil
           className="edit"
           onClick={() => {
             if (!this.state.lookingForDM && !this.state.connectedToDM && !this.state.viewState) {
-              // FOR NOW, THIS TOGGLES, SAVE AND CANCEL BUTTONS SHOULD BE MADE
-              if (this.state.viewState === 0) {
-                this.setState({viewState: 1});
-              } else {
-                this.applyEdits();
-                this.setState({viewState: 0});
-              }
+              this.setState({viewState: 1});
             }
           }}
         />
