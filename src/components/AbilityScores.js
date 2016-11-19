@@ -2,7 +2,7 @@
 
 // Inport libraries
 import React from 'react';
-import {FormGroup, FormControl, Col, Row, Panel} from 'react-bootstrap';
+import {Checkbox, FormGroup, FormControl, Col, Row, Panel} from 'react-bootstrap';
 import capital from 'to-capital-case';
 
 // Import icons
@@ -44,7 +44,8 @@ AbilityScores.propTypes = {
   abilityScoreMods: React.PropTypes.object.isRequired,
   abilityScores: React.PropTypes.object.isRequired,
   savingThrows: React.PropTypes.object.isRequired,
-  skills: React.PropTypes.object.isRequired
+  skills: React.PropTypes.object.isRequired,
+  viewState: React.PropTypes.number.isRequired
 };
 
 export default AbilityScores;
@@ -70,14 +71,14 @@ class AbilityScore extends React.Component {
     );
     if (this.props.viewState) {
       savingThrowBox = (
-        <FormGroup>
-          <FormControl
+        <form>
+          <Checkbox
             id={'csform-savingthrow-' + name}
-            type="checkbox"
             defaultChecked={this.props.savingThrows.proficient}
-          />
-          Saving Throw
-        </FormGroup>
+          >
+            Saving Throws
+          </Checkbox>
+        </form>
       );
     }
     var skills = [];
@@ -86,14 +87,14 @@ class AbilityScore extends React.Component {
         let skill = SKILLS[name][i];
         skills.push(
           <div key={skill}>
-            <FormGroup>
-              <FormControl
+            <form>
+              <Checkbox
                 id={'csform-skill-' + skill}
-                type="checkbox"
                 defaultChecked={this.props.skills[skill].proficient}
-              />
-              {capital(skill)}
-            </FormGroup>
+              >
+                {capital(skill)}
+              </Checkbox>
+            </form>
           </div>
         );
       }
@@ -133,14 +134,12 @@ class AbilityScore extends React.Component {
           </FormGroup>
         </Panel>
       );
-      
-      
     }
-    
+
 		return (
       <Row className="ability-score" id={name} >
         <Col className="col" md={4}>
-          {abilityScoreBox}  
+          {abilityScoreBox}
         </Col>
         <Col className="col" md={8}>
           <Panel>

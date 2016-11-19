@@ -10,7 +10,7 @@ import capital from 'to-capital-case';
 import {FaMinusSquare, FaPlusSquare} from 'react-icons/lib/fa';
 
 // Import internal libraries
-import {ITEMS_DB, WEAPONS_DB} from '../../lib/Character';
+import {ITEMS_DB, WEAPONS_DB, ARMOR_DB} from '../../lib/Character';
 
 // Displays a character's equipment in the Character Sheet View
 class Equipment extends React.Component {
@@ -26,7 +26,7 @@ class Equipment extends React.Component {
     if (this.props.heading === 'Equipment') {
       this.db = ITEMS_DB;
     } else if (this.props.heading === 'Armor') {
-
+      this.db = ARMOR_DB;
     } else if (this.props.heading === 'Weapons') {
       this.db = WEAPONS_DB;
     }
