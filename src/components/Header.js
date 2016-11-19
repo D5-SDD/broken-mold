@@ -51,7 +51,7 @@ class Header extends React.Component {
       )
       charPlayerName = (
         <FormGroup>
-          <FormControl id="csform-Player" type="text" defaultValue={charPlayerName}/>
+          <FormControl id="csform-player" type="text" defaultValue={charPlayerName}/>
         </FormGroup>
       )
       charRace = (

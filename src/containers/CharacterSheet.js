@@ -64,7 +64,7 @@ class CharacterSheet extends React.Component {
     propsCharacter.classes = tempClass;
     propsCharacter.name = document.getElementById('csform-name').value;
     propsCharacter.background = document.getElementById('csform-background').value;
-    propsCharacter.playerName = document.getElementById('csform-Player').value;
+    propsCharacter.playerName = document.getElementById('csform-player').value;
     propsCharacter.race = document.getElementById('csform-race').value;
     var tempAlign = document.getElementById('csform-alignment').value;
     propsCharacter.alignment = tempAlign.split(' ');
@@ -90,7 +90,7 @@ class CharacterSheet extends React.Component {
     //textbox data
     console.log(document.getElementById('csform-personalityTraits').value);
     propsCharacter.personalityTraits = document.getElementById('csform-personalityTraits').value;
-    console.log(this.props.character.personalityTraits);
+    console.log(propsCharacter.personalityTraits);
     propsCharacter.ideals = document.getElementById('csform-ideals').value;
     propsCharacter.bonds = document.getElementById('csform-bonds').value;
     propsCharacter.flaws = document.getElementById('csform-flaws').value;

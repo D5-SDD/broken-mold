@@ -14,6 +14,9 @@ class TextBox extends React.Component {
     this.id = this.props.title;
     this.header = capital(this.id);
     this.data = [this.props.data];
+    this.state = {
+      data: this.props.data
+    };
 	
     // if the data needs to be parsed, flatten it to the information we want to display
     if (typeof this.props.data === 'object') {
