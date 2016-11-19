@@ -48,9 +48,8 @@ class CharacterSheet extends React.Component {
   }
 
   applyEdits() {
-    //for iterating in loops...
     var propsCharacter = this.props.character;
-    //header data
+    //Header data
     var tempClass = [];
     for (let i=0; i<this.props.character.classes.length; i++){
       var classAndLevel = document.getElementById('csform-class-'+i).value;
@@ -70,8 +69,6 @@ class CharacterSheet extends React.Component {
     propsCharacter.alignment = tempAlign.split(' ');
     var tempExp = document.getElementById('csform-experience').value;
     propsCharacter.experience = Math.abs(parseInt(tempExp));
-    //equipment data
-    //equipment declare
 
     //DiceAndSaves data
     propsCharacter.hitDice = document.getElementById('csform-hitDice').value;
@@ -80,7 +77,7 @@ class CharacterSheet extends React.Component {
     propsCharacter.inspiration = Math.abs(document.getElementById('csform-inspiration').value);
     propsCharacter.speed = Math.abs(document.getElementById('csform-speed').value);
     
-    //ability scores data
+    //Ability Scores data
     propsCharacter.abilityScores.strength = Math.abs(document.getElementById('csform-abilityscore-strength').value);
     propsCharacter.abilityScores.dexterity = Math.abs(document.getElementById('csform-abilityscore-dexterity').value);
     propsCharacter.abilityScores.constitution = Math.abs(document.getElementById('csform-abilityscore-constitution').value);
@@ -88,7 +85,7 @@ class CharacterSheet extends React.Component {
     propsCharacter.abilityScores.wisdom = Math.abs(document.getElementById('csform-abilityscore-wisdom').value);
     propsCharacter.abilityScores.charisma = Math.abs(document.getElementById('csform-abilityscore-charisma').value);
     
-    //saving throws data
+    //Saving Throws data
     propsCharacter.savingThrows.strength.proficient = document.getElementById('csform-savingthrow-strength').checked;
     propsCharacter.savingThrows.dexterity.proficient = document.getElementById('csform-savingthrow-dexterity').checked;
     propsCharacter.savingThrows.constitution.proficient = document.getElementById('csform-savingthrow-constitution').checked;
@@ -96,12 +93,12 @@ class CharacterSheet extends React.Component {
     propsCharacter.savingThrows.wisdom.proficient = document.getElementById('csform-savingthrow-wisdom').checked;
     propsCharacter.savingThrows.charisma.proficient = document.getElementById('csform-savingthrow-charisma').checked;
     
-    //hitpoints data
+    //Hitpoints data
     propsCharacter.hitpoints.maximum = Math.abs(document.getElementById('csform-maxhealth').value);
     propsCharacter.hitpoints.current = Math.abs(document.getElementById('csform-currhealth').value);
     propsCharacter.hitpoints.temporary = Math.abs(document.getElementById('csform-temphealth').value);
     
-    //textbox data
+    //Textbox data
     console.log(document.getElementById('csform-personalityTraits').value);
     propsCharacter.personalityTraits = document.getElementById('csform-personalityTraits').value;
     console.log(propsCharacter.personalityTraits);
@@ -109,7 +106,7 @@ class CharacterSheet extends React.Component {
     propsCharacter.bonds = document.getElementById('csform-bonds').value;
     propsCharacter.flaws = document.getElementById('csform-flaws').value;
     
-    //skills data
+    //Skills data
     propsCharacter.skills.acrobatics.proficient = document.getElementById('csform-skill-acrobatics').checked;
     propsCharacter.skills.animalHandling.proficient = document.getElementById('csform-skill-animalHandling').checked;
     propsCharacter.skills.arcana.proficient = document.getElementById('csform-skill-arcana').checked;
@@ -129,7 +126,7 @@ class CharacterSheet extends React.Component {
     propsCharacter.skills.stealth.proficient = document.getElementById('csform-skill-stealth').checked;
     propsCharacter.skills.survival.proficient = document.getElementById('csform-skill-survival').checked;
     
-    //currency data
+    //Currency data
     _.forIn(this.props.character.currency, function(value, key) {
       var moneyValue = document.getElementById('csform-money-'+capital(key)).value;
       propsCharacter.currency[key] = Math.abs(parseInt(moneyValue));
