@@ -38,8 +38,11 @@ class CharacterView extends React.Component {
     for (let i = 0; i < files.length; i++) {
       paths.push(files[i].path);
     }
+    if (paths.length === 0) {
+      $('#fileDialog')[0].value = '';
+      return;
+    }
     this.currentCharacter = loadCharacters(paths);
-    // TODO: Something funky going on here when character fails
     if (this.currentCharacter === null) {
       console.log('Character was not loaded succesfully');
     } else {
@@ -47,6 +50,8 @@ class CharacterView extends React.Component {
         viewState: 1
       });
     }
+    
+    $('#fileDialog')[0].value = '';
   }
 
   // Called when the new button is clicked,
