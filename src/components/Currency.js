@@ -22,7 +22,7 @@ class Currency extends React.Component {
           <FormGroup>
             <label> 
               {capital(key)}
-              <FormControl id={"csform-money"+key} type="text"
+              <FormControl id={"csform-money-"+capital(key)} type="number"
                 defaultValue={properValue}/>
             </label>
           </FormGroup>

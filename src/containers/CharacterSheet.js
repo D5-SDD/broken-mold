@@ -3,6 +3,8 @@
 // Import external libraries
 import React from 'react';
 import {FormGroup, FormControl, Button, Grid, Row, Col, Panel} from 'react-bootstrap';
+import capital from 'to-capital-case';
+import _ from 'lodash';
 
 // Import internal libraries
 import {
@@ -46,6 +48,8 @@ class CharacterSheet extends React.Component {
   }
 
   applyEdits() {
+    //for iterating in loops...
+    var propsCharacter = this.props.character;
     //header data
     var tempClass = [];
     for (let i=0; i<this.props.character.classes.length; i++){
@@ -57,33 +61,46 @@ class CharacterSheet extends React.Component {
       }
       tempClass.push(tempObject);
     }
-    this.props.character.classes = tempClass;
-    this.props.character.name = document.getElementById('csform-name').value;
-    this.props.character.background = document.getElementById('csform-background').value;
-    this.props.character.playerName = document.getElementById('csform-Player').value;
-    this.props.character.race = document.getElementById('csform-race').value;
+    propsCharacter.classes = tempClass;
+    propsCharacter.name = document.getElementById('csform-name').value;
+    propsCharacter.background = document.getElementById('csform-background').value;
+    propsCharacter.playerName = document.getElementById('csform-Player').value;
+    propsCharacter.race = document.getElementById('csform-race').value;
     var tempAlign = document.getElementById('csform-alignment').value;
-    this.props.character.alignment = tempAlign.split(' ');
+    propsCharacter.alignment = tempAlign.split(' ');
     var tempExp = document.getElementById('csform-experience').value;
-    this.props.character.experience = Math.abs(parseInt(tempExp));
+    propsCharacter.experience = Math.abs(parseInt(tempExp));
     //equipment data
     //equipment declare
 
     //DiceAndSaves data
-    this.props.character.hitDice = document.getElementById('csform-hitDice').value;
-    this.props.character.deathSaves.successes = Math.abs(document.getElementById('csform-deathSucc').value);
-    this.props.character.deathSaves.failures = Math.abs(document.getElementById('csform-deathFails').value);
-    this.props.character.inspiration = Math.abs(document.getElementById('csform-inspiration').value);
-    this.props.character.speed = Math.abs(document.getElementById('csform-speed').value);
-    this.props.character.hitpoints.maximum = Math.abs(document.getElementById('csform-maxhealth').value);
-    this.props.character.hitpoints.current = Math.abs(document.getElementById('csform-currhealth').value);
-    this.props.character.hitpoints.temporary = Math.abs(document.getElementById('csform-temphealth').value);
+    propsCharacter.hitDice = document.getElementById('csform-hitDice').value;
+    propsCharacter.deathSaves.successes = Math.abs(document.getElementById('csform-deathSucc').value);
+    propsCharacter.deathSaves.failures = Math.abs(document.getElementById('csform-deathFails').value);
+    
+    //combat stats data
+    propsCharacter.inspiration = Math.abs(document.getElementById('csform-inspiration').value);
+    propsCharacter.speed = Math.abs(document.getElementById('csform-speed').value);
+    
+    //hitpoints data
+    propsCharacter.hitpoints.maximum = Math.abs(document.getElementById('csform-maxhealth').value);
+    propsCharacter.hitpoints.current = Math.abs(document.getElementById('csform-currhealth').value);
+    propsCharacter.hitpoints.temporary = Math.abs(document.getElementById('csform-temphealth').value);
+    
+    //textbox data
     console.log(document.getElementById('csform-personalityTraits').value);
-    this.props.character.personalityTraits = document.getElementById('csform-personalityTraits').value;
+    propsCharacter.personalityTraits = document.getElementById('csform-personalityTraits').value;
     console.log(this.props.character.personalityTraits);
-    this.props.character.ideals = document.getElementById('csform-ideals').value;
-    this.props.character.bonds = document.getElementById('csform-bonds').value;
-    this.props.character.flaws = document.getElementById('csform-flaws').value;
+    propsCharacter.ideals = document.getElementById('csform-ideals').value;
+    propsCharacter.bonds = document.getElementById('csform-bonds').value;
+    propsCharacter.flaws = document.getElementById('csform-flaws').value;
+    
+    //currency data
+    _.forIn(this.props.character.currency, function(value, key) {
+      var moneyValue = document.getElementById('csform-money-'+capital(key)).value;
+      propsCharacter.currency[key] = Math.abs(parseInt(moneyValue));
+    });
+    
   }
 
   validateBeforeExit() {
