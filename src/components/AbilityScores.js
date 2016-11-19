@@ -2,7 +2,7 @@
 
 // Inport libraries
 import React from 'react';
-import {Col, Row, Panel} from 'react-bootstrap';
+import {FormGroup, FormControl, Col, Row, Panel} from 'react-bootstrap';
 import capital from 'to-capital-case';
 
 // Import icons
@@ -28,10 +28,10 @@ class AbilityScores extends React.Component {
           savingThrows={this.props.savingThrows[abilityScore]}
           skills={this.props.skills}
           value={this.props.abilityScores[abilityScore]}
+          viewState={this.props.viewState}
         />
       );
     }
-
     return (
       <div className="ability-scores">
         {abilityScores}
@@ -57,6 +57,9 @@ class AbilityScore extends React.Component {
 
 	render() {
     var name = this.props.name;
+    
+    
+    
     var savingThrowsIcon = <FaStarO />;
     if (this.props.savingThrows.proficient === true) {
       savingThrowsIcon = <FaStar />;
@@ -78,18 +81,31 @@ class AbilityScore extends React.Component {
     if (mod >= 0) {
       mod = '+' + this.props.mod;
     }
-
+    
+    var abilityScoreBox = (
+      <Panel header={capital(name)} className="centered">
+        <div className='ability-score value'>
+          {this.props.value}
+        </div>
+        <div className='ability-score mod'>
+          {mod}
+        </div>
+      </Panel>
+    );
+    if (this.props.viewState) {
+      abilityScoreBox = (
+        <Panel header={capital(name)} className="centered">
+          <FormGroup>
+            <FormControl id={"csform-abilityscore" + name} type="number" defaultValue={this.props.value}/>      
+          </FormGroup>
+        </Panel>
+      );
+    }
+    
 		return (
       <Row className="ability-score" id={name} >
         <Col className="col" md={4}>
-          <Panel header={capital(name)} className="centered">
-            <div className='ability-score value'>
-              {this.props.value}
-            </div>
-            <div className='ability-score mod'>
-              {mod}
-            </div>
-          </Panel>
+          {abilityScoreBox}  
         </Col>
         <Col className="col" md={8}>
           <Panel>
@@ -111,5 +127,6 @@ AbilityScore.propTypes = {
   name: React.PropTypes.string.isRequired,
   savingThrows: React.PropTypes.object.isRequired,
   skills: React.PropTypes.object.isRequired,
-  value: React.PropTypes.number.isRequired
+  value: React.PropTypes.number.isRequired,
+  viewState: React.PropTypes.number.isRequired
 };

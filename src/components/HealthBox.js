@@ -2,7 +2,7 @@
 
 // Inport libraries
 import React from 'react';
-import {Col, Row, Panel} from 'react-bootstrap';
+import {FormGroup, FormControl, Col, Row, Panel} from 'react-bootstrap';
 
 // Import icons
 import {FaHeart, FaHeartbeat, FaHeartO} from 'react-icons/lib/fa';
@@ -14,22 +14,44 @@ class HealthBox extends React.Component {
 	}
 
 	render() {
+    var maxHealth = this.props.health.maximum;
+    var currHealth = this.props.health.current;
+    var tempHealth = this.props.health.temporary;
+    
+  
+    if (this.props.viewState) {
+      maxHealth = (
+        <FormGroup>
+          <FormControl id="csform-maxhealth" type="number" defaultValue={maxHealth} />
+        </FormGroup>
+      );
+      currHealth = (
+        <FormGroup>
+          <FormControl id="csform-currhealth" type="number" defaultValue={currHealth} />
+        </FormGroup>
+      );
+      tempHealth = (
+        <FormGroup>
+          <FormControl id="csform-temphealth" type="number" defaultValue={tempHealth} />
+        </FormGroup>
+      );
+    }
     return (
       <Row className="healthBox" >
         <Col className="col" md={12}>
           <Col className="col" md={4}>
             <Panel header="Max Health" className="centered">
-              <FaHeart /> {this.props.health.maximum}
+              <FaHeart /> {maxHealth}
             </Panel>
           </Col>
           <Col className="col" md={4}>
             <Panel header="Curr Health" className="centered">
-              <FaHeartO /> {this.props.health.current}
+              <FaHeartO /> {currHealth}
             </Panel>
           </Col>
           <Col className="col" md={4}>
             <Panel header="Temp Health" className="centered">
-              <FaHeartbeat /> {this.props.health.temporary}
+              <FaHeartbeat /> {tempHealth}
             </Panel>
           </Col>
         </Col>

@@ -75,42 +75,42 @@ class Header extends React.Component {
     return (
       <Row className="header" >
         <Col className="col" md={3}>
-          <Panel className="centered">
-            Character Name: {charName}
+          <Panel header="Character Name" className="centered">
+            {charName}
           </Panel>
         </Col>
         <Col className="col" md={9}>
           <Row>
             <Col className="col" md={3}>
-              <Panel className="centered">
-                Class & Level:<br/> {classAndLevel}
+              <Panel header="Class & Level" className="centered">
+                {classAndLevel}
               </Panel>
             </Col>
             <Col className="col" md={3}>
-              <Panel className="centered">
-                Background:<br/> {charBackground}
+              <Panel header="Background" className="centered">
+                {charBackground}
               </Panel>
             </Col>
             <Col className="col" md={3}>
-              <Panel className="centered">
-                Player Name:<br/> {charPlayerName}
+              <Panel header="Player Name" className="centered">
+                {charPlayerName}
               </Panel>
             </Col>
           </Row>
           <Row>
             <Col className="col" md={3}>
-              <Panel className="centered">
-                Race:<br/> {charRace}
+              <Panel header="Race" className="centered">
+                {charRace}
               </Panel>
             </Col>
             <Col className="col" md={3}>
-              <Panel className="centered">
-                Alignment:<br/> {printAlignment}
+              <Panel header="Alignment" className="centered">
+                {printAlignment}
               </Panel>
             </Col>
             <Col className="col" md={3}>
-              <Panel className="centered">
-                Experience Points:<br/> {charExp}
+              <Panel header="Experience Points" className="centered">
+                {charExp}
               </Panel>
             </Col>
           </Row>
