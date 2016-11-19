@@ -41,7 +41,7 @@ class Equipment extends React.Component {
     });
 
     return (
-      <Panel header="Equipment">
+      <Panel header={this.props.heading}>
         <ListGroup fill>
           {items}
         </ListGroup>
@@ -52,6 +52,7 @@ class Equipment extends React.Component {
 
 Equipment.propTypes = {
   data: React.PropTypes.array.isRequired,
+  heading: React.PropTypes.string.isRequired,
   viewState: React.PropTypes.number.isRequired
 };
 

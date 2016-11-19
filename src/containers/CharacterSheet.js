@@ -213,12 +213,6 @@ class CharacterSheet extends React.Component {
                   viewState = {this.state.viewState}
                 />
               </Col>
-              <Col className="inner col" md={7}>
-                <Equipment
-                  data={[character.inventory, character.armor]}
-                  viewState={this.state.viewState}
-                />
-              </Col>
             </Row>
           </Col>
           <Col className="outer col" md={4}>
@@ -275,13 +269,38 @@ class CharacterSheet extends React.Component {
             </Row>
           </Col>
           <Row>
-            <Col className="col" md={12}>
+            <Col className="spells" md={12}>
               <TextBox
                 accordion
                 data={spellData}
                 title="Spells"
                 viewState={this.props.viewState}
               />
+            </Col>
+          </Row>
+          <Row>
+            <Col className="inventory" md={5}>
+              <Equipment
+                heading="Equipment"
+                data={character.inventory}
+                viewState={this.state.viewState}
+              />
+            </Col>
+            <Col className="armor" md={7}>
+              <Row>
+                <Equipment
+                  heading="Armor"
+                  data={character.armor}
+                  viewState = {this.state.viewState}
+                />
+              </Row>
+                <Equipment
+                  heading="Weapons"
+                  data={character.weapons}
+                  viewState = {this.state.viewState}
+                />
+              <Row>
+              </Row>
             </Col>
           </Row>
         </Row>
