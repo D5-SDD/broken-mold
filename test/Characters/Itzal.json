@@ -18,7 +18,7 @@
   ],
   "experience": 900,
   "background": "Urchin",
-  "personalityTraits": "I sleep with my back to a wall or tree, with everything I own wrapped in a bundle in my arms.",
+  "personalityTraits": "I sleep with my back to a wall or tree, with everything I own wraped in a bundle in my arms",
   "ideals": "I help the people who help me—that’s what keeps us alive.",
   "bonds": "I owe a debt I can never repay to the person who took pity on me.",
   "flaws": "I’d rather kill someone in their sleep then fight fair.",
@@ -116,8 +116,8 @@
   "speed": 30,
   "hitDice": "3d8",
   "deathSaves": {
-    "successes": "0",
-    "failures": "0"
+    "successes": 0,
+    "failures": 0
   },
   "weapons": [
     {

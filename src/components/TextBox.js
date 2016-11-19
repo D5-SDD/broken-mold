@@ -2,7 +2,7 @@
 
 // Import libraries
 import React from 'react';
-import {Accordion, Col, Row, Panel} from 'react-bootstrap';
+import {FormGroup, FormControl, Accordion, Col, Row, Panel} from 'react-bootstrap';
 import capital from 'to-capital-case';
 import _ from 'lodash';
 
@@ -14,7 +14,7 @@ class TextBox extends React.Component {
     this.id = this.props.title;
     this.header = capital(this.id);
     this.data = [this.props.data];
-
+	
     // if the data needs to be parsed, flatten it to the information we want to display
     if (typeof this.props.data === 'object') {
       this.data = _.map(this.props.data, function(obj) {
@@ -29,6 +29,7 @@ class TextBox extends React.Component {
 
   render() {
     var data = [];
+    
 
     // populate the data to display based on the type of information being displayed
     for (let i = 0; i < this.data.length; i++) {
@@ -56,6 +57,14 @@ class TextBox extends React.Component {
             </Panel>
           </Col>
         </Row>
+      );
+    }
+    
+    if (this.props.viewState) {
+      data = (
+        <FormGroup>
+          <FormControl id={"csform-" + this.id} type="text" defaultValue={data[0].props.children} />
+        </FormGroup>
       );
     }
 

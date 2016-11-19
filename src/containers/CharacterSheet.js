@@ -2,7 +2,7 @@
 
 // Import external libraries
 import React from 'react';
-import {Button, Grid, Row, Col, Panel} from 'react-bootstrap';
+import {FormGroup, FormControl, Button, Grid, Row, Col, Panel} from 'react-bootstrap';
 
 // Import internal libraries
 import {
@@ -53,7 +53,7 @@ class CharacterSheet extends React.Component {
       var tempArray = classAndLevel.split(" ");
       var tempObject = {
         "name" : tempArray[0],
-        "level": parseInt(tempArray[1])
+        "level": Math.abs(parseInt(tempArray[1]))
       }
       tempClass.push(tempObject);
     }
@@ -65,14 +65,25 @@ class CharacterSheet extends React.Component {
     var tempAlign = document.getElementById('csform-alignment').value;
     this.props.character.alignment = tempAlign.split(" ");
     var tempExp = document.getElementById('csform-experience').value;
-    this.props.character.experience = parseInt(tempExp);
+    this.props.character.experience = Math.abs(parseInt(tempExp));
     //equipment data
     //equipment declare
     
     //DiceAndSaves data
     this.props.character.hitDice = document.getElementById('csform-hitDice').value;
-    this.props.character.deathSaves.successes = document.getElementById('csform-deathSucc').value;
-    this.props.character.deathSaves.failures = document.getElementById('csform-deathFails').value;
+    this.props.character.deathSaves.successes = Math.abs(document.getElementById('csform-deathSucc').value);
+    this.props.character.deathSaves.failures = Math.abs(document.getElementById('csform-deathFails').value);
+    this.props.character.inspiration = Math.abs(document.getElementById('csform-inspiration').value);
+    this.props.character.speed = Math.abs(document.getElementById('csform-speed').value);
+    this.props.character.hitpoints.maximum = Math.abs(document.getElementById('csform-maxhealth').value);
+    this.props.character.hitpoints.current = Math.abs(document.getElementById('csform-currhealth').value);
+    this.props.character.hitpoints.temporary = Math.abs(document.getElementById('csform-temphealth').value);
+    console.log(document.getElementById('csform-personalityTraits').value);
+    this.props.character.personalityTraits = document.getElementById('csform-personalityTraits').value;
+    console.log(this.props.character.personalityTraits);
+    this.props.character.ideals = document.getElementById('csform-ideals').value;
+    this.props.character.bonds = document.getElementById('csform-bonds').value;
+    this.props.character.flaws = document.getElementById('csform-flaws').value;
   }
 
   validateBeforeExit() {
@@ -153,6 +164,7 @@ class CharacterSheet extends React.Component {
     var lookingForDM = false;
     var connectedToDM = false;    
     this.applyEdits();
+    this.props.character.updateAutoValues();
     this.setState({
       viewState: viewState,
       lookingForDM: lookingForDM,
@@ -171,6 +183,16 @@ class CharacterSheet extends React.Component {
         name: character.spells[i],
         description: character.getSpellFromName(character.spells[i]).description
       });
+    }
+    
+    var inspiration = character.inspiration;
+    
+    if (this.state.viewState) {
+      inspiration = (
+        <FormGroup>
+          <FormControl id="csform-inspiration" type="number" defaultValue={character.inspiration} />
+        </FormGroup>
+      );
     }
     
     // populate the grid that displays all the relevant information to the user
@@ -196,7 +218,7 @@ class CharacterSheet extends React.Component {
               </Col>
               <Col md={6}>
                 <Panel header="Inspiration" className="centered">
-                  {character.inspiration}
+                  {inspiration}
                 </Panel>
               </Col>
             </Row>
