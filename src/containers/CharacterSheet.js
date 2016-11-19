@@ -391,16 +391,6 @@ class CharacterSheet extends React.Component {
       </Grid>
     );
 
-    let back = null;
-    if (this.props.exitCharacterSheetCB) {
-      back = (
-        <FaArrowLeft
-          className="exit"
-          onClick={this.validateBeforeExit}
-        />
-      );
-    }
-
     var DMButtonText = 'Connect To DM';
     var DMButtonStyle = 'primary';
 
@@ -434,39 +424,46 @@ class CharacterSheet extends React.Component {
         </Button>
       );
     }
+
+    let back = null;
+    let DMButton = null;
+    if (this.props.exitCharacterSheetCB) {
+      back = (
+        <FaArrowLeft
+          className="exit"
+          onClick={this.validateBeforeExit}
+        />
+      );
+      DMButton = (
+        <Button
+          bsStyle={DMButtonStyle}
+          bsSize="small"
+          onClick={() => {
+            if (!this.state.lookingForDM && !this.state.connectedToDM) {
+              this.lookForDM(this.props.character.name + '.json');
+            } else if (!this.state.lookingForDM && this.state.connectedToDM) {
+              this.disconnectFromDM();
+            } else if (this.state.lookingForDM && !this.state.connectedToDM) {
+              this.stopLookForDM();
+            }
+          }}
+          disabled = {Boolean(this.state.viewState)}
+        >
+          {DMButtonText}
+        </Button>        
+      );
+    }
     return (
       <div className="character-sheet">
         <nav className="navigation" id="header">
-          <Button
-            bsStyle={DMButtonStyle}
-            bsSize="small"
-            onClick={() => {
-              if (!this.state.lookingForDM && !this.state.connectedToDM) {
-                this.lookForDM(this.props.character.name + '.json');
-              } else if (!this.state.lookingForDM && this.state.connectedToDM) {
-                this.disconnectFromDM();
-              } else if (this.state.lookingForDM && !this.state.connectedToDM) {
-                this.stopLookForDM();
-              }
-            }}
-            disabled = {Boolean(this.state.viewState)}
-          >
-            {DMButtonText}
-          </Button>
-          {okButton}, {cancelButton}
+          {DMButton}, {okButton}, {cancelButton}
         </nav>
         {back}
         <FaPencil
           className="edit"
           onClick={() => {
             if (!this.state.lookingForDM && !this.state.connectedToDM && !this.state.viewState) {
-              // FOR NOW, THIS TOGGLES, SAVE AND CANCEL BUTTONS SHOULD BE MADE
-              if (this.state.viewState === 0) {
-                this.setState({viewState: 1});
-              } else {
-                this.applyEdits();
-                this.setState({viewState: 0});
-              }
+              this.setState({viewState: 1});
             }
           }}
         />
