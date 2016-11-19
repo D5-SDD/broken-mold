@@ -82,12 +82,38 @@ class CharacterSheet extends React.Component {
     this.props.character.ideals = document.getElementById('csform-ideals').value;
     this.props.character.bonds = document.getElementById('csform-bonds').value;
     this.props.character.flaws = document.getElementById('csform-flaws').value;
-    this.props.character.abilityScores.strength = Math.abs(document.getElementById('csform-abilityscorestrength').value);
-    this.props.character.abilityScores.dexterity = Math.abs(document.getElementById('csform-abilityscoredexterity').value);
-    this.props.character.abilityScores.constitution = Math.abs(document.getElementById('csform-abilityscoreconstitution').value);
-    this.props.character.abilityScores.intelligence = Math.abs(document.getElementById('csform-abilityscoreintelligence').value);
-    this.props.character.abilityScores.wisdom = Math.abs(document.getElementById('csform-abilityscorewisdom').value);
-    this.props.character.abilityScores.charisma = Math.abs(document.getElementById('csform-abilityscorecharisma').value);
+    this.props.character.abilityScores.strength = Math.abs(document.getElementById('csform-abilityscore-strength').value);
+    this.props.character.abilityScores.dexterity = Math.abs(document.getElementById('csform-abilityscore-dexterity').value);
+    this.props.character.abilityScores.constitution = Math.abs(document.getElementById('csform-abilityscore-constitution').value);
+    this.props.character.abilityScores.intelligence = Math.abs(document.getElementById('csform-abilityscore-intelligence').value);
+    this.props.character.abilityScores.wisdom = Math.abs(document.getElementById('csform-abilityscore-wisdom').value);
+    this.props.character.abilityScores.charisma = Math.abs(document.getElementById('csform-abilityscore-charisma').value);
+    
+    this.props.character.savingThrows.strength.proficient = document.getElementById('csform-savingthrow-strength').checked;
+    this.props.character.savingThrows.dexterity.proficient = document.getElementById('csform-savingthrow-dexterity').checked;
+    this.props.character.savingThrows.constitution.proficient = document.getElementById('csform-savingthrow-constitution').checked;
+    this.props.character.savingThrows.intelligence.proficient = document.getElementById('csform-savingthrow-intelligence').checked;
+    this.props.character.savingThrows.wisdom.proficient = document.getElementById('csform-savingthrow-wisdom').checked;
+    this.props.character.savingThrows.charisma.proficient = document.getElementById('csform-savingthrow-charisma').checked;
+    
+    this.props.character.skills.acrobatics.proficient = document.getElementById('csform-skill-acrobatics').checked;
+    this.props.character.skills.animalHandling.proficient = document.getElementById('csform-skill-animalHandling').checked;
+    this.props.character.skills.arcana.proficient = document.getElementById('csform-skill-arcana').checked;
+    this.props.character.skills.athletics.proficient = document.getElementById('csform-skill-athletics').checked;
+    this.props.character.skills.deception.proficient = document.getElementById('csform-skill-deception').checked;
+    this.props.character.skills.history.proficient = document.getElementById('csform-skill-history').checked;
+    this.props.character.skills.insight.proficient = document.getElementById('csform-skill-insight').checked;
+    this.props.character.skills.intimidation.proficient = document.getElementById('csform-skill-intimidation').checked;
+    this.props.character.skills.investigation.proficient = document.getElementById('csform-skill-investigation').checked;
+    this.props.character.skills.medicine.proficient = document.getElementById('csform-skill-medicine').checked;
+    this.props.character.skills.nature.proficient = document.getElementById('csform-skill-nature').checked;
+    this.props.character.skills.perception.proficient = document.getElementById('csform-skill-perception').checked;
+    this.props.character.skills.performance.proficient = document.getElementById('csform-skill-performance').checked;
+    this.props.character.skills.persuasion.proficient = document.getElementById('csform-skill-persuasion').checked;
+    this.props.character.skills.religion.proficient = document.getElementById('csform-skill-religion').checked;
+    this.props.character.skills.sleightOfHand.proficient = document.getElementById('csform-skill-sleightOfHand').checked;
+    this.props.character.skills.stealth.proficient = document.getElementById('csform-skill-stealth').checked;
+    this.props.character.skills.survival.proficient = document.getElementById('csform-skill-survival').checked;
   }
 
   validateBeforeExit() {

@@ -65,16 +65,51 @@ class AbilityScore extends React.Component {
       savingThrowsIcon = <FaStar />;
     }
 
+    var savingThrowBox = (
+      <span className="saving-throws">
+        {savingThrowsIcon} {this.props.savingThrows.value} Saving Throws
+      </span>
+    );
+    if (this.props.viewState) {
+      savingThrowBox = (
+        <FormGroup>
+          <FormControl
+            id={"csform-savingthrow-" + name}
+            type="checkbox"
+            defaultChecked={this.props.savingThrows.proficient}
+          />
+          Saving Throw
+        </FormGroup>
+      );
+    }
     var skills = [];
-    for (let i = 0; i < SKILLS[name].length; i++) {
-      let skill = SKILLS[name][i];
-      let icon = <FaCircleO />;
-      if (this.props.skills[skill].proficient === true) {
-        icon = <FaCircle />;
+    if (this.props.viewState) {
+      for(let i = 0; i < SKILLS[name].length; i++) {
+        let skill = SKILLS[name][i];
+        skills.push(
+          <div key={skill}>
+            <FormGroup>
+              <FormControl 
+                id={"csform-skill-" + skill}
+                type="checkbox"
+                defaultChecked={this.props.skills[skill].proficient}
+              />
+              {capital(skill)}
+            </FormGroup>
+          </div>
+        );
       }
+    } else {
+      for (let i = 0; i < SKILLS[name].length; i++) {
+        let skill = SKILLS[name][i];
+        let icon = <FaCircleO />;
+        if (this.props.skills[skill].proficient === true) {
+          icon = <FaCircle />;
+        }
 
-      let skillName = capital(skill);
-      skills.push(<div key={skill}>{icon} {this.props.skills[skill].value} {skillName}</div>);
+        let skillName = capital(skill);
+        skills.push(<div key={skill}>{icon} {this.props.skills[skill].value} {skillName}</div>);
+      }
     }
 
     var mod = this.props.mod;
@@ -96,10 +131,12 @@ class AbilityScore extends React.Component {
       abilityScoreBox = (
         <Panel header={capital(name)} className="centered">
           <FormGroup>
-            <FormControl id={"csform-abilityscore" + name} type="number" defaultValue={this.props.value}/>      
+            <FormControl id={"csform-abilityscore-" + name} type="number" defaultValue={this.props.value}/>      
           </FormGroup>
         </Panel>
       );
+      
+      
     }
     
 		return (
@@ -109,9 +146,7 @@ class AbilityScore extends React.Component {
         </Col>
         <Col className="col" md={8}>
           <Panel>
-            <span className="saving-throws">
-              {savingThrowsIcon} {this.props.savingThrows.value} Saving Throws
-            </span>
+            {savingThrowBox}
             <div className="skills">
               {skills}
             </div>
