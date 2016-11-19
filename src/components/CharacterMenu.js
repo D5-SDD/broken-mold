@@ -116,7 +116,9 @@ class CharacterMenu extends React.Component {
       deleteCharacter(this.state.treeData[node].filename, () => {
         this._resetMenu();
       });
-    } else {
+    } else if (this.state.lookingForClient || this.state.receiving) {
+      //DO NOTHING
+    }else {
       stopUDPBroadcast();
       stopUDPListen();
       closeTCPServer();
