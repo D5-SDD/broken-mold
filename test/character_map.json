@@ -35,6 +35,21 @@
       "race": "Elf"
     },
     {
+      "filename": "Itzal-DMTemp.json",
+      "label": "Itzal-DMTemp - Human - Rougue 3 - Wizard 3",
+      "classes": [
+        {
+          "name": "Rougue",
+          "level": 3
+        },
+        {
+          "name": "Wizard",
+          "level": 3
+        }
+      ],
+      "race": "Human"
+    },
+    {
       "filename": "Itzal.json",
       "label": "Itzal - Human - Rougue 3 - Wizard 3",
       "classes": [

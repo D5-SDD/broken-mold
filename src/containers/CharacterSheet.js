@@ -391,7 +391,7 @@ class CharacterSheet extends React.Component {
       </Grid>
     );
 
-    let back = null;
+    var back = null;
     if (this.props.exitCharacterSheetCB) {
       back = (
         <FaArrowLeft

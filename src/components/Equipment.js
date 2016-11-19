@@ -10,7 +10,7 @@ import capital from 'to-capital-case';
 import {FaMinusSquare, FaPlusSquare} from 'react-icons/lib/fa';
 
 // Import internal libraries
-import {ITEMS_DB} from '../../lib/Character';
+import {ITEMS_DB, WEAPONS_DB} from '../../lib/Character';
 
 // Displays a character's equipment in the Character Sheet View
 class Equipment extends React.Component {
@@ -28,7 +28,7 @@ class Equipment extends React.Component {
     } else if (this.props.heading === 'Armor') {
 
     } else if (this.props.heading === 'Weapons') {
-
+      this.db = WEAPONS_DB;
     }
 
     this.addEquipment = this.addEquipment.bind(this);
@@ -98,7 +98,8 @@ class Equipment extends React.Component {
         let id = 'equipment-' + this.props.heading + '-' + i;
         title = (
           <span>
-            <FaMinusSquare className="minus" id={id} onClick={this.removeEquipment}/><span>{title}</span>
+            <FaMinusSquare className="minus" id={id} onClick={this.removeEquipment}/>
+            <span>{title}</span>
           </span>
         );
       }
@@ -115,9 +116,13 @@ class Equipment extends React.Component {
       var options = [];
 
       for (let i = 0; i < this.db.length; i++) {
+        var val = this.db[i].name;
+        if (this.props.heading !== 'Equipment') {
+          val = capital(val);
+        }
         options.push(
-          <option value={this.db[i].name} key={i}>
-            {this.db[i].name}
+          <option value={val} key={i}>
+            {val}
           </option>
         );
       }
