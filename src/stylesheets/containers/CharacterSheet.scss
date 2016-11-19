@@ -7,12 +7,12 @@
 
 .character-sheet-grid {
   .col {
-    color: $whiteRed;
+    color: $darkGray;
   }
 }
 
 .list-group-item {
-  background: $lightGreen;
+  background: $baseRed;
 }
 
 .exit {
@@ -20,10 +20,10 @@
   height: 50px;
   width: 50px;
   color: #FFFFFF;
-  
+
   &:hover {
     cursor: pointer;
-    color: $whiteGreen;
+    color: $lightRed;
   }
 }
 

@@ -50,6 +50,25 @@
       "race": "Human"
     },
     {
+      "filename": "Lil Bitch.json",
+      "label": "Lil Bitch - Elf - Druid 1 - Ranger 13 - Monk 7",
+      "classes": [
+        {
+          "name": "Druid",
+          "level": 1
+        },
+        {
+          "name": "Ranger",
+          "level": 13
+        },
+        {
+          "name": "Monk",
+          "level": 7
+        }
+      ],
+      "race": "Elf"
+    },
+    {
       "filename": "T.json",
       "label": "T - Half-Orc - Monk 10",
       "classes": [

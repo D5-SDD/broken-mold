@@ -3,15 +3,15 @@
 .header {
   &.row {
   }
-  
+
   .panel {
     margin-top: 10px;
   }
 }
 
 .panel {
-  background-color: $lightGreen;
-  color: $blackRed;
+  background-color: $lightRed;
+  color: $darkGray;
   .fa {
     margin-right: 5px;
   }
