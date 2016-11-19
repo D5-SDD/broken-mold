@@ -1,78 +1,78 @@
 [
   {
-    "name": "padded",
+    "name": "Padded",
     "armorClass": 11,
     "armorType": "light",
     "strength": 0,
     "stealthDisadvantage": true  },
   {
-    "name": "leather",
+    "name": "Leather",
     "armorClass": 11,
     "armorType": "light",
     "strength": 0,
     "stealthDisadvantage": false  },
   {
-    "name": "studded leather",
+    "name": "Studded Leather",
     "armorClass": 12,
     "armorType": "light",
     "strength": 0,
     "stealthDisadvantage": false  },
   {
-    "name": "hide",
+    "name": "Hide",
     "armorClass": 12,
     "armorType": "medium",
     "strength": 0,
     "stealthDisadvantage": false  },
   {
-    "name": "chain shirt",
+    "name": "Chain Shirt",
     "armorClass": 13,
     "armorType": "medium",
     "strength": 0,
     "stealthDisadvantage": false  },
   {
-    "name": "scale mail",
+    "name": "Scale Mail",
     "armorClass": 14,
     "armorType": "medium",
     "strength": 0,
     "stealthDisadvantage": true  },
   {
-    "name": "breastplate",
+    "name": "Breastplate",
     "armorClass": 14,
     "armorType": "medium",
     "strength": 0,
     "stealthDisadvantage": false  },
   {
-    "name": "half plate",
+    "name": "Half Plate",
     "armorClass": 15,
     "armorType": "medium",
     "strength": 0,
     "stealthDisadvantage": true  },
   {
-    "name": "ring mail",
+    "name": "Ring Mail",
     "armorClass": 14,
     "armorType": "heavy",
     "strength": 0,
     "stealthDisadvantage": true  },
   {
-    "name": "chain mail",
+    "name": "Chain Mail",
     "armorClass": 16,
     "armorType": "heavy",
     "strength": 13,
     "stealthDisadvantage": true  },
   {
-    "name": "splint",
+    "name": "Splint",
     "armorClass": 17,
     "armorType": "heavy",
     "strength": 5,
     "stealthDisadvantage": true  },
   {
-    "name": "plate",
+    "name": "Plate",
     "armorClass": 18,
     "armorType": "heavy",
     "strength": 15,
     "stealthDisadvantage": true  },
   {
-    "name": "shield",
+    "name": "Shield",
     "armorClass": 2,
     "armorType": "shield",
     "strength": 0,

@@ -1,5 +1,5 @@
 [{
-		"name" : "club",
+		"name" : "Club",
 		"damage" : "1d4",
 		"type" : "bludgeoning",
 		"properties" : [
@@ -7,7 +7,7 @@
 		]
 	},
 	{
-		"name" : "dagger",
+		"name" : "Dagger",
 		"damage" : "1d4",
 		"type" : "piercing",
 		"properties" : [
@@ -17,7 +17,7 @@
 		]
 	},
 	{
-		"name" : "greatclub",
+		"name" : "Greatclub",
 		"damage" : "1d8",
 		"type" : "bludgeoning",
 		"properties" : [
@@ -25,7 +25,7 @@
 		]
 	},
 	{
-		"name" : "handaxe",
+		"name" : "Handaxe",
 		"damage" : "1d6",
 		"type" : "slashing",
 		"properties" : [
@@ -34,7 +34,7 @@
 		]
 	},
 	{
-		"name" : "javelin",
+		"name" : "Javelin",
 		"damage" : "1d6",
 		"type" : "piercing",
 		"properties" : [
@@ -42,7 +42,7 @@
 		]
 	},
 	{
-		"name" : "light hammer",
+		"name" : "Light Hammer",
 		"damage" : "1d4",
 		"type" : "bludgeoning",
 		"properties" : [
@@ -51,14 +51,14 @@
 		]
 	},
 	{
-		"name" : "mace",
+		"name" : "Mace",
 		"damage" : "1d6",
 		"type" : "bludgeoning",
 		"properties" : [
 		]
 	},
 	{
-		"name" : "quarterstaff",
+		"name" : "Quarterstaff",
 		"damage" : "1d6",
 		"type" : "bludgeoning",
 		"properties" : [
@@ -66,7 +66,7 @@
 		]
 	},
 	{
-		"name" : "sickle",
+		"name" : "Sickle",
 		"damage" : "1d4",
 		"type" : "slashing",
 		"properties" : [
@@ -74,7 +74,7 @@
 		]
 	},
 	{
-		"name" : "spear",
+		"name" : "Spear",
 		"damage" : "1d6",
 		"type" : "piercing",
 		"properties" : [
@@ -83,7 +83,7 @@
 		]
 	},
 	{
-		"name" : "crossbow,light",
+		"name" : "Crossbow Light",
 		"damage" : "1d8",
 		"type" : "piercing",
 		"properties" : [
@@ -93,7 +93,7 @@
 		]
 	},
 	{
-		"name" : "dart",
+		"name" : "Dart",
 		"damage" : "1d4",
 		"type" : "piercing",
 		"properties" : [
@@ -102,7 +102,7 @@
 		]
 	},
 	{
-		"name" : "shortbow",
+		"name" : "Shortbow",
 		"damage" : "1d6",
 		"type" : "piercing",
 		"properties" : [
@@ -111,7 +111,7 @@
 		]
 	},
 	{
-		"name" : "sling",
+		"name" : "Sling",
 		"damage" : "1d4",
 		"type" : "bludgeoning",
 		"properties" : [
@@ -119,7 +119,7 @@
 		]
 	},
 	{
-		"name" : "battleaxe",
+		"name" : "Battleaxe",
 		"damage" : "1d8",
 		"type" : "slashing",
 		"properties" : [
@@ -127,14 +127,14 @@
 		]
 	},
 	{
-		"name" : "flail",
+		"name" : "Flail",
 		"damage" : "1d8",
 		"type" : "bludgeoning",
 		"properties" : [
 		]
 	},
 	{
-		"name" : "glaive",
+		"name" : "Glaive",
 		"damage" : "1d10",
 		"type" : "slashing",
 		"properties" : [
@@ -144,7 +144,7 @@
 		]
 	},
 	{
-		"name" : "greataxe",
+		"name" : "Greataxe",
 		"damage" : "1d12",
 		"type" : "slashing",
 		"properties" : [
@@ -153,7 +153,7 @@
 		]
 	},
 	{
-		"name" : "greatsword",
+		"name" : "Greatsword",
 		"damage" : "2d6",
 		"type" : "slashing",
 		"properties" : [
@@ -162,7 +162,7 @@
 		]
 	},
 	{
-		"name" : "halberd",
+		"name" : "Halberd",
 		"damage" : "1d10",
 		"type" : "slashing",
 		"properties" : [
@@ -172,7 +172,7 @@
 		]
 	},
 	{
-		"name" : "lance",
+		"name" : "Lance",
 		"damage" : "1d12",
 		"type" : "piercing",
 		"properties" : [
@@ -181,7 +181,7 @@
 		]
 	},
 	{
-		"name" : "longsword",
+		"name" : "Longsword",
 		"damage" : "1d8",
 		"type" : "slashing",
 		"properties" : [
@@ -189,7 +189,7 @@
 		]
 	},
 	{
-		"name" : "maul",
+		"name" : "Maul",
 		"damage" : "2d6",
 		"type" : "bludgeoning",
 		"properties" : [
@@ -198,14 +198,14 @@
 		]
 	},
 	{
-		"name" : "morningstar",
+		"name" : "Morningstar",
 		"damage" : "1d8",
 		"type" : "piercing",
 		"properties" : [
 		]
 	},
 	{
-		"name" : "pike",
+		"name" : "Pike",
 		"damage" : "1d10",
 		"type" : "piercing",
 		"properties" : [
@@ -215,7 +215,7 @@
 		]
 	},
 	{
-		"name" : "rapier",
+		"name" : "Rapier",
 		"damage" : "1d8",
 		"type" : "piercing",
 		"properties" : [
@@ -223,7 +223,7 @@
 		]
 	},
 	{
-		"name" : "scimitar",
+		"name" : "Scimitar",
 		"damage" : "1d6",
 		"type" : "slashing",
 		"properties" : [
@@ -232,7 +232,7 @@
 		]
 	},
 	{
-		"name" : "shortsword",
+		"name" : "Shortsword",
 		"damage" : "1d6",
 		"type" : "piercing",
 		"properties" : [
@@ -241,7 +241,7 @@
 		]
 	},
 	{
-		"name" : "trident",
+		"name" : "Trident",
 		"damage" : "1d6",
 		"type" : "piercing",
 		"properties" : [
@@ -250,14 +250,14 @@
 		]
 	},
 	{
-		"name" : "war pick",
+		"name" : "War Pick",
 		"damage" : "1d8",
 		"type" : "piercing",
 		"properties" : [
 		]
 	},
 	{
-		"name" : "warhammer",
+		"name" : "Warhammer",
 		"damage" : "1d8",
 		"type" : "bludgeoning",
 		"properties" : [
@@ -265,7 +265,7 @@
 		]
 	},
 	{
-		"name" : "whip",
+		"name" : "Whip",
 		"damage" : "1d4",
 		"type" : "slashing",
 		"properties" : [
@@ -274,7 +274,7 @@
 		]
 	},
 	{
-		"name" : "blowgun",
+		"name" : "Blowgun",
 		"damage" : "1",
 		"type" : "piercing",
 		"properties" : [
@@ -283,7 +283,7 @@
 		]
 	},
 	{
-		"name" : "crossbow,hand",
+		"name" : "Crossbow Hand",
 		"damage" : "1d6",
 		"type" : "piercing",
 		"properties" : [
@@ -293,7 +293,7 @@
 		]
 	},
 	{
-		"name" : "crossbow,heavy",
+		"name" : "Crossbow Heavy",
 		"damage" : "1d10",
 		"type" : "piercing",
 		"properties" : [
@@ -304,7 +304,7 @@
 		]
 	},
 	{
-		"name" : "longbow",
+		"name" : "Longbow",
 		"damage" : "1d8",
 		"type" : "piercing",
 		"properties" : [
@@ -314,7 +314,7 @@
 		]
 	},
 	{
-		"name" : "net",
+		"name" : "Net",
 		"damage" : "-",
 		"type" : "-",
 		"properties" : [

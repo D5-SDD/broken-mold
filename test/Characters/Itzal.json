@@ -121,18 +121,18 @@
   },
   "weapons": [
     {
-      "name" : "longsword",
-      "damage" : "1d8",
-      "type" : "slashing",
-      "properties" : [
-        "versatile (1d10)"
+      "name": "Club",
+      "damage": "1d4",
+      "type": "bludgeoning",
+      "properties": [
+        "light"
       ]
     },
     {
-      "name" : "shortbow",
-      "damage" : "1d6",
-      "type" : "piercing",
-      "properties" : [
+      "name": "Shortbow",
+      "damage": "1d6",
+      "type": "piercing",
+      "properties": [
         "ammunition (range 80/320)",
         "two-handed"
       ]
@@ -172,18 +172,18 @@
   ],
   "armor": [
     {
-      "name": "studded leather",
-      "armorClass": 12,
+      "name": "Padded",
+      "armorClass": 11,
       "armorType": "light",
       "strength": 0,
-      "stealthDisadvantage": false
+      "stealthDisadvantage": true
     },
     {
-      "name": "shield",
-      "armorClass": 2,
-      "armorType": "shield",
+      "name": "Scale Mail",
+      "armorClass": 14,
+      "armorType": "medium",
       "strength": 0,
-      "stealthDisadvantage": false
+      "stealthDisadvantage": true
     }
   ],
   "currency": {

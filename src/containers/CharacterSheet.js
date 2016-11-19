@@ -49,7 +49,7 @@ class CharacterSheet extends React.Component {
     this.stopLookForDM = this.stopLookForDM.bind(this);
   }
 
-  applyEdits() {
+  applyEdits(cb) {
     var propsCharacter = this.props.character;
     //Header data
     var tempClass = [];
@@ -142,20 +142,20 @@ class CharacterSheet extends React.Component {
       propsCharacter.inventory.push(item);
     }
     
-    /*
     propsCharacter.armor = [];
-    var armor = $('.equipment-Armor');
-    for(let i = 0; i < inventory.length; i++) {
-      console.log(armor);
-      let armor = propsCharacter.findArmor(armor[i].textContent);
+    var armors = $('.equipment-Armor');
+    for(let i = 0; i < armors.length; i++) {
+      console.log(armors[i]);
+      let armor = propsCharacter.findArmor(armors[i].textContent);
       propsCharacter.armor.push(armor);
     }
-    */
+    
     propsCharacter.weapons = [];
     var weapons = $('.equipment-Weapons');
     for(let i = 0; i < weapons.length; i++) {
+      //console.log(weapons);
       let weapon = propsCharacter.findWeapon(weapons[i].textContent);
-      propsCharacter.inventory.push(weapon);
+      propsCharacter.weapons.push(weapon);
     }
     
   }
@@ -237,8 +237,9 @@ class CharacterSheet extends React.Component {
     var viewState = 0;
     var lookingForDM = false;
     var connectedToDM = false;
-    this.applyEdits();
-    this.props.character.updateAutoValues();
+    this.applyEdits(() => {
+      this.props.character.updateAutoValues();
+    });
     this.setState({
       viewState: viewState,
       lookingForDM: lookingForDM,
