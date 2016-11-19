@@ -1,0 +1,81 @@
+[
+  {
+    "name": "padded",
+    "armorClass": 11,
+    "armorType": "light",
+    "strength": 0,
+    "stealthDisadvantage": true  },
+  {
+    "name": "leather",
+    "armorClass": 11,
+    "armorType": "light",
+    "strength": 0,
+    "stealthDisadvantage": false  },
+  {
+    "name": "studded leather",
+    "armorClass": 12,
+    "armorType": "light",
+    "strength": 0,
+    "stealthDisadvantage": false  },
+  {
+    "name": "hide",
+    "armorClass": 12,
+    "armorType": "medium",
+    "strength": 0,
+    "stealthDisadvantage": false  },
+  {
+    "name": "chain shirt",
+    "armorClass": 13,
+    "armorType": "medium",
+    "strength": 0,
+    "stealthDisadvantage": false  },
+  {
+    "name": "scale mail",
+    "armorClass": 14,
+    "armorType": "medium",
+    "strength": 0,
+    "stealthDisadvantage": true  },
+  {
+    "name": "breastplate",
+    "armorClass": 14,
+    "armorType": "medium",
+    "strength": 0,
+    "stealthDisadvantage": false  },
+  {
+    "name": "half plate",
+    "armorClass": 15,
+    "armorType": "medium",
+    "strength": 0,
+    "stealthDisadvantage": true  },
+  {
+    "name": "ring mail",
+    "armorClass": 14,
+    "armorType": "heavy",
+    "strength": 0,
+    "stealthDisadvantage": true  },
+  {
+    "name": "chain mail",
+    "armorClass": 16,
+    "armorType": "heavy",
+    "strength": 13,
+    "stealthDisadvantage": true  },
+  {
+    "name": "splint",
+    "armorClass": 17,
+    "armorType": "heavy",
+    "strength": 5,
+    "stealthDisadvantage": true  },
+  {
+    "name": "plate",
+    "armorClass": 18,
+    "armorType": "heavy",
+    "strength": 15,
+    "stealthDisadvantage": true  },
+  {
+    "name": "shield",
+    "armorClass": 2,
+    "armorType": "shield",
+    "strength": 0,
+    "stealthDisadvantage": false
+  }
+]
