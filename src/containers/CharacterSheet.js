@@ -142,7 +142,7 @@ class CharacterSheet extends React.Component {
       propsCharacter.inventory.push(item);
     }
     
-    
+    /*
     propsCharacter.armor = [];
     var armor = $('.equipment-Armor');
     for(let i = 0; i < inventory.length; i++) {
@@ -150,7 +150,7 @@ class CharacterSheet extends React.Component {
       let armor = propsCharacter.findArmor(armor[i].textContent);
       propsCharacter.armor.push(armor);
     }
-    
+    */
     propsCharacter.weapons = [];
     var weapons = $('.equipment-Weapons');
     for(let i = 0; i < weapons.length; i++) {
