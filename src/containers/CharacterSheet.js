@@ -3,6 +3,8 @@
 // Import external libraries
 import React from 'react';
 import {FormGroup, FormControl, Button, Grid, Row, Col, Panel} from 'react-bootstrap';
+import capital from 'to-capital-case';
+import _ from 'lodash';
 
 // Import internal libraries
 import {
@@ -46,6 +48,8 @@ class CharacterSheet extends React.Component {
   }
 
   applyEdits() {
+    //for iterating in loops...
+    var propsCharacter = this.props.character;
     //header data
     var tempClass = [];
     for (let i=0; i<this.props.character.classes.length; i++){
@@ -57,15 +61,15 @@ class CharacterSheet extends React.Component {
       }
       tempClass.push(tempObject);
     }
-    this.props.character.classes = tempClass;
-    this.props.character.name = document.getElementById('csform-name').value;
-    this.props.character.background = document.getElementById('csform-background').value;
-    this.props.character.playerName = document.getElementById('csform-Player').value;
-    this.props.character.race = document.getElementById('csform-race').value;
+    propsCharacter.classes = tempClass;
+    propsCharacter.name = document.getElementById('csform-name').value;
+    propsCharacter.background = document.getElementById('csform-background').value;
+    propsCharacter.playerName = document.getElementById('csform-Player').value;
+    propsCharacter.race = document.getElementById('csform-race').value;
     var tempAlign = document.getElementById('csform-alignment').value;
-    this.props.character.alignment = tempAlign.split(' ');
+    propsCharacter.alignment = tempAlign.split(' ');
     var tempExp = document.getElementById('csform-experience').value;
-    this.props.character.experience = Math.abs(parseInt(tempExp));
+    propsCharacter.experience = Math.abs(parseInt(tempExp));
     //equipment data
     //equipment declare
 
@@ -114,6 +118,12 @@ class CharacterSheet extends React.Component {
     this.props.character.skills.sleightOfHand.proficient = document.getElementById('csform-skill-sleightOfHand').checked;
     this.props.character.skills.stealth.proficient = document.getElementById('csform-skill-stealth').checked;
     this.props.character.skills.survival.proficient = document.getElementById('csform-skill-survival').checked;
+    
+    //currency data
+    _.forIn(this.props.character.currency, function(value, key) {
+      var moneyValue = document.getElementById('csform-money-'+capital(key)).value;
+      propsCharacter.currency[key] = Math.abs(parseInt(moneyValue));
+    });
   }
 
   validateBeforeExit() {
