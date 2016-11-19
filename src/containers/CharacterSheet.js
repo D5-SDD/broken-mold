@@ -141,6 +141,14 @@ class CharacterSheet extends React.Component {
     var character = this.props.character;
     var CS_GRID = null;
 
+    var spellData = [];
+    for(let i = 0; i < character.spells.length; i++) {
+      spellData.push({
+        name: character.spells[i],
+        description: character.getSpellFromName(character.spells[i]).description
+      });
+    }
+    
     // populate the grid that displays all the relevant information to the user
     CS_GRID = (
       <Grid className="character-sheet-grid">
@@ -197,7 +205,7 @@ class CharacterSheet extends React.Component {
               cast={character.spellCastingClass}
               save={character.spellSaveDC}
               viewState={this.state.viewState}
-            />
+            />            
             <Row>
               <Col className="inner col" md={5}>
                 <Currency 
@@ -266,6 +274,16 @@ class CharacterSheet extends React.Component {
               </Col>
             </Row>
           </Col>
+          <Row>
+            <Col className="col" md={12}>
+              <TextBox
+                accordion
+                data={spellData}
+                title="Spells"
+                viewState={this.props.viewState}
+              />
+            </Col>
+          </Row>
         </Row>
       </Grid>
     );

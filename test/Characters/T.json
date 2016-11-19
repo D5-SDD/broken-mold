@@ -115,15 +115,17 @@
     "successes": 0,
     "failures": 0
   },
-  "weapons": {
-    "name": "longsword",
-    "attackBonus": 4,
-    "damage": "1d8+2",
-    "type": "slashing",
-    "properties": [
-      "versatile(1d10)"
-    ]
-  },
+  "weapons": [
+    {
+      "name": "longsword",
+      "attackBonus": 4,
+      "damage": "1d8+2",
+      "type": "slashing",
+      "properties": [
+        "versatile(1d10)"
+      ]
+    }
+  ],
   "inventory": [
     {
       "item": "Sling",
@@ -221,13 +223,15 @@
       "weight": "5 lb."
     }
   ],
-  "armor": {
-    "name": "studded leather armor",
-    "armorClass": 12,
-    "armorType": "light",
-    "strength": 0,
-    "stealthDisadvantage": false
-  },
+  "armor": [
+    {
+      "name": "studded leather armor",
+      "armorClass": 12,
+      "armorType": "light",
+      "strength": 0,
+      "stealthDisadvantage": false
+    }
+  ],
   "currency": {
     "platinum": 1,
     "gold": 6,
