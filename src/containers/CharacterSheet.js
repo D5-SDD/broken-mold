@@ -78,12 +78,16 @@ class CharacterSheet extends React.Component {
     this.props.character.hitpoints.maximum = Math.abs(document.getElementById('csform-maxhealth').value);
     this.props.character.hitpoints.current = Math.abs(document.getElementById('csform-currhealth').value);
     this.props.character.hitpoints.temporary = Math.abs(document.getElementById('csform-temphealth').value);
-    console.log(document.getElementById('csform-personalityTraits').value);
     this.props.character.personalityTraits = document.getElementById('csform-personalityTraits').value;
-    console.log(this.props.character.personalityTraits);
     this.props.character.ideals = document.getElementById('csform-ideals').value;
     this.props.character.bonds = document.getElementById('csform-bonds').value;
     this.props.character.flaws = document.getElementById('csform-flaws').value;
+    this.props.character.abilityScores.strength = Math.abs(document.getElementById('csform-abilityscorestrength').value);
+    this.props.character.abilityScores.dexterity = Math.abs(document.getElementById('csform-abilityscoredexterity').value);
+    this.props.character.abilityScores.constitution = Math.abs(document.getElementById('csform-abilityscoreconstitution').value);
+    this.props.character.abilityScores.intelligence = Math.abs(document.getElementById('csform-abilityscoreintelligence').value);
+    this.props.character.abilityScores.wisdom = Math.abs(document.getElementById('csform-abilityscorewisdom').value);
+    this.props.character.abilityScores.charisma = Math.abs(document.getElementById('csform-abilityscorecharisma').value);
   }
 
   validateBeforeExit() {
