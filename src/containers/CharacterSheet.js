@@ -136,6 +136,30 @@ class CharacterSheet extends React.Component {
     closeTCPClient();
     stopUDPListen();
   }
+  
+  _cancelEdit() {
+    var viewState = 0;
+    var lookingForDM = this.state.lookingForDM;
+    var connectedToDM = this.state.connectedToDM;
+    this.setState({
+      viewState: viewState,
+      lookingForDM: lookingForDM,
+      connectedToDM: connectedToDM      
+    });
+  }
+  
+  _makeEdit() {
+    var viewState = 0;
+    var lookingForDM = false;
+    var connectedToDM = false;    
+    this.applyEdits();
+    this.setState({
+      viewState: viewState,
+      lookingForDM: lookingForDM,
+      connectedToDM: connectedToDM      
+    });  
+  
+  }
 
   render() {
     var character = this.props.character;
@@ -320,12 +344,35 @@ class CharacterSheet extends React.Component {
     var DMButtonText = 'Connect To DM';
     var DMButtonStyle = "primary";
     
+    var okButton = null;
+    var cancelButton = null;
+    
     if (this.state.lookingForDM) {
       DMButtonText = 'Cancel';
       DMButtonStyle = "danger";
     }
     if (this.state.connectedToDM) {
       DMButtonText = 'Disconnect From DM';
+    }
+    if (this.state.viewState) {
+      cancelButton = (
+        <Button
+          bsStyle="danger"
+          bsSize="small"
+          onClick={this._cancelEdit.bind(this)}
+        >
+          Cancel
+        </Button>
+      );
+      okButton = (
+      <Button
+          bsStyle="success"
+          bsSize="small"
+          onClick={this._makeEdit.bind(this)}
+        >
+          OK
+        </Button>      
+      );
     }
     return (
       <div className="character-sheet">
@@ -346,12 +393,13 @@ class CharacterSheet extends React.Component {
           >
             {DMButtonText}
           </Button>
+          {okButton}, {cancelButton}
         </nav>
         {back}
         <FaPencil
           className="edit"
           onClick={() => {
-            if (!this.state.lookingForDM && !this.state.connectedToDM) {
+            if (!this.state.lookingForDM && !this.state.connectedToDM && !this.state.viewState) {
               // FOR NOW, THIS TOGGLES, SAVE AND CANCEL BUTTONS SHOULD BE MADE
               if (this.state.viewState === 0) {
                 this.setState({viewState: 1});
