@@ -57,9 +57,7 @@ class AbilityScore extends React.Component {
 
 	render() {
     var name = this.props.name;
-    
-    
-    
+
     var savingThrowsIcon = <FaStarO />;
     if (this.props.savingThrows.proficient === true) {
       savingThrowsIcon = <FaStar />;
@@ -74,7 +72,7 @@ class AbilityScore extends React.Component {
       savingThrowBox = (
         <FormGroup>
           <FormControl
-            id={"csform-savingthrow-" + name}
+            id={'csform-savingthrow-' + name}
             type="checkbox"
             defaultChecked={this.props.savingThrows.proficient}
           />
@@ -84,13 +82,13 @@ class AbilityScore extends React.Component {
     }
     var skills = [];
     if (this.props.viewState) {
-      for(let i = 0; i < SKILLS[name].length; i++) {
+      for (let i = 0; i < SKILLS[name].length; i++) {
         let skill = SKILLS[name][i];
         skills.push(
           <div key={skill}>
             <FormGroup>
-              <FormControl 
-                id={"csform-skill-" + skill}
+              <FormControl
+                id={'csform-skill-' + skill}
                 type="checkbox"
                 defaultChecked={this.props.skills[skill].proficient}
               />
@@ -116,7 +114,7 @@ class AbilityScore extends React.Component {
     if (mod >= 0) {
       mod = '+' + this.props.mod;
     }
-    
+
     var abilityScoreBox = (
       <Panel header={capital(name)} className="centered">
         <div className='ability-score value'>
