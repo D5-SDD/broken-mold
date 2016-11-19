@@ -98,7 +98,7 @@ class CharacterMenu extends React.Component {
     startTCPServer((character, client) => {
       //once connection is made, save and
       stopUDPBroadcast();
-      var temp = JSON.parse(fs.readFileSync(CHAR_LOCATION + character[i].filename));
+      var temp = JSON.parse(fs.readFileSync(CHAR_LOCATION + character.filename));
       console.log(temp);
       client.sendMessage(temp);
       //close TCP client
@@ -116,7 +116,9 @@ class CharacterMenu extends React.Component {
       deleteCharacter(this.state.treeData[node].filename, () => {
         this._resetMenu();
       });
-    } else {
+    } else if (this.state.lookingForClient || this.state.receiving) {
+      //DO NOTHING
+    }else {
       stopUDPBroadcast();
       stopUDPListen();
       closeTCPServer();

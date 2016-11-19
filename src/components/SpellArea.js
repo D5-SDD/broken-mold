@@ -2,7 +2,8 @@
 
 // Inport libraries
 import React from 'react';
-import {Col, Row, Panel} from 'react-bootstrap';
+import {Grid, Col, Row, Panel} from 'react-bootstrap';
+import {TextBox} from '../components/CharacterSheet';
 
 // Displays a character's spell information in the Character Sheet View
 class SpellArea extends React.Component {
@@ -36,7 +37,7 @@ class SpellArea extends React.Component {
 SpellArea.propTypes = {
   attack: React.PropTypes.number.isRequired,
   cast: React.PropTypes.string.isRequired,
-  save: React.PropTypes.number.isRequired
+  save: React.PropTypes.number.isRequired,
 };
 
 export default SpellArea;

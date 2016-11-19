@@ -50,7 +50,7 @@ class DMView extends React.Component {
     startUDPBroadcast(true);
     startTCPServer((charLocation, client) => {
       this.characterReceivedCB(charLocation, client);
-    }, [], (client) => {
+    }, null, (client) => {
       this.characterRemovedCB(client);
     }, true);
 

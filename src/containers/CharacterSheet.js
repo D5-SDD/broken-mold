@@ -136,11 +136,43 @@ class CharacterSheet extends React.Component {
     closeTCPClient();
     stopUDPListen();
   }
+  
+  _cancelEdit() {
+    var viewState = 0;
+    var lookingForDM = this.state.lookingForDM;
+    var connectedToDM = this.state.connectedToDM;
+    this.setState({
+      viewState: viewState,
+      lookingForDM: lookingForDM,
+      connectedToDM: connectedToDM      
+    });
+  }
+  
+  _makeEdit() {
+    var viewState = 0;
+    var lookingForDM = false;
+    var connectedToDM = false;    
+    this.applyEdits();
+    this.setState({
+      viewState: viewState,
+      lookingForDM: lookingForDM,
+      connectedToDM: connectedToDM      
+    });  
+  
+  }
 
   render() {
     var character = this.props.character;
     var CS_GRID = null;
 
+    var spellData = [];
+    for(let i = 0; i < character.spells.length; i++) {
+      spellData.push({
+        name: character.spells[i],
+        description: character.getSpellFromName(character.spells[i]).description
+      });
+    }
+    
     // populate the grid that displays all the relevant information to the user
     CS_GRID = (
       <Grid className="character-sheet-grid">
@@ -197,18 +229,12 @@ class CharacterSheet extends React.Component {
               cast={character.spellCastingClass}
               save={character.spellSaveDC}
               viewState={this.state.viewState}
-            />
+            />            
             <Row>
               <Col className="inner col" md={5}>
                 <Currency 
                   currency={character.currency}
                   viewState = {this.state.viewState}
-                />
-              </Col>
-              <Col className="inner col" md={7}>
-                <Equipment
-                  data={[character.inventory, character.armor]}
-                  viewState={this.state.viewState}
                 />
               </Col>
             </Row>
@@ -266,6 +292,41 @@ class CharacterSheet extends React.Component {
               </Col>
             </Row>
           </Col>
+          <Row>
+            <Col className="spells" md={12}>
+              <TextBox
+                accordion
+                data={spellData}
+                title="Spells"
+                viewState={this.props.viewState}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col className="inventory" md={5}>
+              <Equipment
+                heading="Equipment"
+                data={character.inventory}
+                viewState={this.state.viewState}
+              />
+            </Col>
+            <Col className="armor" md={7}>
+              <Row>
+                <Equipment
+                  heading="Armor"
+                  data={character.armor}
+                  viewState = {this.state.viewState}
+                />
+              </Row>
+                <Equipment
+                  heading="Weapons"
+                  data={character.weapons}
+                  viewState = {this.state.viewState}
+                />
+              <Row>
+              </Row>
+            </Col>
+          </Row>
         </Row>
       </Grid>
     );
@@ -283,12 +344,35 @@ class CharacterSheet extends React.Component {
     var DMButtonText = 'Connect To DM';
     var DMButtonStyle = "primary";
     
+    var okButton = null;
+    var cancelButton = null;
+    
     if (this.state.lookingForDM) {
       DMButtonText = 'Cancel';
       DMButtonStyle = "danger";
     }
     if (this.state.connectedToDM) {
       DMButtonText = 'Disconnect From DM';
+    }
+    if (this.state.viewState) {
+      cancelButton = (
+        <Button
+          bsStyle="danger"
+          bsSize="small"
+          onClick={this._cancelEdit.bind(this)}
+        >
+          Cancel
+        </Button>
+      );
+      okButton = (
+      <Button
+          bsStyle="success"
+          bsSize="small"
+          onClick={this._makeEdit.bind(this)}
+        >
+          OK
+        </Button>      
+      );
     }
     return (
       <div className="character-sheet">
@@ -309,12 +393,13 @@ class CharacterSheet extends React.Component {
           >
             {DMButtonText}
           </Button>
+          {okButton}, {cancelButton}
         </nav>
         {back}
         <FaPencil
           className="edit"
           onClick={() => {
-            if (!this.state.lookingForDM) {
+            if (!this.state.lookingForDM && !this.state.connectedToDM && !this.state.viewState) {
               // FOR NOW, THIS TOGGLES, SAVE AND CANCEL BUTTONS SHOULD BE MADE
               if (this.state.viewState === 0) {
                 this.setState({viewState: 1});
