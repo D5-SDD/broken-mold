@@ -7,10 +7,10 @@ import {Tabs, Tab} from 'react-bootstrap';
 // Import containers
 import CharacterView from './CharacterView';
 import DMView from './DMView';
-import NetworkingView from './NetworkingView';
 
 // Import internal libraries
 import {readMap} from '../../lib/Character';
+import {TCP, UDP, stopUDPBroadcast, closeTCPServer} from '../../lib/Networking';
 
 // Import stylesheet
 import '../stylesheets/containers/App.scss';
@@ -22,6 +22,13 @@ class AppContainer extends React.Component {
 
     // import the characters from the character map file
     this.characters = readMap();
+
+    this.state = {
+      TCPOpen: false,
+      UDPOpen: false
+    };
+
+    this.networkingStateCB = this.networkingStateCB.bind(this);
   }
 
   // Called when a new tab is selected
@@ -29,17 +36,41 @@ class AppContainer extends React.Component {
     this.setState({activeTab: selectedKey});
   }
 
+  networkingStateCB(TCPOpen, UDPOpen) {
+    this.setState({
+      TCPOpen: TCPOpen,
+      UDPOpen: UDPOpen
+    });
+  }
+
   render() {
     return (
-      <Tabs defaultActiveKey={1} animation={false} id="app-tabs">
+      <Tabs
+        defaultActiveKey={1}
+        animation={false}
+        id="app-tabs"
+        onSelect={(eventKey) => {
+          if (eventKey === 1) {
+            // TODO: Make this only happen if UDP broadcast and TCP Server
+            if (UDP && (UDP.timer && UDP.dm)) {
+              stopUDPBroadcast();
+            }
+            if (TCP && (!TCP.client && TCP.dm)){
+              closeTCPServer();
+            }
+            this.networkingStateCB(false, false);
+          }
+        }}
+      >
         <Tab eventKey={1} title="Characters">
           <CharacterView />
         </Tab>
-        <Tab eventKey={2} title="Dungeon Master" disabled>
-          <DMView />
-        </Tab>
-        <Tab eventKey={3} title="Networking">
-          <NetworkingView />
+        <Tab eventKey={2} title="Dungeon Master">
+          <DMView
+            TCPOpen={this.state.TCPOpen}
+            UDPOpen={this.state.UDPOpen}
+            networkingStateCB={this.networkingStateCB}
+          />
         </Tab>
       </Tabs>
     );

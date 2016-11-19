@@ -2,7 +2,7 @@
 
 // Inport libraries
 import React from 'react';
-import {Panel, Table} from 'react-bootstrap';
+import {FormGroup, FormControl, Panel, Table} from 'react-bootstrap';
 import capital from 'to-capital-case';
 import _ from 'lodash';
 
@@ -15,10 +15,11 @@ class Currency extends React.Component {
   render() {
     var currencies = [];
     _.forIn(this.props.currency, function(value, key) {
+      var properValue = value;
       currencies.push(
         <tr key={key}>
           <td>{capital(key)}</td>
-          <td>{value}</td>
+          <td>{properValue}</td>
         </tr>
       );
     });
@@ -36,6 +37,7 @@ class Currency extends React.Component {
 }
 
 Currency.propTypes = {
+  viewState: React.PropTypes.number.isRequired,
   currency: React.PropTypes.shape({
     platinum: React.PropTypes.number,
     gold: React.PropTypes.number,

@@ -2,7 +2,7 @@
 
 // Inport libraries
 import React from 'react';
-import {Panel, ListGroup, ListGroupItem} from 'react-bootstrap';
+import {FormGroup, FormControl, Panel, ListGroup, ListGroupItem} from 'react-bootstrap';
 import _ from 'lodash';
 import capital from 'to-capital-case';
 
@@ -16,6 +16,8 @@ class Equipment extends React.Component {
 
   render() {
     var items = [];
+    var EquipViewState = this.props.viewState;
+    
     this.data.map(function(value) {
       let title = '';
       if (value.name) {
@@ -25,9 +27,16 @@ class Equipment extends React.Component {
       }
 
       items.push(
-        <ListGroupItem key={items.length}>
-          {title}
-        </ListGroupItem>
+        /* if (EquipViewState === 1) {
+          <FormGroup key={items.length}>
+            <FormControl id={"csform-item-"+items.length} type="text" 
+              defaultValue={title}/>
+          </FormGroup>
+        } else { */
+          <ListGroupItem key={items.length}>
+            {title}
+          </ListGroupItem>
+        //}
       );
     });
 
@@ -42,7 +51,8 @@ class Equipment extends React.Component {
 }
 
 Equipment.propTypes = {
-  data: React.PropTypes.array.isRequired
+  data: React.PropTypes.array.isRequired,
+  viewState: React.PropTypes.number.isRequired
 };
 
 export default Equipment;

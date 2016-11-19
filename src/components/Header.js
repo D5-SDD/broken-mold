@@ -2,7 +2,7 @@
 
 // Inport libraries
 import React from 'react';
-import {Row, Col, Panel} from 'react-bootstrap';
+import {FormGroup, FormControl, Row, Col, Panel} from 'react-bootstrap';
 
 // Displays various character information in the Header for the Character Sheet View
 class Header extends React.Component {
@@ -14,18 +14,69 @@ class Header extends React.Component {
     var printAlignment = this.props.alignment[0] + ' ' + this.props.alignment[1];
     var classAndLevel = [];
     for (let i=0; i<this.props.classes.length; i++) {
-      classAndLevel.push(
-        <div>
-          {this.props.classes[i].name+ ' ' +this.props.classes[i].level}
-        </div>
-       );
+      if (this.props.viewState === 1) {
+        classAndLevel.push(
+          //may need help here, fact that its an array is making update weird
+          <FormGroup key={i}>
+            <FormControl id={"csform-class-"+i} type="text" 
+            defaultValue={this.props.classes[i].name+ ' ' +this.props.classes[i].level}/>
+          </FormGroup>
+        );
+      } else {
+        classAndLevel.push(
+          <div key={i}>
+            {this.props.classes[i].name+ ' ' +this.props.classes[i].level}
+          </div>
+        );
+      }
     }
     
+
+    //editing needs
+    var charName = this.props.name;
+    var charBackground = this.props.background;
+    var charPlayerName = this.props.playerName;
+    var charRace = this.props.race;
+    var charExp = this.props.experience;
+    if (this.props.viewState === 1) {
+      charName = (
+        <FormGroup>
+          <FormControl id="csform-name" type="text" defaultValue={this.props.name}/>
+        </FormGroup>
+      )
+      charBackground = (
+        <FormGroup>
+          <FormControl id="csform-background" type="text" defaultValue={charBackground}/>
+        </FormGroup>
+      )
+      charPlayerName = (
+        <FormGroup>
+          <FormControl id="csform-Player" type="text" defaultValue={charPlayerName}/>
+        </FormGroup>
+      )
+      charRace = (
+        <FormGroup>
+          <FormControl id="csform-race" type="text" defaultValue={charRace}/>
+        </FormGroup>
+      )
+      printAlignment = (
+        <FormGroup>
+          <FormControl id="csform-alignment" type="text"
+            defaultValue={this.props.alignment[0] + ' ' + this.props.alignment[1]}/>
+        </FormGroup>
+      )
+      charExp = (
+        <FormGroup>
+          <FormControl id="csform-experience" type="number" defaultValue={charExp}/>
+        </FormGroup>
+      )
+    }
+
     return (
       <Row className="header" >
         <Col className="col" md={3}>
           <Panel className="centered">
-            Character Name: {this.props.name}
+            Character Name: {charName}
           </Panel>
         </Col>
         <Col className="col" md={9}>
@@ -37,19 +88,19 @@ class Header extends React.Component {
             </Col>
             <Col className="col" md={3}>
               <Panel className="centered">
-                Background:<br/> {this.props.background}
+                Background:<br/> {charBackground}
               </Panel>
             </Col>
             <Col className="col" md={3}>
               <Panel className="centered">
-                Player Name:<br/> {this.props.playerName}
+                Player Name:<br/> {charPlayerName}
               </Panel>
             </Col>
           </Row>
           <Row>
             <Col className="col" md={3}>
               <Panel className="centered">
-                Race:<br/> {this.props.race}
+                Race:<br/> {charRace}
               </Panel>
             </Col>
             <Col className="col" md={3}>
@@ -59,7 +110,7 @@ class Header extends React.Component {
             </Col>
             <Col className="col" md={3}>
               <Panel className="centered">
-                Experience Points:<br/> {this.props.experience}
+                Experience Points:<br/> {charExp}
               </Panel>
             </Col>
           </Row>
@@ -75,7 +126,8 @@ Header.propTypes = {
   experience: React.PropTypes.number.isRequired,
   name: React.PropTypes.string.isRequired,
   playerName: React.PropTypes.string.isRequired,
-  race: React.PropTypes.string.isRequired
+  race: React.PropTypes.string.isRequired,
+  viewState: React.PropTypes.number.isRequired
 };
 
 export default Header;

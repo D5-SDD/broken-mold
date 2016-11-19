@@ -6,9 +6,11 @@ import fs from 'fs';
 import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
 import TreeMenu, {Utils} from 'react-tree-menu';
-import {readMap} from '../../lib/Character';
-import {UDP, TCP, startUDPBroadcast, 
-  stopUDPBroadcast, startUDPListen, startTCPServer, closeTCPServer} from '../../lib/Networking';
+import {readMap,exportMap, deleteCharacter} from '../../lib/Character';
+import {
+  startUDPBroadcast, stopUDPBroadcast, startUDPListen,
+  stopUDPListen, startTCPServer, closeTCPServer
+} from '../../lib/Networking';
 
 // Import the stylesheet
 import '../stylesheets/components/CharacterMenu';
@@ -21,7 +23,10 @@ class CharacterMenu extends React.Component {
   constructor(props) {
     super(props);
 
-    // update the map or whatever here
+    // update the map
+    // TODO: call update function
+    exportMap();
+    // read Map
     this.characterMap = readMap();
 
     // parse the character map and create a tree data structure for the menu
@@ -33,94 +38,194 @@ class CharacterMenu extends React.Component {
 
     this.state = {
       treeData: data,
-      sharing: false
+      sharing: false,
+      lookingForClient: false,
+      receiving: false,
+      deleting: false
     };
 
     this._toggleSharing = this._toggleSharing.bind(this);
     this._confirmSharing = this._confirmSharing.bind(this);
+    this._toggleReceiving = this._toggleReceiving.bind(this);
+    this._toggleLookingForClient = this._toggleLookingForClient.bind(this);
+    this._toggleDelete = this._toggleDelete.bind(this);
+    this._resetMenu = this._resetMenu.bind(this);
+  }
+
+  _resetMenu() {
+    exportMap();
+    this.characterMap = readMap();
+    var data = [];
+    for (let i = 0; i < this.characterMap.length; i++) {
+      data.push(this.characterMap[i]);
+    }
+    this.setState({
+      treeData: data,
+      sharing: false,
+      lookingForClient: false,
+      receiving: false,
+      deleting: false
+    });
   }
 
   // Called when the "Share" button is clicked, toggles the sharing state
   _toggleSharing() {
     var sharing = !this.state.sharing;
     var data = this.state.treeData;
-    for (let i = 0; i < data.length; i++) {
-      data[i].checkbox = sharing;
-      data[i].checked = false;
-    }
+    var lookingForClient = this.state.lookingForClient;
+    var receiving = this.state.receiving;
+    var deleting = this.state.deleting;
     this.setState({
       treeData: data,
-      sharing: sharing
+      sharing: sharing,
+      lookingForClient: lookingForClient,
+      receiving: receiving,
+      deleting: deleting
     });
   }
 
   // Called when the "OK" button is clicked while sharing,
-  // initiates a confirmation fialog followed by the sharing interface
-  _confirmSharing() {
+  // initiates a confirmation dialog followed by the sharing interface
+  _confirmSharing(character) {
     if (!this.state.sharing) {
       return;
     }
 
-    // parse the character tree and find selected characters
-    var charactersToShare = [];
-    for (let i = 0; i < this.state.treeData.length; i++) {
-      if (this.state.treeData[i].checked === true) {
-        charactersToShare.push(this.state.treeData[i]);
-      }
-    }
-
     this._toggleSharing();
 
-    // only attempt to share if there were selected characters
-    if (charactersToShare.length === 0) {
-      return;
-    }
-    // TODO: Make the appropriate calls to the networking library
+    this._toggleLookingForClient();
 
-    startTCPServer((charactersToShare, client) => {
+    startTCPServer((character, client) => {
       //once connection is made, save and
       stopUDPBroadcast();
-      for (let i = 0; i < charactersToShare.length; i++) {
-        var temp = fs.readFileSync(CHAR_LOCATION + charactersToShare[i].filename);
-        client.write(temp);
-      }
+      var temp = JSON.parse(fs.readFileSync(CHAR_LOCATION + character[i].filename));
+      console.log(temp);
+      client.sendMessage(temp);
       //close TCP client
       closeTCPServer();
-    }, charactersToShare);
+      this._toggleLookingForClient();
+    }, character, () => {}, false);
     startUDPBroadcast(false);
   }
 
   // Called when a character is selected from the menu
   _handleNodeClicked(action, node) {
-    this.props.selectCharacterCB(this.state.treeData[node]);
+    if (this.state.sharing) {
+      this._confirmSharing(this.state.treeData[node]);
+    } else if (this.state.deleting) {
+      deleteCharacter(this.state.treeData[node].filename, () => {
+        this._resetMenu();
+      });
+    } else {
+      stopUDPBroadcast();
+      stopUDPListen();
+      closeTCPServer();
+      this.props.selectCharacterCB(this.state.treeData[node]);
+    }
   }
 
-  // Called when a checkbox is clicked during sharing
-  _handleNodeCheckChange(propName, lineage) {
-    this.setState(
-      Utils.getNewTreeState(lineage, this.state.treeData, propName)
-    );
+  _toggleReceiving() {
+    var sharing = this.state.sharing;
+    var data = this.state.treeData;
+    var lookingForClient = this.state.lookingForClient;
+    var receiving = !this.state.receiving;
+    var deleting = this.state.deleting;
+
+    if (receiving) {
+      startUDPListen(false, () => {
+        this._resetMenu();
+      });
+    } else {
+      stopUDPListen();
+    }
+
+    this.setState({
+      treeData: data,
+      sharing: sharing,
+      lookingForClient: lookingForClient,
+      receiving: receiving,
+      deleting: deleting
+    });
+  }
+
+  _toggleLookingForClient() {
+    var sharing = this.state.sharing;
+    var data = this.state.treeData;
+    var lookingForClient = !this.state.lookingForClient;
+    var receiving = this.state.receiving;
+    var deleting = this.state.deleting;
+
+    if (this.state.lookingForClient) {
+      stopUDPBroadcast();
+      closeTCPServer();
+    }
+    if (this.state.sharing) {
+      sharing = false;
+    }
+
+    this.setState({
+      treeData: data,
+      sharing: sharing,
+      lookingForClient: lookingForClient,
+      receiving: receiving,
+      deleting: deleting
+    });
+  }
+  
+  _toggleDelete() {
+    var sharing = this.state.sharing;
+    var data = this.state.treeData;
+    var lookingForClient = this.state.lookingForClient;
+    var receiving = this.state.receiving;
+    var deleting = !this.state.deleting; 
+    
+    this.setState({
+      treeData: data,
+      sharing: sharing,
+      lookingForClient: lookingForClient,
+      receiving: receiving,
+      deleting: deleting
+    });
   }
 
   render() {
     var shareButtonText = ' Share ';
-    var shareButtonStyle = 'primary';
-    var continueButton = null;
+    var shareButtonStyle = "primary";
+    var deleteButtonText = ' Delete ';
+    var deleteButtonStyle = "primary";
+    var cancelButton = null;
+    var disableButtons = false;
 
     // customize the share button
     if (this.state.sharing === true) {
-      shareButtonText = 'Cancel';
-      shareButtonStyle = 'danger';
-      continueButton = (
-        <Button
-          className="continue"
-          bsStyle="success"
+      shareButtonText = ' Cancel ';
+      shareButtonStyle = "danger";
+      disableButtons = true;
+    }
+
+    if (this.state.lookingForClient === true || this.state.receiving === true) {
+      cancelButton = (
+      <Button
+          bsStyle="danger"
           bsSize="small"
-          onClick={this._confirmSharing}
+          onClick={() => {
+            if (this.state.lookingForClient) {
+              this._toggleLookingForClient();
+            } else {
+              this._toggleReceiving();
+            }
+          }}
         >
-          OK
+          Cancel
         </Button>
       );
+      disableButtons = true;
+    }
+    
+    if (this.state.deleting) {
+      deleteButtonText = ' Cancel ';
+      var deleteButtonStyle = "danger";
+      disableButtons = true;
     }
 
     return (
@@ -129,44 +234,62 @@ class CharacterMenu extends React.Component {
           style={{display: 'none'}}
           id="fileDialog"
           type="file"
+          title="Load Character"
           accept=".json"
-          multiple
+          onChange={this.props.loadCharacterCB}
         />
         <nav className="navigation" id="header">
           <Button
             bsStyle="primary"
             bsSize="small"
             onClick={this.props.newCharacterCB}
-            disabled
+            disabled = {disableButtons}
           >
             New
           </Button>
           <Button
             bsStyle="primary"
             bsSize="small"
-            onClick={this.props.loadCharacterCB}
+            onClick={() => {
+              $('#fileDialog').click();
+            }}
+            disabled = {disableButtons}
           >
             Load
+          </Button>
+          <Button
+            bsStyle={deleteButtonStyle}
+            bsSize="small"
+            onClick={this._toggleDelete}
+            disabled = {Boolean(disableButtons && !this.state.deleting)}
+          >
+            {deleteButtonText}
           </Button>
           <Button
             bsStyle={shareButtonStyle}
             bsSize="small"
             onClick={this._toggleSharing}
+            disabled = {Boolean(disableButtons && !this.state.sharing)}
           >
             {shareButtonText}
+          </Button>
+          <Button
+            bsStyle="primary"
+            bsSize="small"
+            onClick={this._toggleReceiving}
+            disabled = {disableButtons}
+          >
+            Receive Character
           </Button>
         </nav>
         <TreeMenu
           classNamePrefix={'character-tree'}
           collapsible={false}
           onTreeNodeClick={this._handleNodeClicked.bind(this, 'clicked')}
-          onTreeNodeCheckChange={
-            this._handleNodeCheckChange.bind(this, 'checked')
-          }
           data={this.state.treeData}
         />
         <nav className="navigation" id="footer">
-          {continueButton}
+          {cancelButton}
         </nav>
       </div>
     );
