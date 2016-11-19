@@ -11,7 +11,7 @@ import {
 } from '../components/CharacterSheet';
 
 import {
-  UDP, TCP, startUDPListen, stopUDPListen, startTCPClient, closeTCPClient
+  startUDPListen, stopUDPListen, closeTCPClient
 } from '../../lib/Networking.js';
 
 // Import icons
@@ -50,11 +50,11 @@ class CharacterSheet extends React.Component {
     var tempClass = [];
     for (let i=0; i<this.props.character.classes.length; i++){
       var classAndLevel = document.getElementById('csform-class-'+i).value;
-      var tempArray = classAndLevel.split(" ");
+      var tempArray = classAndLevel.split(' ');
       var tempObject = {
-        "name" : tempArray[0],
-        "level": parseInt(tempArray[1])
-      }
+        'name' : tempArray[0],
+        'level': parseInt(tempArray[1])
+      };
       tempClass.push(tempObject);
     }
     this.props.character.classes = tempClass;
@@ -63,12 +63,12 @@ class CharacterSheet extends React.Component {
     this.props.character.playerName = document.getElementById('csform-Player').value;
     this.props.character.race = document.getElementById('csform-race').value;
     var tempAlign = document.getElementById('csform-alignment').value;
-    this.props.character.alignment = tempAlign.split(" ");
+    this.props.character.alignment = tempAlign.split(' ');
     var tempExp = document.getElementById('csform-experience').value;
     this.props.character.experience = parseInt(tempExp);
     //equipment data
     //equipment declare
-    
+
     //DiceAndSaves data
     this.props.character.hitDice = document.getElementById('csform-hitDice').value;
     this.props.character.deathSaves.successes = document.getElementById('csform-deathSucc').value;
@@ -84,7 +84,7 @@ class CharacterSheet extends React.Component {
     this.disconnectFromDM();
     this.props.exitCharacterSheetCB();
   }
-  
+
   networkCB() {
     var viewState = this.state.viewState;
     var lookingForDM = false;
@@ -96,10 +96,10 @@ class CharacterSheet extends React.Component {
     this.setState({
       viewState: viewState,
       lookingForDM: lookingForDM,
-      connectedToDM: connectedToDM      
-    });  
+      connectedToDM: connectedToDM
+    });
   }
-  
+
   lookForDM(charLocation) {
     if (!this.props.character.isCharacterValid()) {
       console.log('Can\'t be shared till savable');
@@ -116,10 +116,10 @@ class CharacterSheet extends React.Component {
     this.setState({
       viewState: viewState,
       lookingForDM: lookingForDM,
-      connectedToDM: connectedToDM      
+      connectedToDM: connectedToDM
     });
   }
-  
+
   stopLookForDM() {
     stopUDPListen();
     var viewState = this.state.viewState;
@@ -128,37 +128,37 @@ class CharacterSheet extends React.Component {
     this.setState({
       viewState: viewState,
       lookingForDM: lookingForDM,
-      connectedToDM: connectedToDM      
-    });  
+      connectedToDM: connectedToDM
+    });
   }
-  
+
   disconnectFromDM() {
     closeTCPClient();
     stopUDPListen();
   }
-  
+
   _cancelEdit() {
     var viewState = 0;
     var lookingForDM = this.state.lookingForDM;
     var connectedToDM = this.state.connectedToDM;
+    console.log(this.props.character.inventory);
     this.setState({
       viewState: viewState,
       lookingForDM: lookingForDM,
-      connectedToDM: connectedToDM      
+      connectedToDM: connectedToDM
     });
   }
-  
+
   _makeEdit() {
     var viewState = 0;
     var lookingForDM = false;
-    var connectedToDM = false;    
+    var connectedToDM = false;
     this.applyEdits();
     this.setState({
       viewState: viewState,
       lookingForDM: lookingForDM,
-      connectedToDM: connectedToDM      
-    });  
-  
+      connectedToDM: connectedToDM
+    });
   }
 
   render() {
@@ -166,13 +166,13 @@ class CharacterSheet extends React.Component {
     var CS_GRID = null;
 
     var spellData = [];
-    for(let i = 0; i < character.spells.length; i++) {
+    for (let i = 0; i < character.spells.length; i++) {
       spellData.push({
         name: character.spells[i],
         description: character.getSpellFromName(character.spells[i]).description
       });
     }
-    
+
     // populate the grid that displays all the relevant information to the user
     CS_GRID = (
       <Grid className="character-sheet-grid">
@@ -229,10 +229,10 @@ class CharacterSheet extends React.Component {
               cast={character.spellCastingClass}
               save={character.spellSaveDC}
               viewState={this.state.viewState}
-            />            
+            />
             <Row>
               <Col className="inner col" md={5}>
-                <Currency 
+                <Currency
                   currency={character.currency}
                   viewState = {this.state.viewState}
                 />
@@ -298,7 +298,7 @@ class CharacterSheet extends React.Component {
                 accordion
                 data={spellData}
                 title="Spells"
-                viewState={this.props.viewState}
+                viewState={this.state.viewState}
               />
             </Col>
           </Row>
@@ -323,8 +323,6 @@ class CharacterSheet extends React.Component {
                   data={character.weapons}
                   viewState = {this.state.viewState}
                 />
-              <Row>
-              </Row>
             </Col>
           </Row>
         </Row>
@@ -342,14 +340,14 @@ class CharacterSheet extends React.Component {
     }
 
     var DMButtonText = 'Connect To DM';
-    var DMButtonStyle = "primary";
-    
+    var DMButtonStyle = 'primary';
+
     var okButton = null;
     var cancelButton = null;
-    
+
     if (this.state.lookingForDM) {
       DMButtonText = 'Cancel';
-      DMButtonStyle = "danger";
+      DMButtonStyle = 'danger';
     }
     if (this.state.connectedToDM) {
       DMButtonText = 'Disconnect From DM';
@@ -371,7 +369,7 @@ class CharacterSheet extends React.Component {
           onClick={this._makeEdit.bind(this)}
         >
           OK
-        </Button>      
+        </Button>
       );
     }
     return (
