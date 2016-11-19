@@ -59,7 +59,7 @@ class CharacterSheet extends React.Component {
       var tempObject = {
         "name" : tempArray[0],
         "level": Math.abs(parseInt(tempArray[1]))
-      }
+      };
       tempClass.push(tempObject);
     }
     propsCharacter.classes = tempClass;
@@ -201,7 +201,6 @@ class CharacterSheet extends React.Component {
     var viewState = 0;
     var lookingForDM = this.state.lookingForDM;
     var connectedToDM = this.state.connectedToDM;
-    console.log(this.props.character.inventory);
     this.setState({
       viewState: viewState,
       lookingForDM: lookingForDM,
@@ -233,9 +232,9 @@ class CharacterSheet extends React.Component {
         description: character.getSpellFromName(character.spells[i]).description
       });
     }
-    
+
     var inspiration = character.inspiration;
-    
+
     if (this.state.viewState) {
       inspiration = (
         <FormGroup>

@@ -81,6 +81,15 @@ class Equipment extends React.Component {
     });
   }
 
+  componentWillUpdate() {
+    if (this.props.viewState === 0) {
+      this.data = _.flattenDeep(this.props.data);
+      this.setState({
+        data: _.flattenDeep(this.props.data)
+      });
+    }
+  }
+
   render() {
     var items = [];
     var data = this.state.data;
@@ -98,11 +107,11 @@ class Equipment extends React.Component {
       }
 
       if (this.props.viewState === 1) {
-        let id = 'equipment-' + this.props.heading + '-' + i;
+        let id = 'equipment-' + this.props.heading;
         title = (
           <span>
-            <FaMinusSquare className="minus" id={id} onClick={this.removeEquipment}/>
-            <span>{title}</span>
+            <FaMinusSquare className="minus" id={id + '-' + i} onClick={this.removeEquipment}/>
+            <span id={id + ' ' + i}>{title}</span>
           </span>
         );
       }
@@ -149,11 +158,18 @@ class Equipment extends React.Component {
       );
     }
 
-    return (
-      <Panel header={this.props.heading}>
+    var list = null;
+    if (items.length > 0) {
+      list = (
         <ListGroup fill>
           {items}
         </ListGroup>
+      );
+    }
+
+    return (
+      <Panel header={this.props.heading}>
+        {list}
         {form}
       </Panel>
     );
