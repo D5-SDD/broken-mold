@@ -77,10 +77,24 @@ class CharacterSheet extends React.Component {
     propsCharacter.hitDice = document.getElementById('csform-hitDice').value;
     propsCharacter.deathSaves.successes = Math.abs(document.getElementById('csform-deathSucc').value);
     propsCharacter.deathSaves.failures = Math.abs(document.getElementById('csform-deathFails').value);
-    
-    //combat stats data
     propsCharacter.inspiration = Math.abs(document.getElementById('csform-inspiration').value);
     propsCharacter.speed = Math.abs(document.getElementById('csform-speed').value);
+    
+    //ability scores data
+    propsCharacter.abilityScores.strength = Math.abs(document.getElementById('csform-abilityscore-strength').value);
+    propsCharacter.abilityScores.dexterity = Math.abs(document.getElementById('csform-abilityscore-dexterity').value);
+    propsCharacter.abilityScores.constitution = Math.abs(document.getElementById('csform-abilityscore-constitution').value);
+    propsCharacter.abilityScores.intelligence = Math.abs(document.getElementById('csform-abilityscore-intelligence').value);
+    propsCharacter.abilityScores.wisdom = Math.abs(document.getElementById('csform-abilityscore-wisdom').value);
+    propsCharacter.abilityScores.charisma = Math.abs(document.getElementById('csform-abilityscore-charisma').value);
+    
+    //saving throws data
+    propsCharacter.savingThrows.strength.proficient = document.getElementById('csform-savingthrow-strength').checked;
+    propsCharacter.savingThrows.dexterity.proficient = document.getElementById('csform-savingthrow-dexterity').checked;
+    propsCharacter.savingThrows.constitution.proficient = document.getElementById('csform-savingthrow-constitution').checked;
+    propsCharacter.savingThrows.intelligence.proficient = document.getElementById('csform-savingthrow-intelligence').checked;
+    propsCharacter.savingThrows.wisdom.proficient = document.getElementById('csform-savingthrow-wisdom').checked;
+    propsCharacter.savingThrows.charisma.proficient = document.getElementById('csform-savingthrow-charisma').checked;
     
     //hitpoints data
     propsCharacter.hitpoints.maximum = Math.abs(document.getElementById('csform-maxhealth').value);
@@ -95,12 +109,31 @@ class CharacterSheet extends React.Component {
     propsCharacter.bonds = document.getElementById('csform-bonds').value;
     propsCharacter.flaws = document.getElementById('csform-flaws').value;
     
+    //skills data
+    propsCharacter.skills.acrobatics.proficient = document.getElementById('csform-skill-acrobatics').checked;
+    propsCharacter.skills.animalHandling.proficient = document.getElementById('csform-skill-animalHandling').checked;
+    propsCharacter.skills.arcana.proficient = document.getElementById('csform-skill-arcana').checked;
+    propsCharacter.skills.athletics.proficient = document.getElementById('csform-skill-athletics').checked;
+    propsCharacter.skills.deception.proficient = document.getElementById('csform-skill-deception').checked;
+    propsCharacter.skills.history.proficient = document.getElementById('csform-skill-history').checked;
+    propsCharacter.skills.insight.proficient = document.getElementById('csform-skill-insight').checked;
+    propsCharacter.skills.intimidation.proficient = document.getElementById('csform-skill-intimidation').checked;
+    propsCharacter.skills.investigation.proficient = document.getElementById('csform-skill-investigation').checked;
+    propsCharacter.skills.medicine.proficient = document.getElementById('csform-skill-medicine').checked;
+    propsCharacter.skills.nature.proficient = document.getElementById('csform-skill-nature').checked;
+    propsCharacter.skills.perception.proficient = document.getElementById('csform-skill-perception').checked;
+    propsCharacter.skills.performance.proficient = document.getElementById('csform-skill-performance').checked;
+    propsCharacter.skills.persuasion.proficient = document.getElementById('csform-skill-persuasion').checked;
+    propsCharacter.skills.religion.proficient = document.getElementById('csform-skill-religion').checked;
+    propsCharacter.skills.sleightOfHand.proficient = document.getElementById('csform-skill-sleightOfHand').checked;
+    propsCharacter.skills.stealth.proficient = document.getElementById('csform-skill-stealth').checked;
+    propsCharacter.skills.survival.proficient = document.getElementById('csform-skill-survival').checked;
+    
     //currency data
     _.forIn(this.props.character.currency, function(value, key) {
       var moneyValue = document.getElementById('csform-money-'+capital(key)).value;
       propsCharacter.currency[key] = Math.abs(parseInt(moneyValue));
     });
-    
   }
 
   validateBeforeExit() {
