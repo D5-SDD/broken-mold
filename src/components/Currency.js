@@ -14,14 +14,32 @@ class Currency extends React.Component {
 
   render() {
     var currencies = [];
+    var currViewState = this.props.viewState;
     _.forIn(this.props.currency, function(value, key) {
       var properValue = value;
-      currencies.push(
-        <tr key={key}>
-          <td>{capital(key)}</td>
-          <td>{properValue}</td>
-        </tr>
-      );
+      if (currViewState === 1) {
+        properValue = (
+          <FormGroup>
+            <label> 
+              {capital(key)}
+              <FormControl id={"csform-money"+key} type="text"
+                defaultValue={properValue}/>
+            </label>
+          </FormGroup>
+        )
+        currencies.push(
+          <tr key={key}>
+            <td>{properValue}</td>
+          </tr>
+        );
+      } else {
+        currencies.push(
+          <tr key={key}>
+            <td>{capital(key)}</td>
+            <td>{properValue}</td>
+          </tr>
+        );
+      }
     });
 
     return (
