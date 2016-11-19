@@ -17,7 +17,7 @@ class TextBox extends React.Component {
     this.state = {
       data: this.props.data
     };
-	
+
     // if the data needs to be parsed, flatten it to the information we want to display
     if (typeof this.props.data === 'object') {
       this.data = _.map(this.props.data, function(obj) {
@@ -32,7 +32,6 @@ class TextBox extends React.Component {
 
   render() {
     var data = [];
-    
 
     // populate the data to display based on the type of information being displayed
     for (let i = 0; i < this.data.length; i++) {
@@ -62,11 +61,11 @@ class TextBox extends React.Component {
         </Row>
       );
     }
-    
-    if (this.props.viewState) {
+
+    if (this.props.viewState && data.length > 0) {
       data = (
         <FormGroup>
-          <FormControl id={"csform-" + this.id} type="text" defaultValue={data[0].props.children} />
+          <FormControl id={'csform-' + this.id} type="text" defaultValue={data[0].props.children} />
         </FormGroup>
       );
     }
@@ -86,7 +85,8 @@ TextBox.propTypes = {
     React.PropTypes.array,
     React.PropTypes.string
   ]).isRequired,
-  title: React.PropTypes.string.isRequired
+  title: React.PropTypes.string.isRequired,
+  viewState: React.PropTypes.number.isRequired
 };
 
 export default TextBox;

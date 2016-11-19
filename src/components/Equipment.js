@@ -81,6 +81,15 @@ class Equipment extends React.Component {
     });
   }
 
+  componentWillUpdate() {
+    if (this.props.viewState === 0) {
+      this.data = _.flattenDeep(this.props.data);
+      this.setState({
+        data: _.flattenDeep(this.props.data)
+      });
+    }
+  }
+
   render() {
     var items = [];
     var data = this.state.data;
@@ -149,11 +158,18 @@ class Equipment extends React.Component {
       );
     }
 
-    return (
-      <Panel header={this.props.heading}>
+    var list = null;
+    if (items.length > 0) {
+      list = (
         <ListGroup fill>
           {items}
         </ListGroup>
+      );
+    }
+
+    return (
+      <Panel header={this.props.heading}>
+        {list}
         {form}
       </Panel>
     );
