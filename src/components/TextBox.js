@@ -3,7 +3,8 @@
 // Import libraries
 import React from 'react';
 import {
-  FormGroup, FormControl, Accordion, Col, Row, Panel, ListGroup, ListGroupItem
+  FormGroup, FormControl, Accordion, Col, Row, Panel,
+  ListGroup, ListGroupItem, InputGroup, Button
 } from 'react-bootstrap';
 import capital from 'to-capital-case';
 import {FaMinusSquare, FaPlusSquare} from 'react-icons/lib/fa';
@@ -51,22 +52,6 @@ class TextBox extends React.Component {
         data.push(<div key={i}>{this.data[i]}</div>);
       }
     }
-    
-    var options = [];
-    if (this.props.db) {
-      for (let i = 0; i < this.props.length; i++) {
-        let val = this.props.db[i].name;
-        options.push(
-          <option value={val} key={i}>
-            {val}
-          </option>
-        );
-      }
-    }
-    
-    if (this.props.accordion) {
-      console.log(data);
-    }
     var items = [];
     for (let i = 0; i < data.length; i++) {
       let value = data[i].props.header;
@@ -105,6 +90,39 @@ class TextBox extends React.Component {
     if (this.props.viewState) {
       accordionRender = (list);
     }
+    
+    var form = null;
+    if (this.props.viewState) {
+      var options = [];
+      if (this.props.db) {
+        for (let i = 0; i < this.props.db.length; i++) {
+          let val = this.props.db[i].name;
+          options.push(
+            <option value={val} key={i}>
+              {val}
+            </option>
+          );
+        }
+      }
+      
+      form = (
+        <FormGroup>
+          <InputGroup>
+            <InputGroup.Button>
+              <Button
+                id={'new-spell'}
+                onClick={() => {console.log('test 2');}}
+              >
+                <FaPlusSquare/>
+              </Button>
+            </InputGroup.Button>
+            <FormControl componentClass="select" placeholder="">
+              {options}
+            </FormControl>
+          </InputGroup>
+        </FormGroup>
+      );
+    }
     // render an accordion if necessary
     if (this.props.accordion === true) {
       return (
@@ -112,6 +130,7 @@ class TextBox extends React.Component {
           <Col md={11}>
             <Panel id={this.id} header={this.header}>
               {accordionRender}
+              {form}
             </Panel>
           </Col>
         </Row>
