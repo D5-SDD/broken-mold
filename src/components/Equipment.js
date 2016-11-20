@@ -2,7 +2,10 @@
 
 // Inport libraries
 import React from 'react';
-import {InputGroup, Button, FormGroup, FormControl, Panel, ListGroup, ListGroupItem} from 'react-bootstrap';
+import {
+  InputGroup, Button, FormGroup, FormControl,
+  Panel, ListGroup, ListGroupItem
+} from 'react-bootstrap';
 import _ from 'lodash';
 import capital from 'to-capital-case';
 
@@ -82,6 +85,9 @@ class Equipment extends React.Component {
   }
 
   componentWillUpdate() {
+    console.log('willUpdate');
+    console.log(this.props);
+    console.log(this.state);
     if (this.props.viewState === 0) {
       this.data = _.flattenDeep(this.props.data);
       this.setState({
@@ -91,6 +97,9 @@ class Equipment extends React.Component {
   }
 
   render() {
+    console.log('render');
+    console.log(this.props);
+    console.log(this.state);
     var items = [];
     var data = this.state.data;
     if (this.props.viewState === 0) {
@@ -110,7 +119,11 @@ class Equipment extends React.Component {
         let id = 'equipment-' + this.props.heading;
         title = (
           <span>
-            <FaMinusSquare className="minus" id={'minus-' + id + '-' + i} onClick={this.removeEquipment}/>
+            <FaMinusSquare
+              className="minus"
+              id={'minus-' + id + '-' + i}
+              onClick={this.removeEquipment}
+            />
             <span className={id}>{title}</span>
           </span>
         );
