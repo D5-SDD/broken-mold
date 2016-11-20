@@ -36,10 +36,10 @@
     },
     {
       "filename": "Itzal.json",
-      "label": "Itzal - Dragonborn - Rougue 3 - Wizard 3",
+      "label": "Itzal - Dragonborn - Rogue 3 - Wizard 3",
       "classes": [
         {
-          "name": "Rougue",
+          "name": "Rogue",
           "level": 3
         },
         {
