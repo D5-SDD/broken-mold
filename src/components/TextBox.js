@@ -2,8 +2,11 @@
 
 // Import libraries
 import React from 'react';
-import {FormGroup, FormControl, Accordion, Col, Row, Panel} from 'react-bootstrap';
+import {
+  FormGroup, FormControl, Accordion, Col, Row, Panel, ListGroup, ListGroupItem
+} from 'react-bootstrap';
 import capital from 'to-capital-case';
+import {FaMinusSquare, FaPlusSquare} from 'react-icons/lib/fa';
 import _ from 'lodash';
 
 // Generix display for text and lists of properties in the Character Sheet View
@@ -48,16 +51,67 @@ class TextBox extends React.Component {
         data.push(<div key={i}>{this.data[i]}</div>);
       }
     }
-
+    
+    var options = [];
+    if (this.props.db) {
+      for (let i = 0; i < this.props.length; i++) {
+        let val = this.props.db[i].name;
+        options.push(
+          <option value={val} key={i}>
+            {val}
+          </option>
+        );
+      }
+    }
+    
+    if (this.props.accordion) {
+      console.log(data);
+    }
+    var items = [];
+    for (let i = 0; i < data.length; i++) {
+      let value = data[i].props.header;
+      
+      if (this.props.viewState) {
+        let id = 'spells';
+        value = (
+          <span>
+            <FaMinusSquare className="minus" id={'minus-' + id + '-' + i} onClick={() => {console.log('test');}}/>
+            <span className={id}>{value}</span>
+          </span>
+        );
+      }
+      
+      items.push(
+        <ListGroupItem key={items.length}>
+          {value}
+        </ListGroupItem>
+      );
+    }
+    
+    var list = null;
+    if (items.length > 0) {
+      list = (
+        <ListGroup fill>
+          {items}
+        </ListGroup>
+      );
+    }
+    
+    var accordionRender = (
+      <Accordion>
+        {data}
+      </Accordion>
+    )
+    if (this.props.viewState) {
+      accordionRender = (list);
+    }
     // render an accordion if necessary
     if (this.props.accordion === true) {
       return (
         <Row>
           <Col md={11}>
             <Panel id={this.id} header={this.header}>
-              <Accordion>
-                {data}
-              </Accordion>
+              {accordionRender}
             </Panel>
           </Col>
         </Row>
@@ -88,6 +142,7 @@ TextBox.propTypes = {
     React.PropTypes.string
   ]).isRequired,
   title: React.PropTypes.string.isRequired,
+  db: React.PropTypes.array,
   viewState: React.PropTypes.number.isRequired
 };
 

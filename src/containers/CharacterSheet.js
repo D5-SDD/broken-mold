@@ -12,7 +12,9 @@ import {
   Equipment, Header, HealthBox, SpellArea, TextBox
 } from '../components/CharacterSheet';
 
-import {CHARACTER_DIR, SPELL_CLASSES, RACES_DB, BACKGROUNDS_DB} from '../../lib/Character'
+import {
+  CHARACTER_DIR, SPELL_CLASSES, RACES_DB, BACKGROUNDS_DB, SPELLS_DB
+} from '../../lib/Character'
 
 import {
   startUDPListen, stopUDPListen, closeTCPClient
@@ -257,9 +259,7 @@ class CharacterSheet extends React.Component {
         description: character.getSpellFromName(character.spells[i]).description
       });
     }
-
     var inspiration = character.inspiration;
-
     if (this.state.viewState) {
       inspiration = (
         <FormGroup>
@@ -395,6 +395,7 @@ class CharacterSheet extends React.Component {
                 accordion
                 data={spellData}
                 title="Spells"
+                db={SPELLS_DB}
                 viewState={this.state.viewState}
               />
             </Col>
