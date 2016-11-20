@@ -191,12 +191,10 @@
       "description": "Your quick thinking and agility allow you to move and act quickly"
     }
   ],
-  "proficiencies": [
+  "proficienciesAndLanguages": [
     "Light Armor",
     "Simple Weapons",
-    "Disguise Kit"
-  ],
-  "languages": [
+    "Disguise Kit",
     "Common",
     "Draconic"
   ],

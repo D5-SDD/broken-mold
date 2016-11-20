@@ -68,8 +68,8 @@ class TextBox extends React.Component {
       var tempData = [];
       for (let i = 0; i < this.data.length; i++) {
         tempData.push(
-          <FormGroup>
-            <FormControl id={'csform-' + this.id + '-' + i} type="text"
+          <FormGroup key={i}>
+            <FormControl className={'csform-' + this.id} type="text"
               defaultValue={data[i].props.children} />
           </FormGroup>
         );
