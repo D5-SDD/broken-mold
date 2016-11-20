@@ -12,7 +12,7 @@ import {
   Equipment, Header, HealthBox, SpellArea, TextBox
 } from '../components/CharacterSheet';
 
-import {CHARACTER_DIR} from '../../lib/Character'
+import {CHARACTER_DIR, SPELL_CLASSES, RACES_DB, BACKGROUNDS_DB} from '../../lib/Character'
 
 import {
   startUDPListen, stopUDPListen, closeTCPClient
@@ -49,7 +49,7 @@ class CharacterSheet extends React.Component {
     this.stopLookForDM = this.stopLookForDM.bind(this);
   }
 
-  applyEdits() {
+  applyEdits(cb) {
     var propsCharacter = this.props.character;
     //Header data
     var tempClass = [];
@@ -97,7 +97,9 @@ class CharacterSheet extends React.Component {
     
     //Hitpoints data
     propsCharacter.hitpoints.maximum = Math.abs(document.getElementById('csform-maxhealth').value);
-    propsCharacter.hitpoints.current = Math.abs(document.getElementById('csform-currhealth').value);
+    propsCharacter.hitpoints.current = Math.abs(document.getElementById('csform-currhealth').value) > propsCharacter.hitpoints.maximum
+    ? propsCharacter.hitpoints.maximum
+    : Math.abs(document.getElementById('csform-currhealth').value);
     propsCharacter.hitpoints.temporary = Math.abs(document.getElementById('csform-temphealth').value);
     
     //Textbox data
@@ -133,6 +135,29 @@ class CharacterSheet extends React.Component {
       var moneyValue = document.getElementById('csform-money-'+capital(key)).value;
       propsCharacter.currency[key] = Math.abs(parseInt(moneyValue));
     });
+    
+    propsCharacter.inventory = [];
+    var inventory = $('.equipment-Equipment');
+    for(let i = 0; i < inventory.length; i++) {
+      let item = propsCharacter.findItem(inventory[i].textContent);
+      propsCharacter.inventory.push(item);
+    }
+    
+    propsCharacter.armor = [];
+    var armors = $('.equipment-Armor');
+    for(let i = 0; i < armors.length; i++) {
+      let armor = propsCharacter.findArmor(armors[i].textContent);
+      propsCharacter.armor.push(armor);
+    }
+    
+    propsCharacter.weapons = [];
+    var weapons = $('.equipment-Weapons');
+    for(let i = 0; i < weapons.length; i++) {
+      let weapon = propsCharacter.findWeapon(weapons[i].textContent);
+      propsCharacter.weapons.push(weapon);
+    }
+    
+    propsCharacter.spellCastingClass = document.getElementById('csform-spellclass').value;
   }
 
   validateBeforeExit() {
@@ -242,7 +267,6 @@ class CharacterSheet extends React.Component {
         </FormGroup>
       );
     }
-
     // populate the grid that displays all the relevant information to the user
     CS_GRID = (
       <Grid className="character-sheet-grid">
@@ -254,6 +278,8 @@ class CharacterSheet extends React.Component {
           name={character.name}
           playerName={character.playerName}
           race={character.race}
+          racedb = {RACES_DB}
+          backgrounddb = {BACKGROUNDS_DB}
           viewState={this.state.viewState}
         />
         <Row className="outer">
@@ -298,6 +324,7 @@ class CharacterSheet extends React.Component {
               attack={character.spellAttackMod}
               cast={character.spellCastingClass}
               save={character.spellSaveDC}
+              db={SPELL_CLASSES}
               viewState={this.state.viewState}
             />
             <Row>
