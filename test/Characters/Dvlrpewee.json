@@ -187,7 +187,13 @@
     }
   ],
   "armor": [
-    null
+    {
+      "name": "Studded Leather",
+      "armorClass": 12,
+      "armorType": "light",
+      "strength": 0,
+      "stealthDisadvantage": false
+    }
   ],
   "currency": {
     "platinum": 67,
@@ -202,11 +208,9 @@
       "description": "You have no purpose in life but to test this program"
     }
   ],
-  "proficiencies": [
+  "proficienciesAndLanguages": [
     "Light Armor",
-    "Simple Weapons"
-  ],
-  "languages": [
+    "Simple Weapons",
     "Common"
   ],
   "spellCastingClass": "Cleric (trickery)",
