@@ -41,14 +41,14 @@ class TextBox extends React.Component {
   
   
   addToList(item) {
-    var icon = $('#'+item.currentTarget.id);
+    var icon = $(item.currentTarget);
     console.log(icon);
     var itemToAdd = icon.parent().siblings()[0].value;
     console.log(itemToAdd);
     for (let i = 0; i < this.props.db.length; i++) {
       let val = this.props.db[i].name;
       if (val === itemToAdd) {
-        this.state.data.push(this.props.db[i]);
+        this.state.data.push(this.props.db[i].name);
         this.setState({
           data: this.state.data
         });
@@ -58,12 +58,45 @@ class TextBox extends React.Component {
   }
   
   removeFromList (item) {
+    var icon = $(item.currentTarget);
+    var itemToRemove = icon.siblings()[0].childNodes[0].textContent;
+    var index = -1;
+    for (let i = 0; i < this.state.data.length; i++) {
+      let val = this.state.data[i];
+      if (itemToRemove === val) {
+        index = i;
+        break;
+      }
+    }
+
+    if (index < 0) {
+      return;
+    }
+    this.state.data.splice(index, 1);
+    this.setState({
+      data: this.state.data
+    });
+  }
   
+  componentWillUpdate() {
+    if (this.resetState === true) {
+      this.resetState = false;
+      this.setState({
+        data: this.props.data
+      });
+    }
   }
   
   render() {
     var data = [];
-
+    /*
+    if (this.props.confirmed === false) {
+      if (this.props.viewState === 0) {
+        this.data = this.props.data;
+        this.resetState = true;
+      }
+    }
+    */
     // populate the data to display based on the type of information being displayed
     for (let i = 0; i < this.data.length; i++) {
       if (this.props.accordion === true) {
@@ -85,7 +118,11 @@ class TextBox extends React.Component {
         let id = 'spells';
         value = (
           <span>
-            <FaMinusSquare className="minus" id={'minus-' + id + '-' + i} onClick={() => {console.log('test');}}/>
+            <FaMinusSquare 
+              className="minus" 
+              id={'minus-' + id + '-' + i} 
+              onClick={this.removeFromList}
+            />
             <span className={id}>{value}</span>
           </span>
         );
@@ -166,8 +203,8 @@ class TextBox extends React.Component {
       var tempData = [];
       for (let i = 0; i < this.data.length; i++) {
         tempData.push(
-          <FormGroup>
-            <FormControl id={'csform-' + this.id + '-' + i} type="text"
+          <FormGroup key={i}>
+            <FormControl className={'csform-' + this.id} type="text"
               defaultValue={data[i].props.children} />
           </FormGroup>
         );

@@ -208,11 +208,9 @@
       "description": "You have no purpose in life but to test this program"
     }
   ],
-  "proficiencies": [
+  "proficienciesAndLanguages": [
     "Light Armor",
-    "Simple Weapons"
-  ],
-  "languages": [
+    "Simple Weapons",
     "Common"
   ],
   "spellCastingClass": "Cleric (trickery)",

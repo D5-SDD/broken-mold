@@ -58,7 +58,7 @@ class CharacterSheet extends React.Component {
     var propsCharacter = this.props.character;
     //Header data
     var tempClass = [];
-    for (let i=0; i<this.props.character.classes.length; i++){
+    for (let i=0; i<propsCharacter.classes.length; i++){
       var classAndLevel = document.getElementById('csform-class-'+i).value;
       var tempArray = classAndLevel.split(' ');
       var tempObject = {
@@ -108,11 +108,19 @@ class CharacterSheet extends React.Component {
     propsCharacter.hitpoints.temporary = Math.abs(document.getElementById('csform-temphealth').value);
 
     //Textbox data
-    propsCharacter.personalityTraits = document.getElementById('csform-personalityTraits-0').value;
-    console.log(propsCharacter.personalityTraits);
-    propsCharacter.ideals = document.getElementById('csform-ideals-0').value;
-    propsCharacter.bonds = document.getElementById('csform-bonds-0').value;
-    propsCharacter.flaws = document.getElementById('csform-flaws-0').value;
+    propsCharacter.personalityTraits = $('.csform-personalityTraits')[0].value;
+    propsCharacter.ideals = $('.csform-ideals')[0].value;
+    propsCharacter.bonds = $('.csform-bonds')[0].value;
+    propsCharacter.flaws = $('.csform-flaws')[0].value;
+    
+    propsCharacter.proficienciesAndLanguages = [];
+    var profAndLang = $('.csform-ProficienciesAndLanguages');
+    for (let i = 0; i < profAndLang.length; i++) {
+      let item = profAndLang[i].value;
+      propsCharacter.proficienciesAndLanguages.push(item);
+    }
+    console.log(propsCharacter.proficienciesAndLanguages);
+    
 
     //Skills data
     propsCharacter.skills.acrobatics.proficient = document.getElementById('csform-skill-acrobatics').checked;
@@ -282,6 +290,7 @@ class CharacterSheet extends React.Component {
           alignment={character.alignment}
           background={character.background}
           classes={character.classes}
+          confirmed={this.confirmed}
           experience={character.experience}
           name={character.name}
           playerName={character.playerName}
@@ -395,9 +404,9 @@ class CharacterSheet extends React.Component {
                 </Row>
                 <Row>
                   <TextBox
-                    data={[character.proficiencies, character.languages]}
-                    title="otherProficienciesAndLanguages"
                     confirmed={this.confirmed}
+                    data={[character.proficienciesAndLanguages]}
+                    title="ProficienciesAndLanguages"
                     viewState={this.state.viewState}
                   />
                 </Row>
