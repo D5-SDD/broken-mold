@@ -17,8 +17,7 @@ class Header extends React.Component {
 
   addClassAndLevel(e) {
     var icon = $('#'+e.currentTarget.id);
-    var equipmentToAdd = icon.parent().siblings()[0].value;
-
+    var classLevelToAdd = icon.parent().siblings()[0].value;
   }
 
   render() {
@@ -68,7 +67,7 @@ class Header extends React.Component {
     var charExp = this.props.experience;
     if (this.props.viewState === 1) {
       classAndLevel.push(
-        <FormGroup>
+        <FormGroup key={classAndLevel.length + 1}>
           <InputGroup>
             <InputGroup.Button>
               <Button

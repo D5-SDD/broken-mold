@@ -12,7 +12,7 @@ import {
   Equipment, Header, HealthBox, SpellArea, TextBox
 } from '../components/CharacterSheet';
 
-import {CHARACTER_DIR, SPELL_CLASSES, RACES_DB, BACKGROUNDS_DB} from '../../lib/Character'
+import {CHARACTER_DIR, SPELL_CLASSES, RACES_DB, BACKGROUNDS_DB} from '../../lib/Character';
 
 import {
   startUDPListen, stopUDPListen, closeTCPClient
@@ -36,6 +36,9 @@ class CharacterSheet extends React.Component {
       viewState = 1;
     }
 
+    // track if the player confirmed changes to the character sheet
+    this.confirmed = null;
+
     this.state = {
       viewState: viewState,
       lookingForDM: false,
@@ -49,7 +52,7 @@ class CharacterSheet extends React.Component {
     this.stopLookForDM = this.stopLookForDM.bind(this);
   }
 
-  applyEdits(cb) {
+  applyEdits() {
     var propsCharacter = this.props.character;
     //Header data
     var tempClass = [];
@@ -57,8 +60,8 @@ class CharacterSheet extends React.Component {
       var classAndLevel = document.getElementById('csform-class-'+i).value;
       var tempArray = classAndLevel.split(' ');
       var tempObject = {
-        "name" : tempArray[0],
-        "level": Math.abs(parseInt(tempArray[1]))
+        'name' : tempArray[0],
+        'level': Math.abs(parseInt(tempArray[1]))
       };
       tempClass.push(tempObject);
     }
@@ -78,7 +81,7 @@ class CharacterSheet extends React.Component {
     propsCharacter.deathSaves.failures = Math.abs(document.getElementById('csform-deathFails').value);
     propsCharacter.inspiration = Math.abs(document.getElementById('csform-inspiration').value);
     propsCharacter.speed = Math.abs(document.getElementById('csform-speed').value);
-    
+
     //Ability Scores data
     propsCharacter.abilityScores.strength = Math.abs(document.getElementById('csform-abilityscore-strength').value);
     propsCharacter.abilityScores.dexterity = Math.abs(document.getElementById('csform-abilityscore-dexterity').value);
@@ -86,7 +89,7 @@ class CharacterSheet extends React.Component {
     propsCharacter.abilityScores.intelligence = Math.abs(document.getElementById('csform-abilityscore-intelligence').value);
     propsCharacter.abilityScores.wisdom = Math.abs(document.getElementById('csform-abilityscore-wisdom').value);
     propsCharacter.abilityScores.charisma = Math.abs(document.getElementById('csform-abilityscore-charisma').value);
-    
+
     //Saving Throws data
     propsCharacter.savingThrows.strength.proficient = document.getElementById('csform-savingthrow-strength').checked;
     propsCharacter.savingThrows.dexterity.proficient = document.getElementById('csform-savingthrow-dexterity').checked;
@@ -94,22 +97,21 @@ class CharacterSheet extends React.Component {
     propsCharacter.savingThrows.intelligence.proficient = document.getElementById('csform-savingthrow-intelligence').checked;
     propsCharacter.savingThrows.wisdom.proficient = document.getElementById('csform-savingthrow-wisdom').checked;
     propsCharacter.savingThrows.charisma.proficient = document.getElementById('csform-savingthrow-charisma').checked;
-    
+
     //Hitpoints data
     propsCharacter.hitpoints.maximum = Math.abs(document.getElementById('csform-maxhealth').value);
     propsCharacter.hitpoints.current = Math.abs(document.getElementById('csform-currhealth').value) > propsCharacter.hitpoints.maximum
-    ? propsCharacter.hitpoints.maximum
-    : Math.abs(document.getElementById('csform-currhealth').value);
+      ? propsCharacter.hitpoints.maximum
+      : Math.abs(document.getElementById('csform-currhealth').value);
     propsCharacter.hitpoints.temporary = Math.abs(document.getElementById('csform-temphealth').value);
-    
+
     //Textbox data
-    console.log(document.getElementById('csform-personalityTraits').value);
-    propsCharacter.personalityTraits = document.getElementById('csform-personalityTraits').value;
+    propsCharacter.personalityTraits = document.getElementById('csform-personalityTraits-0').value;
     console.log(propsCharacter.personalityTraits);
-    propsCharacter.ideals = document.getElementById('csform-ideals').value;
-    propsCharacter.bonds = document.getElementById('csform-bonds').value;
-    propsCharacter.flaws = document.getElementById('csform-flaws').value;
-    
+    propsCharacter.ideals = document.getElementById('csform-ideals-0').value;
+    propsCharacter.bonds = document.getElementById('csform-bonds-0').value;
+    propsCharacter.flaws = document.getElementById('csform-flaws-0').value;
+
     //Skills data
     propsCharacter.skills.acrobatics.proficient = document.getElementById('csform-skill-acrobatics').checked;
     propsCharacter.skills.animalHandling.proficient = document.getElementById('csform-skill-animalHandling').checked;
@@ -129,34 +131,38 @@ class CharacterSheet extends React.Component {
     propsCharacter.skills.sleightOfHand.proficient = document.getElementById('csform-skill-sleightOfHand').checked;
     propsCharacter.skills.stealth.proficient = document.getElementById('csform-skill-stealth').checked;
     propsCharacter.skills.survival.proficient = document.getElementById('csform-skill-survival').checked;
-    
+
     //Currency data
     _.forIn(this.props.character.currency, function(value, key) {
       var moneyValue = document.getElementById('csform-money-'+capital(key)).value;
       propsCharacter.currency[key] = Math.abs(parseInt(moneyValue));
     });
-    
+
+    //Inventory data
     propsCharacter.inventory = [];
     var inventory = $('.equipment-Equipment');
-    for(let i = 0; i < inventory.length; i++) {
+    for (let i = 0; i < inventory.length; i++) {
       let item = propsCharacter.findItem(inventory[i].textContent);
       propsCharacter.inventory.push(item);
     }
-    
+
+    //Armor data
     propsCharacter.armor = [];
     var armors = $('.equipment-Armor');
-    for(let i = 0; i < armors.length; i++) {
+    for (let i = 0; i < armors.length; i++) {
       let armor = propsCharacter.findArmor(armors[i].textContent);
       propsCharacter.armor.push(armor);
     }
-    
+
+    //Weapons data
     propsCharacter.weapons = [];
     var weapons = $('.equipment-Weapons');
-    for(let i = 0; i < weapons.length; i++) {
+    for (let i = 0; i < weapons.length; i++) {
       let weapon = propsCharacter.findWeapon(weapons[i].textContent);
       propsCharacter.weapons.push(weapon);
     }
-    
+
+    //SpellCasting data
     propsCharacter.spellCastingClass = document.getElementById('csform-spellclass').value;
   }
 
@@ -223,6 +229,7 @@ class CharacterSheet extends React.Component {
   }
 
   _cancelEdit() {
+    this.confirmed = false;
     var viewState = 0;
     var lookingForDM = this.state.lookingForDM;
     var connectedToDM = this.state.connectedToDM;
@@ -234,6 +241,7 @@ class CharacterSheet extends React.Component {
   }
 
   _makeEdit() {
+    this.confirmed = true;
     var viewState = 0;
     var lookingForDM = false;
     var connectedToDM = false;
@@ -403,22 +411,25 @@ class CharacterSheet extends React.Component {
             <Col className="inventory" md={5}>
               <Equipment
                 heading="Equipment"
-                data={character.inventory}
+                data={_.flattenDeep(character.inventory)}
                 viewState={this.state.viewState}
+                confirmed={this.confirmed}
               />
             </Col>
             <Col className="armor" md={7}>
               <Row>
                 <Equipment
                   heading="Armor"
-                  data={character.armor}
+                  data={_.flattenDeep(character.armor)}
                   viewState = {this.state.viewState}
+                  confirmed={this.confirmed}
                 />
               </Row>
                 <Equipment
                   heading="Weapons"
-                  data={character.weapons}
+                  data={_.flattenDeep(character.weapons)}
                   viewState = {this.state.viewState}
+                  confirmed={this.confirmed}
                 />
             </Col>
           </Row>
@@ -485,7 +496,7 @@ class CharacterSheet extends React.Component {
           disabled = {Boolean(this.state.viewState)}
         >
           {DMButtonText}
-        </Button>        
+        </Button>
       );
     }
     return (
@@ -498,6 +509,7 @@ class CharacterSheet extends React.Component {
           className="edit"
           onClick={() => {
             if (!this.state.lookingForDM && !this.state.connectedToDM && !this.state.viewState) {
+              this.confirmed = null;
               this.setState({viewState: 1});
             }
           }}

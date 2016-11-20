@@ -2,8 +2,10 @@
 
 // Inport libraries
 import React from 'react';
-import {InputGroup, Button, FormGroup, FormControl, Panel, ListGroup, ListGroupItem} from 'react-bootstrap';
-import _ from 'lodash';
+import {
+  InputGroup, Button, FormGroup, FormControl,
+  Panel, ListGroup, ListGroupItem
+} from 'react-bootstrap';
 import capital from 'to-capital-case';
 
 // Import icons
@@ -17,10 +19,11 @@ class Equipment extends React.Component {
   constructor(props) {
     super(props);
 
-    this.data = _.flattenDeep(this.props.data);
+    this.data = this.props.data;
     this.state = {
-      data: _.flattenDeep(this.props.data)
+      data: this.props.data
     };
+    this.resetState = false;
 
     this.db = [];
     if (this.props.heading === 'Equipment') {
@@ -82,20 +85,24 @@ class Equipment extends React.Component {
   }
 
   componentWillUpdate() {
-    if (this.props.viewState === 0) {
-      this.data = _.flattenDeep(this.props.data);
+    if (this.resetState === true) {
+      this.resetState = false;
       this.setState({
-        data: _.flattenDeep(this.props.data)
+        data: this.props.data
       });
     }
   }
 
   render() {
     var items = [];
-    var data = this.state.data;
-    if (this.props.viewState === 0) {
-      data = this.data;
+
+    if (this.props.confirmed === false) {
+      if (this.props.viewState === 0) {
+        this.data = this.props.data;
+        this.resetState = true;
+      }
     }
+    var data = this.data;
 
     for (let i = 0; i < data.length; i++) {
       let value = data[i];
@@ -110,7 +117,11 @@ class Equipment extends React.Component {
         let id = 'equipment-' + this.props.heading;
         title = (
           <span>
-            <FaMinusSquare className="minus" id={'minus-' + id + '-' + i} onClick={this.removeEquipment}/>
+            <FaMinusSquare
+              className="minus"
+              id={'minus-' + id + '-' + i}
+              onClick={this.removeEquipment}
+            />
             <span className={id}>{title}</span>
           </span>
         );
@@ -177,6 +188,7 @@ class Equipment extends React.Component {
 }
 
 Equipment.propTypes = {
+  confirmed: React.PropTypes.bool,
   data: React.PropTypes.array.isRequired,
   heading: React.PropTypes.string.isRequired,
   viewState: React.PropTypes.number.isRequired
