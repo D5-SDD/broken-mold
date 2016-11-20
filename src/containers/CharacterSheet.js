@@ -12,7 +12,7 @@ import {
   Equipment, Header, HealthBox, SpellArea, TextBox
 } from '../components/CharacterSheet';
 
-import {CHARACTER_DIR, SPELL_CLASSES, RACES_DB, BACKGROUNDS_DB} from '../../lib/Character'
+import {CHARACTER_DIR, SPELL_CLASSES, RACES_DB, BACKGROUNDS_DB} from '../../lib/Character';
 
 import {
   startUDPListen, stopUDPListen, closeTCPClient
@@ -35,6 +35,9 @@ class CharacterSheet extends React.Component {
       // create a new character
       viewState = 1;
     }
+
+    // track if the player confirmed changes to the character sheet
+    this.confirmed = null;
 
     this.state = {
       viewState: viewState,
@@ -223,6 +226,7 @@ class CharacterSheet extends React.Component {
   }
 
   _cancelEdit() {
+    this.confirmed = false;
     var viewState = 0;
     var lookingForDM = this.state.lookingForDM;
     var connectedToDM = this.state.connectedToDM;
@@ -234,6 +238,7 @@ class CharacterSheet extends React.Component {
   }
 
   _makeEdit() {
+    this.confirmed = true;
     var viewState = 0;
     var lookingForDM = false;
     var connectedToDM = false;
@@ -403,22 +408,25 @@ class CharacterSheet extends React.Component {
             <Col className="inventory" md={5}>
               <Equipment
                 heading="Equipment"
-                data={character.inventory}
+                data={_.flattenDeep(character.inventory)}
                 viewState={this.state.viewState}
+                confirmed={this.confirmed}
               />
             </Col>
             <Col className="armor" md={7}>
               <Row>
                 <Equipment
                   heading="Armor"
-                  data={character.armor}
+                  data={_.flattenDeep(character.armor)}
                   viewState = {this.state.viewState}
+                  confirmed={this.confirmed}
                 />
               </Row>
                 <Equipment
                   heading="Weapons"
-                  data={character.weapons}
+                  data={_.flattenDeep(character.weapons)}
                   viewState = {this.state.viewState}
+                  confirmed={this.confirmed}
                 />
             </Col>
           </Row>
@@ -498,6 +506,7 @@ class CharacterSheet extends React.Component {
           className="edit"
           onClick={() => {
             if (!this.state.lookingForDM && !this.state.connectedToDM && !this.state.viewState) {
+              this.confirmed = null;
               this.setState({viewState: 1});
             }
           }}

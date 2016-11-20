@@ -6,7 +6,6 @@ import {
   InputGroup, Button, FormGroup, FormControl,
   Panel, ListGroup, ListGroupItem
 } from 'react-bootstrap';
-import _ from 'lodash';
 import capital from 'to-capital-case';
 
 // Import icons
@@ -20,10 +19,11 @@ class Equipment extends React.Component {
   constructor(props) {
     super(props);
 
-    this.data = _.flattenDeep(this.props.data);
+    this.data = this.props.data;
     this.state = {
-      data: _.flattenDeep(this.props.data)
+      data: this.props.data
     };
+    this.resetState = false;
 
     this.db = [];
     if (this.props.heading === 'Equipment') {
@@ -84,17 +84,25 @@ class Equipment extends React.Component {
     });
   }
 
+  componentWillUpdate() {
+    if (this.resetState === true) {
+      this.resetState = false;
+      this.setState({
+        data: this.props.data
+      });
+    }
+  }
+
   render() {
-    if (this.props.heading === 'Equipment') {
-      console.log('render');
-      console.log(this.props);
-      console.log(this.state);
-    }
     var items = [];
-    var data = _.flattenDeep(this.props.data);
-    if (this.props.viewState === 1) {
-      data = this.state.data;
+
+    if (this.props.confirmed === false) {
+      if (this.props.viewState === 0) {
+        this.data = this.props.data;
+        this.resetState = true;
+      }
     }
+    var data = this.data;
 
     for (let i = 0; i < data.length; i++) {
       let value = data[i];
@@ -180,7 +188,7 @@ class Equipment extends React.Component {
 }
 
 Equipment.propTypes = {
-  confirmed: React.PropTypes.boolean,
+  confirmed: React.PropTypes.bool,
   data: React.PropTypes.array.isRequired,
   heading: React.PropTypes.string.isRequired,
   viewState: React.PropTypes.number.isRequired
