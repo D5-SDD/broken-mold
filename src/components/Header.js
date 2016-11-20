@@ -41,7 +41,24 @@ class Header extends React.Component {
     }
     
     var raceOptions = [];
-
+    for (let i = 0; i < this.props.racedb.length; i++) {
+      let val = this.props.racedb[i];
+      raceOptions.push(
+        <option value={val} key={i}>
+          {val}
+        </option>
+      );
+    }
+    
+    var backgroundOptions = [];
+    for (let i = 0; i < this.props.backgrounddb.length; i++) {
+      let val = this.props.backgrounddb[i];
+      backgroundOptions.push(
+        <option value={val} key={i}>
+          {val}
+        </option>
+      );
+    }
     //editing needs
     var charName = this.props.name;
     var charBackground = this.props.background;
@@ -71,7 +88,9 @@ class Header extends React.Component {
       );
       charBackground = (
         <FormGroup>
-          <FormControl id="csform-background" type="text" defaultValue={charBackground}/>
+          <FormControl id="csform-background" componentClass="select" defaultValue={charBackground}>
+            {backgroundOptions}
+          </FormControl>
         </FormGroup>
       );
       charPlayerName = (
@@ -81,7 +100,9 @@ class Header extends React.Component {
       );
       charRace = (
         <FormGroup>
-          <FormControl id="csform-race" type="text" defaultValue={charRace}/>
+          <FormControl id="csform-race" componentClass="select" defaultValue={charRace}>
+            {raceOptions}
+          </FormControl>
         </FormGroup>
       );
       printAlignment = (
@@ -153,6 +174,8 @@ Header.propTypes = {
   name: React.PropTypes.string.isRequired,
   playerName: React.PropTypes.string.isRequired,
   race: React.PropTypes.string.isRequired,
+  racedb: React.PropTypes.array.isRequired,
+  backgrounddb: React.PropTypes.array.isRequired,
   viewState: React.PropTypes.number.isRequired
 };
 

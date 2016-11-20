@@ -278,6 +278,8 @@ class CharacterSheet extends React.Component {
           name={character.name}
           playerName={character.playerName}
           race={character.race}
+          racedb = {RACES_DB}
+          backgrounddb = {BACKGROUNDS_DB}
           viewState={this.state.viewState}
         />
         <Row className="outer">
