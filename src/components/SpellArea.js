@@ -16,9 +16,6 @@ class SpellArea extends React.Component {
     var options = [];
     for (let i = 0; i < this.props.db.length; i++) {
       var val = this.props.db[i];
-      let selected = this.props.db[i] === this.props.cast
-      ? true
-      : false;
       options.push(
           <option value={val} key={i}>
             {val}
