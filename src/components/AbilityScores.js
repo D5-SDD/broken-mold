@@ -130,7 +130,11 @@ class AbilityScore extends React.Component {
       abilityScoreBox = (
         <Panel header={capital(name)} className="centered">
           <FormGroup>
-            <FormControl id={"csform-abilityscore-" + name} type="number" defaultValue={this.props.value}/>      
+            <FormControl
+              id={'csform-abilityscore-' + name}
+              type="number"
+              defaultValue={this.props.value}
+            />
           </FormGroup>
         </Panel>
       );

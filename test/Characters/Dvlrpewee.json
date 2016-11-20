@@ -116,78 +116,72 @@
   "speed": 20,
   "hitDice": "1d8",
   "deathSaves": {
-    "successes": "2",
-    "failures": "2"
+    "successes": 2,
+    "failures": 2
   },
   "weapons": [
     {
-      "name": "longsword",
-      "attackBonus": 4,
-      "damage": "1d8+2",
+      "name": "Longsword",
+      "damage": "1d8",
       "type": "slashing",
       "properties": [
-        "versatile(1d10)"
+        "versatile (1d10)"
       ]
     }
   ],
   "inventory": [
     {
-      "item": "Halberd",
+      "name": "Halberd",
       "cost": "20 gp",
       "weight": "6 lb."
     },
     {
-      "item": "Clothes (traveler's)",
-      "cost": "2 gp",
-      "weight": "4 lb."
-    },
-    {
-      "item": "Brewer's supplies",
+      "name": "Brewer's supplies",
       "cost": "20 gp",
       "weight": "9 lb."
     },
     {
-      "item": "Case (crossbow bolt)",
+      "name": "Case (crossbow bolt)",
       "cost": "1 gp",
       "weight": "1 lb."
     },
     {
-      "item": "Ink (1 ounce bottle)",
+      "name": "Ink (1 ounce bottle)",
       "cost": "10 gp",
       "weight": "-"
     },
     {
-      "item": "Rope (hempen) (1 foot)",
+      "name": "Rope (hempen) (1 foot)",
       "cost": "2 cp",
       "weight": ".2 lb."
     },
     {
-      "item": "Handaxe",
+      "name": "Handaxe",
       "cost": "5 gp",
       "weight": "2 lb."
     },
     {
-      "item": "Dart",
+      "name": "Dart",
       "cost": "5 cp",
       "weight": "1/4 lb."
     },
     {
-      "item": "Ladder (10 foot)",
+      "name": "Ladder (10 foot)",
       "cost": "1 sp",
       "weight": "25 lb."
     },
     {
-      "item": "Chain (1 feet)",
+      "name": "Chain (1 feet)",
       "cost": "5 sp",
       "weight": "1 lb."
     },
     {
-      "item": "Waterskin",
+      "name": "Waterskin",
       "cost": "2 sp",
       "weight": "5 lb. (full)"
     },
     {
-      "item": "Dulcimer",
+      "name": "Dulcimer",
       "cost": "25 gp",
       "weight": "10 lb."
     }
