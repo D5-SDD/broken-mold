@@ -138,11 +138,16 @@ class TextBox extends React.Component {
     }
 
     if (this.props.viewState && data.length > 0) {
-      data = (
-        <FormGroup>
-          <FormControl id={'csform-' + this.id} type="text" defaultValue={data[0].props.children} />
-        </FormGroup>
-      );
+      var tempData = [];
+      for (let i = 0; i < this.data.length; i++) {
+        tempData.push(
+          <FormGroup>
+            <FormControl id={'csform-' + this.id + '-' + i} type="text"
+              defaultValue={data[i].props.children} />
+          </FormGroup>
+        );
+      }
+      data = tempData;
     }
 
     // otherwise just render a panel

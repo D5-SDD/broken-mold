@@ -108,12 +108,11 @@ class CharacterSheet extends React.Component {
     propsCharacter.hitpoints.temporary = Math.abs(document.getElementById('csform-temphealth').value);
 
     //Textbox data
-    console.log(document.getElementById('csform-personalityTraits').value);
-    propsCharacter.personalityTraits = document.getElementById('csform-personalityTraits').value;
+    propsCharacter.personalityTraits = document.getElementById('csform-personalityTraits-0').value;
     console.log(propsCharacter.personalityTraits);
-    propsCharacter.ideals = document.getElementById('csform-ideals').value;
-    propsCharacter.bonds = document.getElementById('csform-bonds').value;
-    propsCharacter.flaws = document.getElementById('csform-flaws').value;
+    propsCharacter.ideals = document.getElementById('csform-ideals-0').value;
+    propsCharacter.bonds = document.getElementById('csform-bonds-0').value;
+    propsCharacter.flaws = document.getElementById('csform-flaws-0').value;
 
     //Skills data
     propsCharacter.skills.acrobatics.proficient = document.getElementById('csform-skill-acrobatics').checked;
@@ -141,6 +140,7 @@ class CharacterSheet extends React.Component {
       propsCharacter.currency[key] = Math.abs(parseInt(moneyValue));
     });
 
+    //Inventory data
     propsCharacter.inventory = [];
     var inventory = $('.equipment-Equipment');
     for (let i = 0; i < inventory.length; i++) {
@@ -148,6 +148,7 @@ class CharacterSheet extends React.Component {
       propsCharacter.inventory.push(item);
     }
 
+    //Armor data
     propsCharacter.armor = [];
     var armors = $('.equipment-Armor');
     for (let i = 0; i < armors.length; i++) {
@@ -155,6 +156,7 @@ class CharacterSheet extends React.Component {
       propsCharacter.armor.push(armor);
     }
 
+    //Weapons data
     propsCharacter.weapons = [];
     var weapons = $('.equipment-Weapons');
     for (let i = 0; i < weapons.length; i++) {
@@ -162,6 +164,7 @@ class CharacterSheet extends React.Component {
       propsCharacter.weapons.push(weapon);
     }
 
+    //SpellCasting data
     propsCharacter.spellCastingClass = document.getElementById('csform-spellclass').value;
   }
 

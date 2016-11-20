@@ -187,7 +187,13 @@
     }
   ],
   "armor": [
-    null
+    {
+      "name": "Studded Leather",
+      "armorClass": 12,
+      "armorType": "light",
+      "strength": 0,
+      "stealthDisadvantage": false
+    }
   ],
   "currency": {
     "platinum": 67,
