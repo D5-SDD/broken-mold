@@ -140,11 +140,6 @@
   ],
   "inventory": [
     {
-      "name": "Abacus",
-      "cost": "2 gp",
-      "weight": "2 lb."
-    },
-    {
       "name": "Backpack",
       "cost": "2 gp",
       "weight": "5 lb."
@@ -155,11 +150,6 @@
       "weight": "1 1 lb."
     },
     {
-      "name": "Bottleglass",
-      "cost": "2 gp",
-      "weight": "2 lb."
-    },
-    {
       "name": "Bedroll",
       "cost": "1 gp",
       "weight": "7 lb."
@@ -168,6 +158,11 @@
       "name": "Warship",
       "cost": "25000 gp",
       "weight": "-"
+    },
+    {
+      "name": "Abacus",
+      "cost": "2 gp",
+      "weight": "2 lb."
     }
   ],
   "armor": [
@@ -175,13 +170,6 @@
       "name": "Padded",
       "armorClass": 11,
       "armorType": "light",
-      "strength": 0,
-      "stealthDisadvantage": true
-    },
-    {
-      "name": "Scale Mail",
-      "armorClass": 14,
-      "armorType": "medium",
       "strength": 0,
       "stealthDisadvantage": true
     }

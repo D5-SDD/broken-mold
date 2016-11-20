@@ -12,7 +12,7 @@ import {
   Equipment, Header, HealthBox, SpellArea, TextBox
 } from '../components/CharacterSheet';
 
-import {CHARACTER_DIR} from '../../lib/Character'
+import {CHARACTER_DIR, SPELL_CLASSES} from '../../lib/Character'
 
 import {
   startUDPListen, stopUDPListen, closeTCPClient
@@ -97,7 +97,9 @@ class CharacterSheet extends React.Component {
     
     //Hitpoints data
     propsCharacter.hitpoints.maximum = Math.abs(document.getElementById('csform-maxhealth').value);
-    propsCharacter.hitpoints.current = Math.abs(document.getElementById('csform-currhealth').value);
+    propsCharacter.hitpoints.current = Math.abs(document.getElementById('csform-currhealth').value) > propsCharacter.hitpoints.maximum
+    ? propsCharacter.hitpoints.maximum
+    : Math.abs(document.getElementById('csform-currhealth').value);
     propsCharacter.hitpoints.temporary = Math.abs(document.getElementById('csform-temphealth').value);
     
     //Textbox data
@@ -137,7 +139,6 @@ class CharacterSheet extends React.Component {
     propsCharacter.inventory = [];
     var inventory = $('.equipment-Equipment');
     for(let i = 0; i < inventory.length; i++) {
-      console.log(inventory[i].textContent);
       let item = propsCharacter.findItem(inventory[i].textContent);
       propsCharacter.inventory.push(item);
     }
@@ -145,7 +146,6 @@ class CharacterSheet extends React.Component {
     propsCharacter.armor = [];
     var armors = $('.equipment-Armor');
     for(let i = 0; i < armors.length; i++) {
-      console.log(armors[i]);
       let armor = propsCharacter.findArmor(armors[i].textContent);
       propsCharacter.armor.push(armor);
     }
@@ -153,11 +153,11 @@ class CharacterSheet extends React.Component {
     propsCharacter.weapons = [];
     var weapons = $('.equipment-Weapons');
     for(let i = 0; i < weapons.length; i++) {
-      //console.log(weapons);
       let weapon = propsCharacter.findWeapon(weapons[i].textContent);
       propsCharacter.weapons.push(weapon);
     }
     
+    propsCharacter.spellCastingClass = document.getElementById('csform-spellclass').value;
   }
 
   validateBeforeExit() {
@@ -237,9 +237,8 @@ class CharacterSheet extends React.Component {
     var viewState = 0;
     var lookingForDM = false;
     var connectedToDM = false;
-    this.applyEdits(() => {
-      this.props.character.updateAutoValues();
-    });
+    this.applyEdits();
+    this.props.character.updateAutoValues();
     this.setState({
       viewState: viewState,
       lookingForDM: lookingForDM,
@@ -268,7 +267,6 @@ class CharacterSheet extends React.Component {
         </FormGroup>
       );
     }
-
     // populate the grid that displays all the relevant information to the user
     CS_GRID = (
       <Grid className="character-sheet-grid">
@@ -324,6 +322,7 @@ class CharacterSheet extends React.Component {
               attack={character.spellAttackMod}
               cast={character.spellCastingClass}
               save={character.spellSaveDC}
+              db={SPELL_CLASSES}
               viewState={this.state.viewState}
             />
             <Row>
