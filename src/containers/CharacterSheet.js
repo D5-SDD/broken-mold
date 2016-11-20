@@ -279,6 +279,7 @@ class CharacterSheet extends React.Component {
           alignment={character.alignment}
           background={character.background}
           classes={character.classes}
+          confirmed={this.confirmed}
           experience={character.experience}
           name={character.name}
           playerName={character.playerName}

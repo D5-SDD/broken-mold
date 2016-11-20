@@ -39,7 +39,7 @@ class Equipment extends React.Component {
   }
 
   addEquipment(e) {
-    var icon = $('#'+e.currentTarget.id);
+    var icon = $(e.currentTarget);
     var equipmentToAdd = icon.parent().siblings()[0].value;
     for (let i = 0; i < this.db.length; i++) {
       let val = this.db[i].name;
@@ -57,7 +57,7 @@ class Equipment extends React.Component {
   }
 
   removeEquipment(e) {
-    var icon = $('#'+e.currentTarget.id);
+    var icon = $(e.currentTarget);
     var equipmentToRemove = icon.siblings()[0].childNodes[0].textContent;
     var index = -1;
     for (let i = 0; i < this.state.data.length; i++) {
@@ -74,7 +74,7 @@ class Equipment extends React.Component {
       }
     }
 
-    if (index === -1) {
+    if (index < 0) {
       return;
     }
 

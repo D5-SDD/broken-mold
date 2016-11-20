@@ -3,6 +3,7 @@
 // Inport libraries
 import React from 'react';
 import {Button, InputGroup, FormGroup, FormControl, Row, Col, Panel} from 'react-bootstrap';
+import {CLASSES_DB} from '../../lib/Character';
 
 // Import icons
 import {FaMinusSquare, FaPlusSquare} from 'react-icons/lib/fa';
@@ -12,34 +13,114 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
 
+    this.classAndLevelOptions = [];
+    for (let i = 0; i < CLASSES_DB.length; i++) {
+      let val = CLASSES_DB[i];
+      this.classAndLevelOptions.push(
+        <option value={val} key={i}>
+          {val}
+        </option>
+      );
+    }
+
+    this.classes = this.props.classes;
+    this.state = {
+      classes: this.props.classes
+    };
+    this.resetState = false;
+
     this.addClassAndLevel = this.addClassAndLevel.bind(this);
+    this.removeClassAndLevel = this.removeClassAndLevel.bind(this);
   }
 
   addClassAndLevel(e) {
-    var icon = $('#'+e.currentTarget.id);
-    var classLevelToAdd = icon.parent().siblings()[0].value;
+    var input = $(e.currentTarget).parent().siblings();
+    var classLevelToAdd = {
+        name: input[0].value,
+        level: input[1].value
+    };
+    this.state.classes.push(classLevelToAdd);
+    this.setState({
+      classes: this.state.classes
+    });
+  }
+
+  removeClassAndLevel(e) {
+    var input = $(e.currentTarget).parent().siblings();
+    var classLevelToRemove = {
+      name: input[0].value,
+      level: input[1].value
+    };
+    var index = -1;
+    for (let i = 0; i < this.state.classes.length; i++) {
+      console.log(this.state.classes[i]);
+      console.log(classLevelToRemove);
+      if (this.state.classes[i] === classLevelToRemove) {
+        index = i;
+        break;
+      }
+    }
+
+    if (index < 0) {
+      return;
+    }
+
+    this.state.classes.splice(index, 1);
+    this.setState({
+      classes: this.state.classes
+    });
+  }
+
+  componentWillUpdate() {
+    if (this.resetState === true) {
+      this.resetState = false;
+      this.setState({
+        classes: this.props.classes
+      });
+    }
   }
 
   render() {
     var printAlignment = this.props.alignment[0] + ' ' + this.props.alignment[1];
+
+    if (this.props.confirmed === false) {
+      if (this.props.viewState === 0) {
+        this.classes = this.props.classes;
+        this.resetState = true;
+      }
+    }
+    var classes = this.classes;
+
     var classAndLevel = [];
-    for (let i=0; i<this.props.classes.length; i++) {
+    for (let i = 0; i < classes.length; i++) {
       if (this.props.viewState === 1) {
         classAndLevel.push(
           <FormGroup key={i}>
-            <FormControl id={'csform-class-'+i} type="text"
-            defaultValue={this.props.classes[i].name+ ' ' +this.props.classes[i].level}/>
+            <InputGroup>
+              <InputGroup.Button>
+                <Button
+                  id={'remove-class-and-level'}
+                  onClick={this.removeClassAndLevel}
+                >
+                  <FaMinusSquare/>
+                </Button>
+              </InputGroup.Button>
+              <FormControl componentClass="select" defaultValue={classes[i].name}>
+                {this.classAndLevelOptions}
+              </FormControl>
+              <FormControl type="number" defaultValue={classes[i].level}/>
+            </InputGroup>
           </FormGroup>
         );
       } else {
         classAndLevel.push(
           <div key={i}>
-            {this.props.classes[i].name+ ' ' +this.props.classes[i].level}
+            {classes[i].name + ' ' + classes[i].level}
           </div>
         );
       }
     }
-    
+
     var raceOptions = [];
     for (let i = 0; i < this.props.racedb.length; i++) {
       let val = this.props.racedb[i];
@@ -49,7 +130,7 @@ class Header extends React.Component {
         </option>
       );
     }
-    
+
     var backgroundOptions = [];
     for (let i = 0; i < this.props.backgrounddb.length; i++) {
       let val = this.props.backgrounddb[i];
@@ -66,6 +147,7 @@ class Header extends React.Component {
     var charRace = this.props.race;
     var charExp = this.props.experience;
     if (this.props.viewState === 1) {
+
       classAndLevel.push(
         <FormGroup key={classAndLevel.length + 1}>
           <InputGroup>
@@ -77,7 +159,10 @@ class Header extends React.Component {
                 <FaPlusSquare/>
               </Button>
             </InputGroup.Button>
-            <FormControl id="csform-name" type="text"/>
+            <FormControl componentClass="select">
+              {this.classAndLevelOptions}
+            </FormControl>
+            <FormControl type="number" defaultValue={0} />
           </InputGroup>
         </FormGroup>
       );
@@ -170,6 +255,7 @@ Header.propTypes = {
   alignment: React.PropTypes.array.isRequired,
   background: React.PropTypes.string.isRequired,
   classes: React.PropTypes.array.isRequired,
+  confirmed: React.PropTypes.bool,
   experience: React.PropTypes.number.isRequired,
   name: React.PropTypes.string.isRequired,
   playerName: React.PropTypes.string.isRequired,
