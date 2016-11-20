@@ -84,26 +84,16 @@ class Equipment extends React.Component {
     });
   }
 
-  componentWillUpdate() {
-    console.log('willUpdate');
-    console.log(this.props);
-    console.log(this.state);
-    if (this.props.viewState === 0) {
-      this.data = _.flattenDeep(this.props.data);
-      this.setState({
-        data: _.flattenDeep(this.props.data)
-      });
-    }
-  }
-
   render() {
-    console.log('render');
-    console.log(this.props);
-    console.log(this.state);
+    if (this.props.heading === 'Equipment') {
+      console.log('render');
+      console.log(this.props);
+      console.log(this.state);
+    }
     var items = [];
-    var data = this.state.data;
-    if (this.props.viewState === 0) {
-      data = this.data;
+    var data = _.flattenDeep(this.props.data);
+    if (this.props.viewState === 1) {
+      data = this.state.data;
     }
 
     for (let i = 0; i < data.length; i++) {
@@ -190,6 +180,7 @@ class Equipment extends React.Component {
 }
 
 Equipment.propTypes = {
+  confirmed: React.PropTypes.boolean,
   data: React.PropTypes.array.isRequired,
   heading: React.PropTypes.string.isRequired,
   viewState: React.PropTypes.number.isRequired
