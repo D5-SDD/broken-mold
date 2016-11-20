@@ -13,7 +13,7 @@ import {
 } from '../components/CharacterSheet';
 
 import {
-  CHARACTER_DIR, SPELL_CLASSES, RACES_DB, BACKGROUNDS_DB, SPELLS_DB
+  CHARACTER_DIR, SPELL_CLASSES, RACES_DB, BACKGROUNDS_DB, SPELLS_DB, /*FEATURE_TRAITSDB*/
 } from '../../lib/Character'
 
 import {
