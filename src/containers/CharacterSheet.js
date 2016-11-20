@@ -13,7 +13,7 @@ import {
 } from '../components/CharacterSheet';
 
 import {
-  CHARACTER_DIR, SPELL_CLASSES, RACES_DB, BACKGROUNDS_DB, SPELLS_DB, /*FEATURE_TRAITSDB*/
+  CHARACTER_DIR, SPELL_CLASSES, RACES_DB, BACKGROUNDS_DB, SPELLS_DB, /*FEATURE_TRAITS_DB*/
 } from '../../lib/Character'
 
 import {
@@ -351,6 +351,7 @@ class CharacterSheet extends React.Component {
                   <TextBox
                     data={character.personalityTraits}
                     title="personalityTraits"
+                    confirmed={this.confirmed}
                     viewState={this.state.viewState}
                   />
                 </Row>
@@ -358,6 +359,7 @@ class CharacterSheet extends React.Component {
                   <TextBox
                     data={character.ideals}
                     title="ideals"
+                    confirmed={this.confirmed}
                     viewState={this.state.viewState}
                   />
                 </Row>
@@ -365,6 +367,7 @@ class CharacterSheet extends React.Component {
                   <TextBox
                     data={character.bonds}
                     title="bonds"
+                    confirmed={this.confirmed}
                     viewState={this.state.viewState}
                   />
                 </Row>
@@ -372,6 +375,7 @@ class CharacterSheet extends React.Component {
                   <TextBox
                     data={character.flaws}
                     title="flaws"
+                    confirmed={this.confirmed}
                     viewState={this.state.viewState}
                   />
                 </Row>
@@ -384,6 +388,8 @@ class CharacterSheet extends React.Component {
                     accordion
                     data={character.featuresAndTraits}
                     title="featuresAndTraits"
+                    confirmed={this.confirmed}
+                    /*db={FEATURE_TRAITS_DB}*/
                     viewState={this.state.viewState}
                   />
                 </Row>
@@ -391,6 +397,7 @@ class CharacterSheet extends React.Component {
                   <TextBox
                     data={[character.proficiencies, character.languages]}
                     title="otherProficienciesAndLanguages"
+                    confirmed={this.confirmed}
                     viewState={this.state.viewState}
                   />
                 </Row>
@@ -404,6 +411,7 @@ class CharacterSheet extends React.Component {
                 data={spellData}
                 title="Spells"
                 db={SPELLS_DB}
+                confirmed={this.confirmed}
                 viewState={this.state.viewState}
               />
             </Col>

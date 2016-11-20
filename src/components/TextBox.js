@@ -18,9 +18,7 @@ class TextBox extends React.Component {
     this.id = this.props.title;
     this.header = capital(this.id);
     this.data = [this.props.data];
-    this.state = {
-      data: this.props.data
-    };
+    this.resetState = false;
 
     // if the data needs to be parsed, flatten it to the information we want to display
     if (typeof this.props.data === 'object') {
@@ -32,10 +30,37 @@ class TextBox extends React.Component {
       });
       this.data = _.flatten(this.data);
     }
+    
+    this.state = {
+      data: this.data
+    };
+    
+    this.addToList = this.addToList.bind(this);
+    this.removeFromList = this.removeFromList.bind(this);
   }
   
   
-
+  addToList(item) {
+    var icon = $('#'+item.currentTarget.id);
+    console.log(icon);
+    var itemToAdd = icon.parent().siblings()[0].value;
+    console.log(itemToAdd);
+    for (let i = 0; i < this.props.db.length; i++) {
+      let val = this.props.db[i].name;
+      if (val === itemToAdd) {
+        this.state.data.push(this.props.db[i]);
+        this.setState({
+          data: this.state.data
+        });
+        break;
+      }
+    }
+  }
+  
+  removeFromList (item) {
+  
+  }
+  
   render() {
     var data = [];
 
@@ -111,7 +136,7 @@ class TextBox extends React.Component {
             <InputGroup.Button>
               <Button
                 id={'new-spell'}
-                onClick={() => {console.log('test 2');}}
+                onClick={this.addToList}
               >
                 <FaPlusSquare/>
               </Button>
@@ -167,6 +192,7 @@ TextBox.propTypes = {
   ]).isRequired,
   title: React.PropTypes.string.isRequired,
   db: React.PropTypes.array,
+  confirmed: React.PropTypes.bool,
   viewState: React.PropTypes.number.isRequired
 };
 
