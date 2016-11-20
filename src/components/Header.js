@@ -40,6 +40,8 @@ class Header extends React.Component {
         );
       }
     }
+    
+    var raceOptions = [];
 
     //editing needs
     var charName = this.props.name;
