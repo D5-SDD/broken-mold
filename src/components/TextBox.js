@@ -16,29 +16,54 @@ class TextBox extends React.Component {
 
     this.id = this.props.title;
     this.header = capital(this.id);
-    this.data = this.props.data;
+    this.data = this.parseData(this.props.data);
     this.state = {
-      data: this.props.data
+      data: this.data
     };
     this.resetState = false;
 
+    this.parseData = this.parseData.bind(this);
+    this.addText = this.addText.bind(this);
+    this.removeText = this.removeText.bind(this);
+  }
+
+  parseData(inputData) {
+    var data = [];
     // if the data needs to be parsed, flatten it to the information we want to display
-    if (typeof this.props.data === 'object') {
-      this.data = _.map(this.props.data, function(obj) {
+    if (typeof inputData === 'object') {
+      data = _.map(inputData, function(obj) {
         if (typeof obj === 'string') {
           return obj;
         }
         return _.values(obj);
       });
-      this.data = _.flatten(this.data);
+      data = _.flattenDeep(data);
     }
-
-    this.addText = this.addText.bind(this);
-    this.removeText = this.removeText.bind(this);
+    if (data.length > 0) {
+      return data;
+    }
+    return [inputData];
   }
 
   addText(e) {
     console.log(e);
+  }
+
+
+  addToList(item) {
+    var icon = $(item.currentTarget);
+    var itemToAdd = icon.parent().siblings()[0].value;
+    for (let i = 0; i < this.props.db.length; i++) {
+      let val = this.props.db[i].name;
+      if (val === itemToAdd) {
+        this.state.data.push(this.props.db[i].name);
+        this.state.data.push(findSpell(this.props.db[i].name).description);
+        this.setState({
+          data: this.state.data
+        });
+        break;
+      }
+    }
   }
 
   removeText(e) {
@@ -49,7 +74,7 @@ class TextBox extends React.Component {
     if (this.resetState === true) {
       this.resetState = false;
       this.setState({
-        data: this.props.data
+        data: this.data
       });
     }
   }
@@ -57,7 +82,16 @@ class TextBox extends React.Component {
   render() {
     if (this.props.confirmed === false) {
       if (this.props.viewState === 0) {
-        this.data = this.props.data;
+        this.data = [this.props.data];
+        if (typeof this.props.data === 'object') {
+          this.data = _.map(this.props.data, function(obj) {
+            if (typeof obj === 'string') {
+              return obj;
+            }
+            return _.values(obj);
+          });
+          this.data = _.flatten(this.data);
+        }
         this.resetState = true;
       }
     }
@@ -94,9 +128,9 @@ class TextBox extends React.Component {
       );
     }
 
-    if (this.props.viewState && data.length > 0) {
+    if (this.props.viewState) {
       var tempData = [];
-      for (let i = 0; i < this.data.length; i++) {
+      for (let i = 0; i < data.length; i++) {
         tempData.push(
           <InputGroup key={i}>
             <InputGroup.Button>
@@ -110,7 +144,7 @@ class TextBox extends React.Component {
             <FormControl
               className={'csform-' + this.id}
               type="text"
-              defaultValue={data[i].props.children}
+              defaultValue={data[i]}
             />
           </InputGroup>
         );

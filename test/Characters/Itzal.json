@@ -4,11 +4,11 @@
   "classes": [
     {
       "name": "Rogue",
-      "level": 3
+      "level": "3"
     },
     {
       "name": "Wizard",
-      "level": 3
+      "level": "3"
     }
   ],
   "race": "Dragonborn",
@@ -31,7 +31,7 @@
     "charisma": 14
   },
   "inspiration": 0,
-  "proficiencyBonus": 3,
+  "proficiencyBonus": 84,
   "savingThrows": {
     "strength": {
       "proficient": false
@@ -186,7 +186,8 @@
   ],
   "spellCastingClass": "Wizard",
   "spells": [
-    "Chill Touch",
-    "Revivify"
+    "Dancing Lights",
+    "Detect Poison or Disease",
+    "Color Spray"
   ]
 }

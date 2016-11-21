@@ -40,7 +40,7 @@ class Header extends React.Component {
     for (let i = 0; i < classes.length; i++) {
       let index = this.remainingClasses.indexOf(classes[i].name);
       if (index > -1) {
-        this.remainingClasses.splice(index, 1); 
+        this.remainingClasses.splice(index, 1);
       }
     }
     for (let i = 0; i < this.remainingClasses.length; i++) {
