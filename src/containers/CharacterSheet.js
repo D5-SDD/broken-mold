@@ -5,7 +5,7 @@ import React from 'react';
 import {FormGroup, FormControl, Button, Grid, Row, Col, Panel} from 'react-bootstrap';
 import capital from 'to-capital-case';
 import _ from 'lodash';
-
+import fs from 'fs';
 // Import internal libraries
 import {
   AbilityScores, CombatStatistics, Currency, DiceAndSaves,
@@ -18,7 +18,7 @@ import {
 } from '../../lib/Character'
 
 import {
-  startUDPListen, stopUDPListen, closeTCPClient, TCP
+  startUDPListen, stopUDPListen, closeTCPClient, TCP, DM_LOCATION
 } from '../../lib/Networking';
 
 // Import icons
@@ -270,7 +270,11 @@ class CharacterSheet extends React.Component {
     if (this.state.connectedToDM) {
       this.props.character.saveCharacter(CHARACTER_DIR + this.props.character.name + '.json');
       this.props.character.originalName = this.props.character.name;
-      TCP.client.sendMessage(JSON.parse(fs.readFileSync(CHARACTER_DIR + charName)));
+      TCP.client.sendMessage(JSON.parse(fs.readFileSync(CHARACTER_DIR + this.props.character.name + '.json')));
+    } else if (!exitCharacterSheetCB) {    
+      this.props.character.saveCharacter(DM_LOCATION + this.props.character.name + '.json');
+      this.props.character.originalName = this.props.character.name;
+      TCP.client.sendMessage(JSON.parse(fs.readFileSync(DM_LOCATION + this.props.character.name + '.json')));
     }
     this.setState({
       viewState: viewState,

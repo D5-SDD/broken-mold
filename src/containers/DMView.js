@@ -31,6 +31,10 @@ class DMView extends React.Component {
   }
 
   characterReceivedCB(charLocation, client) {
+    var index = this.clients.indexOf(client);
+    if (index !== -1) {
+      this.characterRemovedCB(this.clients[index]);
+    }
     this.characters.push(new Character(charLocation));
     this.clients.push(client);
     this.forceUpdate();
