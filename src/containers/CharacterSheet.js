@@ -112,14 +112,13 @@ class CharacterSheet extends React.Component {
     propsCharacter.ideals = $('.csform-ideals')[0].value;
     propsCharacter.bonds = $('.csform-bonds')[0].value;
     propsCharacter.flaws = $('.csform-flaws')[0].value;
-    
+
     propsCharacter.proficienciesAndLanguages = [];
     var profAndLang = $('.csform-ProficienciesAndLanguages');
     for (let i = 0; i < profAndLang.length; i++) {
       let item = profAndLang[i].value;
       propsCharacter.proficienciesAndLanguages.push(item);
     }
-    
 
     //Skills data
     propsCharacter.skills.acrobatics.proficient = document.getElementById('csform-skill-acrobatics').checked;
@@ -178,7 +177,7 @@ class CharacterSheet extends React.Component {
     for (let i = 0; i < spells.length; i++) {
       propsCharacter.spells.push(spells[i].textContent);
     }
-    
+
     // Features and Traits
     propsCharacter.featuresAndTraits = [];
     var features = $('.featuresAndTraits');
@@ -286,7 +285,7 @@ class CharacterSheet extends React.Component {
         description: findSpell(character.spells[i]).description
       });
     }
-    
+
     var featureData = [];
     for (let i = 0; i < character.featuresAndTraits.length; i++) {
       featureData.push({
@@ -294,7 +293,7 @@ class CharacterSheet extends React.Component {
         description: findFeature(character.featuresAndTraits[i]).description
       });
     }
-    
+
     var inspiration = character.inspiration;
     if (this.state.viewState) {
       inspiration = (
