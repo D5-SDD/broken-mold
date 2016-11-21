@@ -19,17 +19,17 @@
 
 .panel-default > .panel-heading {
   background-image: none;
-  background-color: $lightBrown;
-  color: $blackBrown;
+  background-color: $baseRed;
+  color: $white;
 }
 
 .panel {
   background-color: $lightRed;
-  color: $darkGray;
+  color: $white;
   .fa {
     margin-right: 5px;
   }
-  
+
 
   &.centered {
   	.panel-heading, .panel-body {
