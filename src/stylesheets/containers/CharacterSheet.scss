@@ -19,7 +19,7 @@
   position: absolute;
   height: 50px;
   width: 50px;
-  color: #FFFFFF;
+  color: $white;
 
   &:hover {
     cursor: pointer;
@@ -32,9 +32,10 @@
   right: 0;
   height: 50px;
   width: 50px;
-  color: #FFFFFF;
+  color: $white;
 
   &:hover {
     cursor: pointer;
+    color: $lightRed;
   }
 }

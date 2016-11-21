@@ -35,12 +35,14 @@ class CharacterView extends React.Component {
     this.openModal = this.openModal.bind(this);
   }
 
+  //closes popup
   closeModal() {
     this.setState({
       showModal: false
     });
   }
 
+  //opens popup
   openModal() {
     this.setState({
       showModal: true
@@ -71,8 +73,7 @@ class CharacterView extends React.Component {
     $('#fileDialog')[0].value = '';
   }
 
-  // Called when the new button is clicked,
-  // TODO: create a modal for the character name, then character creation
+  // Called when the new button is clicked
   newCharacterCB() {
     this.currentCharacter = new Character('NEW_CHARACTER');
     this.setState({
