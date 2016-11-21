@@ -429,7 +429,7 @@ class CharacterSheet extends React.Component {
               viewState={this.state.viewState}
             />
             <Row>
-              <Col className="inner col" md={5}>
+              <Col className="inner col" md={12}>
                 <Currency
                   currency={character.currency}
                   viewState = {this.state.viewState}
