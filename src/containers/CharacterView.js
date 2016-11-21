@@ -140,7 +140,7 @@ class CharacterView extends React.Component {
             <h4>Invalid character JSON, try again.</h4>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.closeModal}>Close</Button>
+            <Button bsStyle="primary" onClick={this.closeModal}>Close</Button>
           </Modal.Footer>
         </Modal>
         {CV}
