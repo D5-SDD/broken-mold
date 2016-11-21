@@ -3,12 +3,12 @@
   "playerName": "Broken Mold",
   "classes": [
     {
-      "name": "Paladin",
-      "level": "18"
-    },
-    {
       "name": "Barbarian",
       "level": "5"
+    },
+    {
+      "name": "Paladin",
+      "level": "18"
     }
   ],
   "race": "Dwarf",
@@ -116,17 +116,24 @@
   "speed": 20,
   "hitDice": "1d8",
   "deathSaves": {
-    "successes": 2,
-    "failures": 2
+    "successes": 0,
+    "failures": 0
   },
   "weapons": [
     "Longsword"
   ],
   "inventory": [
-    "Abacus",
     "Halberd",
-    "Alchemist's supplies",
-    "Alchemist's fire (flask)"
+    "Brewer's supplies",
+    "Case (crossbow bolt)",
+    "Ink (1 ounce bottle)",
+    "Rope (hempen) (1 foot)",
+    "Handaxe",
+    "Dart",
+    "Chain (1 feet)",
+    "Ladder (10 foot)",
+    "Waterskin",
+    "Dulcimer"
   ],
   "armor": [
     "Studded Leather"

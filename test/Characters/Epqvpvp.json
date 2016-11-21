@@ -4,15 +4,15 @@
   "classes": [
     {
       "name": "Druid",
-      "level": 1
+      "level": "1"
     },
     {
       "name": "Ranger",
-      "level": 13
+      "level": "13"
     },
     {
       "name": "Monk",
-      "level": 7
+      "level": "7"
     }
   ],
   "race": "Elf",
@@ -123,12 +123,21 @@
     "successes": 0,
     "failures": 0
   },
-  "weapons": [],
+  "weapons": [
+    "Longsword"
+  ],
   "inventory": [
-    "Abacus",
-    "Halberd",
-    "Alchemist's supplies",
-    "Alchemist's fire (flask)"
+    "Component pouch",
+    "Elephant",
+    "Stabling (per day)",
+    "Chain shirt",
+    "Rations (1 day)",
+    "Breastplate",
+    "Clothes (traveler's)",
+    "Chain mail",
+    "Scale (merchant's)",
+    "Shortbow",
+    "Mastiff"
   ],
   "armor": [
     "Studded Leather"
