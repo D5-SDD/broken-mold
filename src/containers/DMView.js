@@ -28,6 +28,7 @@ class DMView extends React.Component {
     this.characterRemovedCB = this.characterRemovedCB.bind(this);
   }
 
+  // Called when the DM receives a character from a client
   characterReceivedCB(charLocation, client) {
     var index = this.clients.indexOf(client);
     var newCharacter = new Character(DM_FOLDER + charLocation);
@@ -48,6 +49,7 @@ class DMView extends React.Component {
     this.forceUpdate();
   }
 
+  // Called when the client disconnects and the character needs to be removed from the view
   characterRemovedCB(client) {
     var index = this.clients.indexOf(client);
     if (fs.existsSync(DM_FOLDER + this.characters[index].originalName + '.json')) {
@@ -58,6 +60,8 @@ class DMView extends React.Component {
     this.forceUpdate();
   }
 
+  // Called when DM starts accepting connection
+  // Starts UDP broadcasting and TCP server
   openConnectionCB() {
     startUDPBroadcast(true);
     startTCPServer((charLocation, client) => {
@@ -69,12 +73,14 @@ class DMView extends React.Component {
     this.props.networkingStateCB(true, true);
   }
 
+  // Stops TCP server and USP broadcasting
   closeAllDMConnections() {
     closeTCPServer();
     stopUDPBroadcast();
     this.props.networkingStateCB(false, false);
   }
 
+  // Just stops UDP broadcasting
   closeUDPBroadcasting() {
     stopUDPBroadcast();
     let TCPOpen = this.props.TCPOpen;
@@ -83,6 +89,7 @@ class DMView extends React.Component {
 
   render() {
     var tabContainer = null;
+    // Render each tab based on the characters
     if (this.characters.length > 0) {
       var tabs = [];
       for (let i = 0; i < this.characters.length; i++) {
