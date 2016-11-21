@@ -12,6 +12,7 @@ import {FaCircle, FaCircleO, FaStar, FaStarO} from 'react-icons/lib/fa';
 import {SKILLS} from '../../lib/Character';
 
 // Displays a character's ability scores in the Character Sheet View
+// Collection of AbilityScore components
 class AbilityScores extends React.Component {
   constructor(props) {
     super(props);
@@ -58,7 +59,8 @@ class AbilityScore extends React.Component {
 
 	render() {
     var name = this.props.name;
-
+    
+    //Icon based on if you are proficient in a skill or saving throw
     var savingThrowsIcon = <FaStarO />;
     if (this.props.savingThrows.proficient === true) {
       savingThrowsIcon = <FaStar />;
@@ -69,6 +71,7 @@ class AbilityScore extends React.Component {
         {savingThrowsIcon} {this.props.savingThrows.value} Saving Throws
       </span>
     );
+    // If editing, make checkboxes
     if (this.props.viewState) {
       savingThrowBox = (
         <form>
