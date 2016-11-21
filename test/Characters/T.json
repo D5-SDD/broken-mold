@@ -4,7 +4,7 @@
   "classes": [
     {
       "name": "Monk",
-      "level": 10
+      "level": "10"
     }
   ],
   "race": "Half-Orc",
@@ -115,12 +115,29 @@
     "successes": 0,
     "failures": 0
   },
-  "weapons": [],
+  "weapons": [
+    "Longsword"
+  ],
   "inventory": [
-    "Abacus",
-    "Halberd",
-    "Alchemist's supplies",
-    "Alchemist's fire (flask)"
+    "Sling",
+    "Navigator's tools",
+    "Herbalism kit",
+    "Cart",
+    "Bucket",
+    "Mason's tools",
+    "Ink (1 ounce bottle)",
+    "Whetstone",
+    "Pony",
+    "Bedroll",
+    "Saddlebags",
+    "Mirror (steel)",
+    "Manacles",
+    "Longship",
+    "Ball bearing",
+    "Quiver",
+    "Splint",
+    "Greataxe",
+    "Crowbar"
   ],
   "armor": [
     "Studded Leather"
