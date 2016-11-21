@@ -13,7 +13,8 @@ import {
 } from '../components/CharacterSheet';
 
 import {
-  CHARACTER_DIR, SPELL_CLASSES, RACES_DB, BACKGROUNDS_DB, SPELLS_DB, /*FEATURE_TRAITS_DB*/
+  CHARACTER_DIR, SPELL_CLASSES, RACES_DB, BACKGROUNDS_DB, SPELLS_DB, /*FEATURE_TRAITS_DB,*/
+  findSpell, findItem, findArmor, findWeapon
 } from '../../lib/Character'
 
 import {
@@ -57,6 +58,7 @@ class CharacterSheet extends React.Component {
   applyEdits() {
     var propsCharacter = this.props.character;
     //Header data
+    /*
     var tempClass = [];
     for (let i=0; i<propsCharacter.classes.length; i++){
       var classAndLevel = document.getElementById('csform-class-'+i).value;
@@ -68,6 +70,7 @@ class CharacterSheet extends React.Component {
       tempClass.push(tempObject);
     }
     propsCharacter.classes = tempClass;
+    */
     propsCharacter.name = document.getElementById('csform-name').value;
     propsCharacter.background = document.getElementById('csform-background').value;
     propsCharacter.playerName = document.getElementById('csform-player').value;
@@ -152,7 +155,7 @@ class CharacterSheet extends React.Component {
     propsCharacter.inventory = [];
     var inventory = $('.equipment-Equipment');
     for (let i = 0; i < inventory.length; i++) {
-      let item = propsCharacter.findItem(inventory[i].textContent);
+      let item = findItem(inventory[i].textContent);
       propsCharacter.inventory.push(item);
     }
 
@@ -160,7 +163,7 @@ class CharacterSheet extends React.Component {
     propsCharacter.armor = [];
     var armors = $('.equipment-Armor');
     for (let i = 0; i < armors.length; i++) {
-      let armor = propsCharacter.findArmor(armors[i].textContent);
+      let armor = findArmor(armors[i].textContent);
       propsCharacter.armor.push(armor);
     }
 
@@ -168,12 +171,18 @@ class CharacterSheet extends React.Component {
     propsCharacter.weapons = [];
     var weapons = $('.equipment-Weapons');
     for (let i = 0; i < weapons.length; i++) {
-      let weapon = propsCharacter.findWeapon(weapons[i].textContent);
+      let weapon = findWeapon(weapons[i].textContent);
       propsCharacter.weapons.push(weapon);
     }
 
     //SpellCasting data
     propsCharacter.spellCastingClass = document.getElementById('csform-spellclass').value;
+    propsCharacter.spells = [];
+    var spells = $('.Spells');
+    console.log(spells);
+    for (let i = 0; i < spells.length; i++) {
+      propsCharacter.spells.push(spells[i].textContent);
+    }
   }
 
   validateBeforeExit() {
@@ -272,7 +281,7 @@ class CharacterSheet extends React.Component {
     for (let i = 0; i < character.spells.length; i++) {
       spellData.push({
         name: character.spells[i],
-        description: character.getSpellFromName(character.spells[i]).description
+        description: findSpell(character.spells[i]).description
       });
     }
     var inspiration = character.inspiration;

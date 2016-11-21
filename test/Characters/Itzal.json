@@ -186,6 +186,7 @@
   ],
   "spellCastingClass": "Wizard",
   "spells": [
-    "Acid Splash"
+    "Chill Touch",
+    "Revivify"
   ]
 }

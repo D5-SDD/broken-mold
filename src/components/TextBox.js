@@ -9,6 +9,7 @@ import {
 import capital from 'to-capital-case';
 import {FaMinusSquare, FaPlusSquare} from 'react-icons/lib/fa';
 import _ from 'lodash';
+import {findSpell /*FEATURE_TRAITS_DB*/} from '../../lib/Character';
 
 // Generix display for text and lists of properties in the Character Sheet View
 class TextBox extends React.Component {
@@ -42,13 +43,13 @@ class TextBox extends React.Component {
   
   addToList(item) {
     var icon = $(item.currentTarget);
-    console.log(icon);
+    console.log(this.props);
     var itemToAdd = icon.parent().siblings()[0].value;
-    console.log(itemToAdd);
     for (let i = 0; i < this.props.db.length; i++) {
       let val = this.props.db[i].name;
       if (val === itemToAdd) {
         this.state.data.push(this.props.db[i].name);
+        this.state.data.push(findSpell(this.props.db[i].name).description);
         this.setState({
           data: this.state.data
         });
@@ -72,7 +73,7 @@ class TextBox extends React.Component {
     if (index < 0) {
       return;
     }
-    this.state.data.splice(index, 1);
+    this.state.data.splice(index, 2);
     this.setState({
       data: this.state.data
     });
@@ -115,7 +116,7 @@ class TextBox extends React.Component {
       let value = data[i].props.header;
       
       if (this.props.viewState) {
-        let id = 'spells';
+        let id = this.props.title;
         value = (
           <span>
             <FaMinusSquare 
@@ -172,7 +173,7 @@ class TextBox extends React.Component {
           <InputGroup>
             <InputGroup.Button>
               <Button
-                id={'new-spell'}
+                id={'new-' + this.props.title}
                 onClick={this.addToList}
               >
                 <FaPlusSquare/>
