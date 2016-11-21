@@ -2,12 +2,13 @@
 
 // Import libraries
 import React from 'react';
-import CharacterMenu from '../components/CharacterMenu';
-import CharacterSheet from './CharacterSheet';
+import {Modal, Button} from 'react-bootstrap';
 
 // Import internal libraries
+import CharacterMenu from '../components/CharacterMenu';
+import CharacterSheet from './CharacterSheet';
 import Character, {
-  exportMap, readCharactersFromMap, readMap, loadCharacters, CHARACTER_DIR
+  exportMap, readMap, loadCharacters, CHARACTER_DIR
 } from '../../lib/Character';
 
 // Import stylesheet
@@ -21,13 +22,29 @@ class CharacterView extends React.Component {
 
     this.state = {
       viewState: 0, // 0: menu, 1: view/create sheet
-    }
-;
+      showModal: false
+    };
+
     this.currentCharacter = null;
 
     // import the character map and read all saved characters
     exportMap();
     this.characterMap = readMap();
+
+    this.closeModal = this.closeModal.bind(this);
+    this.openModal = this.openModal.bind(this);
+  }
+
+  closeModal() {
+    this.setState({
+      showModal: false
+    });
+  }
+
+  openModal() {
+    this.setState({
+      showModal: true
+    });
   }
 
   // Called when the load button is clicked,
@@ -44,7 +61,7 @@ class CharacterView extends React.Component {
     }
     this.currentCharacter = loadCharacters(paths);
     if (this.currentCharacter === null) {
-      console.log('Character was not loaded succesfully');
+      this.openModal();
     } else {
       this.setState({
         viewState: 1
@@ -81,11 +98,13 @@ class CharacterView extends React.Component {
 
   // Called when any exit button is clicked,
   // exports any changes to the characters and return to the character menu
-  exitCharacterSheetCB() {
-    // save character
-    this.currentCharacter.saveCharacter(CHARACTER_DIR + this.currentCharacter.name + '.json');
-    this.currentCharacter = null;
-    exportMap();
+  exitCharacterSheetCB(save) {
+    if (save !== false) {
+      // save character
+      this.currentCharacter.saveCharacter(CHARACTER_DIR + this.currentCharacter.name + '.json');
+      this.currentCharacter = null;
+      exportMap();
+    }
     this.characterMap = readMap();
     this.setState({viewState: 0});
   }
@@ -112,7 +131,20 @@ class CharacterView extends React.Component {
       );
     }
     return (
-      <div className="character-view">{CV}</div>
+      <div className="character-view">
+        <Modal show={this.state.showModal} onHide={this.closeModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Unable to load character</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <h4>Invalid character JSON, try again.</h4>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button bsStyle="primary" onClick={this.closeModal}>Close</Button>
+          </Modal.Footer>
+        </Modal>
+        {CV}
+      </div>
     );
   }
 }
