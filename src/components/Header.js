@@ -91,7 +91,7 @@ class Header extends React.Component {
     var input = $(e.currentTarget).parent().siblings();
     var classLevelToRemove = {
       name: input[0].value,
-      level: parseInt(input[1].value)
+      level: input[1].value
     };
     var index = -1;
     for (let i = 0; i < this.state.classes.length; i++) {
