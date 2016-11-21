@@ -4,11 +4,11 @@
   "classes": [
     {
       "name": "Paladin",
-      "level": 18
+      "level": "18"
     },
     {
       "name": "Barbarian",
-      "level": 5
+      "level": "5"
     }
   ],
   "race": "Dwarf",
@@ -120,80 +120,16 @@
     "failures": 2
   },
   "weapons": [
-    {
-      "name": "Longsword",
-      "damage": "1d8",
-      "type": "slashing",
-      "properties": [
-        "versatile (1d10)"
-      ]
-    }
+    "Longsword"
   ],
   "inventory": [
-    {
-      "name": "Halberd",
-      "cost": "20 gp",
-      "weight": "6 lb."
-    },
-    {
-      "name": "Brewer's supplies",
-      "cost": "20 gp",
-      "weight": "9 lb."
-    },
-    {
-      "name": "Case (crossbow bolt)",
-      "cost": "1 gp",
-      "weight": "1 lb."
-    },
-    {
-      "name": "Ink (1 ounce bottle)",
-      "cost": "10 gp",
-      "weight": "-"
-    },
-    {
-      "name": "Rope (hempen) (1 foot)",
-      "cost": "2 cp",
-      "weight": ".2 lb."
-    },
-    {
-      "name": "Handaxe",
-      "cost": "5 gp",
-      "weight": "2 lb."
-    },
-    {
-      "name": "Dart",
-      "cost": "5 cp",
-      "weight": "1/4 lb."
-    },
-    {
-      "name": "Ladder (10 foot)",
-      "cost": "1 sp",
-      "weight": "25 lb."
-    },
-    {
-      "name": "Chain (1 feet)",
-      "cost": "5 sp",
-      "weight": "1 lb."
-    },
-    {
-      "name": "Waterskin",
-      "cost": "2 sp",
-      "weight": "5 lb. (full)"
-    },
-    {
-      "name": "Dulcimer",
-      "cost": "25 gp",
-      "weight": "10 lb."
-    }
+    "Abacus",
+    "Halberd",
+    "Alchemist's supplies",
+    "Alchemist's fire (flask)"
   ],
   "armor": [
-    {
-      "name": "Studded Leather",
-      "armorClass": 12,
-      "armorType": "light",
-      "strength": 0,
-      "stealthDisadvantage": false
-    }
+    "Studded Leather"
   ],
   "currency": {
     "platinum": 67,

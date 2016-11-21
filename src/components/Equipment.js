@@ -6,7 +6,6 @@ import {
   InputGroup, Button, FormGroup, FormControl,
   Panel, ListGroup, ListGroupItem
 } from 'react-bootstrap';
-import capital from 'to-capital-case';
 
 // Import icons
 import {FaMinusSquare, FaPlusSquare} from 'react-icons/lib/fa';
@@ -41,19 +40,10 @@ class Equipment extends React.Component {
   addEquipment(e) {
     var icon = $(e.currentTarget);
     var equipmentToAdd = icon.parent().siblings()[0].value;
-    for (let i = 0; i < this.db.length; i++) {
-      let val = this.db[i].name;
-      if (this.props.heading !== 'Equipment') {
-        val = capital(val);
-      }
-      if (val === equipmentToAdd) {
-        this.state.data.push(this.db[i]);
-        this.setState({
-          data: this.state.data
-        });
-        break;
-      }
-    }
+    this.state.data.push(equipmentToAdd);
+    this.setState({
+      data: this.state.data
+    });
   }
 
   removeEquipment(e) {
@@ -62,11 +52,6 @@ class Equipment extends React.Component {
     var index = -1;
     for (let i = 0; i < this.state.data.length; i++) {
       let val = this.state.data[i];
-      if (val.name) {
-        val = capital(val.name);
-      } else if (val.item) {
-        val = val.item;
-      }
 
       if (equipmentToRemove === val) {
         index = i;
@@ -106,30 +91,24 @@ class Equipment extends React.Component {
 
     for (let i = 0; i < data.length; i++) {
       let value = data[i];
-      let title = '';
-      if (value.name) {
-        title = capital(value.name);
-      } else if (value.item) {
-        title = value.item;
-      }
 
       if (this.props.viewState === 1) {
         let id = 'equipment-' + this.props.heading;
-        title = (
+        value = (
           <span>
             <FaMinusSquare
               className="minus"
               id={'minus-' + id + '-' + i}
               onClick={this.removeEquipment}
             />
-            <span className={id}>{title}</span>
+            <span className={id}>{value}</span>
           </span>
         );
       }
 
       items.push(
         <ListGroupItem key={items.length}>
-          {title}
+          {value}
         </ListGroupItem>
       );
     }
@@ -140,9 +119,6 @@ class Equipment extends React.Component {
 
       for (let i = 0; i < this.db.length; i++) {
         var val = this.db[i].name;
-        if (this.props.heading !== 'Equipment') {
-          val = capital(val);
-        }
         options.push(
           <option value={val} key={i}>
             {val}

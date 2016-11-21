@@ -6,11 +6,11 @@
       "classes": [
         {
           "name": "Paladin",
-          "level": 18
+          "level": "18"
         },
         {
           "name": "Barbarian",
-          "level": 5
+          "level": "5"
         }
       ],
       "race": "Dwarf"

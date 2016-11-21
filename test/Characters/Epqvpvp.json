@@ -125,70 +125,13 @@
   },
   "weapons": [],
   "inventory": [
-    {
-      "item": "Component pouch",
-      "cost": "25 gp",
-      "weight": "2 lb."
-    },
-    {
-      "item": "Elephant",
-      "cost": "200 gp",
-      "weight": "-"
-    },
-    {
-      "item": "Stabling (per day)",
-      "cost": "5 sp",
-      "weight": "-"
-    },
-    {
-      "item": "Chain shirt",
-      "cost": "50 gp",
-      "weight": "20 lb."
-    },
-    {
-      "item": "Rations (1 day)",
-      "cost": "5 sp",
-      "weight": "2 lb."
-    },
-    {
-      "item": "Breastplate",
-      "cost": "400 gp",
-      "weight": "20 lb."
-    },
-    {
-      "item": "Clothes (traveler's)",
-      "cost": "2 gp",
-      "weight": "4 lb."
-    },
-    {
-      "item": "Chain mail",
-      "cost": "75 gp",
-      "weight": "55 lb."
-    },
-    {
-      "item": "Scale (merchant's)",
-      "cost": "5 gp",
-      "weight": "3 lb."
-    },
-    {
-      "item": "Shortbow",
-      "cost": "25 gp",
-      "weight": "2 lb."
-    },
-    {
-      "item": "Mastiff",
-      "cost": "25 gp",
-      "weight": "-"
-    }
+    "Abacus",
+    "Halberd",
+    "Alchemist's supplies",
+    "Alchemist's fire (flask)"
   ],
   "armor": [
-    {
-      "name": "Studded Leather",
-      "armorClass": 12,
-      "armorType": "light",
-      "strength": 0,
-      "stealthDisadvantage": false
-    }
+    "Studded Leather"
   ],
   "currency": {
     "platinum": 1,

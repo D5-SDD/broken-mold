@@ -175,24 +175,30 @@ class CharacterSheet extends React.Component {
     propsCharacter.inventory = [];
     var inventory = $('.equipment-Equipment');
     for (let i = 0; i < inventory.length; i++) {
-      let item = findItem(inventory[i].textContent);
-      propsCharacter.inventory.push(item);
+      let item = inventory[i].textContent;
+      if (findItem(item)) {
+        propsCharacter.inventory.push(item);
+      }
     }
 
     //Armor data
     propsCharacter.armor = [];
     var armors = $('.equipment-Armor');
     for (let i = 0; i < armors.length; i++) {
-      let armor = findArmor(armors[i].textContent);
-      propsCharacter.armor.push(armor);
+      let armor = armors[i].textContent;
+      if (findArmor(armor)) {
+        propsCharacter.armor.push(armor);
+      }
     }
 
     //Weapons data
     propsCharacter.weapons = [];
     var weapons = $('.equipment-Weapons');
     for (let i = 0; i < weapons.length; i++) {
-      let weapon = findWeapon(weapons[i].textContent);
-      propsCharacter.weapons.push(weapon);
+      let weapon = weapons[i].textContent;
+      if (findWeapon(weapon)) {
+        propsCharacter.weapons.push(weapon);
+      }
     }
 
     //SpellCasting data
@@ -495,7 +501,7 @@ class CharacterSheet extends React.Component {
             <Col className="inventory" md={5}>
               <Equipment
                 heading="Equipment"
-                data={_.flattenDeep(character.inventory)}
+                data={character.inventory}
                 viewState={this.state.viewState}
                 confirmed={this.confirmed}
               />
@@ -504,14 +510,14 @@ class CharacterSheet extends React.Component {
               <Row>
                 <Equipment
                   heading="Armor"
-                  data={_.flattenDeep(character.armor)}
+                  data={character.armor}
                   viewState = {this.state.viewState}
                   confirmed={this.confirmed}
                 />
               </Row>
                 <Equipment
                   heading="Weapons"
-                  data={_.flattenDeep(character.weapons)}
+                  data={character.weapons}
                   viewState = {this.state.viewState}
                   confirmed={this.confirmed}
                 />
