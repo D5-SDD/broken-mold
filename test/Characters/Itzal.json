@@ -127,15 +127,6 @@
       "properties": [
         "light"
       ]
-    },
-    {
-      "name": "Shortbow",
-      "damage": "1d6",
-      "type": "piercing",
-      "properties": [
-        "ammunition (range 80/320)",
-        "two-handed"
-      ]
     }
   ],
   "inventory": [
@@ -155,23 +146,18 @@
       "weight": "7 lb."
     },
     {
-      "name": "Warship",
-      "cost": "25000 gp",
-      "weight": "-"
-    },
-    {
-      "name": "Abacus",
-      "cost": "2 gp",
-      "weight": "2 lb."
+      "name": "Torch",
+      "cost": "1 cp",
+      "weight": "1 lb."
     }
   ],
   "armor": [
     {
-      "name": "Padded",
-      "armorClass": 11,
+      "name": "Studded Leather",
+      "armorClass": 12,
       "armorType": "light",
       "strength": 0,
-      "stealthDisadvantage": true
+      "stealthDisadvantage": false
     }
   ],
   "currency": {
@@ -200,6 +186,7 @@
   ],
   "spellCastingClass": "Wizard",
   "spells": [
-    "Acid Splash"
+    "Chill Touch",
+    "Revivify"
   ]
 }

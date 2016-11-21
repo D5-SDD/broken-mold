@@ -12,7 +12,10 @@ import {
   Equipment, Header, HealthBox, SpellArea, TextBox
 } from '../components/CharacterSheet';
 
-import {CHARACTER_DIR, SPELL_CLASSES, RACES_DB, BACKGROUNDS_DB} from '../../lib/Character';
+import {
+  CHARACTER_DIR, SPELL_CLASSES, RACES_DB, BACKGROUNDS_DB, SPELLS_DB, /*FEATURE_TRAITS_DB,*/
+  findSpell, findItem, findArmor, findWeapon
+} from '../../lib/Character'
 
 import {
   startUDPListen, stopUDPListen, closeTCPClient
@@ -149,7 +152,7 @@ class CharacterSheet extends React.Component {
     propsCharacter.inventory = [];
     var inventory = $('.equipment-Equipment');
     for (let i = 0; i < inventory.length; i++) {
-      let item = propsCharacter.findItem(inventory[i].textContent);
+      let item = findItem(inventory[i].textContent);
       propsCharacter.inventory.push(item);
     }
 
@@ -157,7 +160,7 @@ class CharacterSheet extends React.Component {
     propsCharacter.armor = [];
     var armors = $('.equipment-Armor');
     for (let i = 0; i < armors.length; i++) {
-      let armor = propsCharacter.findArmor(armors[i].textContent);
+      let armor = findArmor(armors[i].textContent);
       propsCharacter.armor.push(armor);
     }
 
@@ -165,12 +168,18 @@ class CharacterSheet extends React.Component {
     propsCharacter.weapons = [];
     var weapons = $('.equipment-Weapons');
     for (let i = 0; i < weapons.length; i++) {
-      let weapon = propsCharacter.findWeapon(weapons[i].textContent);
+      let weapon = findWeapon(weapons[i].textContent);
       propsCharacter.weapons.push(weapon);
     }
 
     //SpellCasting data
     propsCharacter.spellCastingClass = document.getElementById('csform-spellclass').value;
+    propsCharacter.spells = [];
+    var spells = $('.Spells');
+    console.log(spells);
+    for (let i = 0; i < spells.length; i++) {
+      propsCharacter.spells.push(spells[i].textContent);
+    }
   }
 
   validateBeforeExit() {
@@ -269,12 +278,10 @@ class CharacterSheet extends React.Component {
     for (let i = 0; i < character.spells.length; i++) {
       spellData.push({
         name: character.spells[i],
-        description: character.getSpellFromName(character.spells[i]).description
+        description: findSpell(character.spells[i]).description
       });
     }
-
     var inspiration = character.inspiration;
-
     if (this.state.viewState) {
       inspiration = (
         <FormGroup>
@@ -359,6 +366,7 @@ class CharacterSheet extends React.Component {
                   <TextBox
                     data={character.personalityTraits}
                     title="personalityTraits"
+                    confirmed={this.confirmed}
                     viewState={this.state.viewState}
                   />
                 </Row>
@@ -366,6 +374,7 @@ class CharacterSheet extends React.Component {
                   <TextBox
                     data={character.ideals}
                     title="ideals"
+                    confirmed={this.confirmed}
                     viewState={this.state.viewState}
                   />
                 </Row>
@@ -373,6 +382,7 @@ class CharacterSheet extends React.Component {
                   <TextBox
                     data={character.bonds}
                     title="bonds"
+                    confirmed={this.confirmed}
                     viewState={this.state.viewState}
                   />
                 </Row>
@@ -380,6 +390,7 @@ class CharacterSheet extends React.Component {
                   <TextBox
                     data={character.flaws}
                     title="flaws"
+                    confirmed={this.confirmed}
                     viewState={this.state.viewState}
                   />
                 </Row>
@@ -392,11 +403,14 @@ class CharacterSheet extends React.Component {
                     accordion
                     data={character.featuresAndTraits}
                     title="featuresAndTraits"
+                    confirmed={this.confirmed}
+                    /*db={FEATURE_TRAITS_DB}*/
                     viewState={this.state.viewState}
                   />
                 </Row>
                 <Row>
                   <TextBox
+                    confirmed={this.confirmed}
                     data={[character.proficienciesAndLanguages]}
                     title="ProficienciesAndLanguages"
                     viewState={this.state.viewState}
@@ -411,6 +425,8 @@ class CharacterSheet extends React.Component {
                 accordion
                 data={spellData}
                 title="Spells"
+                db={SPELLS_DB}
+                confirmed={this.confirmed}
                 viewState={this.state.viewState}
               />
             </Col>
