@@ -40,11 +40,11 @@
       "classes": [
         {
           "name": "Rogue",
-          "level": 3
+          "level": "3"
         },
         {
           "name": "Wizard",
-          "level": 3
+          "level": "3"
         }
       ],
       "race": "Dragonborn"

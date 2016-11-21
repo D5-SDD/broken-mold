@@ -43,7 +43,6 @@ class TextBox extends React.Component {
   
   addToList(item) {
     var icon = $(item.currentTarget);
-    console.log(this.props);
     var itemToAdd = icon.parent().siblings()[0].value;
     for (let i = 0; i < this.props.db.length; i++) {
       let val = this.props.db[i].name;
@@ -79,6 +78,7 @@ class TextBox extends React.Component {
     });
   }
   
+  /*
   componentWillUpdate() {
     if (this.resetState === true) {
       this.resetState = false;
@@ -87,6 +87,7 @@ class TextBox extends React.Component {
       });
     }
   }
+  */
   
   render() {
     var data = [];

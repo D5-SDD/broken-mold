@@ -119,7 +119,6 @@ class CharacterSheet extends React.Component {
       let item = profAndLang[i].value;
       propsCharacter.proficienciesAndLanguages.push(item);
     }
-    console.log(propsCharacter.proficienciesAndLanguages);
     
 
     //Skills data
@@ -176,7 +175,6 @@ class CharacterSheet extends React.Component {
     propsCharacter.spellCastingClass = document.getElementById('csform-spellclass').value;
     propsCharacter.spells = [];
     var spells = $('.Spells');
-    console.log(spells);
     for (let i = 0; i < spells.length; i++) {
       propsCharacter.spells.push(spells[i].textContent);
     }
