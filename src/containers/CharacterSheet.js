@@ -18,7 +18,7 @@ import {
 } from '../../lib/Character'
 
 import {
-  startUDPListen, stopUDPListen, closeTCPClient
+  startUDPListen, stopUDPListen, closeTCPClient, TCP
 } from '../../lib/Networking';
 
 // Import icons
@@ -264,10 +264,15 @@ class CharacterSheet extends React.Component {
   _makeEdit() {
     this.confirmed = true;
     var viewState = 0;
-    var lookingForDM = false;
-    var connectedToDM = false;
+    var lookingForDM = this.state.lookingForDM;
+    var connectedToDM = this.state.connectedToDM;
     this.applyEdits();
     this.props.character.updateAutoValues();
+    if (this.state.connectedToDM) {
+      this.props.character.saveCharacter(CHARACTER_DIR + this.props.character.name + '.json');
+      this.props.character.originalName = this.props.character.name;
+      TCP.client.sendMessage(JSON.parse(fs.readFileSync(CHARACTER_DIR + charName)));
+    }
     this.setState({
       viewState: viewState,
       lookingForDM: lookingForDM,
@@ -546,7 +551,7 @@ class CharacterSheet extends React.Component {
         <FaPencil
           className="edit"
           onClick={() => {
-            if (!this.state.lookingForDM && !this.state.connectedToDM && !this.state.viewState) {
+            if (!this.state.lookingForDM && !this.state.viewState) {
               this.confirmed = null;
               this.setState({viewState: 1});
             }

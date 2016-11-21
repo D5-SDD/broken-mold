@@ -63,8 +63,9 @@ class TextBox extends React.Component {
         return _.values(obj);
       });
       data = _.flattenDeep(data);
+    } else if (typeof inputData === 'string') {
+      return [inputData];
     }
-
     return data;
   }
 
