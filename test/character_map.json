@@ -21,15 +21,15 @@
       "classes": [
         {
           "name": "Druid",
-          "level": 1
+          "level": "1"
         },
         {
           "name": "Ranger",
-          "level": 13
+          "level": "13"
         },
         {
           "name": "Monk",
-          "level": 7
+          "level": "7"
         }
       ],
       "race": "Elf"
@@ -74,7 +74,7 @@
       "classes": [
         {
           "name": "Monk",
-          "level": 10
+          "level": "10"
         }
       ],
       "race": "Half-Orc"
