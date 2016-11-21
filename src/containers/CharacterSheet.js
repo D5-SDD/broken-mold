@@ -57,6 +57,7 @@ class CharacterSheet extends React.Component {
     this.lookForDM = this.lookForDM.bind(this);
     this.disconnectFromDM = this.disconnectFromDM.bind(this);
     this.stopLookForDM = this.stopLookForDM.bind(this);
+    this._reloadCB = this._reloadCB.bind(this);
   }
 
   closeModal() {
@@ -243,7 +244,9 @@ class CharacterSheet extends React.Component {
     this.props.character.originalName = this.props.character.name;
     startUDPListen(true, () => {
       this.networkCB();
-    }, charLocation);
+    }, charLocation, () => {
+      this._reloadCB();
+    });
     var viewState = this.state.viewState;
     var lookingForDM = true;
     var connectedToDM = false;
@@ -294,11 +297,23 @@ class CharacterSheet extends React.Component {
       this.props.character.saveCharacter(CHARACTER_DIR + this.props.character.name + '.json');
       this.props.character.originalName = this.props.character.name;
       TCP.client.sendMessage(JSON.parse(fs.readFileSync(CHARACTER_DIR + this.props.character.name + '.json')));
-    } else if (!exitCharacterSheetCB) {    
+    } else if (!this.props.exitCharacterSheetCB) {    
       this.props.character.saveCharacter(DM_LOCATION + this.props.character.name + '.json');
       this.props.character.originalName = this.props.character.name;
-      TCP.client.sendMessage(JSON.parse(fs.readFileSync(DM_LOCATION + this.props.character.name + '.json')));
+      TCP.clients[TCP.clients.indexOf(this.props.client)].sendMessage(JSON.parse(fs.readFileSync(DM_LOCATION + this.props.character.name + '.json')));
     }
+    this.setState({
+      viewState: viewState,
+      lookingForDM: lookingForDM,
+      connectedToDM: connectedToDM
+    });
+  }
+  
+  _reloadCB() {
+    var viewState = 0;
+    var lookingForDM = this.state.lookingForDM;
+    var connectedToDM = this.state.connectedToDM;
+    this.props.character.importFromJSON(CHARACTER_DIR + this.props.character.name + '.json');
     this.setState({
       viewState: viewState,
       lookingForDM: lookingForDM,
@@ -604,7 +619,8 @@ class CharacterSheet extends React.Component {
 
 CharacterSheet.propTypes = {
   exitCharacterSheetCB: React.PropTypes.func,
-  character: React.PropTypes.object.isRequired
+  character: React.PropTypes.object.isRequired,
+  client:React.PropTypes.object
 };
 
 export default CharacterSheet;

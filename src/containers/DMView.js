@@ -80,7 +80,7 @@ class DMView extends React.Component {
       for (let i = 0; i < this.characters.length; i++) {
         tabs.push(
           <Tab key={i} eventKey={i} title={this.characters[i].name}>
-            <CharacterSheet character={this.characters[i]} />
+            <CharacterSheet character={this.characters[i]} client={this.clients[i]} />
           </Tab>
         );
       }

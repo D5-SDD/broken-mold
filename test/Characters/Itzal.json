@@ -8,7 +8,7 @@
     },
     {
       "name": "Wizard",
-      "level": "5"
+      "level": "3"
     }
   ],
   "race": "Dragonborn",
@@ -16,7 +16,7 @@
     "Lawful",
     "Neutral"
   ],
-  "experience": 900,
+  "experience": 910,
   "background": "Acolyte",
   "personalityTraits": "Test",
   "ideals": "More Test",
@@ -31,7 +31,7 @@
     "charisma": 14
   },
   "inspiration": 0,
-  "proficiencyBonus": 10,
+  "proficiencyBonus": 3,
   "savingThrows": {
     "strength": {
       "proficient": false
