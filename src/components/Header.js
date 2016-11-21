@@ -29,11 +29,11 @@ class Header extends React.Component {
 
   handleChange(event, i) {
     var classes = [];
-    for(let i = 0; i < this.state.classes.length; i++) {
+    for (let i = 0; i < this.state.classes.length; i++) {
       classes[i] = {
         name: this.state.classes[i].name,
         level: this.state.classes[i].level
-      }
+      };
     }
     classes[i].name = event.target.value;
     this.classes = classes;
@@ -41,14 +41,14 @@ class Header extends React.Component {
       classes: classes
     });
   }
-  
+
   handleNumberChange(event, i) {
     var classes = [];
-    for(let i = 0; i < this.state.classes.length; i++) {
+    for (let i = 0; i < this.state.classes.length; i++) {
       classes[i] = {
         name: this.state.classes[i].name,
         level: this.state.classes[i].level
-      }
+      };
     }
     classes[i].level = event.target.value;
     this.classes = classes;
@@ -181,11 +181,11 @@ class Header extends React.Component {
               >
                 {this.getCurrentClassOptions(classes[i].name)}
               </FormControl>
-              <FormControl 
-                className="csform-level" 
-                type="number" 
-                defaultValue={classes[i].level} 
-                min="1" 
+              <FormControl
+                className="csform-level"
+                type="number"
+                value={classes[i].level}
+                min="1"
                 max="20"
                 onChange={(event) => {
                   this.handleNumberChange(event, i);
