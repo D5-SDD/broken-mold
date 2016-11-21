@@ -5,7 +5,7 @@ import fs from 'fs';
 // Import libraries
 import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
-import TreeMenu, {Utils} from 'react-tree-menu';
+import TreeMenu from 'react-tree-menu';
 import {readMap,exportMap, deleteCharacter} from '../../lib/Character';
 import {
   startUDPBroadcast, stopUDPBroadcast, startUDPListen,
@@ -118,7 +118,7 @@ class CharacterMenu extends React.Component {
       });
     } else if (this.state.lookingForClient || this.state.receiving) {
       //DO NOTHING
-    }else {
+    } else {
       stopUDPBroadcast();
       stopUDPListen();
       closeTCPServer();
@@ -173,14 +173,14 @@ class CharacterMenu extends React.Component {
       deleting: deleting
     });
   }
-  
+
   _toggleDelete() {
     var sharing = this.state.sharing;
     var data = this.state.treeData;
     var lookingForClient = this.state.lookingForClient;
     var receiving = this.state.receiving;
-    var deleting = !this.state.deleting; 
-    
+    var deleting = !this.state.deleting;
+
     this.setState({
       treeData: data,
       sharing: sharing,
@@ -192,16 +192,16 @@ class CharacterMenu extends React.Component {
 
   render() {
     var shareButtonText = ' Share ';
-    var shareButtonStyle = "primary";
+    var shareButtonStyle = 'primary';
     var deleteButtonText = ' Delete ';
-    var deleteButtonStyle = "primary";
+    var deleteButtonStyle = 'primary';
     var cancelButton = null;
     var disableButtons = false;
 
     // customize the share button
     if (this.state.sharing === true) {
       shareButtonText = ' Cancel ';
-      shareButtonStyle = "danger";
+      shareButtonStyle = 'danger';
       disableButtons = true;
     }
 
@@ -223,10 +223,10 @@ class CharacterMenu extends React.Component {
       );
       disableButtons = true;
     }
-    
+
     if (this.state.deleting) {
       deleteButtonText = ' Cancel ';
-      var deleteButtonStyle = "danger";
+      deleteButtonStyle = 'danger';
       disableButtons = true;
     }
 

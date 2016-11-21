@@ -64,12 +64,8 @@ class TextBox extends React.Component {
       });
       data = _.flattenDeep(data);
     }
-    
-    //if (this.props.accordion) {console.log(data); console.log(inputData);}
-    if (data.length > 0) {
-      return data;
-    }
-    return [inputData];
+
+    return data;
   }
 
 
@@ -80,9 +76,9 @@ class TextBox extends React.Component {
       let val = this.props.db[i].name;
       if (val === itemToAdd) {
         this.state.data.push(this.props.db[i].name);
-        if (this.props.title === "Spells"){
+        if (this.props.title === 'Spells'){
           this.state.data.push(findSpell(this.props.db[i].name).description);
-        } else if (this.props.title === "featuresAndTraits"){
+        } else if (this.props.title === 'featuresAndTraits'){
           this.state.data.push(findFeature(this.props.db[i].name).description);
         }
         this.setState({
@@ -92,7 +88,7 @@ class TextBox extends React.Component {
       }
     }
   }
-  
+
   removeFromList (item) {
     var icon = $(item.currentTarget);
     var itemToRemove = icon.siblings()[0].childNodes[0].textContent;
@@ -157,7 +153,7 @@ class TextBox extends React.Component {
   render() {
     if (this.props.confirmed === false) {
       if (this.props.viewState === 0) {
-        this.data = this.parseData(this.props.data)
+        this.data = this.parseData(this.props.data);
         this.resetState = true;
       }
     }
@@ -177,7 +173,7 @@ class TextBox extends React.Component {
         displayData.push(<div key={i}>{data[i]}</div>);
       }
     }
-    
+
     var items = [];
     for (let i = 0; i < displayData.length; i++) {
       let value = displayData[i].props.header;
@@ -185,23 +181,23 @@ class TextBox extends React.Component {
         let id = this.props.title;
         value = (
           <span>
-            <FaMinusSquare 
-              className="minus" 
-              id={'minus-' + id + '-' + i} 
+            <FaMinusSquare
+              className="minus"
+              id={'minus-' + id + '-' + i}
               onClick={this.removeFromList}
             />
             <span className={id}>{value}</span>
           </span>
         );
       }
-      
+
       items.push(
         <ListGroupItem key={items.length}>
           {value}
         </ListGroupItem>
       );
     }
-    
+
     var list = null;
     if (items.length > 0) {
       list = (
@@ -210,18 +206,18 @@ class TextBox extends React.Component {
         </ListGroup>
       );
     }
-    
+
     var accordionRender = (
       <Accordion>
         {displayData}
       </Accordion>
-    )
+    );
     if (this.props.viewState) {
       accordionRender = (list);
     }
-    
+
     var form = null;
-    
+
     if (this.props.viewState) {
       var options = [];
       if (this.props.db) {
@@ -234,7 +230,7 @@ class TextBox extends React.Component {
           );
         }
       }
-      
+
       form = (
         <FormGroup>
           <InputGroup>
@@ -269,7 +265,7 @@ class TextBox extends React.Component {
 
     if (this.props.viewState) {
       var tempData = [];
-      if (data.length > 1) {
+      if (data.length > 1 || this.props.title === 'ProficienciesAndLanguages') {
         for (let i = 0; i < data.length; i++) {
           tempData.push(
             <InputGroup key={i}>
@@ -292,6 +288,27 @@ class TextBox extends React.Component {
             </InputGroup>
           );
         }
+        tempData.push(
+          <InputGroup key={tempData.length}>
+            <InputGroup.Button>
+              <Button
+                id={'new-' + this.id + '-button'}
+                onClick={this.addText}
+              >
+                <FaPlusSquare/>
+              </Button>
+            </InputGroup.Button>
+            <FormControl
+              className={'csform-new-' + this.id}
+              type="text"
+              value={this.state.inputValue}
+              onChange={(event) => {
+                this.handleChange(event, -1);
+              }}
+            />
+          </InputGroup>
+        );
+      } else if (data.length <= 1 && this.props.title === 'ProficienciesAndLanguages') {
         tempData.push(
           <InputGroup key={tempData.length}>
             <InputGroup.Button>

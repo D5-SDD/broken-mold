@@ -1,17 +1,6 @@
 {
   "map": [
     {
-      "filename": "Creed.json",
-      "label": "Creed - Tiefling - Warlock 2",
-      "classes": [
-        {
-          "name": "Warlock",
-          "level": "2"
-        }
-      ],
-      "race": "Tiefling"
-    },
-    {
       "filename": "Dvlrpewee.json",
       "label": "Dvlrpewee - Dwarf - Paladin 18 - Barbarian 5",
       "classes": [
@@ -44,6 +33,21 @@
         }
       ],
       "race": "Elf"
+    },
+    {
+      "filename": "Itzal - shared.json",
+      "label": "Itzal - shared - Human - Rougue 3 - Wizard 3",
+      "classes": [
+        {
+          "name": "Rougue",
+          "level": 3
+        },
+        {
+          "name": "Wizard",
+          "level": 3
+        }
+      ],
+      "race": "Human"
     },
     {
       "filename": "Itzal.json",
