@@ -50,6 +50,7 @@ class CharacterSheet extends React.Component {
     };
 
     this.closeModal = this.closeModal.bind(this);
+    this.closeModalAndExit = this.closeModalAndExit.bind(this);
     this.openModal = this.openModal.bind(this);
     this.applyEdits = this.applyEdits.bind(this);
     this.validateBeforeExit = this.validateBeforeExit.bind(this);
@@ -62,6 +63,14 @@ class CharacterSheet extends React.Component {
     this.setState({
       showModal: false
     });
+  }
+
+  closeModalAndExit() {
+    this.setState({
+      showModal: false
+    });
+    this.disconnectFromDM();
+    this.props.exitCharacterSheetCB(false);
   }
 
   openModal() {
@@ -561,7 +570,8 @@ class CharacterSheet extends React.Component {
             <h4>A character needs a name, class, and race in order to be saved.</h4>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.closeModal}>Close</Button>
+            <Button bsStyle="danger" onClick={this.closeModalAndExit}>Exit</Button>
+            <Button bsStyle="primary" onClick={this.closeModal}>Continue Editing</Button>
           </Modal.Footer>
         </Modal>
         <nav className="navigation" id="header">
