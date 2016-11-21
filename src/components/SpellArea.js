@@ -33,12 +33,12 @@ class SpellArea extends React.Component {
     }
     return (
       <Row className="SpellArea">
-        <Col className="col" md={4}>
+        <Col className="col" md={5}>
           <Panel header="Spell-Casting Class" className="centered">
             {spellClass}
           </Panel>
         </Col>
-        <Col className="col" md={4}>
+        <Col className="col" md={3}>
           <Panel header="Spell Save DC" className="centered">
             {this.props.save}
           </Panel>

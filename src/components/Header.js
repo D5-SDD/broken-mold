@@ -13,31 +13,73 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
 
-    this.classAndLevelOptions = [];
-    for (let i = 0; i < CLASSES_DB.length; i++) {
-      let val = CLASSES_DB[i];
-      this.classAndLevelOptions.push(
-        <option value={val} key={i}>
-          {val}
-        </option>
-      );
-    }
-
     this.classes = this.props.classes;
     this.state = {
       classes: this.props.classes
     };
     this.resetState = false;
 
+    this.handleChange = this.handleChange.bind(this);
+    this.updateRemainingClasses = this.updateRemainingClasses.bind(this);
+    this.getCurrentClassOptions = this.getCurrentClassOptions.bind(this);
     this.addClassAndLevel = this.addClassAndLevel.bind(this);
     this.removeClassAndLevel = this.removeClassAndLevel.bind(this);
+  }
+
+  handleChange(event, i) {
+    var classes = this.state.classes.slice();
+    classes[i].name = event.target.value;
+    this.setState({
+      classes: classes
+    });
+  }
+
+  updateRemainingClasses(classes) {
+    this.remainingClasses = CLASSES_DB.slice();
+    this.remainingClassesOptions = [];
+    for (let i = 0; i < classes.length; i++) {
+      let index = this.remainingClasses.indexOf(classes[i].name);
+      if (index > -1) {
+        this.remainingClasses.splice(index, 1); 
+      }
+    }
+    for (let i = 0; i < this.remainingClasses.length; i++) {
+      this.remainingClassesOptions.push(
+        <option value={this.remainingClasses[i]} key={i}>
+          {this.remainingClasses[i]}
+        </option>
+      );
+    }
+  }
+
+  getCurrentClassOptions(currentClass) {
+    var options = [];
+    var remainingClasses = this.remainingClasses.slice();
+    remainingClasses.push(currentClass);
+    remainingClasses.sort();
+    for (let i = 0; i < remainingClasses.length; i++) {
+      if (remainingClasses[i] === currentClass) {
+        options.push(
+          <option value={remainingClasses[i]} key={i}>
+            {remainingClasses[i]}
+          </option>
+        );
+      } else {
+        options.push(
+          <option value={remainingClasses[i]} key={i}>
+            {remainingClasses[i]}
+          </option>
+        );
+      }
+    }
+    return options;
   }
 
   addClassAndLevel(e) {
     var input = $(e.currentTarget).parent().siblings();
     var classLevelToAdd = {
         name: input[0].value,
-        level: input[1].value
+        level: parseInt(input[1].value)
     };
     this.state.classes.push(classLevelToAdd);
     this.setState({
@@ -49,13 +91,13 @@ class Header extends React.Component {
     var input = $(e.currentTarget).parent().siblings();
     var classLevelToRemove = {
       name: input[0].value,
-      level: input[1].value
+      level: parseInt(input[1].value)
     };
     var index = -1;
     for (let i = 0; i < this.state.classes.length; i++) {
-      console.log(this.state.classes[i]);
-      console.log(classLevelToRemove);
-      if (this.state.classes[i] === classLevelToRemove) {
+      let name = this.state.classes[i].name;
+      let level = this.state.classes[i].level;
+      if (name === classLevelToRemove.name && level === classLevelToRemove.level) {
         index = i;
         break;
       }
@@ -90,6 +132,7 @@ class Header extends React.Component {
       }
     }
     var classes = this.classes;
+    this.updateRemainingClasses(classes);
 
     var classAndLevel = [];
     for (let i = 0; i < classes.length; i++) {
@@ -105,10 +148,17 @@ class Header extends React.Component {
                   <FaMinusSquare/>
                 </Button>
               </InputGroup.Button>
-              <FormControl componentClass="select" defaultValue={classes[i].name}>
-                {this.classAndLevelOptions}
+              <FormControl
+                className="csform-class"
+                componentClass="select"
+                value={classes[i].name}
+                onChange={(event) => {
+                  this.handleChange(event, i);
+                }}
+              >
+                {this.getCurrentClassOptions(classes[i].name)}
               </FormControl>
-              <FormControl type="number" defaultValue={classes[i].level}/>
+              <FormControl className="csform-level" type="number" defaultValue={classes[i].level} min="1" max="20"/>
             </InputGroup>
           </FormGroup>
         );
@@ -147,7 +197,6 @@ class Header extends React.Component {
     var charRace = this.props.race;
     var charExp = this.props.experience;
     if (this.props.viewState === 1) {
-
       classAndLevel.push(
         <FormGroup key={classAndLevel.length + 1}>
           <InputGroup>
@@ -160,9 +209,9 @@ class Header extends React.Component {
               </Button>
             </InputGroup.Button>
             <FormControl componentClass="select">
-              {this.classAndLevelOptions}
+              {this.remainingClassesOptions}
             </FormControl>
-            <FormControl type="number" defaultValue={0} />
+            <FormControl type="number" defaultValue="1" min="1" max="20"/>
           </InputGroup>
         </FormGroup>
       );
