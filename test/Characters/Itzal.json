@@ -1,10 +1,10 @@
 {
   "name": "Itzal",
-  "playerName": "Sam",
+  "playerName": "Test",
   "classes": [
     {
       "name": "Rogue",
-      "level": "3"
+      "level": "6"
     },
     {
       "name": "Barbarian",
@@ -16,7 +16,7 @@
     "Lawful",
     "Neutral"
   ],
-  "experience": 900,
+  "experience": 910,
   "background": "Acolyte",
   "personalityTraits": "Test",
   "ideals": "More Test",

@@ -279,7 +279,7 @@ class Header extends React.Component {
       );
       charExp = (
         <FormGroup>
-          <FormControl id="csform-experience" type="number" defaultValue={charExp}/>
+          <FormControl id="csform-experience" type="number" defaultValue={charExp} min="0"/>
         </FormGroup>
       );
     }

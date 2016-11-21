@@ -2,15 +2,15 @@
   "map": [
     {
       "filename": "Dvlrpewee.json",
-      "label": "Dvlrpewee - Dwarf - Paladin 18 - Barbarian 5",
+      "label": "Dvlrpewee - Dwarf - Barbarian 5 - Paladin 18",
       "classes": [
-        {
-          "name": "Paladin",
-          "level": "18"
-        },
         {
           "name": "Barbarian",
           "level": "5"
+        },
+        {
+          "name": "Paladin",
+          "level": "18"
         }
       ],
       "race": "Dwarf"
@@ -36,11 +36,11 @@
     },
     {
       "filename": "Itzal.json",
-      "label": "Itzal - Dragonborn - Rogue 3 - Barbarian 6",
+      "label": "Itzal - Dragonborn - Rogue 6 - Barbarian 6",
       "classes": [
         {
           "name": "Rogue",
-          "level": "3"
+          "level": "6"
         },
         {
           "name": "Barbarian",

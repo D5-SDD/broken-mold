@@ -3,12 +3,12 @@
   "playerName": "Broken Mold",
   "classes": [
     {
-      "name": "Paladin",
-      "level": "18"
-    },
-    {
       "name": "Barbarian",
       "level": "5"
+    },
+    {
+      "name": "Paladin",
+      "level": "18"
     }
   ],
   "race": "Dwarf",

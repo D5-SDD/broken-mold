@@ -9,14 +9,12 @@ import fs from 'fs';
 import CharacterSheet from './CharacterSheet';
 
 // Import internal libraries
-import Character from '../../lib/Character';
+import Character, {CHARACTER_DIR} from '../../lib/Character';
 import {
   UDP, TCP, startUDPBroadcast, stopUDPBroadcast,
-  startTCPServer, closeTCPServer
+  startTCPServer, closeTCPServer, DM_FOLDER
 } from '../../lib/Networking';
 
-const CHARACTER_DIR = './test/Characters/';
-const DM_FOLDER = CHARACTER_DIR + 'DMTemp/';
 
 // The Dungeon Master View for the client
 class DMView extends React.Component {
@@ -32,10 +30,20 @@ class DMView extends React.Component {
 
   characterReceivedCB(charLocation, client) {
     var index = this.clients.indexOf(client);
+    var newCharacter = new Character(DM_FOLDER + charLocation);
     if (index !== -1) {
-      this.characterRemovedCB(this.clients[index]);
+      let needToDelete = false;
+      let originalName = this.characters[index].originalName;
+      if (newCharacter.name !== this.characters[index].originalName) {
+        needToDelete = true;
+      }
+      this.characters.splice(index, 1);
+      this.clients.splice(index, 1);  
+      if (needToDelete && fs.existsSync(DM_FOLDER + originalName + '.json')) {
+        fs.unlink(DM_FOLDER + originalName + '.json');
+      }
     }
-    this.characters.push(new Character(charLocation));
+    this.characters.push(newCharacter);
     this.clients.push(client);
     this.forceUpdate();
   }

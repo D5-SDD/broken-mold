@@ -134,6 +134,8 @@ class AbilityScore extends React.Component {
               id={'csform-abilityscore-' + name}
               type="number"
               defaultValue={this.props.value}
+              min="0"
+              max="20"
             />
           </FormGroup>
         </Panel>
