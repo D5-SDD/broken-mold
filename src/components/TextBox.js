@@ -9,7 +9,7 @@ import {
 import capital from 'to-capital-case';
 import {FaMinusSquare, FaPlusSquare} from 'react-icons/lib/fa';
 import _ from 'lodash';
-import {findSpell /*FEATURE_TRAITS_DB*/} from '../../lib/Character';
+import {findSpell, findFeature} from '../../lib/Character';
 
 // Generix display for text and lists of properties in the Character Sheet View
 class TextBox extends React.Component {
@@ -48,7 +48,11 @@ class TextBox extends React.Component {
       let val = this.props.db[i].name;
       if (val === itemToAdd) {
         this.state.data.push(this.props.db[i].name);
-        this.state.data.push(findSpell(this.props.db[i].name).description);
+        if (this.props.title === "Spells"){
+          this.state.data.push(findSpell(this.props.db[i].name).description);
+        } else if (this.props.title === "featuresAndTraits"){
+          this.state.data.push(findFeature(this.props.db[i].name).description);
+        }
         this.setState({
           data: this.state.data
         });

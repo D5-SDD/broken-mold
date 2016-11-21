@@ -13,8 +13,8 @@ import {
 } from '../components/CharacterSheet';
 
 import {
-  CHARACTER_DIR, SPELL_CLASSES, RACES_DB, BACKGROUNDS_DB, SPELLS_DB, /*FEATURE_TRAITS_DB,*/
-  findSpell, findItem, findArmor, findWeapon
+  CHARACTER_DIR, SPELL_CLASSES, RACES_DB, BACKGROUNDS_DB, SPELLS_DB, FEATURE_TRAITS_DB,
+  findSpell, findItem, findArmor, findWeapon, findFeature
 } from '../../lib/Character'
 
 import {
@@ -179,6 +179,14 @@ class CharacterSheet extends React.Component {
     for (let i = 0; i < spells.length; i++) {
       propsCharacter.spells.push(spells[i].textContent);
     }
+    
+    // Features and Traits
+    propsCharacter.featuresAndTraits = [];
+    var features = $('.featuresAndTraits');
+    console.log(features);
+    for (let i = 0; i < features.length; i++) {
+      propsCharacter.featuresAndTraits.push(features[i].textContent);
+    }
   }
 
   validateBeforeExit() {
@@ -280,6 +288,15 @@ class CharacterSheet extends React.Component {
         description: findSpell(character.spells[i]).description
       });
     }
+    
+    var featureData = [];
+    for (let i = 0; i < character.featuresAndTraits.length; i++) {
+      featureData.push({
+        name: character.featuresAndTraits[i],
+        description: findFeature(character.featuresAndTraits[i]).description
+      });
+    }
+    
     var inspiration = character.inspiration;
     if (this.state.viewState) {
       inspiration = (
@@ -400,10 +417,10 @@ class CharacterSheet extends React.Component {
                 <Row>
                   <TextBox
                     accordion
-                    data={character.featuresAndTraits}
+                    data={featureData}
                     title="featuresAndTraits"
                     confirmed={this.confirmed}
-                    /*db={FEATURE_TRAITS_DB}*/
+                    db={FEATURE_TRAITS_DB}
                     viewState={this.state.viewState}
                   />
                 </Row>

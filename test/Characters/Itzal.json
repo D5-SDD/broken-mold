@@ -31,7 +31,7 @@
     "charisma": 14
   },
   "inspiration": 0,
-  "proficiencyBonus": 84,
+  "proficiencyBonus": 10,
   "savingThrows": {
     "strength": {
       "proficient": false
@@ -168,14 +168,8 @@
     "copper": 0
   },
   "featuresAndTraits": [
-    {
-      "name": "City Secrets",
-      "description": "You know the secret patterns and flow to cities and can find passages through the urban sprawl that others would miss."
-    },
-    {
-      "name": "Cunning Action",
-      "description": "Your quick thinking and agility allow you to move and act quickly"
-    }
+    "Draconic Ancestry",
+    "Trance"
   ],
   "proficienciesAndLanguages": [
     "Light Armor",
