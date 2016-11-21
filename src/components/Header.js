@@ -29,15 +29,38 @@ class Header extends React.Component {
     };
     this.resetState = false;
 
+    this.getRemainingClassAndLevelOptions = this.getRemainingClassAndLevelOptions.bind(this);
     this.addClassAndLevel = this.addClassAndLevel.bind(this);
     this.removeClassAndLevel = this.removeClassAndLevel.bind(this);
+  }
+
+  getRemainingClassAndLevelOptions() {
+    var remainingClasses = CLASSES_DB;
+    for (let i = 0; i < this.classes.length; i++) {
+      let index = remainingClasses.indexOf(this.classes[i].name);
+      if (index > -1) {
+        remainingClasses.splice(index, 1);
+      }
+    }
+
+    var options = [];
+    for (let i = 0; i < remainingClasses.length; i++) {
+      let val = remainingClasses[i];
+      options.push(
+        <option value={val} key={i}>
+          {val}
+        </option>
+      );
+    }
+
+    return options;
   }
 
   addClassAndLevel(e) {
     var input = $(e.currentTarget).parent().siblings();
     var classLevelToAdd = {
         name: input[0].value,
-        level: input[1].value
+        level: parseInt(input[1].value)
     };
     this.state.classes.push(classLevelToAdd);
     this.setState({
@@ -49,13 +72,13 @@ class Header extends React.Component {
     var input = $(e.currentTarget).parent().siblings();
     var classLevelToRemove = {
       name: input[0].value,
-      level: input[1].value
+      level: parseInt(input[1].value)
     };
     var index = -1;
     for (let i = 0; i < this.state.classes.length; i++) {
-      console.log(this.state.classes[i]);
-      console.log(classLevelToRemove);
-      if (this.state.classes[i] === classLevelToRemove) {
+      let name = this.state.classes[i].name;
+      let level = this.state.classes[i].level;
+      if (name === classLevelToRemove.name && level === classLevelToRemove.level) {
         index = i;
         break;
       }
@@ -105,10 +128,10 @@ class Header extends React.Component {
                   <FaMinusSquare/>
                 </Button>
               </InputGroup.Button>
-              <FormControl componentClass="select" defaultValue={classes[i].name}>
+              <FormControl className="csform-class" componentClass="select" defaultValue={classes[i].name}>
                 {this.classAndLevelOptions}
               </FormControl>
-              <FormControl type="number" defaultValue={classes[i].level}/>
+              <FormControl className="csform-level" type="number" defaultValue={classes[i].level} min="1" max="20"/>
             </InputGroup>
           </FormGroup>
         );
@@ -147,7 +170,6 @@ class Header extends React.Component {
     var charRace = this.props.race;
     var charExp = this.props.experience;
     if (this.props.viewState === 1) {
-
       classAndLevel.push(
         <FormGroup key={classAndLevel.length + 1}>
           <InputGroup>
@@ -160,9 +182,9 @@ class Header extends React.Component {
               </Button>
             </InputGroup.Button>
             <FormControl componentClass="select">
-              {this.classAndLevelOptions}
+              {this.getRemainingClassAndLevelOptions()}
             </FormControl>
-            <FormControl type="number" defaultValue={0} />
+            <FormControl type="number" defaultValue="1" min="1" max="20"/>
           </InputGroup>
         </FormGroup>
       );

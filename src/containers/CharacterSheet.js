@@ -55,17 +55,16 @@ class CharacterSheet extends React.Component {
   applyEdits() {
     var propsCharacter = this.props.character;
     //Header data
-    var tempClass = [];
-    for (let i=0; i<propsCharacter.classes.length; i++){
-      var classAndLevel = document.getElementById('csform-class-'+i).value;
-      var tempArray = classAndLevel.split(' ');
-      var tempObject = {
-        'name' : tempArray[0],
-        'level': Math.abs(parseInt(tempArray[1]))
-      };
-      tempClass.push(tempObject);
+    var classInput = $('.csform-class');
+    var levelInput = $('.csform-level');
+    var tempClasses = [];
+    for (let i = 0; i < classInput.length; i++) {
+      tempClasses.push({
+        name: classInput[i].value,
+        level: levelInput[i].value
+      });
     }
-    propsCharacter.classes = tempClass;
+    propsCharacter.classes = tempClasses;
     propsCharacter.name = document.getElementById('csform-name').value;
     propsCharacter.background = document.getElementById('csform-background').value;
     propsCharacter.playerName = document.getElementById('csform-player').value;
@@ -289,7 +288,7 @@ class CharacterSheet extends React.Component {
         <Header
           alignment={character.alignment}
           background={character.background}
-          classes={character.classes}
+          classes={character.classes.slice()}
           confirmed={this.confirmed}
           experience={character.experience}
           name={character.name}
