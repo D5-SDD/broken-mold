@@ -115,17 +115,7 @@
     "successes": 0,
     "failures": 0
   },
-  "weapons": [
-    {
-      "name": "longsword",
-      "attackBonus": 4,
-      "damage": "1d8+2",
-      "type": "slashing",
-      "properties": [
-        "versatile(1d10)"
-      ]
-    }
-  ],
+  "weapons": [],
   "inventory": [
     {
       "item": "Sling",
@@ -239,12 +229,7 @@
     "silver": 3,
     "copper": 5
   },
-  "featuresAndTraits": [
-    {
-      "name": "Test Character",
-      "description": "You have no purpose in life but to test this program"
-    }
-  ],
+  "featuresAndTraits": [],
   "proficienciesAndLanguages": [
     "Light Armor",
     "Simple Weapons",

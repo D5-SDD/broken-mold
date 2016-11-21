@@ -202,12 +202,7 @@
     "silver": 4,
     "copper": 2
   },
-  "featuresAndTraits": [
-    {
-      "name": "Test Character",
-      "description": "You have no purpose in life but to test this program"
-    }
-  ],
+  "featuresAndTraits": [],
   "proficienciesAndLanguages": [
     "Light Armor",
     "Simple Weapons",
