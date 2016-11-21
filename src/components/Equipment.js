@@ -25,6 +25,7 @@ class Equipment extends React.Component {
     this.resetState = false;
 
     this.db = [];
+    // Get correct database
     if (this.props.heading === 'Equipment') {
       this.db = ITEMS_DB;
     } else if (this.props.heading === 'Armor') {
@@ -37,6 +38,7 @@ class Equipment extends React.Component {
     this.removeEquipment = this.removeEquipment.bind(this);
   }
 
+  // Adds equipment ot the list of equipment
   addEquipment(e) {
     var icon = $(e.currentTarget);
     var equipmentToAdd = icon.parent().siblings()[0].value;
@@ -46,6 +48,7 @@ class Equipment extends React.Component {
     });
   }
 
+  // Removes an item from the list
   removeEquipment(e) {
     var icon = $(e.currentTarget);
     var equipmentToRemove = icon.siblings()[0].childNodes[0].textContent;
@@ -68,7 +71,7 @@ class Equipment extends React.Component {
       data: this.state.data
     });
   }
-
+  
   componentWillUpdate() {
     if (this.resetState === true) {
       this.resetState = false;
@@ -89,6 +92,7 @@ class Equipment extends React.Component {
     }
     var data = this.data;
 
+    // Populate list based on if you are editing
     for (let i = 0; i < data.length; i++) {
       let value = data[i];
 
@@ -113,6 +117,7 @@ class Equipment extends React.Component {
       );
     }
 
+    // Add button for adding equipment if editing
     var form = null;
     if (this.props.viewState === 1) {
       var options = [];

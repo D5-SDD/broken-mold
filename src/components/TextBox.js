@@ -35,6 +35,7 @@ class TextBox extends React.Component {
     this.removeText = this.removeText.bind(this);
   }
 
+  // Gets calles when an edit is made to the component
   handleChange(event, i) {
     if (i < 0) {
       this.setState({
@@ -49,6 +50,7 @@ class TextBox extends React.Component {
     }
   }
 
+  // Parses prop into proper format for text box based on type
   parseData(inputData) {
     var data = [];
     // if the data needs to be parsed, flatten it to the information we want to display
@@ -68,8 +70,9 @@ class TextBox extends React.Component {
     }
     return data;
   }
-
-
+  
+  // Adds option to list of choices
+  // Used for Spells and Features and Traits (accordion boxes)
   addToList(item) {
     var icon = $(item.currentTarget);
     var itemToAdd = icon.parent().siblings()[0].value;
@@ -90,6 +93,8 @@ class TextBox extends React.Component {
     }
   }
 
+  // Removes option from list of choices
+  // Used for Spells and Features and Traits (accordion boxes)
   removeFromList (item) {
     var icon = $(item.currentTarget);
     var itemToRemove = icon.siblings()[0].childNodes[0].textContent;
@@ -111,6 +116,8 @@ class TextBox extends React.Component {
     });
   }
 
+  // Adds text choice to list of text options
+  // Used in Proficiencies and Languages (non-accordion lists)
   addText(e) {
     var input = $(e.currentTarget);
     var textToAdd = input.parent().siblings()[0].value;
@@ -121,6 +128,8 @@ class TextBox extends React.Component {
     });
   }
 
+  // Removes text choice from list of text options
+  // Used in Proficiencies and Languages (non-accordion lists)
   removeText(e) {
     var input = $(e.currentTarget);
     var textToRemove = input.parent().siblings()[0].value;
@@ -175,6 +184,7 @@ class TextBox extends React.Component {
       }
     }
 
+    //Render the items based on if you are editing
     var items = [];
     for (let i = 0; i < displayData.length; i++) {
       let value = displayData[i].props.header;
@@ -217,8 +227,8 @@ class TextBox extends React.Component {
       accordionRender = (list);
     }
 
+    // Render '+' button if necessary
     var form = null;
-
     if (this.props.viewState) {
       var options = [];
       if (this.props.db) {
@@ -250,7 +260,8 @@ class TextBox extends React.Component {
         </FormGroup>
       );
     }
-    // render an accordion if necessary
+    
+    // Render an accordion if necessary
     if (this.props.accordion === true) {
       return (
         <Row>
@@ -264,6 +275,7 @@ class TextBox extends React.Component {
       );
     }
 
+    // Same as above but for non-accordion text boxes
     if (this.props.viewState) {
       var tempData = [];
       if (data.length > 1 || this.props.title === 'ProficienciesAndLanguages') {

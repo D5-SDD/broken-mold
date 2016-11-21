@@ -18,7 +18,7 @@ class HealthBox extends React.Component {
     var currHealth = this.props.health.current;
     var tempHealth = this.props.health.temporary;
     
-  
+    //Render editing boxes if editing
     if (this.props.viewState) {
       maxHealth = (
         <FormGroup>

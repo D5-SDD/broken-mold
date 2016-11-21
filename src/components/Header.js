@@ -27,6 +27,7 @@ class Header extends React.Component {
     this.removeClassAndLevel = this.removeClassAndLevel.bind(this);
   }
 
+  // Called when a class name is selected
   handleChange(event, i) {
     var classes = [];
     for (let i = 0; i < this.state.classes.length; i++) {
@@ -42,6 +43,7 @@ class Header extends React.Component {
     });
   }
 
+  // Called when a class level is selected
   handleNumberChange(event, i) {
     var classes = [];
     for (let i = 0; i < this.state.classes.length; i++) {
@@ -57,6 +59,7 @@ class Header extends React.Component {
     });
   }
 
+  // Gets the list of classes not currently used
   updateRemainingClasses(classes) {
     this.remainingClasses = CLASSES_DB.slice();
     this.remainingClassesOptions = [];
@@ -75,6 +78,7 @@ class Header extends React.Component {
     }
   }
 
+  // Gets the unused classes + currentClass
   getCurrentClassOptions(currentClass) {
     var options = [];
     var remainingClasses = this.remainingClasses.slice();
@@ -98,6 +102,7 @@ class Header extends React.Component {
     return options;
   }
 
+  // Adds class and level to list of classes
   addClassAndLevel(e) {
     var input = $(e.currentTarget).parent().siblings();
     var classLevelToAdd = {
@@ -110,6 +115,7 @@ class Header extends React.Component {
     });
   }
 
+  // Removes class and level from list of classes
   removeClassAndLevel(e) {
     var input = $(e.currentTarget).parent().siblings();
     var classLevelToRemove = {
@@ -157,6 +163,7 @@ class Header extends React.Component {
     var classes = this.classes;
     this.updateRemainingClasses(classes);
 
+    // Populare classes and levels to be displayed based on if you are editing
     var classAndLevel = [];
     for (let i = 0; i < classes.length; i++) {
       if (this.props.viewState === 1) {
@@ -202,7 +209,8 @@ class Header extends React.Component {
         );
       }
     }
-
+    
+    // Gets list of races to choose from
     var raceOptions = [];
     for (let i = 0; i < this.props.racedb.length; i++) {
       let val = this.props.racedb[i];
@@ -213,6 +221,7 @@ class Header extends React.Component {
       );
     }
 
+    // Gets list of backgrounds to choose from
     var backgroundOptions = [];
     for (let i = 0; i < this.props.backgrounddb.length; i++) {
       let val = this.props.backgrounddb[i];
@@ -222,7 +231,8 @@ class Header extends React.Component {
         </option>
       );
     }
-    //editing needs
+    
+    // Render the edit boxes if editing
     var charName = this.props.name;
     var charBackground = this.props.background;
     var charPlayerName = this.props.playerName;
