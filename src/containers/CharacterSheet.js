@@ -145,7 +145,6 @@ class CharacterSheet extends React.Component {
     propsCharacter.ideals = $('.csform-ideals')[0].value;
     propsCharacter.bonds = $('.csform-bonds')[0].value;
     propsCharacter.flaws = $('.csform-flaws')[0].value;
-
     propsCharacter.proficienciesAndLanguages = [];
     var profAndLang = $('.csform-ProficienciesAndLanguages');
     for (let i = 0; i < profAndLang.length; i++) {
@@ -225,6 +224,7 @@ class CharacterSheet extends React.Component {
     }
   }
 
+  //check that character has all required information before exiting
   validateBeforeExit() {
     if (!this.props.character.isCharacterValid()) {
       this.openModal('A character needs a name, class, and race in order to be saved.', 'Unable to save character');
@@ -249,6 +249,7 @@ class CharacterSheet extends React.Component {
     });
   }
 
+  //sets up UDP listening to begin process of connecting to DM
   lookForDM(charLocation) {
     if (!this.props.character.isCharacterValid()) {
       this.openModal('A character needs a name, class, and race in order to be shared.', 'Unable to share character');
@@ -271,6 +272,7 @@ class CharacterSheet extends React.Component {
     });
   }
 
+  //stope UDP listening as the session is over
   stopLookForDM() {
     stopUDPListen();
     var viewState = this.state.viewState;
@@ -283,11 +285,13 @@ class CharacterSheet extends React.Component {
     });
   }
 
+  //disconnects user from DM
   disconnectFromDM() {
     closeTCPClient();
     stopUDPListen();
   }
 
+  //"forgets" the edits that have been made in this edit round
   _cancelEdit() {
     this.confirmed = false;
     var viewState = 0;
