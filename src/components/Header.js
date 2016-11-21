@@ -13,46 +13,65 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
 
-    this.classAndLevelOptions = [];
-    for (let i = 0; i < CLASSES_DB.length; i++) {
-      let val = CLASSES_DB[i];
-      this.classAndLevelOptions.push(
-        <option value={val} key={i}>
-          {val}
-        </option>
-      );
-    }
-
     this.classes = this.props.classes;
     this.state = {
       classes: this.props.classes
     };
     this.resetState = false;
 
-    this.getRemainingClassAndLevelOptions = this.getRemainingClassAndLevelOptions.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.updateRemainingClasses = this.updateRemainingClasses.bind(this);
+    this.getCurrentClassOptions = this.getCurrentClassOptions.bind(this);
     this.addClassAndLevel = this.addClassAndLevel.bind(this);
     this.removeClassAndLevel = this.removeClassAndLevel.bind(this);
   }
 
-  getRemainingClassAndLevelOptions() {
-    var remainingClasses = CLASSES_DB;
-    for (let i = 0; i < this.classes.length; i++) {
-      let index = remainingClasses.indexOf(this.classes[i].name);
+  handleChange(event, i) {
+    var classes = this.state.classes.slice();
+    classes[i].name = event.target.value;
+    this.setState({
+      classes: classes
+    });
+  }
+
+  updateRemainingClasses(classes) {
+    this.remainingClasses = CLASSES_DB.slice();
+    this.remainingClassesOptions = [];
+    for (let i = 0; i < classes.length; i++) {
+      let index = this.remainingClasses.indexOf(classes[i].name);
       if (index > -1) {
-        remainingClasses.splice(index, 1);
+        this.remainingClasses.splice(index, 1); 
       }
     }
-
-    var options = [];
-    for (let i = 0; i < remainingClasses.length; i++) {
-      let val = remainingClasses[i];
-      options.push(
-        <option value={val} key={i}>
-          {val}
+    for (let i = 0; i < this.remainingClasses.length; i++) {
+      this.remainingClassesOptions.push(
+        <option value={this.remainingClasses[i]} key={i}>
+          {this.remainingClasses[i]}
         </option>
       );
     }
+  }
 
+  getCurrentClassOptions(currentClass) {
+    var options = [];
+    var remainingClasses = this.remainingClasses.slice();
+    remainingClasses.push(currentClass);
+    remainingClasses.sort();
+    for (let i = 0; i < remainingClasses.length; i++) {
+      if (remainingClasses[i] === currentClass) {
+        options.push(
+          <option value={remainingClasses[i]} key={i}>
+            {remainingClasses[i]}
+          </option>
+        );
+      } else {
+        options.push(
+          <option value={remainingClasses[i]} key={i}>
+            {remainingClasses[i]}
+          </option>
+        );
+      }
+    }
     return options;
   }
 
@@ -113,6 +132,7 @@ class Header extends React.Component {
       }
     }
     var classes = this.classes;
+    this.updateRemainingClasses(classes);
 
     var classAndLevel = [];
     for (let i = 0; i < classes.length; i++) {
@@ -128,8 +148,15 @@ class Header extends React.Component {
                   <FaMinusSquare/>
                 </Button>
               </InputGroup.Button>
-              <FormControl className="csform-class" componentClass="select" defaultValue={classes[i].name}>
-                {this.classAndLevelOptions}
+              <FormControl
+                className="csform-class"
+                componentClass="select"
+                value={classes[i].name}
+                onChange={(event) => {
+                  this.handleChange(event, i);
+                }}
+              >
+                {this.getCurrentClassOptions(classes[i].name)}
               </FormControl>
               <FormControl className="csform-level" type="number" defaultValue={classes[i].level} min="1" max="20"/>
             </InputGroup>
@@ -182,7 +209,7 @@ class Header extends React.Component {
               </Button>
             </InputGroup.Button>
             <FormControl componentClass="select">
-              {this.getRemainingClassAndLevelOptions()}
+              {this.remainingClassesOptions}
             </FormControl>
             <FormControl type="number" defaultValue="1" min="1" max="20"/>
           </InputGroup>
