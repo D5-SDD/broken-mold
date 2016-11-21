@@ -71,7 +71,7 @@ class Equipment extends React.Component {
       data: this.state.data
     });
   }
-  
+
   componentWillUpdate() {
     if (this.resetState === true) {
       this.resetState = false;

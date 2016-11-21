@@ -610,7 +610,6 @@ class CharacterSheet extends React.Component {
       );
     }
 
-    
     var modalExitButton = null;
     if (this.state.modalTitle === 'Unable to save character') {
       modalExitButton = (

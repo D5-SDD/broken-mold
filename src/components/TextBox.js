@@ -260,7 +260,7 @@ class TextBox extends React.Component {
         </FormGroup>
       );
     }
-    
+
     // Render an accordion if necessary
     if (this.props.accordion === true) {
       return (

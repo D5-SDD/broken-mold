@@ -151,7 +151,6 @@ class Header extends React.Component {
   }
 
   render() {
-    
     var printAlignment = this.props.alignment[0] + ' ' + this.props.alignment[1];
 
     if (this.props.confirmed === false) {
@@ -209,7 +208,7 @@ class Header extends React.Component {
         );
       }
     }
-    
+
     // Gets list of races to choose from
     var raceOptions = [];
     for (let i = 0; i < this.props.racedb.length; i++) {
@@ -231,7 +230,7 @@ class Header extends React.Component {
         </option>
       );
     }
-    
+
     // Render the edit boxes if editing
     var charName = this.props.name;
     var charBackground = this.props.background;
