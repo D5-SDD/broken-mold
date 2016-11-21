@@ -26,12 +26,12 @@ export class DiceAndSaves extends React.Component {
       );
       deathSucc = (
         <FormGroup>
-          <FormControl id="csform-deathSucc" type="number" defaultValue={deathSucc}/>
+          <FormControl id="csform-deathSucc" type="number" defaultValue={deathSucc} min="0" max="3"/>
         </FormGroup>
       );
       deathFails = (
         <FormGroup>
-          <FormControl id="csform-deathFails" type="number" defaultValue={deathFails}/>
+          <FormControl id="csform-deathFails" type="number" defaultValue={deathFails} min="0" max="3"/>
         </FormGroup>
       );
     }

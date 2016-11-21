@@ -46,7 +46,9 @@ class CharacterSheet extends React.Component {
       viewState: viewState,
       lookingForDM: false,
       connectedToDM: false,
-      showModal: false
+      showModal: false,
+      modalTitle: '',
+      modalBody: ''
     };
 
     this.closeModal = this.closeModal.bind(this);
@@ -62,21 +64,27 @@ class CharacterSheet extends React.Component {
 
   closeModal() {
     this.setState({
-      showModal: false
+      showModal: false,
+      modalTitle: '',
+      modalBody: ''
     });
   }
 
   closeModalAndExit() {
     this.setState({
-      showModal: false
+      showModal: false,
+      modalTitle: '',
+      modalBody: ''
     });
     this.disconnectFromDM();
     this.props.exitCharacterSheetCB(false);
   }
 
-  openModal() {
+  openModal(message, title) {
     this.setState({
-      showModal: true
+      showModal: true,
+      modalTitle: title,
+      modalBody: message
     });
   }
 
@@ -219,7 +227,7 @@ class CharacterSheet extends React.Component {
 
   validateBeforeExit() {
     if (!this.props.character.isCharacterValid()) {
-      this.openModal();
+      this.openModal('A character needs a name, class, and race in order to be saved.', 'Unable to save character');
       return;
     }
     this.disconnectFromDM();
@@ -243,7 +251,7 @@ class CharacterSheet extends React.Component {
 
   lookForDM(charLocation) {
     if (!this.props.character.isCharacterValid()) {
-      console.log('Can\'t be shared till savable');
+      this.openModal('A character needs a name, class, and race in order to be shared.', 'Unable to share character');
       return;
     }
     this.props.character.saveCharacter(CHARACTER_DIR + this.props.character.name + '.json');
@@ -351,7 +359,7 @@ class CharacterSheet extends React.Component {
     if (this.state.viewState) {
       inspiration = (
         <FormGroup>
-          <FormControl id="csform-inspiration" type="number" defaultValue={character.inspiration} />
+          <FormControl id="csform-inspiration" type="number" defaultValue={character.inspiration} min="0"/>
         </FormGroup>
       );
     }
@@ -591,17 +599,24 @@ class CharacterSheet extends React.Component {
       );
     }
 
+    
+    var modalExitButton = null;
+    if (this.state.modalTitle === 'Unable to save character') {
+      modalExitButton = (
+        <Button bsStyle="danger" onClick={this.closeModalAndExit}>Exit</Button>
+      );
+    }
     return (
       <div className="character-sheet">
         <Modal show={this.state.showModal} onHide={this.closeModal}>
           <Modal.Header closeButton>
-            <Modal.Title>Unable to save character</Modal.Title>
+            <Modal.Title>{this.state.modalTitle}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h4>A character needs a name, class, and race in order to be saved.</h4>
+            <h4>{this.state.modalBody}</h4>
           </Modal.Body>
           <Modal.Footer>
-            <Button bsStyle="danger" onClick={this.closeModalAndExit}>Exit</Button>
+            {modalExitButton}
             <Button bsStyle="primary" onClick={this.closeModal}>Continue Editing</Button>
           </Modal.Footer>
         </Modal>
@@ -612,7 +627,7 @@ class CharacterSheet extends React.Component {
         <FaPencil
           className="edit"
           onClick={() => {
-            if (!this.state.lookingForDM && !this.state.viewState) {
+            if (!this.state.lookingForDM && !this.state.viewState && !this.state.connectedToDM) {
               this.confirmed = null;
               this.setState({viewState: 1});
             }

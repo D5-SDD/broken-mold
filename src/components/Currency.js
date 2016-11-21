@@ -26,6 +26,7 @@ class Currency extends React.Component {
                 id={'csform-money-' + capital(key)}
                 type="number"
                 defaultValue={properValue}
+                min="0"
               />
             </label>
           </FormGroup>

@@ -44,7 +44,6 @@ class DMView extends React.Component {
       }
     }
     this.characters.push(newCharacter);
-    //console.log('saved correctly');
     this.clients.push(client);
     this.forceUpdate();
   }

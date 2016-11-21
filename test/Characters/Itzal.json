@@ -1,6 +1,6 @@
 {
   "name": "Itzal",
-  "playerName": "Sam",
+  "playerName": "Test",
   "classes": [
     {
       "name": "Rogue",
@@ -14,7 +14,7 @@
   "race": "Dragonborn",
   "alignment": [
     "Lawful",
-    "Good"
+    "Neutral"
   ],
   "experience": 910,
   "background": "Acolyte",

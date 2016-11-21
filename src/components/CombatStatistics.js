@@ -17,7 +17,7 @@ class CombatStatistics extends React.Component {
     if (this.props.viewState) {
       speed = (
         <FormGroup>
-          <FormControl id="csform-speed" type="number" defaultValue={speed} />
+          <FormControl id="csform-speed" type="number" defaultValue={speed} min="0"/>
         </FormGroup>
       );
     }
