@@ -2,9 +2,12 @@
 
 // Import libraries
 import React from 'react';
-import {FormGroup, FormControl, Accordion, Col, Row, Panel} from 'react-bootstrap';
+import {InputGroup, Button, FormGroup, FormControl, Accordion, Col, Row, Panel} from 'react-bootstrap';
 import capital from 'to-capital-case';
 import _ from 'lodash';
+
+// Import icons
+import {FaMinusSquare, FaPlusSquare} from 'react-icons/lib/fa';
 
 // Generix display for text and lists of properties in the Character Sheet View
 class TextBox extends React.Component {
@@ -13,10 +16,11 @@ class TextBox extends React.Component {
 
     this.id = this.props.title;
     this.header = capital(this.id);
-    this.data = [this.props.data];
+    this.data = this.props.data;
     this.state = {
       data: this.props.data
     };
+    this.resetState = false;
 
     // if the data needs to be parsed, flatten it to the information we want to display
     if (typeof this.props.data === 'object') {
@@ -28,24 +32,50 @@ class TextBox extends React.Component {
       });
       this.data = _.flatten(this.data);
     }
+
+    this.addText = this.addText.bind(this);
+    this.removeText = this.removeText.bind(this);
   }
-  
-  
+
+  addText(e) {
+    console.log(e);
+  }
+
+  removeText(e) {
+    console.log(e);
+  }
+
+  componentWillUpdate() {
+    if (this.resetState === true) {
+      this.resetState = false;
+      this.setState({
+        data: this.props.data
+      });
+    }
+  }
 
   render() {
-    var data = [];
+    if (this.props.confirmed === false) {
+      if (this.props.viewState === 0) {
+        this.data = this.props.data;
+        this.resetState = true;
+      }
+    }
+    var data = this.data;
+
+    var displayData = [];
 
     // populate the data to display based on the type of information being displayed
-    for (let i = 0; i < this.data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
       if (this.props.accordion === true) {
-        data.push(
-          <Panel header={this.data[i]} eventKey={i/2} key={i/2}>
-            {this.data[i+1]}
+        displayData.push(
+          <Panel header={data[i]} eventKey={i/2} key={i/2}>
+            {data[i+1]}
           </Panel>
         );
         i++;
       } else {
-        data.push(<div key={i}>{this.data[i]}</div>);
+        displayData.push(<div key={i}>{data[i]}</div>);
       }
     }
 
@@ -56,7 +86,7 @@ class TextBox extends React.Component {
           <Col md={11}>
             <Panel id={this.id} header={this.header}>
               <Accordion>
-                {data}
+                {displayData}
               </Accordion>
             </Panel>
           </Col>
@@ -68,19 +98,47 @@ class TextBox extends React.Component {
       var tempData = [];
       for (let i = 0; i < this.data.length; i++) {
         tempData.push(
-          <FormGroup key={i}>
-            <FormControl className={'csform-' + this.id} type="text"
-              defaultValue={data[i].props.children} />
-          </FormGroup>
+          <InputGroup key={i}>
+            <InputGroup.Button>
+              <Button
+                id={'remove-' + this.id + '-button'}
+                onClick={this.removeText}
+              >
+                <FaMinusSquare/>
+              </Button>
+            </InputGroup.Button>
+            <FormControl
+              className={'csform-' + this.id}
+              type="text"
+              defaultValue={data[i].props.children}
+            />
+          </InputGroup>
         );
       }
-      data = tempData;
+      tempData.push(
+        <InputGroup key={tempData.length}>
+          <InputGroup.Button>
+            <Button
+              id={'new-' + this.id + '-button'}
+              onClick={this.addText}
+            >
+              <FaPlusSquare/>
+            </Button>
+          </InputGroup.Button>
+          <FormControl className={'csform-new-' + this.id} type="text"/>
+        </InputGroup>
+      );
+      displayData = (
+        <FormGroup>
+          {tempData}
+        </FormGroup>
+      );
     }
 
     // otherwise just render a panel
     return (
       <Panel id={this.id} header={this.header}>
-        {data}
+        {displayData}
       </Panel>
     );
   }
@@ -88,6 +146,7 @@ class TextBox extends React.Component {
 
 TextBox.propTypes = {
   accordion: React.PropTypes.bool,
+  confirmed: React.PropTypes.bool,
   data: React.PropTypes.oneOfType([
     React.PropTypes.array,
     React.PropTypes.string
