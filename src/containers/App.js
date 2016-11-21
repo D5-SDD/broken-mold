@@ -36,6 +36,7 @@ class AppContainer extends React.Component {
     this.setState({activeTab: selectedKey});
   }
 
+  //switches to the state that can broadcast and accept signals as needed
   networkingStateCB(TCPOpen, UDPOpen) {
     this.setState({
       TCPOpen: TCPOpen,

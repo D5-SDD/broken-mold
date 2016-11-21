@@ -15,7 +15,6 @@ import {
 // Import the stylesheet
 import '../stylesheets/components/CharacterMenu';
 
-
 const CHAR_LOCATION = './test/Characters/';
 
 // Displays a menu of all characters that are available for a client to view
@@ -52,6 +51,7 @@ class CharacterMenu extends React.Component {
     this._resetMenu = this._resetMenu.bind(this);
   }
 
+  //re-reads the character_map file and reloads the menu with the updated data
   _resetMenu() {
     exportMap();
     this.characterMap = readMap();
@@ -126,6 +126,7 @@ class CharacterMenu extends React.Component {
     }
   }
 
+  //swaps between a states that receive a signal from clients and that which doesn't
   _toggleReceiving() {
     var sharing = this.state.sharing;
     var data = this.state.treeData;
@@ -150,6 +151,7 @@ class CharacterMenu extends React.Component {
     });
   }
 
+  //switches states of lookingForClient to toggle sending out signal
   _toggleLookingForClient() {
     var sharing = this.state.sharing;
     var data = this.state.treeData;
@@ -174,6 +176,7 @@ class CharacterMenu extends React.Component {
     });
   }
 
+  //sets the state to allow selected characters to be deleted
   _toggleDelete() {
     var sharing = this.state.sharing;
     var data = this.state.treeData;
