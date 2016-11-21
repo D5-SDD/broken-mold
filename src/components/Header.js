@@ -40,7 +40,7 @@ class Header extends React.Component {
     for (let i = 0; i < classes.length; i++) {
       let index = this.remainingClasses.indexOf(classes[i].name);
       if (index > -1) {
-        this.remainingClasses.splice(index, 1); 
+        this.remainingClasses.splice(index, 1);
       }
     }
     for (let i = 0; i < this.remainingClasses.length; i++) {
@@ -91,7 +91,7 @@ class Header extends React.Component {
     var input = $(e.currentTarget).parent().siblings();
     var classLevelToRemove = {
       name: input[0].value,
-      level: parseInt(input[1].value)
+      level: input[1].value
     };
     var index = -1;
     for (let i = 0; i < this.state.classes.length; i++) {

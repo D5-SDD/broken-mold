@@ -169,7 +169,7 @@
   },
   "featuresAndTraits": [
     "Draconic Ancestry",
-    "Trance"
+    "Dwarven Combat Training"
   ],
   "proficienciesAndLanguages": [
     "Light Armor",
@@ -181,7 +181,7 @@
   "spellCastingClass": "Wizard",
   "spells": [
     "Dancing Lights",
-    "Detect Poison or Disease",
-    "Color Spray"
+    "Color Spray",
+    "Acid Splash"
   ]
 }

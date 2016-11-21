@@ -1,6 +1,17 @@
 {
   "map": [
     {
+      "filename": "Creed.json",
+      "label": "Creed - Tiefling - Warlock 2",
+      "classes": [
+        {
+          "name": "Warlock",
+          "level": "2"
+        }
+      ],
+      "race": "Tiefling"
+    },
+    {
       "filename": "Dvlrpewee.json",
       "label": "Dvlrpewee - Dwarf - Paladin 18 - Barbarian 5",
       "classes": [
