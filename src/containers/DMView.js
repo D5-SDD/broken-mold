@@ -9,14 +9,12 @@ import fs from 'fs';
 import CharacterSheet from './CharacterSheet';
 
 // Import internal libraries
-import Character from '../../lib/Character';
+import Character, {CHARACTER_DIR} from '../../lib/Character';
 import {
   UDP, TCP, startUDPBroadcast, stopUDPBroadcast,
-  startTCPServer, closeTCPServer
+  startTCPServer, closeTCPServer, DM_FOLDER
 } from '../../lib/Networking';
 
-const CHARACTER_DIR = './test/Characters/';
-const DM_FOLDER = CHARACTER_DIR + 'DMTemp/';
 
 // The Dungeon Master View for the client
 class DMView extends React.Component {
@@ -30,12 +28,28 @@ class DMView extends React.Component {
     this.characterRemovedCB = this.characterRemovedCB.bind(this);
   }
 
+  // Called when the DM receives a character from a client
   characterReceivedCB(charLocation, client) {
-    this.characters.push(new Character(charLocation));
+    var index = this.clients.indexOf(client);
+    var newCharacter = new Character(DM_FOLDER + charLocation);
+    if (index !== -1) {
+      let needToDelete = false;
+      let originalName = this.characters[index].originalName;
+      if (newCharacter.name !== this.characters[index].originalName) {
+        needToDelete = true;
+      }
+      this.characters.splice(index, 1);
+      this.clients.splice(index, 1);  
+      if (needToDelete && fs.existsSync(DM_FOLDER + originalName + '.json')) {
+        fs.unlink(DM_FOLDER + originalName + '.json');
+      }
+    }
+    this.characters.push(newCharacter);
     this.clients.push(client);
     this.forceUpdate();
   }
 
+  // Called when the client disconnects and the character needs to be removed from the view
   characterRemovedCB(client) {
     var index = this.clients.indexOf(client);
     if (fs.existsSync(DM_FOLDER + this.characters[index].originalName + '.json')) {
@@ -46,6 +60,8 @@ class DMView extends React.Component {
     this.forceUpdate();
   }
 
+  // Called when DM starts accepting connection
+  // Starts UDP broadcasting and TCP server
   openConnectionCB() {
     startUDPBroadcast(true);
     startTCPServer((charLocation, client) => {
@@ -57,12 +73,14 @@ class DMView extends React.Component {
     this.props.networkingStateCB(true, true);
   }
 
+  // Stops TCP server and USP broadcasting
   closeAllDMConnections() {
     closeTCPServer();
     stopUDPBroadcast();
     this.props.networkingStateCB(false, false);
   }
 
+  // Just stops UDP broadcasting
   closeUDPBroadcasting() {
     stopUDPBroadcast();
     let TCPOpen = this.props.TCPOpen;
@@ -71,12 +89,13 @@ class DMView extends React.Component {
 
   render() {
     var tabContainer = null;
+    // Render each tab based on the characters
     if (this.characters.length > 0) {
       var tabs = [];
       for (let i = 0; i < this.characters.length; i++) {
         tabs.push(
           <Tab key={i} eventKey={i} title={this.characters[i].name}>
-            <CharacterSheet character={this.characters[i]} />
+            <CharacterSheet character={this.characters[i]} client={this.clients[i]} />
           </Tab>
         );
       }

@@ -2,10 +2,10 @@
 
 // Import external libraries
 import React from 'react';
-import {FormGroup, FormControl, Button, Grid, Row, Col, Panel} from 'react-bootstrap';
+import {FormGroup, FormControl, Modal, Button, Grid, Row, Col, Panel} from 'react-bootstrap';
 import capital from 'to-capital-case';
 import _ from 'lodash';
-
+import fs from 'fs';
 // Import internal libraries
 import {
   AbilityScores, CombatStatistics, Currency, DiceAndSaves,
@@ -15,10 +15,10 @@ import {
 import {
   CHARACTER_DIR, SPELL_CLASSES, RACES_DB, BACKGROUNDS_DB, SPELLS_DB, FEATURE_TRAITS_DB,
   findSpell, findItem, findArmor, findWeapon, findFeature
-} from '../../lib/Character'
+} from '../../lib/Character';
 
 import {
-  startUDPListen, stopUDPListen, closeTCPClient
+  startUDPListen, stopUDPListen, closeTCPClient, TCP, DM_FOLDER
 } from '../../lib/Networking';
 
 // Import icons
@@ -45,16 +45,53 @@ class CharacterSheet extends React.Component {
     this.state = {
       viewState: viewState,
       lookingForDM: false,
-      connectedToDM: false
+      connectedToDM: false,
+      showModal: false,
+      modalTitle: '',
+      modalBody: ''
     };
 
+    this.closeModal = this.closeModal.bind(this);
+    this.closeModalAndExit = this.closeModalAndExit.bind(this);
+    this.openModal = this.openModal.bind(this);
     this.applyEdits = this.applyEdits.bind(this);
     this.validateBeforeExit = this.validateBeforeExit.bind(this);
     this.lookForDM = this.lookForDM.bind(this);
     this.disconnectFromDM = this.disconnectFromDM.bind(this);
     this.stopLookForDM = this.stopLookForDM.bind(this);
+    this._reloadCB = this._reloadCB.bind(this);
   }
 
+  //close popup and continue editing
+  closeModal() {
+    this.setState({
+      showModal: false,
+      modalTitle: '',
+      modalBody: ''
+    });
+  }
+
+  //close popup and exit the current character sheet
+  closeModalAndExit() {
+    this.setState({
+      showModal: false,
+      modalTitle: '',
+      modalBody: ''
+    });
+    this.disconnectFromDM();
+    this.props.exitCharacterSheetCB(false);
+  }
+
+  //open a popup message if the character is invalid
+  openModal(message, title) {
+    this.setState({
+      showModal: true,
+      modalTitle: title,
+      modalBody: message
+    });
+  }
+
+  //populates the edits that have been made to the appropriate variables
   applyEdits() {
     var propsCharacter = this.props.character;
     //Header data
@@ -68,51 +105,50 @@ class CharacterSheet extends React.Component {
       });
     }
     propsCharacter.classes = tempClasses;
-    propsCharacter.name = document.getElementById('csform-name').value;
-    propsCharacter.background = document.getElementById('csform-background').value;
-    propsCharacter.playerName = document.getElementById('csform-player').value;
-    propsCharacter.race = document.getElementById('csform-race').value;
-    var tempAlign = document.getElementById('csform-alignment').value;
+    propsCharacter.name = $('#csform-name')[0].value;
+    propsCharacter.background = $('#csform-background')[0].value;
+    propsCharacter.playerName = $('#csform-player')[0].value;
+    propsCharacter.race = $('#csform-race')[0].value;
+    var tempAlign = $('#csform-alignment')[0].value;
     propsCharacter.alignment = tempAlign.split(' ');
-    var tempExp = document.getElementById('csform-experience').value;
+    var tempExp = $('#csform-experience')[0].value;
     propsCharacter.experience = Math.abs(parseInt(tempExp));
 
     //DiceAndSaves data
-    propsCharacter.hitDice = document.getElementById('csform-hitDice').value;
-    propsCharacter.deathSaves.successes = Math.abs(document.getElementById('csform-deathSucc').value);
-    propsCharacter.deathSaves.failures = Math.abs(document.getElementById('csform-deathFails').value);
-    propsCharacter.inspiration = Math.abs(document.getElementById('csform-inspiration').value);
-    propsCharacter.speed = Math.abs(document.getElementById('csform-speed').value);
+    propsCharacter.hitDice = $('#csform-hitDice')[0].value;
+    propsCharacter.deathSaves.successes = Math.abs($('#csform-deathSucc')[0].value);
+    propsCharacter.deathSaves.failures = Math.abs($('#csform-deathFails')[0].value);
+    propsCharacter.inspiration = Math.abs($('#csform-inspiration')[0].value);
+    propsCharacter.speed = Math.abs($('#csform-speed')[0].value);
 
     //Ability Scores data
-    propsCharacter.abilityScores.strength = Math.abs(document.getElementById('csform-abilityscore-strength').value);
-    propsCharacter.abilityScores.dexterity = Math.abs(document.getElementById('csform-abilityscore-dexterity').value);
-    propsCharacter.abilityScores.constitution = Math.abs(document.getElementById('csform-abilityscore-constitution').value);
-    propsCharacter.abilityScores.intelligence = Math.abs(document.getElementById('csform-abilityscore-intelligence').value);
-    propsCharacter.abilityScores.wisdom = Math.abs(document.getElementById('csform-abilityscore-wisdom').value);
-    propsCharacter.abilityScores.charisma = Math.abs(document.getElementById('csform-abilityscore-charisma').value);
+    propsCharacter.abilityScores.strength = Math.abs($('#csform-abilityscore-strength')[0].value);
+    propsCharacter.abilityScores.dexterity = Math.abs($('#csform-abilityscore-dexterity')[0].value);
+    propsCharacter.abilityScores.constitution = Math.abs($('#csform-abilityscore-constitution')[0].value);
+    propsCharacter.abilityScores.intelligence = Math.abs($('#csform-abilityscore-intelligence')[0].value);
+    propsCharacter.abilityScores.wisdom = Math.abs($('#csform-abilityscore-wisdom')[0].value);
+    propsCharacter.abilityScores.charisma = Math.abs($('#csform-abilityscore-charisma')[0].value);
 
     //Saving Throws data
-    propsCharacter.savingThrows.strength.proficient = document.getElementById('csform-savingthrow-strength').checked;
-    propsCharacter.savingThrows.dexterity.proficient = document.getElementById('csform-savingthrow-dexterity').checked;
-    propsCharacter.savingThrows.constitution.proficient = document.getElementById('csform-savingthrow-constitution').checked;
-    propsCharacter.savingThrows.intelligence.proficient = document.getElementById('csform-savingthrow-intelligence').checked;
-    propsCharacter.savingThrows.wisdom.proficient = document.getElementById('csform-savingthrow-wisdom').checked;
-    propsCharacter.savingThrows.charisma.proficient = document.getElementById('csform-savingthrow-charisma').checked;
+    propsCharacter.savingThrows.strength.proficient = $('#csform-savingthrow-strength')[0].checked;
+    propsCharacter.savingThrows.dexterity.proficient = $('#csform-savingthrow-dexterity')[0].checked;
+    propsCharacter.savingThrows.constitution.proficient = $('#csform-savingthrow-constitution')[0].checked;
+    propsCharacter.savingThrows.intelligence.proficient = $('#csform-savingthrow-intelligence')[0].checked;
+    propsCharacter.savingThrows.wisdom.proficient = $('#csform-savingthrow-wisdom')[0].checked;
+    propsCharacter.savingThrows.charisma.proficient = $('#csform-savingthrow-charisma')[0].checked;
 
     //Hitpoints data
-    propsCharacter.hitpoints.maximum = Math.abs(document.getElementById('csform-maxhealth').value);
-    propsCharacter.hitpoints.current = Math.abs(document.getElementById('csform-currhealth').value) > propsCharacter.hitpoints.maximum
+    propsCharacter.hitpoints.maximum = Math.abs($('#csform-maxhealth')[0].value);
+    propsCharacter.hitpoints.current = Math.abs($('#csform-currhealth')[0].value) > propsCharacter.hitpoints.maximum
       ? propsCharacter.hitpoints.maximum
-      : Math.abs(document.getElementById('csform-currhealth').value);
-    propsCharacter.hitpoints.temporary = Math.abs(document.getElementById('csform-temphealth').value);
+      : Math.abs($('#csform-currhealth')[0].value);
+    propsCharacter.hitpoints.temporary = Math.abs($('#csform-temphealth')[0].value);
 
     //Textbox data
     propsCharacter.personalityTraits = $('.csform-personalityTraits')[0].value;
     propsCharacter.ideals = $('.csform-ideals')[0].value;
     propsCharacter.bonds = $('.csform-bonds')[0].value;
     propsCharacter.flaws = $('.csform-flaws')[0].value;
-
     propsCharacter.proficienciesAndLanguages = [];
     var profAndLang = $('.csform-ProficienciesAndLanguages');
     for (let i = 0; i < profAndLang.length; i++) {
@@ -121,28 +157,28 @@ class CharacterSheet extends React.Component {
     }
 
     //Skills data
-    propsCharacter.skills.acrobatics.proficient = document.getElementById('csform-skill-acrobatics').checked;
-    propsCharacter.skills.animalHandling.proficient = document.getElementById('csform-skill-animalHandling').checked;
-    propsCharacter.skills.arcana.proficient = document.getElementById('csform-skill-arcana').checked;
-    propsCharacter.skills.athletics.proficient = document.getElementById('csform-skill-athletics').checked;
-    propsCharacter.skills.deception.proficient = document.getElementById('csform-skill-deception').checked;
-    propsCharacter.skills.history.proficient = document.getElementById('csform-skill-history').checked;
-    propsCharacter.skills.insight.proficient = document.getElementById('csform-skill-insight').checked;
-    propsCharacter.skills.intimidation.proficient = document.getElementById('csform-skill-intimidation').checked;
-    propsCharacter.skills.investigation.proficient = document.getElementById('csform-skill-investigation').checked;
-    propsCharacter.skills.medicine.proficient = document.getElementById('csform-skill-medicine').checked;
-    propsCharacter.skills.nature.proficient = document.getElementById('csform-skill-nature').checked;
-    propsCharacter.skills.perception.proficient = document.getElementById('csform-skill-perception').checked;
-    propsCharacter.skills.performance.proficient = document.getElementById('csform-skill-performance').checked;
-    propsCharacter.skills.persuasion.proficient = document.getElementById('csform-skill-persuasion').checked;
-    propsCharacter.skills.religion.proficient = document.getElementById('csform-skill-religion').checked;
-    propsCharacter.skills.sleightOfHand.proficient = document.getElementById('csform-skill-sleightOfHand').checked;
-    propsCharacter.skills.stealth.proficient = document.getElementById('csform-skill-stealth').checked;
-    propsCharacter.skills.survival.proficient = document.getElementById('csform-skill-survival').checked;
+    propsCharacter.skills.acrobatics.proficient = $('#csform-skill-acrobatics')[0].checked;
+    propsCharacter.skills.animalHandling.proficient = $('#csform-skill-animalHandling')[0].checked;
+    propsCharacter.skills.arcana.proficient = $('#csform-skill-arcana')[0].checked;
+    propsCharacter.skills.athletics.proficient = $('#csform-skill-athletics')[0].checked;
+    propsCharacter.skills.deception.proficient = $('#csform-skill-deception')[0].checked;
+    propsCharacter.skills.history.proficient = $('#csform-skill-history')[0].checked;
+    propsCharacter.skills.insight.proficient = $('#csform-skill-insight')[0].checked;
+    propsCharacter.skills.intimidation.proficient = $('#csform-skill-intimidation')[0].checked;
+    propsCharacter.skills.investigation.proficient = $('#csform-skill-investigation')[0].checked;
+    propsCharacter.skills.medicine.proficient = $('#csform-skill-medicine')[0].checked;
+    propsCharacter.skills.nature.proficient = $('#csform-skill-nature')[0].checked;
+    propsCharacter.skills.perception.proficient = $('#csform-skill-perception')[0].checked;
+    propsCharacter.skills.performance.proficient = $('#csform-skill-performance')[0].checked;
+    propsCharacter.skills.persuasion.proficient = $('#csform-skill-persuasion')[0].checked;
+    propsCharacter.skills.religion.proficient = $('#csform-skill-religion')[0].checked;
+    propsCharacter.skills.sleightOfHand.proficient = $('#csform-skill-sleightOfHand')[0].checked;
+    propsCharacter.skills.stealth.proficient = $('#csform-skill-stealth')[0].checked;
+    propsCharacter.skills.survival.proficient = $('#csform-skill-survival')[0].checked;
 
     //Currency data
     _.forIn(this.props.character.currency, function(value, key) {
-      var moneyValue = document.getElementById('csform-money-'+capital(key)).value;
+      var moneyValue = $('#csform-money-'+capital(key))[0].value;
       propsCharacter.currency[key] = Math.abs(parseInt(moneyValue));
     });
 
@@ -150,28 +186,34 @@ class CharacterSheet extends React.Component {
     propsCharacter.inventory = [];
     var inventory = $('.equipment-Equipment');
     for (let i = 0; i < inventory.length; i++) {
-      let item = findItem(inventory[i].textContent);
-      propsCharacter.inventory.push(item);
+      let item = inventory[i].textContent;
+      if (findItem(item)) {
+        propsCharacter.inventory.push(item);
+      }
     }
 
     //Armor data
     propsCharacter.armor = [];
     var armors = $('.equipment-Armor');
     for (let i = 0; i < armors.length; i++) {
-      let armor = findArmor(armors[i].textContent);
-      propsCharacter.armor.push(armor);
+      let armor = armors[i].textContent;
+      if (findArmor(armor)) {
+        propsCharacter.armor.push(armor);
+      }
     }
 
     //Weapons data
     propsCharacter.weapons = [];
     var weapons = $('.equipment-Weapons');
     for (let i = 0; i < weapons.length; i++) {
-      let weapon = findWeapon(weapons[i].textContent);
-      propsCharacter.weapons.push(weapon);
+      let weapon = weapons[i].textContent;
+      if (findWeapon(weapon)) {
+        propsCharacter.weapons.push(weapon);
+      }
     }
 
     //SpellCasting data
-    propsCharacter.spellCastingClass = document.getElementById('csform-spellclass').value;
+    propsCharacter.spellCastingClass = $('#csform-spellclass')[0].value;
     propsCharacter.spells = [];
     var spells = $('.Spells');
     for (let i = 0; i < spells.length; i++) {
@@ -186,16 +228,17 @@ class CharacterSheet extends React.Component {
     }
   }
 
+  //check that character has all required information before exiting
   validateBeforeExit() {
     if (!this.props.character.isCharacterValid()) {
-      // TODO: Pop up window saying character can't be saved
-      console.log('Character could not be saved');
+      this.openModal('A character needs a name, class, and race in order to be saved.', 'Unable to save character');
       return;
     }
     this.disconnectFromDM();
     this.props.exitCharacterSheetCB();
   }
 
+  //sets the state of the client so that it knows it is connected to DM
   networkCB() {
     var viewState = this.state.viewState;
     var lookingForDM = false;
@@ -211,16 +254,19 @@ class CharacterSheet extends React.Component {
     });
   }
 
+  //sets up UDP listening to begin process of connecting to DM
   lookForDM(charLocation) {
     if (!this.props.character.isCharacterValid()) {
-      console.log('Can\'t be shared till savable');
+      this.openModal('A character needs a name, class, and race in order to be shared.', 'Unable to share character');
       return;
     }
     this.props.character.saveCharacter(CHARACTER_DIR + this.props.character.name + '.json');
     this.props.character.originalName = this.props.character.name;
     startUDPListen(true, () => {
       this.networkCB();
-    }, charLocation);
+    }, charLocation, () => {
+      this._reloadCB();
+    });
     var viewState = this.state.viewState;
     var lookingForDM = true;
     var connectedToDM = false;
@@ -231,6 +277,7 @@ class CharacterSheet extends React.Component {
     });
   }
 
+  //stope UDP listening as the session is over
   stopLookForDM() {
     stopUDPListen();
     var viewState = this.state.viewState;
@@ -243,11 +290,13 @@ class CharacterSheet extends React.Component {
     });
   }
 
+  //disconnects user from DM
   disconnectFromDM() {
     closeTCPClient();
     stopUDPListen();
   }
 
+  //"forgets" the edits that have been made in this edit round
   _cancelEdit() {
     this.confirmed = false;
     var viewState = 0;
@@ -260,13 +309,36 @@ class CharacterSheet extends React.Component {
     });
   }
 
+  //makes recent edits show up after they have been made and confirmed
   _makeEdit() {
     this.confirmed = true;
     var viewState = 0;
-    var lookingForDM = false;
-    var connectedToDM = false;
+    var lookingForDM = this.state.lookingForDM;
+    var connectedToDM = this.state.connectedToDM;
     this.applyEdits();
     this.props.character.updateAutoValues();
+    if (this.state.connectedToDM) {
+      this.props.character.saveCharacter(CHARACTER_DIR + this.props.character.name + '.json');
+      this.props.character.originalName = this.props.character.name;
+      TCP.client.sendMessage(JSON.parse(fs.readFileSync(CHARACTER_DIR + this.props.character.name + '.json')));
+    } else if (!this.props.exitCharacterSheetCB) {
+      this.props.character.saveCharacter(DM_FOLDER + this.props.character.name + '.json');
+      this.props.character.originalName = this.props.character.name;
+      TCP.clients[TCP.clients.indexOf(this.props.client)].sendMessage(JSON.parse(fs.readFileSync(DM_FOLDER + this.props.character.name + '.json')));
+    }
+    this.setState({
+      viewState: viewState,
+      lookingForDM: lookingForDM,
+      connectedToDM: connectedToDM
+    });
+  }
+
+  //reloads the callback to update the view
+  _reloadCB() {
+    var viewState = 0;
+    var lookingForDM = this.state.lookingForDM;
+    var connectedToDM = this.state.connectedToDM;
+    this.props.character.importFromJSON(CHARACTER_DIR + this.props.character.name + '.json');
     this.setState({
       viewState: viewState,
       lookingForDM: lookingForDM,
@@ -298,7 +370,7 @@ class CharacterSheet extends React.Component {
     if (this.state.viewState) {
       inspiration = (
         <FormGroup>
-          <FormControl id="csform-inspiration" type="number" defaultValue={character.inspiration} />
+          <FormControl id="csform-inspiration" type="number" defaultValue={character.inspiration} min="0"/>
         </FormGroup>
       );
     }
@@ -364,7 +436,7 @@ class CharacterSheet extends React.Component {
               viewState={this.state.viewState}
             />
             <Row>
-              <Col className="inner col" md={5}>
+              <Col className="inner col" md={12}>
                 <Currency
                   currency={character.currency}
                   viewState = {this.state.viewState}
@@ -448,7 +520,7 @@ class CharacterSheet extends React.Component {
             <Col className="inventory" md={5}>
               <Equipment
                 heading="Equipment"
-                data={_.flattenDeep(character.inventory)}
+                data={character.inventory}
                 viewState={this.state.viewState}
                 confirmed={this.confirmed}
               />
@@ -457,14 +529,14 @@ class CharacterSheet extends React.Component {
               <Row>
                 <Equipment
                   heading="Armor"
-                  data={_.flattenDeep(character.armor)}
+                  data={character.armor}
                   viewState = {this.state.viewState}
                   confirmed={this.confirmed}
                 />
               </Row>
                 <Equipment
                   heading="Weapons"
-                  data={_.flattenDeep(character.weapons)}
+                  data={character.weapons}
                   viewState = {this.state.viewState}
                   confirmed={this.confirmed}
                 />
@@ -486,6 +558,7 @@ class CharacterSheet extends React.Component {
     }
     if (this.state.connectedToDM) {
       DMButtonText = 'Disconnect From DM';
+      DMButtonStyle = 'danger';
     }
     if (this.state.viewState) {
       cancelButton = (
@@ -536,8 +609,27 @@ class CharacterSheet extends React.Component {
         </Button>
       );
     }
+
+    var modalExitButton = null;
+    if (this.state.modalTitle === 'Unable to save character') {
+      modalExitButton = (
+        <Button bsStyle="danger" onClick={this.closeModalAndExit}>Exit</Button>
+      );
+    }
     return (
       <div className="character-sheet">
+        <Modal show={this.state.showModal} onHide={this.closeModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>{this.state.modalTitle}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <h4>{this.state.modalBody}</h4>
+          </Modal.Body>
+          <Modal.Footer>
+            {modalExitButton}
+            <Button bsStyle="primary" onClick={this.closeModal}>Continue Editing</Button>
+          </Modal.Footer>
+        </Modal>
         <nav className="navigation" id="header">
           {DMButton}, {okButton}, {cancelButton}
         </nav>
@@ -545,7 +637,7 @@ class CharacterSheet extends React.Component {
         <FaPencil
           className="edit"
           onClick={() => {
-            if (!this.state.lookingForDM && !this.state.connectedToDM && !this.state.viewState) {
+            if (!this.state.lookingForDM && !this.state.viewState && !this.state.connectedToDM) {
               this.confirmed = null;
               this.setState({viewState: 1});
             }
@@ -559,7 +651,8 @@ class CharacterSheet extends React.Component {
 
 CharacterSheet.propTypes = {
   exitCharacterSheetCB: React.PropTypes.func,
-  character: React.PropTypes.object.isRequired
+  character: React.PropTypes.object.isRequired,
+  client:React.PropTypes.object
 };
 
 export default CharacterSheet;

@@ -12,6 +12,8 @@ class SpellArea extends React.Component {
 
 	render() {
     var spellClass = this.props.cast;
+    
+    // Gets list of spell casting classes
     var options = [];
     for (let i = 0; i < this.props.db.length; i++) {
       var val = this.props.db[i];
@@ -21,6 +23,8 @@ class SpellArea extends React.Component {
           </option>
       );
     }
+    
+    //Render dropdown if editing
     if (this.props.viewState) {
       spellClass = (
         <FormGroup>

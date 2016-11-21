@@ -22,8 +22,8 @@
   padding-left: 5px;
   padding-right: 5px;
   margin-bottom: 0;
-  background-color: $lightGreen;
-  color: $blackRed;
+  background-color: $lightRed;
+  color: $white;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -39,15 +39,15 @@ input[type="checkbox"].character-tree-node-checkbox {
 nav {
   padding: 5px;
   display: flex;
-  
+
   button {
     flex-basis: calc(100% / 3);
-    
+
     &:not(:first-child) {
       margin-left: 5px;
     }
   }
-  
+
   &#footer {
     justify-content: flex-end;
   }

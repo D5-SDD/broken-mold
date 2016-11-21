@@ -36,6 +36,7 @@ class AppContainer extends React.Component {
     this.setState({activeTab: selectedKey});
   }
 
+  //switches to the state that can broadcast and accept signals as needed
   networkingStateCB(TCPOpen, UDPOpen) {
     this.setState({
       TCPOpen: TCPOpen,
@@ -51,7 +52,7 @@ class AppContainer extends React.Component {
         id="app-tabs"
         onSelect={(eventKey) => {
           if (eventKey === 1) {
-            // TODO: Make this only happen if UDP broadcast and TCP Server
+            // only happens if UDP broadcast and TCP Server
             if (UDP && (UDP.timer && UDP.dm)) {
               stopUDPBroadcast();
             }

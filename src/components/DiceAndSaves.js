@@ -14,7 +14,9 @@ export class DiceAndSaves extends React.Component {
 	}
 
 	render() {
-    //editing needs
+  
+    // If editing, make all boxes editable
+    // String for hit dice and numbers for death saves
     var charHitDice = this.props.hitDice;
     var deathSucc = this.props.deathSaves.successes;
     var deathFails = this.props.deathSaves.failures;
@@ -26,12 +28,12 @@ export class DiceAndSaves extends React.Component {
       );
       deathSucc = (
         <FormGroup>
-          <FormControl id="csform-deathSucc" type="number" defaultValue={deathSucc}/>
+          <FormControl id="csform-deathSucc" type="number" defaultValue={deathSucc} min="0" max="3"/>
         </FormGroup>
       );
       deathFails = (
         <FormGroup>
-          <FormControl id="csform-deathFails" type="number" defaultValue={deathFails}/>
+          <FormControl id="csform-deathFails" type="number" defaultValue={deathFails} min="0" max="3"/>
         </FormGroup>
       );
     }

@@ -1,14 +1,14 @@
 {
   "name": "Itzal",
-  "playerName": "Sam",
+  "playerName": "Test",
   "classes": [
     {
       "name": "Rogue",
-      "level": "3"
+      "level": "6"
     },
     {
-      "name": "Wizard",
-      "level": "3"
+      "name": "Barbarian",
+      "level": "6"
     }
   ],
   "race": "Dragonborn",
@@ -16,12 +16,12 @@
     "Lawful",
     "Neutral"
   ],
-  "experience": 900,
+  "experience": 910,
   "background": "Acolyte",
-  "personalityTraits": "I sleep with my back to a wall or tree, with everything I own wraped in a bundle in my arms",
-  "ideals": "I help the people who help me—that’s what keeps us alive.",
-  "bonds": "I owe a debt I can never repay to the person who took pity on me.",
-  "flaws": "I’d rather kill someone in their sleep then fight fair.",
+  "personalityTraits": "Test",
+  "ideals": "More Test",
+  "bonds": "Super Test",
+  "flaws": "ULTIMATE TEST",
   "abilityScores": {
     "strength": 14,
     "dexterity": 18,
@@ -31,7 +31,7 @@
     "charisma": 14
   },
   "inspiration": 0,
-  "proficiencyBonus": 10,
+  "proficiencyBonus": 4,
   "savingThrows": {
     "strength": {
       "proficient": false
@@ -120,45 +120,18 @@
     "failures": 0
   },
   "weapons": [
-    {
-      "name": "Club",
-      "damage": "1d4",
-      "type": "bludgeoning",
-      "properties": [
-        "light"
-      ]
-    }
+    "Club"
   ],
   "inventory": [
-    {
-      "name": "Backpack",
-      "cost": "2 gp",
-      "weight": "5 lb."
-    },
-    {
-      "name": "Blowgun",
-      "cost": "10 gp",
-      "weight": "1 1 lb."
-    },
-    {
-      "name": "Bedroll",
-      "cost": "1 gp",
-      "weight": "7 lb."
-    },
-    {
-      "name": "Torch",
-      "cost": "1 cp",
-      "weight": "1 lb."
-    }
+    "Backpack",
+    "Blowgun",
+    "Bedroll",
+    "Torch",
+    "Block and tackle"
   ],
   "armor": [
-    {
-      "name": "Studded Leather",
-      "armorClass": 12,
-      "armorType": "light",
-      "strength": 0,
-      "stealthDisadvantage": false
-    }
+    "Studded Leather",
+    "Breastplate"
   ],
   "currency": {
     "platinum": 0,
@@ -182,6 +155,6 @@
   "spells": [
     "Dancing Lights",
     "Color Spray",
-    "Acid Splash"
+    "Charm Person"
   ]
 }

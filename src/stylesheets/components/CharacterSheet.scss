@@ -3,7 +3,7 @@
 .header {
   &.row {
   }
-  
+
   .panel {
     margin-top: 10px;
   }
@@ -14,22 +14,22 @@
 }
 
 .form-control {
-  background-color: $whiteGreen;
+  background-color: $whiteGray;
 }
 
 .panel-default > .panel-heading {
   background-image: none;
-  background-color: $lightBrown;
-  color: $blackBrown;
+  background-color: $baseRed;
+  color: $white;
 }
 
 .panel {
-  background-color: $lightGreen;
-  color: $blackRed;
+  background-color: $lightRed;
+  color: $white;
   .fa {
     margin-right: 5px;
   }
-  
+
 
   &.centered {
   	.panel-heading, .panel-body {

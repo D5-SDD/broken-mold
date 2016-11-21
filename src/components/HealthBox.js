@@ -18,21 +18,25 @@ class HealthBox extends React.Component {
     var currHealth = this.props.health.current;
     var tempHealth = this.props.health.temporary;
     
-  
+    //Render editing boxes if editing
     if (this.props.viewState) {
       maxHealth = (
         <FormGroup>
-          <FormControl id="csform-maxhealth" type="number" defaultValue={maxHealth} />
+          <FormControl id="csform-maxhealth" type="number" defaultValue={maxHealth} min="0"/>
         </FormGroup>
       );
       currHealth = (
         <FormGroup>
-          <FormControl id="csform-currhealth" type="number" defaultValue={currHealth} />
+          <FormControl id="csform-currhealth" 
+            type="number" 
+            defaultValue={currHealth} 
+            min="0" 
+          />
         </FormGroup>
       );
       tempHealth = (
         <FormGroup>
-          <FormControl id="csform-temphealth" type="number" defaultValue={tempHealth} />
+          <FormControl id="csform-temphealth" type="number" defaultValue={tempHealth} min="0"/>
         </FormGroup>
       );
     }

@@ -7,23 +7,23 @@
 
 .character-sheet-grid {
   .col {
-    color: $whiteRed;
+    color: $darkGray;
   }
 }
 
 .list-group-item {
-  background: $lightGreen;
+  background: $lightRed;
 }
 
 .exit {
   position: absolute;
   height: 50px;
   width: 50px;
-  color: #FFFFFF;
-  
+  color: $white;
+
   &:hover {
     cursor: pointer;
-    color: $whiteGreen;
+    color: $lightRed;
   }
 }
 
@@ -32,9 +32,10 @@
   right: 0;
   height: 50px;
   width: 50px;
-  color: #FFFFFF;
+  color: $white;
 
   &:hover {
     cursor: pointer;
+    color: $lightRed;
   }
 }
