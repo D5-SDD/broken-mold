@@ -116,7 +116,6 @@ class Header extends React.Component {
       name: input[0].value,
       level: input[1].value
     };
-    //console.log(classLevelToRemove);
     var index = -1;
     for (let i = 0; i < this.state.classes.length; i++) {
       let name = this.state.classes[i].name;
@@ -160,7 +159,6 @@ class Header extends React.Component {
 
     var classAndLevel = [];
     for (let i = 0; i < classes.length; i++) {
-    console.log(classes[i]);
       if (this.props.viewState === 1) {
         classAndLevel.push(
           <FormGroup key={i}>
