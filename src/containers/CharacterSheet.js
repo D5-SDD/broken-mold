@@ -231,7 +231,7 @@ class CharacterSheet extends React.Component {
   //check that character has all required information before exiting
   validateBeforeExit() {
     if (!this.props.character.isCharacterValid()) {
-      this.openModal('A character needs a name, class, and race in order to be saved.', 'Unable to save character');
+      this.openModal('A character needs a unique name, class, and race in order to be saved.', 'Unable to save character');
       return;
     }
     this.disconnectFromDM();
@@ -257,7 +257,7 @@ class CharacterSheet extends React.Component {
   //sets up UDP listening to begin process of connecting to DM
   lookForDM(charLocation) {
     if (!this.props.character.isCharacterValid()) {
-      this.openModal('A character needs a name, class, and race in order to be shared.', 'Unable to share character');
+      this.openModal('A character needs a unique name, class, and race in order to be shared.', 'Unable to share character');
       return;
     }
     this.props.character.saveCharacter(CHARACTER_DIR + this.props.character.name + '.json');

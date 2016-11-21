@@ -1,6 +1,17 @@
 {
   "map": [
     {
+      "filename": "Creed.json",
+      "label": "Creed - Half-Orc - Monk 10",
+      "classes": [
+        {
+          "name": "Monk",
+          "level": "10"
+        }
+      ],
+      "race": "Half-Orc"
+    },
+    {
       "filename": "Dvlrpewee.json",
       "label": "Dvlrpewee - Dwarf - Barbarian 5 - Paladin 18",
       "classes": [
@@ -48,17 +59,6 @@
         }
       ],
       "race": "Dragonborn"
-    },
-    {
-      "filename": "T.json",
-      "label": "T - Half-Orc - Monk 10",
-      "classes": [
-        {
-          "name": "Monk",
-          "level": "10"
-        }
-      ],
-      "race": "Half-Orc"
     }
   ]
 }
