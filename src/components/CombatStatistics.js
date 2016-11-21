@@ -14,6 +14,8 @@ class CombatStatistics extends React.Component {
   render() {
     var speed = this.props.speed;
 
+    // If editing, edit speed
+    // Only speed is editable, the other values are auto-calculated
     if (this.props.viewState) {
       speed = (
         <FormGroup>

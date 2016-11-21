@@ -14,7 +14,9 @@ export class DiceAndSaves extends React.Component {
 	}
 
 	render() {
-    //editing needs
+  
+    // If editing, make all boxes editable
+    // String for hit dice and numbers for death saves
     var charHitDice = this.props.hitDice;
     var deathSucc = this.props.deathSaves.successes;
     var deathFails = this.props.deathSaves.failures;

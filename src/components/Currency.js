@@ -15,6 +15,8 @@ class Currency extends React.Component {
   render() {
     var currencies = [];
     var currViewState = this.props.viewState;
+    // Add currencies to table
+    // If editing, add editable boxes instead of numbers
     _.forIn(this.props.currency, function(value, key) {
       var properValue = value;
       if (currViewState === 1) {

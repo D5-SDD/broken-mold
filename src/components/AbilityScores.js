@@ -84,6 +84,7 @@ class AbilityScore extends React.Component {
         </form>
       );
     }
+    // If editing, make checkboxes
     var skills = [];
     if (this.props.viewState) {
       for (let i = 0; i < SKILLS[name].length; i++) {
@@ -129,6 +130,7 @@ class AbilityScore extends React.Component {
         </div>
       </Panel>
     );
+    // If editing, no need to display the mod, since it is auto calculated
     if (this.props.viewState) {
       abilityScoreBox = (
         <Panel header={capital(name)} className="centered">
