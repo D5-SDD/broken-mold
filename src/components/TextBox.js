@@ -78,27 +78,34 @@ class TextBox extends React.Component {
     });
   }
   
-  /*
+  
   componentWillUpdate() {
     if (this.resetState === true) {
       this.resetState = false;
       this.setState({
-        data: this.props.data
+        data: this.data
       });
     }
   }
-  */
+  
   
   render() {
     var data = [];
-    /*
     if (this.props.confirmed === false) {
       if (this.props.viewState === 0) {
-        this.data = this.props.data;
+        this.data = [this.props.data];
+        if (typeof this.props.data === 'object') {
+          this.data = _.map(this.props.data, function(obj) {
+            if (typeof obj === 'string') {
+              return obj;
+            }
+            return _.values(obj);
+          });
+          this.data = _.flatten(this.data);
+        }
         this.resetState = true;
       }
     }
-    */
     // populate the data to display based on the type of information being displayed
     for (let i = 0; i < this.data.length; i++) {
       if (this.props.accordion === true) {

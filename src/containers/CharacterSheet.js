@@ -67,6 +67,7 @@ class CharacterSheet extends React.Component {
         level: levelInput[i].value
       });
     }
+    console.log(tempClasses);
     propsCharacter.classes = tempClasses;
     propsCharacter.name = document.getElementById('csform-name').value;
     propsCharacter.background = document.getElementById('csform-background').value;
