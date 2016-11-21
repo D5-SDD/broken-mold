@@ -18,7 +18,7 @@ import {
 } from '../../lib/Character';
 
 import {
-  startUDPListen, stopUDPListen, closeTCPClient, TCP, DM_LOCATION
+  startUDPListen, stopUDPListen, closeTCPClient, TCP, DM_FOLDER
 } from '../../lib/Networking';
 
 // Import icons
@@ -297,10 +297,10 @@ class CharacterSheet extends React.Component {
       this.props.character.saveCharacter(CHARACTER_DIR + this.props.character.name + '.json');
       this.props.character.originalName = this.props.character.name;
       TCP.client.sendMessage(JSON.parse(fs.readFileSync(CHARACTER_DIR + this.props.character.name + '.json')));
-    } else if (!this.props.exitCharacterSheetCB) {    
-      this.props.character.saveCharacter(DM_LOCATION + this.props.character.name + '.json');
+    } else if (!this.props.exitCharacterSheetCB) {
+      this.props.character.saveCharacter(DM_FOLDER + this.props.character.name + '.json');
       this.props.character.originalName = this.props.character.name;
-      TCP.clients[TCP.clients.indexOf(this.props.client)].sendMessage(JSON.parse(fs.readFileSync(DM_LOCATION + this.props.character.name + '.json')));
+      TCP.clients[TCP.clients.indexOf(this.props.client)].sendMessage(JSON.parse(fs.readFileSync(DM_FOLDER + this.props.character.name + '.json')));
     }
     this.setState({
       viewState: viewState,
