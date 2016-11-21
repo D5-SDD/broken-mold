@@ -13,15 +13,15 @@ class CombatStatistics extends React.Component {
 
   render() {
     var speed = this.props.speed;
-    
-    if(this.props.viewState) {
+
+    if (this.props.viewState) {
       speed = (
         <FormGroup>
           <FormControl id="csform-speed" type="number" defaultValue={speed} />
         </FormGroup>
       );
     }
-  
+
     return (
       <Row className="Armor_Initiative_Speed" >
         <Col className="col" md={4}>
@@ -47,7 +47,8 @@ class CombatStatistics extends React.Component {
 CombatStatistics.propTypes = {
   armorClass: React.PropTypes.number.isRequired,
   initiative: React.PropTypes.number.isRequired,
-  speed: React.PropTypes.number.isRequired
+  speed: React.PropTypes.number.isRequired,
+  viewState: React.PropTypes.number.isRequired
 };
 
 export default CombatStatistics;

@@ -50,7 +50,7 @@ class CharacterView extends React.Component {
         viewState: 1
       });
     }
-    
+
     $('#fileDialog')[0].value = '';
   }
 
