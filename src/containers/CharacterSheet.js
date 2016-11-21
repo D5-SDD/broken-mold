@@ -2,7 +2,9 @@
 
 // Import external libraries
 import React from 'react';
-import {Button, Grid, Row, Col, Panel} from 'react-bootstrap';
+import {FormGroup, FormControl, Button, Grid, Row, Col, Panel} from 'react-bootstrap';
+import capital from 'to-capital-case';
+import _ from 'lodash';
 
 // Import internal libraries
 import {
@@ -11,8 +13,13 @@ import {
 } from '../components/CharacterSheet';
 
 import {
-  UDP, TCP, startUDPListen, stopUDPListen, startTCPClient, closeTCPClient
-} from '../../lib/Networking.js';
+  CHARACTER_DIR, SPELL_CLASSES, RACES_DB, BACKGROUNDS_DB, SPELLS_DB, FEATURE_TRAITS_DB,
+  findSpell, findItem, findArmor, findWeapon, findFeature
+} from '../../lib/Character'
+
+import {
+  startUDPListen, stopUDPListen, closeTCPClient
+} from '../../lib/Networking';
 
 // Import icons
 import {FaArrowLeft, FaPencil} from 'react-icons/lib/fa';
@@ -32,6 +39,9 @@ class CharacterSheet extends React.Component {
       viewState = 1;
     }
 
+    // track if the player confirmed changes to the character sheet
+    this.confirmed = null;
+
     this.state = {
       viewState: viewState,
       lookingForDM: false,
@@ -46,33 +56,134 @@ class CharacterSheet extends React.Component {
   }
 
   applyEdits() {
-    //header data
-    var tempClass = [];
-    for (let i=0; i<this.props.character.classes.length; i++){
-      var classAndLevel = document.getElementById('csform-class-'+i).value;
-      var tempArray = classAndLevel.split(" ");
-      var tempObject = {
-        "name" : tempArray[0],
-        "level": parseInt(tempArray[1])
-      }
-      tempClass.push(tempObject);
+    var propsCharacter = this.props.character;
+    //Header data
+    var classInput = $('.csform-class');
+    var levelInput = $('.csform-level');
+    var tempClasses = [];
+    for (let i = 0; i < classInput.length; i++) {
+      tempClasses.push({
+        name: classInput[i].value,
+        level: levelInput[i].value
+      });
     }
-    this.props.character.classes = tempClass;
-    this.props.character.name = document.getElementById('csform-name').value;
-    this.props.character.background = document.getElementById('csform-background').value;
-    this.props.character.playerName = document.getElementById('csform-Player').value;
-    this.props.character.race = document.getElementById('csform-race').value;
+    propsCharacter.classes = tempClasses;
+    propsCharacter.name = document.getElementById('csform-name').value;
+    propsCharacter.background = document.getElementById('csform-background').value;
+    propsCharacter.playerName = document.getElementById('csform-player').value;
+    propsCharacter.race = document.getElementById('csform-race').value;
     var tempAlign = document.getElementById('csform-alignment').value;
-    this.props.character.alignment = tempAlign.split(" ");
+    propsCharacter.alignment = tempAlign.split(' ');
     var tempExp = document.getElementById('csform-experience').value;
-    this.props.character.experience = parseInt(tempExp);
-    //equipment data
-    //equipment declare
-    
+    propsCharacter.experience = Math.abs(parseInt(tempExp));
+
     //DiceAndSaves data
-    this.props.character.hitDice = document.getElementById('csform-hitDice').value;
-    this.props.character.deathSaves.successes = document.getElementById('csform-deathSucc').value;
-    this.props.character.deathSaves.failures = document.getElementById('csform-deathFails').value;
+    propsCharacter.hitDice = document.getElementById('csform-hitDice').value;
+    propsCharacter.deathSaves.successes = Math.abs(document.getElementById('csform-deathSucc').value);
+    propsCharacter.deathSaves.failures = Math.abs(document.getElementById('csform-deathFails').value);
+    propsCharacter.inspiration = Math.abs(document.getElementById('csform-inspiration').value);
+    propsCharacter.speed = Math.abs(document.getElementById('csform-speed').value);
+
+    //Ability Scores data
+    propsCharacter.abilityScores.strength = Math.abs(document.getElementById('csform-abilityscore-strength').value);
+    propsCharacter.abilityScores.dexterity = Math.abs(document.getElementById('csform-abilityscore-dexterity').value);
+    propsCharacter.abilityScores.constitution = Math.abs(document.getElementById('csform-abilityscore-constitution').value);
+    propsCharacter.abilityScores.intelligence = Math.abs(document.getElementById('csform-abilityscore-intelligence').value);
+    propsCharacter.abilityScores.wisdom = Math.abs(document.getElementById('csform-abilityscore-wisdom').value);
+    propsCharacter.abilityScores.charisma = Math.abs(document.getElementById('csform-abilityscore-charisma').value);
+
+    //Saving Throws data
+    propsCharacter.savingThrows.strength.proficient = document.getElementById('csform-savingthrow-strength').checked;
+    propsCharacter.savingThrows.dexterity.proficient = document.getElementById('csform-savingthrow-dexterity').checked;
+    propsCharacter.savingThrows.constitution.proficient = document.getElementById('csform-savingthrow-constitution').checked;
+    propsCharacter.savingThrows.intelligence.proficient = document.getElementById('csform-savingthrow-intelligence').checked;
+    propsCharacter.savingThrows.wisdom.proficient = document.getElementById('csform-savingthrow-wisdom').checked;
+    propsCharacter.savingThrows.charisma.proficient = document.getElementById('csform-savingthrow-charisma').checked;
+
+    //Hitpoints data
+    propsCharacter.hitpoints.maximum = Math.abs(document.getElementById('csform-maxhealth').value);
+    propsCharacter.hitpoints.current = Math.abs(document.getElementById('csform-currhealth').value) > propsCharacter.hitpoints.maximum
+      ? propsCharacter.hitpoints.maximum
+      : Math.abs(document.getElementById('csform-currhealth').value);
+    propsCharacter.hitpoints.temporary = Math.abs(document.getElementById('csform-temphealth').value);
+
+    //Textbox data
+    propsCharacter.personalityTraits = $('.csform-personalityTraits')[0].value;
+    propsCharacter.ideals = $('.csform-ideals')[0].value;
+    propsCharacter.bonds = $('.csform-bonds')[0].value;
+    propsCharacter.flaws = $('.csform-flaws')[0].value;
+
+    propsCharacter.proficienciesAndLanguages = [];
+    var profAndLang = $('.csform-ProficienciesAndLanguages');
+    for (let i = 0; i < profAndLang.length; i++) {
+      let item = profAndLang[i].value;
+      propsCharacter.proficienciesAndLanguages.push(item);
+    }
+
+    //Skills data
+    propsCharacter.skills.acrobatics.proficient = document.getElementById('csform-skill-acrobatics').checked;
+    propsCharacter.skills.animalHandling.proficient = document.getElementById('csform-skill-animalHandling').checked;
+    propsCharacter.skills.arcana.proficient = document.getElementById('csform-skill-arcana').checked;
+    propsCharacter.skills.athletics.proficient = document.getElementById('csform-skill-athletics').checked;
+    propsCharacter.skills.deception.proficient = document.getElementById('csform-skill-deception').checked;
+    propsCharacter.skills.history.proficient = document.getElementById('csform-skill-history').checked;
+    propsCharacter.skills.insight.proficient = document.getElementById('csform-skill-insight').checked;
+    propsCharacter.skills.intimidation.proficient = document.getElementById('csform-skill-intimidation').checked;
+    propsCharacter.skills.investigation.proficient = document.getElementById('csform-skill-investigation').checked;
+    propsCharacter.skills.medicine.proficient = document.getElementById('csform-skill-medicine').checked;
+    propsCharacter.skills.nature.proficient = document.getElementById('csform-skill-nature').checked;
+    propsCharacter.skills.perception.proficient = document.getElementById('csform-skill-perception').checked;
+    propsCharacter.skills.performance.proficient = document.getElementById('csform-skill-performance').checked;
+    propsCharacter.skills.persuasion.proficient = document.getElementById('csform-skill-persuasion').checked;
+    propsCharacter.skills.religion.proficient = document.getElementById('csform-skill-religion').checked;
+    propsCharacter.skills.sleightOfHand.proficient = document.getElementById('csform-skill-sleightOfHand').checked;
+    propsCharacter.skills.stealth.proficient = document.getElementById('csform-skill-stealth').checked;
+    propsCharacter.skills.survival.proficient = document.getElementById('csform-skill-survival').checked;
+
+    //Currency data
+    _.forIn(this.props.character.currency, function(value, key) {
+      var moneyValue = document.getElementById('csform-money-'+capital(key)).value;
+      propsCharacter.currency[key] = Math.abs(parseInt(moneyValue));
+    });
+
+    //Inventory data
+    propsCharacter.inventory = [];
+    var inventory = $('.equipment-Equipment');
+    for (let i = 0; i < inventory.length; i++) {
+      let item = findItem(inventory[i].textContent);
+      propsCharacter.inventory.push(item);
+    }
+
+    //Armor data
+    propsCharacter.armor = [];
+    var armors = $('.equipment-Armor');
+    for (let i = 0; i < armors.length; i++) {
+      let armor = findArmor(armors[i].textContent);
+      propsCharacter.armor.push(armor);
+    }
+
+    //Weapons data
+    propsCharacter.weapons = [];
+    var weapons = $('.equipment-Weapons');
+    for (let i = 0; i < weapons.length; i++) {
+      let weapon = findWeapon(weapons[i].textContent);
+      propsCharacter.weapons.push(weapon);
+    }
+
+    //SpellCasting data
+    propsCharacter.spellCastingClass = document.getElementById('csform-spellclass').value;
+    propsCharacter.spells = [];
+    var spells = $('.Spells');
+    for (let i = 0; i < spells.length; i++) {
+      propsCharacter.spells.push(spells[i].textContent);
+    }
+
+    // Features and Traits
+    propsCharacter.featuresAndTraits = [];
+    var features = $('.featuresAndTraits');
+    for (let i = 0; i < features.length; i++) {
+      propsCharacter.featuresAndTraits.push(features[i].textContent);
+    }
   }
 
   validateBeforeExit() {
@@ -84,7 +195,7 @@ class CharacterSheet extends React.Component {
     this.disconnectFromDM();
     this.props.exitCharacterSheetCB();
   }
-  
+
   networkCB() {
     var viewState = this.state.viewState;
     var lookingForDM = false;
@@ -96,16 +207,16 @@ class CharacterSheet extends React.Component {
     this.setState({
       viewState: viewState,
       lookingForDM: lookingForDM,
-      connectedToDM: connectedToDM      
-    });  
+      connectedToDM: connectedToDM
+    });
   }
-  
+
   lookForDM(charLocation) {
     if (!this.props.character.isCharacterValid()) {
       console.log('Can\'t be shared till savable');
       return;
     }
-    this.props.character.saveCharacter();
+    this.props.character.saveCharacter(CHARACTER_DIR + this.props.character.name + '.json');
     this.props.character.originalName = this.props.character.name;
     startUDPListen(true, () => {
       this.networkCB();
@@ -116,10 +227,10 @@ class CharacterSheet extends React.Component {
     this.setState({
       viewState: viewState,
       lookingForDM: lookingForDM,
-      connectedToDM: connectedToDM      
+      connectedToDM: connectedToDM
     });
   }
-  
+
   stopLookForDM() {
     stopUDPListen();
     var viewState = this.state.viewState;
@@ -128,37 +239,39 @@ class CharacterSheet extends React.Component {
     this.setState({
       viewState: viewState,
       lookingForDM: lookingForDM,
-      connectedToDM: connectedToDM      
-    });  
+      connectedToDM: connectedToDM
+    });
   }
-  
+
   disconnectFromDM() {
     closeTCPClient();
     stopUDPListen();
   }
-  
+
   _cancelEdit() {
+    this.confirmed = false;
     var viewState = 0;
     var lookingForDM = this.state.lookingForDM;
     var connectedToDM = this.state.connectedToDM;
     this.setState({
       viewState: viewState,
       lookingForDM: lookingForDM,
-      connectedToDM: connectedToDM      
+      connectedToDM: connectedToDM
     });
   }
-  
+
   _makeEdit() {
+    this.confirmed = true;
     var viewState = 0;
     var lookingForDM = false;
-    var connectedToDM = false;    
+    var connectedToDM = false;
     this.applyEdits();
+    this.props.character.updateAutoValues();
     this.setState({
       viewState: viewState,
       lookingForDM: lookingForDM,
-      connectedToDM: connectedToDM      
-    });  
-  
+      connectedToDM: connectedToDM
+    });
   }
 
   render() {
@@ -166,24 +279,43 @@ class CharacterSheet extends React.Component {
     var CS_GRID = null;
 
     var spellData = [];
-    for(let i = 0; i < character.spells.length; i++) {
+    for (let i = 0; i < character.spells.length; i++) {
       spellData.push({
         name: character.spells[i],
-        description: character.getSpellFromName(character.spells[i]).description
+        description: findSpell(character.spells[i]).description
       });
     }
-    
+
+    var featureData = [];
+    for (let i = 0; i < character.featuresAndTraits.length; i++) {
+      featureData.push({
+        name: character.featuresAndTraits[i],
+        description: findFeature(character.featuresAndTraits[i]).description
+      });
+    }
+
+    var inspiration = character.inspiration;
+    if (this.state.viewState) {
+      inspiration = (
+        <FormGroup>
+          <FormControl id="csform-inspiration" type="number" defaultValue={character.inspiration} />
+        </FormGroup>
+      );
+    }
     // populate the grid that displays all the relevant information to the user
     CS_GRID = (
       <Grid className="character-sheet-grid">
         <Header
           alignment={character.alignment}
           background={character.background}
-          classes={character.classes}
+          classes={character.classes.slice()}
+          confirmed={this.confirmed}
           experience={character.experience}
           name={character.name}
           playerName={character.playerName}
           race={character.race}
+          racedb = {RACES_DB}
+          backgrounddb = {BACKGROUNDS_DB}
           viewState={this.state.viewState}
         />
         <Row className="outer">
@@ -196,7 +328,7 @@ class CharacterSheet extends React.Component {
               </Col>
               <Col md={6}>
                 <Panel header="Inspiration" className="centered">
-                  {character.inspiration}
+                  {inspiration}
                 </Panel>
               </Col>
             </Row>
@@ -228,11 +360,12 @@ class CharacterSheet extends React.Component {
               attack={character.spellAttackMod}
               cast={character.spellCastingClass}
               save={character.spellSaveDC}
+              db={SPELL_CLASSES}
               viewState={this.state.viewState}
-            />            
+            />
             <Row>
               <Col className="inner col" md={5}>
-                <Currency 
+                <Currency
                   currency={character.currency}
                   viewState = {this.state.viewState}
                 />
@@ -246,6 +379,7 @@ class CharacterSheet extends React.Component {
                   <TextBox
                     data={character.personalityTraits}
                     title="personalityTraits"
+                    confirmed={this.confirmed}
                     viewState={this.state.viewState}
                   />
                 </Row>
@@ -253,6 +387,7 @@ class CharacterSheet extends React.Component {
                   <TextBox
                     data={character.ideals}
                     title="ideals"
+                    confirmed={this.confirmed}
                     viewState={this.state.viewState}
                   />
                 </Row>
@@ -260,6 +395,7 @@ class CharacterSheet extends React.Component {
                   <TextBox
                     data={character.bonds}
                     title="bonds"
+                    confirmed={this.confirmed}
                     viewState={this.state.viewState}
                   />
                 </Row>
@@ -267,6 +403,7 @@ class CharacterSheet extends React.Component {
                   <TextBox
                     data={character.flaws}
                     title="flaws"
+                    confirmed={this.confirmed}
                     viewState={this.state.viewState}
                   />
                 </Row>
@@ -277,15 +414,18 @@ class CharacterSheet extends React.Component {
                 <Row>
                   <TextBox
                     accordion
-                    data={character.featuresAndTraits}
+                    data={featureData}
                     title="featuresAndTraits"
+                    confirmed={this.confirmed}
+                    db={FEATURE_TRAITS_DB}
                     viewState={this.state.viewState}
                   />
                 </Row>
                 <Row>
                   <TextBox
-                    data={[character.proficiencies, character.languages]}
-                    title="otherProficienciesAndLanguages"
+                    confirmed={this.confirmed}
+                    data={[character.proficienciesAndLanguages]}
+                    title="ProficienciesAndLanguages"
                     viewState={this.state.viewState}
                   />
                 </Row>
@@ -298,7 +438,9 @@ class CharacterSheet extends React.Component {
                 accordion
                 data={spellData}
                 title="Spells"
-                viewState={this.props.viewState}
+                db={SPELLS_DB}
+                confirmed={this.confirmed}
+                viewState={this.state.viewState}
               />
             </Col>
           </Row>
@@ -306,50 +448,41 @@ class CharacterSheet extends React.Component {
             <Col className="inventory" md={5}>
               <Equipment
                 heading="Equipment"
-                data={character.inventory}
+                data={_.flattenDeep(character.inventory)}
                 viewState={this.state.viewState}
+                confirmed={this.confirmed}
               />
             </Col>
             <Col className="armor" md={7}>
               <Row>
                 <Equipment
                   heading="Armor"
-                  data={character.armor}
+                  data={_.flattenDeep(character.armor)}
                   viewState = {this.state.viewState}
+                  confirmed={this.confirmed}
                 />
               </Row>
                 <Equipment
                   heading="Weapons"
-                  data={character.weapons}
+                  data={_.flattenDeep(character.weapons)}
                   viewState = {this.state.viewState}
+                  confirmed={this.confirmed}
                 />
-              <Row>
-              </Row>
             </Col>
           </Row>
         </Row>
       </Grid>
     );
 
-    let back = null;
-    if (this.props.exitCharacterSheetCB) {
-      back = (
-        <FaArrowLeft
-          className="exit"
-          onClick={this.validateBeforeExit}
-        />
-      );
-    }
-
     var DMButtonText = 'Connect To DM';
-    var DMButtonStyle = "primary";
-    
+    var DMButtonStyle = 'primary';
+
     var okButton = null;
     var cancelButton = null;
-    
+
     if (this.state.lookingForDM) {
       DMButtonText = 'Cancel';
-      DMButtonStyle = "danger";
+      DMButtonStyle = 'danger';
     }
     if (this.state.connectedToDM) {
       DMButtonText = 'Disconnect From DM';
@@ -371,42 +504,50 @@ class CharacterSheet extends React.Component {
           onClick={this._makeEdit.bind(this)}
         >
           OK
-        </Button>      
+        </Button>
+      );
+    }
+
+    let back = null;
+    let DMButton = null;
+    if (this.props.exitCharacterSheetCB) {
+      back = (
+        <FaArrowLeft
+          className="exit"
+          onClick={this.validateBeforeExit}
+        />
+      );
+      DMButton = (
+        <Button
+          bsStyle={DMButtonStyle}
+          bsSize="small"
+          onClick={() => {
+            if (!this.state.lookingForDM && !this.state.connectedToDM) {
+              this.lookForDM(this.props.character.name + '.json');
+            } else if (!this.state.lookingForDM && this.state.connectedToDM) {
+              this.disconnectFromDM();
+            } else if (this.state.lookingForDM && !this.state.connectedToDM) {
+              this.stopLookForDM();
+            }
+          }}
+          disabled = {Boolean(this.state.viewState)}
+        >
+          {DMButtonText}
+        </Button>
       );
     }
     return (
       <div className="character-sheet">
         <nav className="navigation" id="header">
-          <Button
-            bsStyle={DMButtonStyle}
-            bsSize="small"
-            onClick={() => {
-              if (!this.state.lookingForDM && !this.state.connectedToDM) {
-                this.lookForDM(this.props.character.name + '.json');
-              } else if (!this.state.lookingForDM && this.state.connectedToDM) {
-                this.disconnectFromDM();
-              } else if (this.state.lookingForDM && !this.state.connectedToDM) {
-                this.stopLookForDM();
-              }
-            }}
-            disabled = {Boolean(this.state.viewState)}
-          >
-            {DMButtonText}
-          </Button>
-          {okButton}, {cancelButton}
+          {DMButton}, {okButton}, {cancelButton}
         </nav>
         {back}
         <FaPencil
           className="edit"
           onClick={() => {
             if (!this.state.lookingForDM && !this.state.connectedToDM && !this.state.viewState) {
-              // FOR NOW, THIS TOGGLES, SAVE AND CANCEL BUTTONS SHOULD BE MADE
-              if (this.state.viewState === 0) {
-                this.setState({viewState: 1});
-              } else {
-                this.applyEdits();
-                this.setState({viewState: 0});
-              }
+              this.confirmed = null;
+              this.setState({viewState: 1});
             }
           }}
         />

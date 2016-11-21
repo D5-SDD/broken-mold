@@ -1,0 +1,325 @@
+[{
+		"name" : "Club",
+		"damage" : "1d4",
+		"type" : "bludgeoning",
+		"properties" : [
+			"light"
+		]
+	},
+	{
+		"name" : "Dagger",
+		"damage" : "1d4",
+		"type" : "piercing",
+		"properties" : [
+			"finesse",
+			"light",
+			"thrown (range 20/60)"
+		]
+	},
+	{
+		"name" : "Greatclub",
+		"damage" : "1d8",
+		"type" : "bludgeoning",
+		"properties" : [
+			"two-handed"
+		]
+	},
+	{
+		"name" : "Handaxe",
+		"damage" : "1d6",
+		"type" : "slashing",
+		"properties" : [
+			"light",
+			"thrown (range 20/60)"
+		]
+	},
+	{
+		"name" : "Javelin",
+		"damage" : "1d6",
+		"type" : "piercing",
+		"properties" : [
+			"thrown (range 30/120)"
+		]
+	},
+	{
+		"name" : "Light Hammer",
+		"damage" : "1d4",
+		"type" : "bludgeoning",
+		"properties" : [
+			"light",
+			"thrown (range 20/60)"
+		]
+	},
+	{
+		"name" : "Mace",
+		"damage" : "1d6",
+		"type" : "bludgeoning",
+		"properties" : [
+		]
+	},
+	{
+		"name" : "Quarterstaff",
+		"damage" : "1d6",
+		"type" : "bludgeoning",
+		"properties" : [
+			"versatile (1d8)"
+		]
+	},
+	{
+		"name" : "Sickle",
+		"damage" : "1d4",
+		"type" : "slashing",
+		"properties" : [
+			"light"
+		]
+	},
+	{
+		"name" : "Spear",
+		"damage" : "1d6",
+		"type" : "piercing",
+		"properties" : [
+			"thrown (range 20/60)",
+			"versatile (1d8)"
+		]
+	},
+	{
+		"name" : "Crossbow Light",
+		"damage" : "1d8",
+		"type" : "piercing",
+		"properties" : [
+			"ammunition (range 80/320)",
+			"loading",
+			"two-handed"
+		]
+	},
+	{
+		"name" : "Dart",
+		"damage" : "1d4",
+		"type" : "piercing",
+		"properties" : [
+			"finesse",
+			"thrown (range 20/60)"
+		]
+	},
+	{
+		"name" : "Shortbow",
+		"damage" : "1d6",
+		"type" : "piercing",
+		"properties" : [
+			"ammunition (range 80/320)",
+			"two-handed"
+		]
+	},
+	{
+		"name" : "Sling",
+		"damage" : "1d4",
+		"type" : "bludgeoning",
+		"properties" : [
+			"ammunition (range 30/120)"
+		]
+	},
+	{
+		"name" : "Battleaxe",
+		"damage" : "1d8",
+		"type" : "slashing",
+		"properties" : [
+			"versatile (1d10)"
+		]
+	},
+	{
+		"name" : "Flail",
+		"damage" : "1d8",
+		"type" : "bludgeoning",
+		"properties" : [
+		]
+	},
+	{
+		"name" : "Glaive",
+		"damage" : "1d10",
+		"type" : "slashing",
+		"properties" : [
+			"heavy",
+			"reach",
+			"two-handed"
+		]
+	},
+	{
+		"name" : "Greataxe",
+		"damage" : "1d12",
+		"type" : "slashing",
+		"properties" : [
+			"heavy",
+			"two-handed"
+		]
+	},
+	{
+		"name" : "Greatsword",
+		"damage" : "2d6",
+		"type" : "slashing",
+		"properties" : [
+			"heavy",
+			"two-handed"
+		]
+	},
+	{
+		"name" : "Halberd",
+		"damage" : "1d10",
+		"type" : "slashing",
+		"properties" : [
+			"heavy",
+			"reach",
+			"two-handed"
+		]
+	},
+	{
+		"name" : "Lance",
+		"damage" : "1d12",
+		"type" : "piercing",
+		"properties" : [
+			"reach",
+			"special"
+		]
+	},
+	{
+		"name" : "Longsword",
+		"damage" : "1d8",
+		"type" : "slashing",
+		"properties" : [
+			"versatile (1d10)"
+		]
+	},
+	{
+		"name" : "Maul",
+		"damage" : "2d6",
+		"type" : "bludgeoning",
+		"properties" : [
+			"heavy",
+			"two-handed"
+		]
+	},
+	{
+		"name" : "Morningstar",
+		"damage" : "1d8",
+		"type" : "piercing",
+		"properties" : [
+		]
+	},
+	{
+		"name" : "Pike",
+		"damage" : "1d10",
+		"type" : "piercing",
+		"properties" : [
+			"heavy",
+			"reach",
+			"two-handed"
+		]
+	},
+	{
+		"name" : "Rapier",
+		"damage" : "1d8",
+		"type" : "piercing",
+		"properties" : [
+			"finesse"
+		]
+	},
+	{
+		"name" : "Scimitar",
+		"damage" : "1d6",
+		"type" : "slashing",
+		"properties" : [
+			"finesse",
+			"light"
+		]
+	},
+	{
+		"name" : "Shortsword",
+		"damage" : "1d6",
+		"type" : "piercing",
+		"properties" : [
+			"finesse",
+			"light"
+		]
+	},
+	{
+		"name" : "Trident",
+		"damage" : "1d6",
+		"type" : "piercing",
+		"properties" : [
+			"thrown (range 20/60)",
+			"versatile (1d8)"
+		]
+	},
+	{
+		"name" : "War Pick",
+		"damage" : "1d8",
+		"type" : "piercing",
+		"properties" : [
+		]
+	},
+	{
+		"name" : "Warhammer",
+		"damage" : "1d8",
+		"type" : "bludgeoning",
+		"properties" : [
+			"versatile (1d10)"
+		]
+	},
+	{
+		"name" : "Whip",
+		"damage" : "1d4",
+		"type" : "slashing",
+		"properties" : [
+			"finesse",
+			"reach"
+		]
+	},
+	{
+		"name" : "Blowgun",
+		"damage" : "1",
+		"type" : "piercing",
+		"properties" : [
+			"ammunition (range 25/100)",
+			"loading"
+		]
+	},
+	{
+		"name" : "Crossbow Hand",
+		"damage" : "1d6",
+		"type" : "piercing",
+		"properties" : [
+			"ammunition (range 30/120)",
+			"light",
+			"loading"
+		]
+	},
+	{
+		"name" : "Crossbow Heavy",
+		"damage" : "1d10",
+		"type" : "piercing",
+		"properties" : [
+			"ammunition (range 100/400)",
+			"heavy",
+			"loading",
+			"two-handed"
+		]
+	},
+	{
+		"name" : "Longbow",
+		"damage" : "1d8",
+		"type" : "piercing",
+		"properties" : [
+			"ammunition (range 150/600)",
+			"heavy",
+			"two-handed"
+		]
+	},
+	{
+		"name" : "Net",
+		"damage" : "-",
+		"type" : "-",
+		"properties" : [
+			"special",
+			"thrown (range 5/15)"
+		]
+	}
+]

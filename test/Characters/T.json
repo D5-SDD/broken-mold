@@ -225,7 +225,7 @@
   ],
   "armor": [
     {
-      "name": "studded leather armor",
+      "name": "Studded Leather",
       "armorClass": 12,
       "armorType": "light",
       "strength": 0,
@@ -245,11 +245,9 @@
       "description": "You have no purpose in life but to test this program"
     }
   ],
-  "proficiencies": [
+  "proficienciesAndLanguages": [
     "Light Armor",
-    "Simple Weapons"
-  ],
-  "languages": [
+    "Simple Weapons",
     "Common"
   ],
   "spellCastingClass": "Wizard",

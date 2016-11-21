@@ -3,22 +3,22 @@
   "playerName": "Sam",
   "classes": [
     {
-      "name": "Rougue",
-      "level": 3
+      "name": "Rogue",
+      "level": "3"
     },
     {
       "name": "Wizard",
-      "level": 3
+      "level": "3"
     }
   ],
-  "race": "Human",
+  "race": "Dragonborn",
   "alignment": [
     "Lawful",
     "Neutral"
   ],
   "experience": 900,
-  "background": "Urchin",
-  "personalityTraits": "I sleep with my back to a wall or tree, with everything I own wrapped in a bundle in my arms.",
+  "background": "Acolyte",
+  "personalityTraits": "I sleep with my back to a wall or tree, with everything I own wraped in a bundle in my arms",
   "ideals": "I help the people who help me—that’s what keeps us alive.",
   "bonds": "I owe a debt I can never repay to the person who took pity on me.",
   "flaws": "I’d rather kill someone in their sleep then fight fair.",
@@ -31,7 +31,7 @@
     "charisma": 14
   },
   "inspiration": 0,
-  "proficiencyBonus": 3,
+  "proficiencyBonus": 10,
   "savingThrows": {
     "strength": {
       "proficient": false
@@ -116,63 +116,46 @@
   "speed": 30,
   "hitDice": "3d8",
   "deathSaves": {
-    "successes": "0",
-    "failures": "0"
+    "successes": 0,
+    "failures": 0
   },
   "weapons": [
     {
-      "name": "longsword",
-      "attackBonus": 4,
-      "damage": "1d8+2",
-      "type": "slashing",
+      "name": "Club",
+      "damage": "1d4",
+      "type": "bludgeoning",
       "properties": [
-        "versatile(1d10)"
-      ]
-    },
-    {
-      "name": "shortbow",
-      "attackBonus": 6,
-      "damage": "1d6+4",
-      "type": "piercing",
-      "properties": [
-        "ammunition",
-        "range(80/320)",
-        "two-handed"
+        "light"
       ]
     }
   ],
   "inventory": [
     {
-      "name": "small knife",
-      "weight": 0,
-      "cost": 0,
-      "quantity": 1
+      "name": "Backpack",
+      "cost": "2 gp",
+      "weight": "5 lb."
     },
     {
-      "name": "studded leather armor",
-      "weight": 13,
-      "cost": 4500,
-      "quantity": 1
+      "name": "Blowgun",
+      "cost": "10 gp",
+      "weight": "1 1 lb."
     },
     {
-      "name": "ball bearings",
-      "weight": 0.002,
-      "cost": 0.1,
-      "quantity": 1000
+      "name": "Bedroll",
+      "cost": "1 gp",
+      "weight": "7 lb."
+    },
+    {
+      "name": "Torch",
+      "cost": "1 cp",
+      "weight": "1 lb."
     }
   ],
   "armor": [
     {
-      "name": "studded leather armor",
+      "name": "Studded Leather",
       "armorClass": 12,
       "armorType": "light",
-      "strength": 0,
-      "stealthDisadvantage": false
-    },
-    {
-      "name": "shield",
-      "armorClass": 2,
-      "armorType": "shield",
       "strength": 0,
       "stealthDisadvantage": false
     }
@@ -185,26 +168,20 @@
     "copper": 0
   },
   "featuresAndTraits": [
-    {
-      "name": "City Secrets",
-      "description": "You know the secret patterns and flow to cities and can find passages through the urban sprawl that others would miss."
-    },
-    {
-      "name": "Cunning Action",
-      "description": "Your quick thinking and agility allow you to move and act quickly"
-    }
+    "Draconic Ancestry",
+    "Dwarven Combat Training"
   ],
-  "proficiencies": [
+  "proficienciesAndLanguages": [
     "Light Armor",
     "Simple Weapons",
-    "Disguise Kit"
-  ],
-  "languages": [
+    "Disguise Kit",
     "Common",
     "Draconic"
   ],
   "spellCastingClass": "Wizard",
   "spells": [
+    "Dancing Lights",
+    "Color Spray",
     "Acid Splash"
   ]
 }

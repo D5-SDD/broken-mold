@@ -7,7 +7,7 @@ import CharacterSheet from './CharacterSheet';
 
 // Import internal libraries
 import Character, {
-  exportMap, readCharactersFromMap, readMap, loadCharacters
+  exportMap, readCharactersFromMap, readMap, loadCharacters, CHARACTER_DIR
 } from '../../lib/Character';
 
 // Import stylesheet
@@ -50,7 +50,7 @@ class CharacterView extends React.Component {
         viewState: 1
       });
     }
-    
+
     $('#fileDialog')[0].value = '';
   }
 
@@ -83,7 +83,7 @@ class CharacterView extends React.Component {
   // exports any changes to the characters and return to the character menu
   exitCharacterSheetCB() {
     // save character
-    this.currentCharacter.saveCharacter();
+    this.currentCharacter.saveCharacter(CHARACTER_DIR + this.currentCharacter.name + '.json');
     this.currentCharacter = null;
     exportMap();
     this.characterMap = readMap();
