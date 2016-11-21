@@ -9,12 +9,27 @@
   }
 }
 
+.form-group {
+  margin: 5px;
+}
+
+.form-control {
+  background-color: $whiteGreen;
+}
+
+.panel-default > .panel-heading {
+  background-image: none;
+  background-color: $lightBrown;
+  color: $blackBrown;
+}
+
 .panel {
   background-color: $lightRed;
   color: $darkGray;
   .fa {
     margin-right: 5px;
   }
+  
 
   &.centered {
   	.panel-heading, .panel-body {

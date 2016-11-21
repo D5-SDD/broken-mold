@@ -6,11 +6,11 @@
       "classes": [
         {
           "name": "Paladin",
-          "level": 18
+          "level": "18"
         },
         {
           "name": "Barbarian",
-          "level": 5
+          "level": "5"
         }
       ],
       "race": "Dwarf"
@@ -36,15 +36,15 @@
     },
     {
       "filename": "Itzal.json",
-      "label": "Itzal - Dragonborn - Rougue 3 - Wizard 3",
+      "label": "Itzal - Dragonborn - Rogue 3 - Barbarian 6",
       "classes": [
         {
-          "name": "Rougue",
-          "level": 3
+          "name": "Rogue",
+          "level": "3"
         },
         {
-          "name": "Wizard",
-          "level": 3
+          "name": "Barbarian",
+          "level": "6"
         }
       ],
       "race": "Dragonborn"

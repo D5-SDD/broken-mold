@@ -2,8 +2,7 @@
 
 // Inport libraries
 import React from 'react';
-import {FormGroup, FormControl, Grid, Col, Row, Panel} from 'react-bootstrap';
-import {TextBox} from '../components/CharacterSheet';
+import {FormGroup, FormControl, Col, Row, Panel} from 'react-bootstrap';
 
 // Displays a character's spell information in the Character Sheet View
 class SpellArea extends React.Component {
@@ -33,12 +32,12 @@ class SpellArea extends React.Component {
     }
     return (
       <Row className="SpellArea">
-        <Col className="col" md={4}>
+        <Col className="col" md={5}>
           <Panel header="Spell-Casting Class" className="centered">
             {spellClass}
           </Panel>
         </Col>
-        <Col className="col" md={4}>
+        <Col className="col" md={3}>
           <Panel header="Spell Save DC" className="centered">
             {this.props.save}
           </Panel>
@@ -57,7 +56,8 @@ SpellArea.propTypes = {
   attack: React.PropTypes.number.isRequired,
   cast: React.PropTypes.string.isRequired,
   save: React.PropTypes.number.isRequired,
-  db: React.PropTypes.array.isRequired
+  db: React.PropTypes.array.isRequired,
+  viewState: React.PropTypes.number.isRequired
 };
 
 export default SpellArea;

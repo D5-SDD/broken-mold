@@ -20,13 +20,16 @@ class Currency extends React.Component {
       if (currViewState === 1) {
         properValue = (
           <FormGroup>
-            <label> 
+            <label>
               {capital(key)}
-              <FormControl id={"csform-money-"+capital(key)} type="number"
-                defaultValue={properValue}/>
+              <FormControl
+                id={'csform-money-' + capital(key)}
+                type="number"
+                defaultValue={properValue}
+              />
             </label>
           </FormGroup>
-        )
+        );
         currencies.push(
           <tr key={key}>
             <td>{properValue}</td>

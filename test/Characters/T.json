@@ -115,122 +115,15 @@
     "successes": 0,
     "failures": 0
   },
-  "weapons": [
-    {
-      "name": "longsword",
-      "attackBonus": 4,
-      "damage": "1d8+2",
-      "type": "slashing",
-      "properties": [
-        "versatile(1d10)"
-      ]
-    }
-  ],
+  "weapons": [],
   "inventory": [
-    {
-      "item": "Sling",
-      "cost": "1 sp",
-      "weight": "-"
-    },
-    {
-      "item": "Navigator's tools",
-      "cost": "25 gp",
-      "weight": "2 lb."
-    },
-    {
-      "item": "Herbalism kit",
-      "cost": "5 gp",
-      "weight": "3 lb."
-    },
-    {
-      "item": "Cart",
-      "cost": "15 gp",
-      "weight": "200 lb."
-    },
-    {
-      "item": "Bucket",
-      "cost": "5 cp",
-      "weight": "2 lb."
-    },
-    {
-      "item": "Mason's tools",
-      "cost": "10 gp",
-      "weight": "8 lb."
-    },
-    {
-      "item": "Ink (1 ounce bottle)",
-      "cost": "10 gp",
-      "weight": "-"
-    },
-    {
-      "item": "Whetstone",
-      "cost": "1 cp",
-      "weight": "1 lb."
-    },
-    {
-      "item": "Pony",
-      "cost": "30 gp",
-      "weight": "-"
-    },
-    {
-      "item": "Bedroll",
-      "cost": "1 gp",
-      "weight": "7 lb."
-    },
-    {
-      "item": "Saddlebags",
-      "cost": "4 gp",
-      "weight": "8 lb."
-    },
-    {
-      "item": "Mirror (steel)",
-      "cost": "5 gp",
-      "weight": "1/2 lb."
-    },
-    {
-      "item": "Manacles",
-      "cost": "2 gp",
-      "weight": "6 lb."
-    },
-    {
-      "item": "Longship",
-      "cost": "10000 gp",
-      "weight": "-"
-    },
-    {
-      "item": "Ball bearing",
-      "cost": ".001 gp",
-      "weight": ".002 lb."
-    },
-    {
-      "item": "Quiver",
-      "cost": "1 gp",
-      "weight": "1 lb."
-    },
-    {
-      "item": "Splint",
-      "cost": "200 gp",
-      "weight": "60 lb."
-    },
-    {
-      "item": "Greataxe",
-      "cost": "30 gp",
-      "weight": "7 lb."
-    },
-    {
-      "item": "Crowbar",
-      "cost": "2 gp",
-      "weight": "5 lb."
-    }
+    "Abacus",
+    "Halberd",
+    "Alchemist's supplies",
+    "Alchemist's fire (flask)"
   ],
   "armor": [
-    {
-      "name": "Studded Leather",
-      "armorClass": 12,
-      "armorType": "light",
-      "strength": 0,
-      "stealthDisadvantage": false
-    }
+    "Studded Leather"
   ],
   "currency": {
     "platinum": 1,
@@ -239,17 +132,10 @@
     "silver": 3,
     "copper": 5
   },
-  "featuresAndTraits": [
-    {
-      "name": "Test Character",
-      "description": "You have no purpose in life but to test this program"
-    }
-  ],
-  "proficiencies": [
+  "featuresAndTraits": [],
+  "proficienciesAndLanguages": [
     "Light Armor",
-    "Simple Weapons"
-  ],
-  "languages": [
+    "Simple Weapons",
     "Common"
   ],
   "spellCastingClass": "Wizard",

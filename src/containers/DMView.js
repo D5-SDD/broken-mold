@@ -31,6 +31,10 @@ class DMView extends React.Component {
   }
 
   characterReceivedCB(charLocation, client) {
+    var index = this.clients.indexOf(client);
+    if (index !== -1) {
+      this.characterRemovedCB(this.clients[index]);
+    }
     this.characters.push(new Character(charLocation));
     this.clients.push(client);
     this.forceUpdate();
@@ -76,7 +80,7 @@ class DMView extends React.Component {
       for (let i = 0; i < this.characters.length; i++) {
         tabs.push(
           <Tab key={i} eventKey={i} title={this.characters[i].name}>
-            <CharacterSheet character={this.characters[i]} />
+            <CharacterSheet character={this.characters[i]} client={this.clients[i]} />
           </Tab>
         );
       }

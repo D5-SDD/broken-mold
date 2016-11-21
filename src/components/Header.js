@@ -3,6 +3,7 @@
 // Inport libraries
 import React from 'react';
 import {Button, InputGroup, FormGroup, FormControl, Row, Col, Panel} from 'react-bootstrap';
+import {CLASSES_DB} from '../../lib/Character';
 
 // Import icons
 import {FaMinusSquare, FaPlusSquare} from 'react-icons/lib/fa';
@@ -12,34 +13,196 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
 
+    this.classes = this.props.classes;
+    this.state = {
+      classes: this.props.classes
+    };
+    this.resetState = false;
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleNumberChange = this.handleNumberChange.bind(this);
+    this.updateRemainingClasses = this.updateRemainingClasses.bind(this);
+    this.getCurrentClassOptions = this.getCurrentClassOptions.bind(this);
     this.addClassAndLevel = this.addClassAndLevel.bind(this);
+    this.removeClassAndLevel = this.removeClassAndLevel.bind(this);
+  }
+
+  handleChange(event, i) {
+    var classes = [];
+    for (let i = 0; i < this.state.classes.length; i++) {
+      classes[i] = {
+        name: this.state.classes[i].name,
+        level: this.state.classes[i].level
+      };
+    }
+    classes[i].name = event.target.value;
+    this.classes = classes;
+    this.setState({
+      classes: classes
+    });
+  }
+
+  handleNumberChange(event, i) {
+    var classes = [];
+    for (let i = 0; i < this.state.classes.length; i++) {
+      classes[i] = {
+        name: this.state.classes[i].name,
+        level: this.state.classes[i].level
+      };
+    }
+    classes[i].level = event.target.value;
+    this.classes = classes;
+    this.setState({
+      classes: classes
+    });
+  }
+
+  updateRemainingClasses(classes) {
+    this.remainingClasses = CLASSES_DB.slice();
+    this.remainingClassesOptions = [];
+    for (let i = 0; i < classes.length; i++) {
+      let index = this.remainingClasses.indexOf(classes[i].name);
+      if (index > -1) {
+        this.remainingClasses.splice(index, 1);
+      }
+    }
+    for (let i = 0; i < this.remainingClasses.length; i++) {
+      this.remainingClassesOptions.push(
+        <option value={this.remainingClasses[i]} key={i}>
+          {this.remainingClasses[i]}
+        </option>
+      );
+    }
+  }
+
+  getCurrentClassOptions(currentClass) {
+    var options = [];
+    var remainingClasses = this.remainingClasses.slice();
+    remainingClasses.push(currentClass);
+    remainingClasses.sort();
+    for (let i = 0; i < remainingClasses.length; i++) {
+      if (remainingClasses[i] === currentClass) {
+        options.push(
+          <option value={remainingClasses[i]} key={i}>
+            {remainingClasses[i]}
+          </option>
+        );
+      } else {
+        options.push(
+          <option value={remainingClasses[i]} key={i}>
+            {remainingClasses[i]}
+          </option>
+        );
+      }
+    }
+    return options;
   }
 
   addClassAndLevel(e) {
-    var icon = $('#'+e.currentTarget.id);
-    var classLevelToAdd = icon.parent().siblings()[0].value;
+    var input = $(e.currentTarget).parent().siblings();
+    var classLevelToAdd = {
+        name: input[0].value,
+        level: input[1].value
+    };
+    this.state.classes.push(classLevelToAdd);
+    this.setState({
+      classes: this.state.classes
+    });
+  }
+
+  removeClassAndLevel(e) {
+    var input = $(e.currentTarget).parent().siblings();
+    var classLevelToRemove = {
+      name: input[0].value,
+      level: input[1].value
+    };
+    var index = -1;
+    for (let i = 0; i < this.state.classes.length; i++) {
+      let name = this.state.classes[i].name;
+      let level = this.state.classes[i].level;
+      if (name === classLevelToRemove.name && level === classLevelToRemove.level) {
+        index = i;
+        break;
+      }
+    }
+    if (index < 0) {
+      return;
+    }
+
+    this.state.classes.splice(index, 1);
+    this.setState({
+      classes: this.state.classes
+    });
+  }
+
+  componentWillUpdate() {
+    if (this.resetState === true) {
+      this.resetState = false;
+      this.setState({
+        classes: this.props.classes
+      });
+    }
   }
 
   render() {
+    
     var printAlignment = this.props.alignment[0] + ' ' + this.props.alignment[1];
+
+    if (this.props.confirmed === false) {
+      if (this.props.viewState === 0) {
+        this.classes = this.props.classes;
+        this.resetState = true;
+      }
+    }
+    var classes = this.classes;
+    this.updateRemainingClasses(classes);
+
     var classAndLevel = [];
-    for (let i=0; i<this.props.classes.length; i++) {
+    for (let i = 0; i < classes.length; i++) {
       if (this.props.viewState === 1) {
         classAndLevel.push(
           <FormGroup key={i}>
-            <FormControl id={'csform-class-'+i} type="text"
-            defaultValue={this.props.classes[i].name+ ' ' +this.props.classes[i].level}/>
+            <InputGroup>
+              <InputGroup.Button>
+                <Button
+                  id={'remove-class-and-level'}
+                  onClick={this.removeClassAndLevel}
+                >
+                  <FaMinusSquare/>
+                </Button>
+              </InputGroup.Button>
+              <FormControl
+                className="csform-class"
+                componentClass="select"
+                value={classes[i].name}
+                onChange={(event) => {
+                  this.handleChange(event, i);
+                }}
+              >
+                {this.getCurrentClassOptions(classes[i].name)}
+              </FormControl>
+              <FormControl
+                className="csform-level"
+                type="number"
+                value={classes[i].level}
+                min="1"
+                max="20"
+                onChange={(event) => {
+                  this.handleNumberChange(event, i);
+                }}
+              />
+            </InputGroup>
           </FormGroup>
         );
       } else {
         classAndLevel.push(
           <div key={i}>
-            {this.props.classes[i].name+ ' ' +this.props.classes[i].level}
+            {classes[i].name + ' ' + classes[i].level}
           </div>
         );
       }
     }
-    
+
     var raceOptions = [];
     for (let i = 0; i < this.props.racedb.length; i++) {
       let val = this.props.racedb[i];
@@ -49,7 +212,7 @@ class Header extends React.Component {
         </option>
       );
     }
-    
+
     var backgroundOptions = [];
     for (let i = 0; i < this.props.backgrounddb.length; i++) {
       let val = this.props.backgrounddb[i];
@@ -77,7 +240,10 @@ class Header extends React.Component {
                 <FaPlusSquare/>
               </Button>
             </InputGroup.Button>
-            <FormControl id="csform-name" type="text"/>
+            <FormControl componentClass="select">
+              {this.remainingClassesOptions}
+            </FormControl>
+            <FormControl type="number" defaultValue="1" min="1" max="20"/>
           </InputGroup>
         </FormGroup>
       );
@@ -170,6 +336,7 @@ Header.propTypes = {
   alignment: React.PropTypes.array.isRequired,
   background: React.PropTypes.string.isRequired,
   classes: React.PropTypes.array.isRequired,
+  confirmed: React.PropTypes.bool,
   experience: React.PropTypes.number.isRequired,
   name: React.PropTypes.string.isRequired,
   playerName: React.PropTypes.string.isRequired,
