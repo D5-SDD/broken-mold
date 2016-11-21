@@ -62,6 +62,7 @@ class CharacterSheet extends React.Component {
     this._reloadCB = this._reloadCB.bind(this);
   }
 
+  //close popup and continue editing
   closeModal() {
     this.setState({
       showModal: false,
@@ -70,6 +71,7 @@ class CharacterSheet extends React.Component {
     });
   }
 
+  //close popup and exit the current character sheet
   closeModalAndExit() {
     this.setState({
       showModal: false,
@@ -80,6 +82,7 @@ class CharacterSheet extends React.Component {
     this.props.exitCharacterSheetCB(false);
   }
 
+  //open a popup message if the character is invalid
   openModal(message, title) {
     this.setState({
       showModal: true,
@@ -88,6 +91,7 @@ class CharacterSheet extends React.Component {
     });
   }
 
+  //populates the edits that have been made to the appropriate variables
   applyEdits() {
     var propsCharacter = this.props.character;
     //Header data
@@ -234,6 +238,7 @@ class CharacterSheet extends React.Component {
     this.props.exitCharacterSheetCB();
   }
 
+  //sets the state of the client so that it knows it is connected to DM
   networkCB() {
     var viewState = this.state.viewState;
     var lookingForDM = false;
@@ -304,6 +309,7 @@ class CharacterSheet extends React.Component {
     });
   }
 
+  //makes recent edits show up after they have been made and confirmed
   _makeEdit() {
     this.confirmed = true;
     var viewState = 0;
@@ -326,7 +332,8 @@ class CharacterSheet extends React.Component {
       connectedToDM: connectedToDM
     });
   }
-  
+
+  //reloads the callback to update the view
   _reloadCB() {
     var viewState = 0;
     var lookingForDM = this.state.lookingForDM;

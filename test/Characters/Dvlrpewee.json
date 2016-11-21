@@ -145,7 +145,10 @@
     "silver": 4,
     "copper": 2
   },
-  "featuresAndTraits": [],
+  "featuresAndTraits": [
+    "Dwarven Resilience",
+    "Dwarven Combat Training"
+  ],
   "proficienciesAndLanguages": [
     "Light Armor",
     "Simple Weapons",
