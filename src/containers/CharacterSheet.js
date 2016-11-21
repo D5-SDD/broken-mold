@@ -539,6 +539,7 @@ class CharacterSheet extends React.Component {
     }
     if (this.state.connectedToDM) {
       DMButtonText = 'Disconnect From DM';
+      DMButtonStyle = 'danger';
     }
     if (this.state.viewState) {
       cancelButton = (
