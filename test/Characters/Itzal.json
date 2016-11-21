@@ -7,8 +7,8 @@
       "level": "3"
     },
     {
-      "name": "Wizard",
-      "level": "3"
+      "name": "Barbarian",
+      "level": "6"
     }
   ],
   "race": "Dragonborn",
@@ -31,7 +31,7 @@
     "charisma": 14
   },
   "inspiration": 0,
-  "proficiencyBonus": 3,
+  "proficiencyBonus": 4,
   "savingThrows": {
     "strength": {
       "proficient": false

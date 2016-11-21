@@ -20,6 +20,7 @@ class Header extends React.Component {
     this.resetState = false;
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleNumberChange = this.handleNumberChange.bind(this);
     this.updateRemainingClasses = this.updateRemainingClasses.bind(this);
     this.getCurrentClassOptions = this.getCurrentClassOptions.bind(this);
     this.addClassAndLevel = this.addClassAndLevel.bind(this);
@@ -27,8 +28,30 @@ class Header extends React.Component {
   }
 
   handleChange(event, i) {
-    var classes = this.state.classes.slice();
+    var classes = [];
+    for(let i = 0; i < this.state.classes.length; i++) {
+      classes[i] = {
+        name: this.state.classes[i].name,
+        level: this.state.classes[i].level
+      }
+    }
     classes[i].name = event.target.value;
+    this.classes = classes;
+    this.setState({
+      classes: classes
+    });
+  }
+  
+  handleNumberChange(event, i) {
+    var classes = [];
+    for(let i = 0; i < this.state.classes.length; i++) {
+      classes[i] = {
+        name: this.state.classes[i].name,
+        level: this.state.classes[i].level
+      }
+    }
+    classes[i].level = event.target.value;
+    this.classes = classes;
     this.setState({
       classes: classes
     });
@@ -79,7 +102,7 @@ class Header extends React.Component {
     var input = $(e.currentTarget).parent().siblings();
     var classLevelToAdd = {
         name: input[0].value,
-        level: parseInt(input[1].value)
+        level: input[1].value
     };
     this.state.classes.push(classLevelToAdd);
     this.setState({
@@ -93,6 +116,7 @@ class Header extends React.Component {
       name: input[0].value,
       level: input[1].value
     };
+    //console.log(classLevelToRemove);
     var index = -1;
     for (let i = 0; i < this.state.classes.length; i++) {
       let name = this.state.classes[i].name;
@@ -102,7 +126,6 @@ class Header extends React.Component {
         break;
       }
     }
-
     if (index < 0) {
       return;
     }
@@ -123,6 +146,7 @@ class Header extends React.Component {
   }
 
   render() {
+    
     var printAlignment = this.props.alignment[0] + ' ' + this.props.alignment[1];
 
     if (this.props.confirmed === false) {
@@ -136,6 +160,7 @@ class Header extends React.Component {
 
     var classAndLevel = [];
     for (let i = 0; i < classes.length; i++) {
+    console.log(classes[i]);
       if (this.props.viewState === 1) {
         classAndLevel.push(
           <FormGroup key={i}>
@@ -158,7 +183,16 @@ class Header extends React.Component {
               >
                 {this.getCurrentClassOptions(classes[i].name)}
               </FormControl>
-              <FormControl className="csform-level" type="number" defaultValue={classes[i].level} min="1" max="20"/>
+              <FormControl 
+                className="csform-level" 
+                type="number" 
+                defaultValue={classes[i].level} 
+                min="1" 
+                max="20"
+                onChange={(event) => {
+                  this.handleNumberChange(event, i);
+                }}
+              />
             </InputGroup>
           </FormGroup>
         );

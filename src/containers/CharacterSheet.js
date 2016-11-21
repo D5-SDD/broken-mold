@@ -93,6 +93,7 @@ class CharacterSheet extends React.Component {
       });
     }
     propsCharacter.classes = tempClasses;
+    //console.log(tempClasses);
     propsCharacter.name = document.getElementById('csform-name').value;
     propsCharacter.background = document.getElementById('csform-background').value;
     propsCharacter.playerName = document.getElementById('csform-player').value;
