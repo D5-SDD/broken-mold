@@ -2,7 +2,7 @@
 
 // Import external libraries
 import React from 'react';
-import {FormGroup, FormControl, Button, Grid, Row, Col, Panel} from 'react-bootstrap';
+import {FormGroup, FormControl, Modal, Button, Grid, Row, Col, Panel} from 'react-bootstrap';
 import capital from 'to-capital-case';
 import _ from 'lodash';
 
@@ -15,7 +15,7 @@ import {
 import {
   CHARACTER_DIR, SPELL_CLASSES, RACES_DB, BACKGROUNDS_DB, SPELLS_DB, FEATURE_TRAITS_DB,
   findSpell, findItem, findArmor, findWeapon, findFeature
-} from '../../lib/Character'
+} from '../../lib/Character';
 
 import {
   startUDPListen, stopUDPListen, closeTCPClient
@@ -45,14 +45,29 @@ class CharacterSheet extends React.Component {
     this.state = {
       viewState: viewState,
       lookingForDM: false,
-      connectedToDM: false
+      connectedToDM: false,
+      showModal: false
     };
 
+    this.closeModal = this.closeModal.bind(this);
+    this.openModal = this.openModal.bind(this);
     this.applyEdits = this.applyEdits.bind(this);
     this.validateBeforeExit = this.validateBeforeExit.bind(this);
     this.lookForDM = this.lookForDM.bind(this);
     this.disconnectFromDM = this.disconnectFromDM.bind(this);
     this.stopLookForDM = this.stopLookForDM.bind(this);
+  }
+
+  closeModal() {
+    this.setState({
+      showModal: false
+    });
+  }
+
+  openModal() {
+    this.setState({
+      showModal: true
+    });
   }
 
   applyEdits() {
@@ -188,8 +203,7 @@ class CharacterSheet extends React.Component {
 
   validateBeforeExit() {
     if (!this.props.character.isCharacterValid()) {
-      // TODO: Pop up window saying character can't be saved
-      console.log('Character could not be saved');
+      this.openModal();
       return;
     }
     this.disconnectFromDM();
@@ -536,8 +550,20 @@ class CharacterSheet extends React.Component {
         </Button>
       );
     }
+
     return (
       <div className="character-sheet">
+        <Modal show={this.state.showModal} onHide={this.closeModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Unable to save character</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <h4>A character needs a name, class, and race in order to be saved.</h4>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.closeModal}>Close</Button>
+          </Modal.Footer>
+        </Modal>
         <nav className="navigation" id="header">
           {DMButton}, {okButton}, {cancelButton}
         </nav>
