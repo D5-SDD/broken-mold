@@ -5,13 +5,15 @@ const electron = require('electron');
 const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
+// Module to control global key presses
+const globalShortcut = electron.globalShortcut;
 
 /*
 require('electron-reload')(__dirname, {
   electron: require('electron-prebuilt')
 });
 */
-require('electron-context-menu')();
+//require('electron-context-menu')();
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -26,6 +28,8 @@ function createWindow () {
 
   // Create the browser window.
   mainWindow = new BrowserWindow(browserOptions);
+
+  mainWindow.setMenu(null);
 
   // and load the index.html of the app.
   mainWindow.loadURL('file://' + __dirname + '/index.html');
@@ -44,7 +48,12 @@ function createWindow () {
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
-app.on('ready', createWindow);
+app.on('ready', function() {
+  createWindow();
+
+  globalShortcut.register('ctrl+r', function () {});
+  globalShortcut.register('ctrl+shift+i', function() {});
+});
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
