@@ -2,6 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 var validate = require('webpack-validator');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports =  validate({
   cache: true,
@@ -52,8 +53,12 @@ module.exports =  validate({
     }),
     new ExtractTextPlugin('bundle.css', {
       allChunks: true
-    })
-  ],
+    }),
+    new CopyWebpackPlugin([
+      {from: 'index.html'},
+      {from: 'main.js'}
+    ])
+  ],  
 
   resolve: {
     extensions: ['', '.js', '.scss', '.json'],

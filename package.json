@@ -3,13 +3,14 @@
   "productName": "Broken Mold",
   "description": "Dungeons & Dragons companion application",
   "author": "D5",
-  "license": "WTFPL",
   "version": "0.1.0",
-  "main": "main.js",
+  "main": "./bin/main.js",
   "scripts": {
     "build": "node_modules/.bin/webpack --progress --colors --bail",
+    "clean": "rm -rf ./dist && rm -rf ./bin",
+    "package": "npm run clean && npm run build && npm run package:win",
+    "package:win": "node_modules/.bin/electron-packager ./bin \"Broken Mold\" --platform=win32 --arch=all --out=dist",
     "start": "node_modules/.bin/electron .",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "node_modules/.bin/webpack --progress --colors --watch"
   },
   "repository": {
@@ -43,6 +44,7 @@
     "babel-polyfill": "^6.0.0",
     "babel-preset-es2015": "^6.16.0",
     "babel-preset-react": "^6.16.0",
+    "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.25.0",
     "eslint": "^3.6.1",
     "eslint-plugin-react": "^6.3.0",

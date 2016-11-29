@@ -26,3 +26,8 @@ https://nodejs.org/.
   ```
   npm run watch
   ```
+
+6. You can package the application for distribution with:
+  ```
+  npm run package
+  ```
