@@ -58,7 +58,7 @@ module.exports =  validate({
       {from: 'index.html'},
       {from: 'main.js'}
     ])
-  ],  
+  ],
 
   resolve: {
     extensions: ['', '.js', '.scss', '.json'],
