@@ -2,7 +2,7 @@
 
 ## Getting Started
 
-1. You should have Node v6.7.0 and npm v3.10.3 installed. You can get them here 
+1. You should have Node v7.2+ and npm v3.10+ installed. You can get them at 
 https://nodejs.org/.
 
 2. Use the following commands to setup your development environment:
@@ -25,9 +25,4 @@ https://nodejs.org/.
 5. You can watch for changes to files in the project with:
   ```
   npm run watch
-  ```
-
-6. You can package the application for distribution with:
-  ```
-  npm run package
   ```
