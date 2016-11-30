@@ -9,7 +9,7 @@ import fs from 'fs';
 import CharacterSheet from './CharacterSheet';
 
 // Import internal libraries
-import Character, {CHARACTER_DIR} from '../../lib/Character';
+import Character from '../../lib/Character';
 import {
   UDP, TCP, startUDPBroadcast, stopUDPBroadcast,
   startTCPServer, closeTCPServer, DM_FOLDER
@@ -39,7 +39,7 @@ class DMView extends React.Component {
         needToDelete = true;
       }
       this.characters.splice(index, 1);
-      this.clients.splice(index, 1);  
+      this.clients.splice(index, 1);
       if (needToDelete && fs.existsSync(DM_FOLDER + originalName + '.json')) {
         fs.unlink(DM_FOLDER + originalName + '.json');
       }
