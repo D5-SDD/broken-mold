@@ -12,7 +12,7 @@ import CharacterSheet from './CharacterSheet';
 import Character from '../../lib/Character';
 import {
   UDP, TCP, startUDPBroadcast, stopUDPBroadcast,
-  startTCPServer, closeTCPServer, DM_FOLDER
+  startTCPServer, closeTCPServer, DM_DIR
 } from '../../lib/Networking';
 
 
@@ -31,7 +31,7 @@ class DMView extends React.Component {
   // Called when the DM receives a character from a client
   characterReceivedCB(charLocation, client) {
     var index = this.clients.indexOf(client);
-    var newCharacter = new Character(DM_FOLDER + charLocation);
+    var newCharacter = new Character(DM_DIR + charLocation);
     if (index !== -1) {
       let needToDelete = false;
       let originalName = this.characters[index].originalName;
@@ -40,8 +40,8 @@ class DMView extends React.Component {
       }
       this.characters.splice(index, 1);
       this.clients.splice(index, 1);
-      if (needToDelete && fs.existsSync(DM_FOLDER + originalName + '.json')) {
-        fs.unlink(DM_FOLDER + originalName + '.json');
+      if (needToDelete && fs.existsSync(DM_DIR + originalName + '.json')) {
+        fs.unlink(DM_DIR + originalName + '.json');
       }
     }
     this.characters.push(newCharacter);
@@ -52,8 +52,8 @@ class DMView extends React.Component {
   // Called when the client disconnects and the character needs to be removed from the view
   characterRemovedCB(client) {
     var index = this.clients.indexOf(client);
-    if (fs.existsSync(DM_FOLDER + this.characters[index].originalName + '.json')) {
-      fs.unlink(DM_FOLDER + this.characters[index].originalName + '.json');
+    if (fs.existsSync(DM_DIR + this.characters[index].originalName + '.json')) {
+      fs.unlink(DM_DIR + this.characters[index].originalName + '.json');
     }
     this.characters.splice(index, 1);
     this.clients.splice(index, 1);
