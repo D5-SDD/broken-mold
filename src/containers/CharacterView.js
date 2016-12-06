@@ -28,9 +28,7 @@ class CharacterView extends React.Component {
     this.currentCharacter = null;
 
     // import the character map and read all saved characters
-    console.log('exportMap()');
     exportMap();
-    console.log('readMap()');
     this.characterMap = readMap();
 
     this.closeModal = this.closeModal.bind(this);

@@ -29,13 +29,15 @@ function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow(browserOptions);
 
-  mainWindow.setMenu(null);
-
   // and load the index.html of the app.
   mainWindow.loadURL('file://' + __dirname + '/index.html');
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  if (process.env.NODE_ENV === 'development') {
+    mainWindow.webContents.openDevTools();
+  } else {
+    mainWindow.setMenu(null);
+  }
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
@@ -51,8 +53,10 @@ function createWindow () {
 app.on('ready', function() {
   createWindow();
 
-  globalShortcut.register('ctrl+r', function () {});
-  globalShortcut.register('ctrl+shift+i', function() {});
+  if (process.env.NODE_ENV !== 'development') {
+    globalShortcut.register('ctrl+r', function () {});
+    globalShortcut.register('ctrl+shift+i', function() {});
+  }
 });
 
 // Quit when all windows are closed.
