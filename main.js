@@ -8,12 +8,14 @@ const BrowserWindow = electron.BrowserWindow;
 // Module to control global key presses
 const globalShortcut = electron.globalShortcut;
 
-/*
-require('electron-reload')(__dirname, {
-  electron: require('electron-prebuilt')
-});
-*/
-//require('electron-context-menu')();
+if (process.env.NODE_ENV === 'development') {
+  /*
+  require('electron-reload')(__dirname, {
+    electron: require('electron-prebuilt')
+  });
+  */
+  require('electron-context-menu')();
+}
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -32,8 +34,8 @@ function createWindow () {
   // and load the index.html of the app.
   mainWindow.loadURL('file://' + __dirname + '/index.html');
 
-  // Open the DevTools.
   if (process.env.NODE_ENV === 'development') {
+    // Open the DevTools.
     mainWindow.webContents.openDevTools();
   } else {
     mainWindow.setMenu(null);
