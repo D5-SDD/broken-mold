@@ -63,13 +63,12 @@ class DMView extends React.Component {
   // Called when DM starts accepting connection
   // Starts UDP broadcasting and TCP server
   openConnectionCB() {
-    startUDPBroadcast(true);
     startTCPServer((charLocation, client) => {
       this.characterReceivedCB(charLocation, client);
     }, null, (client) => {
       this.characterRemovedCB(client);
     }, true);
-
+    startUDPBroadcast(true);
     this.props.networkingStateCB(true, true);
   }
 
