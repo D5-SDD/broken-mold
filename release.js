@@ -15,11 +15,13 @@ var options = {
   arch: ARCH,
   name: NAME,
   ignore: [
-    /^\..*$/,
-    /^src$/,
-    /^test$/,
-    /^README.*$/,
-    /^webpack.*$/
+    /test/,
+    /.eslint/,
+    /.gitignore/,
+    /package.json/,
+    /README.md/,
+    /release.js/,
+    /webpack.config.js/
   ]
 };
 
