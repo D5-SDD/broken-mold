@@ -6,7 +6,7 @@ import fs from 'fs';
 import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
 import TreeMenu from 'react-tree-menu';
-import {readMap,exportMap, deleteCharacter} from '../../lib/Character';
+import {readMap,exportMap, deleteCharacter, CHARACTER_DIR} from '../../lib/Character';
 import {
   startUDPBroadcast, stopUDPBroadcast, startUDPListen,
   stopUDPListen, startTCPServer, closeTCPServer
@@ -15,7 +15,7 @@ import {
 // Import the stylesheet
 import '../stylesheets/components/CharacterMenu';
 
-const CHAR_LOCATION = './test/Characters/';
+const CHAR_LOCATION = CHARACTER_DIR;
 
 // Displays a menu of all characters that are available for a client to view
 class CharacterMenu extends React.Component {

@@ -29,10 +29,10 @@ function createWindow () {
   // and load the index.html of the app.
   mainWindow.loadURL('file://' + __dirname + '/index.html');
 
-  mainWindow.webContents.openDevTools();
   if (process.env.NODE_ENV === 'dev') {
     // Open the DevTools.
   } else {
+    mainWindow.webContents.openDevTools();
     mainWindow.setMenu(null);
   }
 
