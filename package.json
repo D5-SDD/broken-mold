@@ -11,7 +11,7 @@
     "build:dist": "cross-env NODE_ENV=dist webpack --progress --colors --bail",
     "clean": "rm -rf ./dist && rm -rf ./bin",
     "release": "npm run clean && npm run build:dist && npm run release:win",
-    "release:win": "cross-env NODE_ENV=dist node release.js",
+    "release:win": "electron-packager . --out=dist --platform=win32 --arch=ia32 --ignore=test --ignore=src --ignore=.eslintrc --ignore=.gitignore --ignore=README.md --ignore=webpack.config.js",
     "start": "cross-env NODE_ENV=dev electron .",
     "watch": "cross-env NODE_ENV=dev webpack --progress --colors --watch"
   },
