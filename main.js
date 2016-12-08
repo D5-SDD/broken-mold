@@ -8,12 +8,7 @@ const BrowserWindow = electron.BrowserWindow;
 // Module to control global key presses
 const globalShortcut = electron.globalShortcut;
 
-if (process.env.NODE_ENV === 'development') {
-  /*
-  require('electron-reload')(__dirname, {
-    electron: require('electron-prebuilt')
-  });
-  */
+if (process.env.NODE_ENV === 'dev') {
   require('electron-context-menu')();
 }
 
@@ -35,9 +30,8 @@ function createWindow () {
   mainWindow.loadURL('file://' + __dirname + '/index.html');
 
   mainWindow.webContents.openDevTools();
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === 'dev') {
     // Open the DevTools.
-    //mainWindow.webContents.openDevTools();
   } else {
     mainWindow.setMenu(null);
   }
@@ -56,7 +50,7 @@ function createWindow () {
 app.on('ready', function() {
   createWindow();
 
-  if (process.env.NODE_ENV !== 'development') {
+  if (process.env.NODE_ENV !== 'dev') {
     globalShortcut.register('ctrl+r', function () {});
     globalShortcut.register('ctrl+shift+i', function() {});
   }
@@ -78,6 +72,3 @@ app.on('activate', function () {
     createWindow();
   }
 });
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
