@@ -31,8 +31,8 @@ function createWindow () {
 
   if (process.env.NODE_ENV === 'dev') {
     // Open the DevTools.
-  } else {
     mainWindow.webContents.openDevTools();
+  } else {
     mainWindow.setMenu(null);
   }
 
