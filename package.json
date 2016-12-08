@@ -3,7 +3,7 @@
   "productName": "Broken Mold",
   "description": "Dungeons & Dragons companion application",
   "author": "D5",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "main.js",
   "scripts": {
     "build": "npm run build:dev",

@@ -8,7 +8,7 @@
     },
     {
       "name": "Barbarian",
-      "level": "6"
+      "level": "7"
     }
   ],
   "race": "Dragonborn",
@@ -16,7 +16,7 @@
     "Lawful",
     "Neutral"
   ],
-  "experience": 910,
+  "experience": 920,
   "background": "Acolyte",
   "personalityTraits": "Test",
   "ideals": "More Test",
@@ -31,7 +31,7 @@
     "charisma": 14
   },
   "inspiration": 0,
-  "proficiencyBonus": 4,
+  "proficiencyBonus": 5,
   "savingThrows": {
     "strength": {
       "proficient": false
